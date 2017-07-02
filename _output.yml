@@ -4,6 +4,8 @@
 bookdown::epub_book: default
 # gitbook形式の設定
 bookdown::gitbook:
+  includes:
+    in_header: google_analytics.txt
   css: style.css
   split_by: "rmd"
   config:
