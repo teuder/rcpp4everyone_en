@@ -1,6 +1,6 @@
 # Matrix
 
-### Creating Matrix object
+## Creating Matrix object
 
 Like Vector, Matrix object can be created in several ways.
 
@@ -53,7 +53,7 @@ v.attr("dim") = Dimension(2, 2);
 NumericMatrix m = as<NumericMatrix>(v);
 ```
 
-### Accessing to Matrix elements
+## Accessing to Matrix elements
 
 By using `()` operator, you can get and assign the values of the elements of the matrix by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol `_`.
 
@@ -82,7 +82,7 @@ m[5]; // This points to the same element as m(0,1)
 ```
 
 
-### References to row, column, sub matrix
+**References to row, column and sub matrix**
 
 Rcpp also provides types that hold "references" to some column and row of a matrix.
 
@@ -131,7 +131,7 @@ Returns the numerical index in the original vector of the matrix corresponding t
 
 
 
-## Static member function
+## Static member functions
 
 `Matrix` basically has the same static member function as` Vector`. The static member functions unique to `Matrix` are shown below.
 
@@ -141,7 +141,7 @@ Returns a diagonal matrix whose number of rows and columns equals to "size" and 
 
 
 
-## Other functions relating to Matrix
+## Other functions related to Matrix
 
 This section shows functions relating to Matrix.
 
