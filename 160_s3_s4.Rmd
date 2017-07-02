@@ -1,0 +1,119 @@
+# S3・S4 class
+
+## S3 class
+
+The S3 class is actually a list whose attribute `class` has its own value. For that, see the section `List` and  section Attributes for creating S3 objects and accessing its elements.
+
+In the code example below, as an example of handling objects of S3, we show the function that receives the return value of function `lm()` and computes RMSE (Root Mean Square Error) as an index of the prediction accuracy of the model in the learning data.
+
+```cpp
+//Receiving lm() model object and calculate RMSE
+// [[Rcpp::export]]
+double rcpp_rmse(List lm_model) {
+    // Since S3 is a list, data type of the argument is specified as List.
+
+    // If the object given to this function is not an lm() model object,
+    // it outputs an error message and stops execution.
+    if (! lm_model.inherits("lm")) stop("Input must be a lm() model object.");
+
+    // Extracting residuals (i.e. actual - prediction) from the S3 object
+    NumericVector resid  = lm_model["residuals"];
+
+    // Number of elements of the residual vector
+    R_xlen_t n = resid.length();
+
+    // The sum of squares of the residual vector
+    double rmse(0.0);
+    for(double& r : resid){
+        rmse += r*r;
+    }
+
+    // Divide the residual sum of squares by the number of elements and take the square root
+    return(sqrt((1.0/n)*rmse));
+}
+```
+
+As an example of execution, use R's sample data `mtcars` to calculate the RMSE of the model linearly regressing the fuel efficiency of the car.
+
+```R
+> mod <- lm(mpg ~ ., data = mtcars)
+> rcpp_rmse(mod)
+[1] 2.146905
+```
+
+
+
+## S4 class
+
+
+### Accessing to slot
+
+To access the slots of a S4 class object, use the `slot()` member function. Also, use the `hasSlot()` member function to check if the object have a slot with a specific name.
+
+```cpp
+x.slot("slot_name");
+x.hasSlot("slot_name");
+```
+
+### Creating a new S4 class object
+
+Rcpp alone can not define a new S4 class, but you can create an S4 class object defined in R.
+
+The following code example shows how to define a new S4 class Person in R, then create an object of Person class with Rcpp.
+
+We first define S4 class "Person". This class holds name and birthday of a person in slot `name` and `birth`.
+
+```R
+# R code
+# Defining S4 class Person in R
+setClass (
+  # Class name
+  "Person",
+
+  # Defining slot type
+  representation (
+    name = "character",
+    birth = "Date"
+  ),
+
+  # Initializing slots
+  prototype = list(
+    name = as.character(NULL),
+    birth = as.Date(as.character(NULL))
+  )
+)
+
+# Creating an object of Person class in R
+person_01 <- new("Person",
+                 name = "Ronald Fisher",
+                 birth = as.Date("1890-02-17"))
+```
+
+The following code example creates an object of Person class in Rcpp and set values for the slots.
+
+```cpp
+// [[Rcpp::export]]
+S4 rcpp_s4(){
+
+    // Creating an object of Person class
+    S4 x("Person");
+
+    // Setting values to the slots
+    x.slot("name")  = "Sewall Wright";
+    x.slot("birth") = Date("1889-12-21");
+
+    return(x);
+}
+```
+
+Execution result
+
+```
+> rcpp_s4()
+An object of class "Person"
+Slot "name":
+[1] "Sewall Wright"
+
+Slot "birth":
+[1] "1889-12-21"
+```

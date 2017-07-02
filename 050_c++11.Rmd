@@ -1,0 +1,115 @@
+# C++11
+
+C++ 11 is a standard of C++ newly established in 2011, it introduce new functionalities and notations. Compared with the previous standard, many new features are added to make C++ even easier for beginners, so this document will actively exploit the features of C++11.
+
+** Important: Code example in this document is written assuming that C++11 is enabled. **
+
+## Enabling C++11
+
+
+To enable C ++ 11, add the following description somewhere in your Rcpp code.
+
+```cpp
+// [[Rcpp::plugins("cpp11")]]
+```
+
+## Recommended C++11 features
+
+
+### Initializer list
+
+Initialization of variables using `{}`.
+
+```
+// Initialize Vector
+// The next three are the same as c (1, 2, 3).
+NumericVector v1 = NumericVector::create(1.0, 2.0, 3.0);
+NumericVector v2 = {1.0, 2.0, 3.0};
+NumericVector v3   {1.0, 2.0, 3.0}; // You can omit "=".
+```
+
+
+### auto
+
+Using the `auto` specifier will automatically set the type of the variable, according to the value to be assigned.
+
+```
+// variable "i" will be int
+auto  i  = 4;
+
+NumericVector v;
+// variable "it" will be NumericVector::iterator
+auto it = v.begin();
+```
+
+
+### decltype
+
+With `decltype` you can declare variables of the same type as existing variables.
+
+```
+int i;
+decltype(i) x; // variable "x" will be int
+```
+
+
+### Range-based for-loop
+
+You can write a `for` statement with the same style as R.
+
+```
+IntegerVector v{1,2,3};
+int sum=0;
+for(auto& x : v) {
+  sum += x;
+}
+```
+
+
+### Lambda expression
+
+You can create a function object by using lambda expression. Function object are usually used as unnamed function passed to other function.
+
+Lambda expressions are written in the form `[](){}`.
+
+In `[]`, you write a list of local variables you want to use in this function object.
+
+- `[]` do not allow access to all the local variables from the function object.
+- `[=]` will copy values of the all local variables to the function object.
+- `[&]` enables direct access to all local variables from the function object.
+- `[=x, &y]` means that the local variable "x" will be copied to the function object, and the local variable "y" is allowed to be accessed directly from the function object.
+
+In `()`, you write arguments to be passed to this function object.
+
+In `{}`, you describe processes you want.
+  
+**Return type of the lambda expression**
+
+The return type of this function object is automatically set to the type of the returned value described in `{}`. If you want to define return type explicitly, write it like `[]()->int{}`.
+
+**Exapmle**
+
+The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.
+
+*R exapmle*
+
+``` R
+v <- c(1,2,3,4,5)
+A <- 2.0
+res <-
+  sapply(v, function(x){A*x})
+```
+
+*Rcpp exapmle*
+
+``` cpp
+// [[Rcpp::plugins("cpp11")]]
+// [[Rcpp::export]]
+NumericVector rcpp_lambda_1(){
+  NumericVector v = {1,2,3,4,5};
+  double A = 2.0;
+  NumericVector res =
+    sapply(v, [&](double x){return A*x;});
+  return res;
+}
+```

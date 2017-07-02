@@ -1,0 +1,172 @@
+# Logical operations
+
+## LogicalVector
+
+### Data type of LogicalVector elements  
+
+Since boolean type in C++ is `bool`, you may think that the type of the element of `LogicalVector` is also `bool`, but it is `int`. This is because `bool` type can only represent `true` or `false`, but there are three possible values `TRUE`,` FALSE`, and `NA` for elements of the logical vector in R.
+
+In Rcpp, `TRUE` is represented by 1,` FALSE` by 0, and `NA` by` NA_LOGICAL` (minimum value of int: -2147483648).
+
+|R|Rcpp|int|bool|
+|:---:|:---:|:---:|:---:|
+|TRUE|TRUE|1 (Values other than 0 and -2147483648)|true|
+|FALSE|FALSE|0|false|
+|NA|NA_LOGICAL|-2147483648|true|
+
+
+## Logical operations
+
+Use the operator `&` (logical product) `|` (logical sum) `!` (Logical negation) for the logical operation for each element of LogicalVector.
+
+```
+LogicalVector v1 = {1,1,0,0};
+LogicalVector v2 = {1,0,1,0};
+
+LogicalVector res1 = v1 & v2;
+LogicalVector res2 = v1 | v2;
+LogicalVector res3 = !(v1 | v2);
+
+Rcout << res1 << "\n"; // 1 0 0 0
+Rcout << res2 << "\n"; // 1 1 1 0
+Rcout << res3 << "\n"; // 0 0 0 1
+```
+
+## Function that receives LogicalVector
+
+Examples of functions that receive `LogicalVector` are `all()`, `any()` and `ifelse()`.
+
+### all(),  any()
+
+For `LogicalVector` v, `all (v) `returns` TRUE` when all elements of v are `TRUE`, and `any(v)` returns `TRUE` if any of v's elements are `TRUE`.
+
+You can not use the return value of the `all()` and `any()` as the conditional expression of the `if` statement. This is because the return type of the `all()` and `any()` is not `bool` but `SingleLogicalResult`. To use the return value of the `all()` and `any()` as a conditional expression of an `if` statement, use the function `is_true()`, `is_false()` and `is_na()`. These functions convert `SingleLogicalResult` to `bool`.
+
+The code example below shows how to use the return values of the functions `all()` and `any()` as a conditional expression of an `if` statement. In this example, the conditional expression of all `if` statements will be `true`, and the return value of `all()`, `any()` will be displayed.
+
+```cpp
+// [[Rcpp::export]]
+List rcpp_logical_03(){
+  LogicalVector v1 = LogicalVector::create(1,1,1,NA_LOGICAL);
+  LogicalVector v2 = LogicalVector::create(0,1,0,NA_LOGICAL);
+
+  // Behavior of all (), any () for LogicalVector including NA is the same as R
+  LogicalVector lv1 = all( v1 );   // NA
+  LogicalVector lv2 = all( v2 );   // FALSE
+  LogicalVector lv3 = any( v2 ); // TRUE
+
+  // In case assigning to bool
+  bool b1 = is_true ( all(v1) );  // false
+  bool b2 = is_false( all(v1) );  // false
+  bool b3 = is_na   ( all(v1) );  // true
+
+  // In case used in conditional expression of if statement
+  if(is_na(all( v1 ))) { // OK
+    Rcout << "all( v1 ) is NA\n";
+  }
+
+  return List::create(lv1, lv2, lv3, b1, b2, b3);
+}
+```
+
+### ifelse()
+
+`ifelse (v, x1, x2)` receives the logical vector v, and returns the corresponding element of x1 when the element of v is `TRUE` and the corresponding element of x2 when it is` FALSE`. Although x1 and x2 can be vectors or scalars, in the case of vectors the length of x1 and x2 must match the length of v.
+
+```cpp
+NumericVector v1;
+NumericVector v2;
+
+//Number of elements of vector
+int n = v1.length();
+
+// In case, both x1 and x2 are scalar
+IntegerVector res1     = ifelse( v1>v2, 1, 0);
+NumericVector res2     = ifelse( v1>v2, 1.0, 0.0);
+//CharacterVector res3 = ifelse( v1>v2, "T", "F"); // not supported
+
+
+// Since ifelse() does not work with a scalar caracter string,
+// in order to obtain results equivalent to R,
+// we need to use a string vector whose values of elements are all the same.
+CharacterVector chr_v1 = rep(CharacterVector("T"), n);
+CharacterVector chr_v2 = rep(CharacterVector("F"), n);
+CharacterVector res3   = ifelse( v1>v2, chr_v1, chr_v2);
+
+// In case, x1 and x2 are vector and scalar
+IntegerVector int_v1, int_v2;
+NumericVector num_v1, num_v2;
+IntegerVector   res4 = ifelse( v1>v2, int_v1, 0);
+NumericVector   res5 = ifelse( v1>v2, num_v1, 0.0);
+CharacterVector res6 = ifelse( v1>v2, chr_v1, Rf_mkChar("F")); // Note
+
+// In case, x1 and x2 are vector and vector
+IntegerVector   res7 = ifelse( v1>v2, int_v1, int_v2);
+NumericVector   res8 = ifelse( v1>v2, num_v1, num_v2);
+CharacterVector res9 = ifelse( v1>v2, chr_v1, chr_v2);
+```
+Note: `Rf_mkChar ()` is a function that convert C language string (`char*`) to `CHARSXP` (type of element of `CharacterVector`).
+
+
+
+## Evaluation of elements of LogicalVector 
+
+The value of the element of `LogicalVector` should not be used as a conditional expression of `if` statement. Because the conditional expression of the C++ `if` statement evaluates the value of the expression as a `bool` type. `bool` type evaluates all values other than 0 as `true`, thus the` NA of `LogicalVector` (`NA_LOGICAL`) is evaluated as `true`.
+
+See the following code example for how to evaluate the value of an element of `LogicalVector` with an `if` statement.
+
+```
+// [[Rcpp::export]]
+LogicalVector rcpp_logical(){
+
+  // Create an integer vector containing NA
+  IntegerVector x = {1,2,3,4,NA_INTEGER};
+
+  // The result of the comparison operation becomes LogicalVector
+  LogicalVector v = (x >= 3);
+
+   // If you use the element of LogicalVector directly in the "if" statement
+   // NA_LOGICAL will be evaluated as TRUE
+  for(int i=0; i<v.size();++i) {
+    if(v[i]) Rprintf("v[%i] is evaluated as true.\n",i);
+    else Rprintf("v[%i] is evaluated as false.\n",i);
+  }
+
+  // Evaluate the elements of LogicalVector
+  for(int i=0; i<v.size();++i) {
+    if(v[i]==TRUE) Rprintf("v[%i] is TRUE.\n",i);
+    else if (v[i]==FALSE) Rprintf("v[%i] is FALSE.\n",i);
+    else if (v[i]==NA_LOGICAL) Rprintf("v[%i] is NA.\n",i);
+    else Rcout << "v[" << i << "] is not 1\n";
+  }
+
+  // Displays the value of TRUE, FALSE and NA_LOGICAL
+  Rcout << "TRUE " << TRUE << "\n";
+  Rcout << "FALSE " << FALSE << "\n";
+  Rcout << "NA_LOGICAL " << NA_LOGICAL << "\n";
+
+  return v;
+}
+```
+
+Execution result
+
+```
+> rcpp_logical()
+v[0] is evaluated as false.
+v[1] is evaluated as false.
+v[2] is evaluated as true.
+v[3] is evaluated as true.
+v[4] is evaluated as true.
+v[0] is FALSE.
+v[1] is FALSE.
+v[2] is TRUE.
+v[3] is TRUE.
+v[4] is NA.
+TRUE 1
+FALSE 0
+NA_LOGICAL -2147483648
+[1] FALSE FALSE  TRUE  TRUE    NA
+```
+
+

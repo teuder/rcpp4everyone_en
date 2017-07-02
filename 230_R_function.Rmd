@@ -1,0 +1,86 @@
+# Using R functions
+
+In order to use R functions in Rcpp, you can use `Function` and `Environment`.
+
+## Function
+
+Using the `Function` class, you can call R functions from Rcpp. The argument given to the R function is determined based on position and name.
+
+Use `Named()` or `_[]` to pass a value to an argument by specifying argument name. `Name()` can be used in two ways: `Named("argument_name", value)` or `Named("argument_name") = value`.
+
+The code example below shows an example of calling the R function `rnorm (n, mean, sd)`from the function defined in Rcpp. However, when calling a package function using `Function` class, you have to add the package environment to the search path using the `library()` function in R in advance.
+
+```cpp
+// [[Rcpp::export]]
+NumericVector my_fun(){
+    // calling rnorm()
+    Function f("rnorm");   
+
+    // Next code is interpreted as rnorm(n=5, mean=10, sd=2)
+    return f(5, Named("sd")=2, _["mean"]=10);
+}
+```
+
+Execution example
+
+```r
+> my_fun()
+[1]  8.014863 10.459980  7.741581  9.000762 11.465920
+```
+
+In the above example, the return type of R function called from Rcpp is assumed `NumericVector`. However, as in the example below, the return type of an R function called from Rcpp function is sometimes undefined. In such a case it would be better to assign the return value of the function into `RObject` or `List` element.
+
+The code below shows an example of defining simplified R function `lapply()` with Rcpp.
+
+```cpp
+// [[Rcpp::export]]
+List rcpp_lapply(List input, Function f) {
+    // Applies the Function f to each element of the List input and returns the result as List
+
+    // Number of elements in the List input
+    R_xlen_t n = input.length();
+
+    // Creating a List for output
+    List out(n);
+
+    // Applying f() to each element of "input" and store it to "out".
+    // The type of the return value of f() is unknown, but it can be assigned to the List element.
+    for(R_xlen_t i = 0; i < n; ++i) {
+        out[i] = f(input[i]);
+    }
+    return out;
+}
+```
+
+
+## Environment
+
+By using `Environment` class, you can retrieve objects (variables and functions) from packages and other environments.
+
+The code below shows an example of calling `Matrix()` function in the `Matrix` package. When calling a package function in this way, it is not necessary to attach the package using `library()` function.
+
+```cpp
+// [[Rcpp::export]]
+S4 rcpp_package_function(NumericMatrix m){
+
+    // Obtaining namespace of Matrix package
+    Environment pkg = Environment::namespace_env("Matrix");
+
+    // Picking up Matrix() function from Matrix package
+    Function f = pkg["Matrix"];
+
+    // Executing Matrix( m, sparse = TRIE )
+    return f( m, Named("sparse", true));
+}
+```
+
+Execution result
+
+```
+> m <- matrix(c(1,0,0,2), nrow = 2, ncol = 2)
+> rcpp_package_function(m)
+2 x 2 sparse Matrix of class "dsCMatrix"
+
+[1,] 1 .
+[2,] . 2
+```

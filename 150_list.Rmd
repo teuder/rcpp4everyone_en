@@ -1,0 +1,32 @@
+# List
+
+This chapter explains how to create `List` object, how to access its elements, and its member functions. In Rcpp, `List` is implemented as a kind of vector. In other words, `Vector` is a vector whose element is scalar value, while `List` is a vector whose elements are any kinds of data types. Therefore, `Vector` and `List` have many common methods of creating objects, accessing elements, and member functions.
+
+Since the contents described on the page of [DataFrame](dataframe.md) can be mostly valid by replacing `DataFrame` with` List`, please refer to that for details.
+
+## Creating List object
+
+To create a `List` object we use the `List::create()` function. Also, to specify the element name when creating `List`, use `Named()` function or `_[] `.
+
+```cpp
+// Create list L from vector v1, v2
+List L = List::create(v1, v2);
+
+// When giving names to elements
+List L = List::create(Named("name1") = v1 , _["name2"] = v2);
+```
+
+## Accessing List elements
+
+When accessing a specific element of `List`, we assign it to the other object and access it via that object.
+
+The elements of `List` can be specified by numerical index, element names and logical vector.
+
+```cpp
+NumericVector v1 = L[0];
+NumericVector v2 = L["V1"];
+```
+
+## Member functions
+
+`List` has the same member functions as `Vector`.

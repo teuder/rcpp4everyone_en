@@ -1,0 +1,56 @@
+# Installation
+
+Before developing with Rcpp, you need to install c++ compiler.
+
+##Install C++ compiler
+
+### Windows
+
+Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/index.html).
+
+It might be helpful to refer instruction of RStan ([Install Rtools for Windows](https://github.com/stan-dev/rstan/wiki/Install-Rtools-for-Windows)) .
+
+
+
+### Mac
+
+Install Xcode command line tools. Execute the command `xcode-select --install` on Terminal.
+
+### Linux
+
+Install gcc and related packages. 
+
+In Ubuntu Linux, execute the command `sudo apt-get install r-base-dev` on Terminal.
+
+
+### Using other compilers installed by yourself
+
+If you installed other compiler (g++, clang++) different from above, create the following file under the user's home directory. Then set environment variables in the file.
+
+**Linux, Mac**
+
+* `.R/Makevars`
+
+**Windows**
+
+* `.R/Makevars.win`
+
+**Example settings of environmental variables**
+
+```
+CC=/opt/local/bin/gcc-mp-4.7
+CXX=/opt/local/bin/g++-mp-4.7
+CPLUS_INCLUDE_PATH=/opt/local/include:$CPLUS_INCLUDE_PATH
+LD_LIBRARY_PATH=/opt/local/lib:$LD_LIBRARY_PATH
+CXXFLAGS= -g0 -O2 -Wall
+MAKE=make -j4
+```
+
+
+## Install Rcpp
+
+You can install Rcpp by executing following code.
+
+```r
+install.packages("Rcpp")
+```

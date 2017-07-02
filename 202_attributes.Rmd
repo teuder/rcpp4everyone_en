@@ -1,0 +1,85 @@
+# Attributes
+
+## Attributes related functions
+
+The following member functions are used to access the attributes of Rcpp objects.
+
+**attr( name )**
+
+accesses the attribute specified by the character string "name" and gets and sets the value.
+
+```
+List L;
+L.attr("class") = "my_class";
+```
+
+**attributeNames()**
+
+Returns a list of the attributes the object has. Since the return type of this function is `std::vector<std::string>`, if you want to convert it to `CharacterVector` use `wrap()` function.
+
+```
+CharacterVector ch = wrap(x.attributeNames());
+```
+
+**hasAttribute( name )**
+
+If this object has an attribute with the name specified by the string "name", it returns `true`.
+
+```
+bool b = x.hasAttribute("name");
+```
+
+```cpp
+// Creating a List object
+NumericVector   v1 = {1,2,3,4,5};
+CharacterVector v2 = {"A","B","C"};
+List L = List::create(v1, v2);
+
+// Setting element names
+L.attr("names") = CharacterVector::create("x", "y");
+
+// Creating a new attribute and set its value
+L.attr("new_attribute") = "new_value";
+
+// Changing the class name of this object to "new_class"
+L.attr("class") = "new_class";
+
+// Outputting a list of the names of the attributes of this object
+CharacterVector ch = wrap(L.attributeNames());
+Rcout << ch << "\n"; // "names" "new_attribute" "class"
+
+// Check if this object has the attribute "new_attribute".
+bool b = L.hasAttribute("new_attribute");
+Rcout << b << "\n"; // 1
+```
+
+## Access functions for common attributes
+
+Dedicated access functions may be prepared for frequently used attributes such as element names.
+
+```
+// Element name, the following two sentences are synonymous
+x.attr("names");
+x.names();
+```
+
+The code example below shows how to access common attributes.
+
+```
+Vector v
+v.attr("names"); // Element names
+v.names();       // Element names
+
+Matrix m;
+m.ncol();  // Number of columns
+m.nrow();  // Number of rows
+m.attr(“dim”) = NumericVector::create( nrows, ncols );
+m.attr(“dimnames”) = List::create( row_names, col_names );
+
+DataFrame df;
+df.attr(“names”);     // column names
+df.attr(“row.names”); // row names
+
+List L;
+L.names(); // Element names
+```

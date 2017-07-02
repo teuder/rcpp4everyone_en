@@ -1,0 +1,150 @@
+# Datetime
+
+`Datetime` is a scalar type corresponding to the elements of` DatetimeVector`.
+
+## Creating Datetime object
+
+As with Date, Datetime is also created by specifying the number of seconds from 1970-01-01 00:00:00 UTC (Coordinated Universal Time), and by explicitly specifying the date and time.
+
+The format to explicitly specify the date and time is `Datetime dt(str, format)`. This format converts the string `str` to `Datetime` with the format string `format`. Please refer to `help(strptime)` in R for symbols used in the format string.
+
+```
+// Creating Datetime object it with elapsed seconds since 00:00:00 on January 1, 1970
+Datetime dt;         // "1970-01-01 00:00:00 UTC"
+Datetime dt(10.1);   // "1970-01-01 00:00:00 UTC" + 10.1 sec
+
+// Creating by specifying the date and time
+// The default format is "%Y-%m-%d %H:%M:%OS"
+// The specified date and time are interpreted as vthe date and time of the local time zone
+Datetime dt("2000-01-01 00:00:00");
+Datetime dt("2000年1月1日 0時0分0秒", "%Y年%m月%d日 %H時%M分%OS秒");
+```
+
+## Time zone
+
+`Datetime` internally manages the date and time in seconds (real number) from `1970-01-01 00:00:00` in Coordinated Universal Time (UTC). For example, `Datetime dt(10)` represents the point after 10 seconds from `1970-01-01 00:00:00 UTC`. When this value is returned to R, it is displayed as the time converted to the executed time zone. For example, in Japan, Japan Standard Time (JST) is UTC + 9 hours, so `Datetime d(10)` will be `1970-01-01 09:00:10 JST`.
+
+When creating a Datetime object in the form of `Datetime dt(str, format)`, `str` is interpreted as the time in the local timezone. For example, if you run `Datetime dt(2000-01-01 00:00:00);` in Japan Standard Time (JST), the value of `1999-12-31 15:00:00 UTC` is set internally.
+
+
+## Operators
+
+The `+, -, <, >, >=, <=, ==, !=` operators are defined in `Datetime`.
+
+By using these operators, you can perform addition of seconds (`+`), difference of datetime (`-`) in seconds, comparison of datetime (`<, <=, >, >=, ==, !=`) .
+
+```cpp
+Datetime dt1("2000-01-01 00:00:00");
+Datetime dt2("2000-01-02 00:00:00");
+
+// difference of datetime (seconds)
+int sec = dt2 - dt1;  // 86400
+
+// addition of seconds
+dt1 = dt1 + 1; // "2000-01-01 00:00:01"
+
+// comparison of datetime
+bool b = dt2 > dt1; // true
+```
+
+
+## Member functions
+
+Note: The value output using these member functions is the time interpreted at the time of Coordinated Universal Time. Therefore, it looks different from the date and time of the user's time zone. (For example, refer to the execution result of the code at the end of this chapter)
+
+### getFractionalTimestamp()
+
+Returns the number of seconds (real number) from the base date (1970-01-01 00: 00: 00 UTC).
+
+### getMicroSeconds()
+
+Returns the microseconds of the date and time at the Coordinated Universal Time. This value express the value of the second after decimal point in units of microseconds. (i.e. 0.1 second = 100000 microseconds)
+
+### getSeconds()
+
+Returns the second of the date and time in Coordinated Universal Time.
+
+### getMinutes()
+
+Returns the minute of the date and time in Coordinated Universal Time.
+
+
+### getHours()
+
+Returns the hour of the date and time in Coordinated Universal Time.
+
+###getDay()
+
+Returns the day of the date and time in Coordinated Universal Time.
+
+###getMonth()
+
+Returns the month of the date and time in Coordinated Universal Time.
+
+### getYear()
+
+Returns the year of the date and time in Coordinated Universal Time.
+
+###getWeekday()
+
+Returns the day of the week of the date and time in Coordinated Universal Time in `int`.
+
+1:Sun 2:Mon 3:Tue 4:Wed 5:Thu 6:Sat
+
+### getYearday()
+
+Returns the number of the date through the year with January 1st as 1 and December 31st as 365.
+
+### is_na()
+
+Returns `true` if this object is `NA`.
+
+
+## Code example
+
+The code example below shows the result of executing in Japan Standard Time (JST) environment.
+
+
+```
+// [[Rcpp::export]]
+Datetime rcpp_datetime(){
+    // Creating Datetime object by specifying date and time to
+    Datetime dt("2000-01-01 00:00:00");
+
+    // Displaying parts of the Datetime object in Coordinated Universal Time
+    Rcout << "getYear " << dt.getYear() << "\n";
+    Rcout << "getMonth " << dt.getMonth() << "\n";
+    Rcout << "getDay " << dt.getDay() << "\n";
+
+    Rcout << "getHours " << dt.getHours() << "\n";
+    Rcout << "getMinutes " << dt.getMinutes() << "\n";
+    Rcout << "getSeconds " << dt.getSeconds() << "\n";
+
+    Rcout << "getMicroSeconds " << dt.getMicroSeconds() << "\n";
+    Rcout << "getWeekday " << dt.getWeekday() << "\n";
+    Rcout << "getYearday " << dt.getYearday() << "\n";
+    Rcout << "getFractionalTimestamp " << dt.getFractionalTimestamp() << "\n";
+
+    return dt;
+}
+```
+
+Execution result
+
+You can see that the time output is 9 hours before Japan Standard Time (JST).
+
+
+```
+> rcpp_datetime()
+getYear 1999
+getMonth 12
+getDay 31
+getHours 15
+getMinutes 0
+getSeconds 0
+getMicroSeconds 0
+getWeekday 6
+getYearday 365
+getFractionalTimestamp 9.46652e+08
+[1] "2000-01-01 JST"
+```

@@ -1,0 +1,99 @@
+# String
+
+`String` is a scalar type corresponding to the element of `CharacterVector`. `String` can also handle NA values (`NA_STRING`) which are not supported by the C character string `char*` and the C++ string `std::string`.
+
+## Creating String object
+
+There are roughly　three ways to create a `String` object, as follows. The first method is to create from a C/C++ string, the second is to create it from another `String` object, and the third is to create it from one element of a `CharacterVector`.
+
+```cpp
+// Creating from C string
+String s("X"); // "X"
+
+// Creating from Rcpp String
+String s(str);
+
+//Creating from single element of CharacterVector object
+String s(char_vec[0])
+```
+
+## Operators
+
+The `+=` operator is defined in `String` type. This allows you to combine another string object at the end of the string. (Note that the `+` operator is not defined)
+
+```
+// Creating String object
+String s("A");
+
+// Conbining a string
+s += "B";
+
+Rcout << s << "\n"; // "AB"
+```
+
+
+## Member functions
+
+Note: The member functions `replace_first()`, `replace_last()`, `replace_all()` do not just return the replaced character string, but instead rewrite the value of this object.
+
+### replace_first( str, new_str )
+
+Replace first substring that matches the string `str` with the string `new_str`.
+
+### replace_last( str, new_str )
+
+Replace last substring that matches the string `str` with the string `new_str`.
+
+### replace_all( str, new_str )
+
+Replace all substrings that matches the string `str` with the string `new_str`.
+
+### push_back(str)
+
+Combine the string `str` to the end of this `String` object. (Same as += operator)
+
+### push_back(str)
+
+Combine the string str at the beginning of this `String` object.
+
+### set_na()
+
+Set NA value to this `String` object.
+
+### get_cstring()
+
+Convert the string of this String object into a C character string constant (const char*) and return it.
+
+### get_encoding()
+
+Returns the character encoding ( "bytes", "latin1", "UTF-8", "unknown").
+
+### set_encoding(str)
+
+Set the character encoding specified by the character string `str`.
+
+
+
+
+### Code example
+
+```
+// [[Rcpp::export]]
+void rcpp_replace(){
+
+    // Replace only at the first occurrence of "ab"
+    String s("abcdabcd");
+    s.replace_first("ab", "AB");
+    Rcout << s.get_cstring() << "\n"; // ABcdabcd
+
+    // Replace only at the last occurrence of "ab"
+    s="abcdabcd";
+    s.replace_last("ab", "AB");
+    Rcout << s.get_cstring() << "\n"; // abcdABcd
+
+    // Replace every occurrence of "ab"
+    s="abcdabcd";
+    s.replace_all("ab", "AB");
+    Rcout << s.get_cstring() << "\n"; // ABcdABcd
+}
+```

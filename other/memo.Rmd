@@ -1,0 +1,21 @@
+## Embedding R code in Rcpp code
+
+You can embed R code in your Rcpp code. Describe your R code in a comment beginning with `/*** R` and the code will be executed when you compile the code with `sourceCpp()`.
+
+```cpp
+#include<Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+int fibonacci(const int x) {
+    if (x < 2)
+      return x;
+    else
+      return (fibonacci(x - 1)) + fibonacci(x - 2);
+}
+
+/*** R
+# Call the ﬁbonacci function deﬁned in C++
+ﬁbonacci(10)
+*/
+```

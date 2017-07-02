@@ -1,0 +1,9 @@
+# Suitable situation to use Rcpp
+
+R is weak in some kinds of operations. If you need operations listed below, it is time to consider using Rcpp.
+
+- Loop operation in which later iteration depends on previous iteration.
+- Accessing each elements of vector/matrix.
+- Recurrent call of function in loop operation.
+- Changing size of vector dynamically.
+- Operation that need advanced data structures and algorithms.

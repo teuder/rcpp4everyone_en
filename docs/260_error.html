@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rcpp for everyone</title>
+  <meta name="description" content="Introducing how to use Rcpp">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Rcpp for everyone" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Introducing how to use Rcpp" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rcpp for everyone" />
+  
+  <meta name="twitter:description" content="Introducing how to use Rcpp" />
+  
+
+<meta name="author" content="Masaki E. Tsuda">
+
+
+<meta name="date" content="2017-07-02">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="250_factor.html">
+<link rel="next" href="270_miscellaneous.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rcpp for everyone</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="010_Rcpp_merit.html"><a href="010_Rcpp_merit.html"><i class="fa fa-check"></i><b>1</b> Suitable situation to use Rcpp</a></li>
+<li class="chapter" data-level="2" data-path="020_install.html"><a href="020_install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-c-compiler"><i class="fa fa-check"></i><b>2.1</b> Install C++ compiler</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
+<li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
+<li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
+<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
+<li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#format-for-defining-a-function-in-rcpp."><i class="fa fa-check"></i><b>3.1.1</b> Format for defining a function in Rcpp.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="030_basic_usage.html"><a href="030_basic_usage.html#compiling-the-code"><i class="fa fa-check"></i><b>3.2</b> Compiling the code</a></li>
+<li class="chapter" data-level="3.3" data-path="030_basic_usage.html"><a href="030_basic_usage.html#executing-the-function"><i class="fa fa-check"></i><b>3.3</b> Executing the function</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="040_function.html"><a href="040_function.html"><i class="fa fa-check"></i><b>4</b> Embedding Rcpp code in your R code</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="040_function.html"><a href="040_function.html#sourcecpp"><i class="fa fa-check"></i><b>4.0.1</b> sourceCpp()</a></li>
+<li class="chapter" data-level="4.0.2" data-path="040_function.html"><a href="040_function.html#cppfunction"><i class="fa fa-check"></i><b>4.0.2</b> cppFunction()</a></li>
+<li class="chapter" data-level="4.0.3" data-path="040_function.html"><a href="040_function.html#evalcpp"><i class="fa fa-check"></i><b>4.0.3</b> evalCpp()</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="050_c++11.html"><a href="050_c++11.html"><i class="fa fa-check"></i><b>5</b> C++11</a><ul>
+<li class="chapter" data-level="5.1" data-path="050_c++11.html"><a href="050_c++11.html#enabling-c11"><i class="fa fa-check"></i><b>5.1</b> Enabling C++11</a></li>
+<li class="chapter" data-level="5.2" data-path="050_c++11.html"><a href="050_c++11.html#recommended-c11-features"><i class="fa fa-check"></i><b>5.2</b> Recommended C++11 features</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="050_c++11.html"><a href="050_c++11.html#initializer-list"><i class="fa fa-check"></i><b>5.2.1</b> Initializer list</a></li>
+<li class="chapter" data-level="5.2.2" data-path="050_c++11.html"><a href="050_c++11.html#auto"><i class="fa fa-check"></i><b>5.2.2</b> auto</a></li>
+<li class="chapter" data-level="5.2.3" data-path="050_c++11.html"><a href="050_c++11.html#decltype"><i class="fa fa-check"></i><b>5.2.3</b> decltype</a></li>
+<li class="chapter" data-level="5.2.4" data-path="050_c++11.html"><a href="050_c++11.html#range-based-for-loop"><i class="fa fa-check"></i><b>5.2.4</b> Range-based for-loop</a></li>
+<li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#lambda-expression"><i class="fa fa-check"></i><b>5.2.5</b> Lambda expression</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
+<li class="chapter" data-level="6.1" data-path="060_utility.html"><a href="060_utility.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
+<li class="chapter" data-level="6.2" data-path="060_utility.html"><a href="060_utility.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="070_data_types.html"><a href="070_data_types.html"><i class="fa fa-check"></i><b>7</b> Data types</a><ul>
+<li class="chapter" data-level="7.1" data-path="070_data_types.html"><a href="070_data_types.html#vector-and-matrix"><i class="fa fa-check"></i><b>7.1</b> Vector and Matrix</a></li>
+<li class="chapter" data-level="7.2" data-path="070_data_types.html"><a href="070_data_types.html#data.frame-list-s3-s4"><i class="fa fa-check"></i><b>7.2</b> data.frame, list, S3, S4</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="080_vector.html"><a href="080_vector.html"><i class="fa fa-check"></i><b>8</b> Vector</a><ul>
+<li class="chapter" data-level="8.1" data-path="080_vector.html"><a href="080_vector.html#creating-vector-object"><i class="fa fa-check"></i><b>8.1</b> Creating vector object</a></li>
+<li class="chapter" data-level="8.2" data-path="080_vector.html"><a href="080_vector.html#accessing-vector-elements"><i class="fa fa-check"></i><b>8.2</b> Accessing vector elements</a></li>
+<li class="chapter" data-level="8.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>8.3</b> Member functions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> length(), size()</a></li>
+<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> names()</a></li>
+<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offsetname-findnamename"><i class="fa fa-check"></i><b>8.3.3</b> offset(name), findName(name)</a></li>
+<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#fillx"><i class="fa fa-check"></i><b>8.3.4</b> fill(x)</a></li>
+<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.5</b> sort()</a></li>
+<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.6</b> assign( first_it, last_it)</a></li>
+<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#push_backx"><i class="fa fa-check"></i><b>8.3.7</b> push_back(x)</a></li>
+<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.8</b> push_back( x, name )</a></li>
+<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_frontx"><i class="fa fa-check"></i><b>8.3.9</b> push_front(x)</a></li>
+<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.10</b> push_front( x, name )</a></li>
+<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.11</b> begin()</a></li>
+<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.12</b> end()</a></li>
+<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.13</b> insert( i, x )</a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.14</b> insert( it, x )</a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.15</b> erase(i)</a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.16</b> erase(it)</a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.17</b> erase( first_i, first_i )</a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.18</b> erase( first_it, last_it )</a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.19</b> containsElementNamed(name)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
+<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> is_na(x)</a></li>
+<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2"><i class="fa fa-check"></i><b>8.4.3</b> create( x1, x2, …)</a></li>
+<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> import( first_it , last_it )</a></li>
+<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> import_transform( first_it, last_it, func)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="100_matrix.html"><a href="100_matrix.html#creating-matrix-object"><i class="fa fa-check"></i><b>9.0.1</b> Creating Matrix object</a></li>
+<li class="chapter" data-level="9.0.2" data-path="100_matrix.html"><a href="100_matrix.html#accessing-to-matrix-elements"><i class="fa fa-check"></i><b>9.0.2</b> Accessing to Matrix elements</a></li>
+<li class="chapter" data-level="9.0.3" data-path="100_matrix.html"><a href="100_matrix.html#references-to-row-column-sub-matrix"><i class="fa fa-check"></i><b>9.0.3</b> References to row, column, sub matrix</a></li>
+<li class="chapter" data-level="9.1" data-path="100_matrix.html"><a href="100_matrix.html#member-functions-1"><i class="fa fa-check"></i><b>9.1</b> Member functions</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="100_matrix.html"><a href="100_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.1.1</b> nrow() rows()</a></li>
+<li class="chapter" data-level="9.1.2" data-path="100_matrix.html"><a href="100_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.1.2</b> ncol()　cols()</a></li>
+<li class="chapter" data-level="9.1.3" data-path="100_matrix.html"><a href="100_matrix.html#row-i"><i class="fa fa-check"></i><b>9.1.3</b> row( i )</a></li>
+<li class="chapter" data-level="9.1.4" data-path="100_matrix.html"><a href="100_matrix.html#column-i"><i class="fa fa-check"></i><b>9.1.4</b> column( i )</a></li>
+<li class="chapter" data-level="9.1.5" data-path="100_matrix.html"><a href="100_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.1.5</b> fill_diag( x )</a></li>
+<li class="chapter" data-level="9.1.6" data-path="100_matrix.html"><a href="100_matrix.html#offsetij"><i class="fa fa-check"></i><b>9.1.6</b> offset(i,j)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="100_matrix.html"><a href="100_matrix.html#static-member-function"><i class="fa fa-check"></i><b>9.2</b> Static member function</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="100_matrix.html"><a href="100_matrix.html#matrixdiag-size-x"><i class="fa fa-check"></i><b>9.2.1</b> Matrix::diag( size, x )</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="100_matrix.html"><a href="100_matrix.html#other-functions-relating-to-matrix"><i class="fa fa-check"></i><b>9.3</b> Other functions relating to Matrix</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="100_matrix.html"><a href="100_matrix.html#rownames-m"><i class="fa fa-check"></i><b>9.3.1</b> rownames( m )</a></li>
+<li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#colnames-m"><i class="fa fa-check"></i><b>9.3.2</b> colnames( m )</a></li>
+<li class="chapter" data-level="9.3.3" data-path="100_matrix.html"><a href="100_matrix.html#transpose-m"><i class="fa fa-check"></i><b>9.3.3</b> transpose( m )</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="110_calculation.html"><a href="110_calculation.html"><i class="fa fa-check"></i><b>10</b> Vector operations</a><ul>
+<li class="chapter" data-level="10.1" data-path="110_calculation.html"><a href="110_calculation.html#arithmetic-operations"><i class="fa fa-check"></i><b>10.1</b> Arithmetic operations</a></li>
+<li class="chapter" data-level="10.2" data-path="110_calculation.html"><a href="110_calculation.html#comparison-operations"><i class="fa fa-check"></i><b>10.2</b> Comparison operations</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="120_logical.html"><a href="120_logical.html"><i class="fa fa-check"></i><b>11</b> Logical operations</a><ul>
+<li class="chapter" data-level="11.1" data-path="120_logical.html"><a href="120_logical.html#logicalvector"><i class="fa fa-check"></i><b>11.1</b> LogicalVector</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="120_logical.html"><a href="120_logical.html#data-type-of-logicalvector-elements"><i class="fa fa-check"></i><b>11.1.1</b> Data type of LogicalVector elements</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="120_logical.html"><a href="120_logical.html#logical-operations-1"><i class="fa fa-check"></i><b>11.2</b> Logical operations</a></li>
+<li class="chapter" data-level="11.3" data-path="120_logical.html"><a href="120_logical.html#function-that-receives-logicalvector"><i class="fa fa-check"></i><b>11.3</b> Function that receives LogicalVector</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="120_logical.html"><a href="120_logical.html#all-any"><i class="fa fa-check"></i><b>11.3.1</b> all(), any()</a></li>
+<li class="chapter" data-level="11.3.2" data-path="120_logical.html"><a href="120_logical.html#ifelse"><i class="fa fa-check"></i><b>11.3.2</b> ifelse()</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="120_logical.html"><a href="120_logical.html#evaluation-of-elements-of-logicalvector"><i class="fa fa-check"></i><b>11.4</b> Evaluation of elements of LogicalVector</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="140_dataframe.html"><a href="140_dataframe.html"><i class="fa fa-check"></i><b>12</b> DataFrame</a><ul>
+<li class="chapter" data-level="12.1" data-path="140_dataframe.html"><a href="140_dataframe.html#creating-a-dataframe-object"><i class="fa fa-check"></i><b>12.1</b> Creating a DataFrame object</a></li>
+<li class="chapter" data-level="12.2" data-path="140_dataframe.html"><a href="140_dataframe.html#accessing-dataframe-elements"><i class="fa fa-check"></i><b>12.2</b> Accessing DataFrame elements</a></li>
+<li class="chapter" data-level="12.3" data-path="140_dataframe.html"><a href="140_dataframe.html#member-functions-2"><i class="fa fa-check"></i><b>12.3</b> Member functions</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="140_dataframe.html"><a href="140_dataframe.html#length-size-1"><i class="fa fa-check"></i><b>12.3.1</b> length() size()</a></li>
+<li class="chapter" data-level="12.3.2" data-path="140_dataframe.html"><a href="140_dataframe.html#nrows"><i class="fa fa-check"></i><b>12.3.2</b> nrows()</a></li>
+<li class="chapter" data-level="12.3.3" data-path="140_dataframe.html"><a href="140_dataframe.html#names-1"><i class="fa fa-check"></i><b>12.3.3</b> names()</a></li>
+<li class="chapter" data-level="12.3.4" data-path="140_dataframe.html"><a href="140_dataframe.html#offsetname-findnamename-1"><i class="fa fa-check"></i><b>12.3.4</b> offset(name) findName(name)</a></li>
+<li class="chapter" data-level="12.3.5" data-path="140_dataframe.html"><a href="140_dataframe.html#fillv"><i class="fa fa-check"></i><b>12.3.5</b> fill(v)</a></li>
+<li class="chapter" data-level="12.3.6" data-path="140_dataframe.html"><a href="140_dataframe.html#assign-first_it-last_it-1"><i class="fa fa-check"></i><b>12.3.6</b> assign( first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.7" data-path="140_dataframe.html"><a href="140_dataframe.html#push_backv"><i class="fa fa-check"></i><b>12.3.7</b> push_back(v)</a></li>
+<li class="chapter" data-level="12.3.8" data-path="140_dataframe.html"><a href="140_dataframe.html#push_back-v-name"><i class="fa fa-check"></i><b>12.3.8</b> push_back( v, name )</a></li>
+<li class="chapter" data-level="12.3.9" data-path="140_dataframe.html"><a href="140_dataframe.html#push_frontx-1"><i class="fa fa-check"></i><b>12.3.9</b> push_front(x)</a></li>
+<li class="chapter" data-level="12.3.10" data-path="140_dataframe.html"><a href="140_dataframe.html#push_front-x-name-1"><i class="fa fa-check"></i><b>12.3.10</b> push_front( x, name )</a></li>
+<li class="chapter" data-level="12.3.11" data-path="140_dataframe.html"><a href="140_dataframe.html#begin-1"><i class="fa fa-check"></i><b>12.3.11</b> begin()</a></li>
+<li class="chapter" data-level="12.3.12" data-path="140_dataframe.html"><a href="140_dataframe.html#end-1"><i class="fa fa-check"></i><b>12.3.12</b> end()</a></li>
+<li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
+<li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
+<li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
+<li class="chapter" data-level="13.1" data-path="150_list.html"><a href="150_list.html#creating-list-object"><i class="fa fa-check"></i><b>13.1</b> Creating List object</a></li>
+<li class="chapter" data-level="13.2" data-path="150_list.html"><a href="150_list.html#accessing-list-elements"><i class="fa fa-check"></i><b>13.2</b> Accessing List elements</a></li>
+<li class="chapter" data-level="13.3" data-path="150_list.html"><a href="150_list.html#member-functions-3"><i class="fa fa-check"></i><b>13.3</b> Member functions</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="160_s3_s4.html"><a href="160_s3_s4.html"><i class="fa fa-check"></i><b>14</b> S3・S4 class</a><ul>
+<li class="chapter" data-level="14.1" data-path="160_s3_s4.html"><a href="160_s3_s4.html#s3-class"><i class="fa fa-check"></i><b>14.1</b> S3 class</a></li>
+<li class="chapter" data-level="14.2" data-path="160_s3_s4.html"><a href="160_s3_s4.html#s4-class"><i class="fa fa-check"></i><b>14.2</b> S4 class</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="160_s3_s4.html"><a href="160_s3_s4.html#accessing-to-slot"><i class="fa fa-check"></i><b>14.2.1</b> Accessing to slot</a></li>
+<li class="chapter" data-level="14.2.2" data-path="160_s3_s4.html"><a href="160_s3_s4.html#creating-a-new-s4-class-object"><i class="fa fa-check"></i><b>14.2.2</b> Creating a new S4 class object</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="170_string.html"><a href="170_string.html"><i class="fa fa-check"></i><b>15</b> String</a><ul>
+<li class="chapter" data-level="15.1" data-path="170_string.html"><a href="170_string.html#creating-string-object"><i class="fa fa-check"></i><b>15.1</b> Creating String object</a></li>
+<li class="chapter" data-level="15.2" data-path="170_string.html"><a href="170_string.html#operators"><i class="fa fa-check"></i><b>15.2</b> Operators</a></li>
+<li class="chapter" data-level="15.3" data-path="170_string.html"><a href="170_string.html#member-functions-4"><i class="fa fa-check"></i><b>15.3</b> Member functions</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="170_string.html"><a href="170_string.html#replace_first-str-new_str"><i class="fa fa-check"></i><b>15.3.1</b> replace_first( str, new_str )</a></li>
+<li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
+<li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
+<li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
+<li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
+<li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
+<li class="chapter" data-level="15.3.9" data-path="170_string.html"><a href="170_string.html#set_encodingstr"><i class="fa fa-check"></i><b>15.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="15.3.10" data-path="170_string.html"><a href="170_string.html#code-example"><i class="fa fa-check"></i><b>15.3.10</b> Code example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="180_date.html"><a href="180_date.html"><i class="fa fa-check"></i><b>16</b> Date</a><ul>
+<li class="chapter" data-level="16.1" data-path="180_date.html"><a href="180_date.html#creating-date-object"><i class="fa fa-check"></i><b>16.1</b> Creating Date object</a></li>
+<li class="chapter" data-level="16.2" data-path="180_date.html"><a href="180_date.html#operators-1"><i class="fa fa-check"></i><b>16.2</b> Operators</a></li>
+<li class="chapter" data-level="16.3" data-path="180_date.html"><a href="180_date.html#member-functions-5"><i class="fa fa-check"></i><b>16.3</b> Member functions</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="180_date.html"><a href="180_date.html#getday"><i class="fa fa-check"></i><b>16.3.1</b> getDay()</a></li>
+<li class="chapter" data-level="16.3.2" data-path="180_date.html"><a href="180_date.html#getmonth"><i class="fa fa-check"></i><b>16.3.2</b> getMonth()</a></li>
+<li class="chapter" data-level="16.3.3" data-path="180_date.html"><a href="180_date.html#getyear"><i class="fa fa-check"></i><b>16.3.3</b> getYear()</a></li>
+<li class="chapter" data-level="16.3.4" data-path="180_date.html"><a href="180_date.html#getweekday"><i class="fa fa-check"></i><b>16.3.4</b> getWeekday()</a></li>
+<li class="chapter" data-level="16.3.5" data-path="180_date.html"><a href="180_date.html#getyearday"><i class="fa fa-check"></i><b>16.3.5</b> getYearday()</a></li>
+<li class="chapter" data-level="16.3.6" data-path="180_date.html"><a href="180_date.html#is_na"><i class="fa fa-check"></i><b>16.3.6</b> is_na()</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="180_date.html"><a href="180_date.html#execution-result"><i class="fa fa-check"></i><b>16.4</b> Execution result</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="190_datetime.html"><a href="190_datetime.html"><i class="fa fa-check"></i><b>17</b> Datetime</a><ul>
+<li class="chapter" data-level="17.1" data-path="190_datetime.html"><a href="190_datetime.html#creating-datetime-object"><i class="fa fa-check"></i><b>17.1</b> Creating Datetime object</a></li>
+<li class="chapter" data-level="17.2" data-path="190_datetime.html"><a href="190_datetime.html#time-zone"><i class="fa fa-check"></i><b>17.2</b> Time zone</a></li>
+<li class="chapter" data-level="17.3" data-path="190_datetime.html"><a href="190_datetime.html#operators-2"><i class="fa fa-check"></i><b>17.3</b> Operators</a></li>
+<li class="chapter" data-level="17.4" data-path="190_datetime.html"><a href="190_datetime.html#member-functions-6"><i class="fa fa-check"></i><b>17.4</b> Member functions</a><ul>
+<li class="chapter" data-level="17.4.1" data-path="190_datetime.html"><a href="190_datetime.html#getfractionaltimestamp"><i class="fa fa-check"></i><b>17.4.1</b> getFractionalTimestamp()</a></li>
+<li class="chapter" data-level="17.4.2" data-path="190_datetime.html"><a href="190_datetime.html#getmicroseconds"><i class="fa fa-check"></i><b>17.4.2</b> getMicroSeconds()</a></li>
+<li class="chapter" data-level="17.4.3" data-path="190_datetime.html"><a href="190_datetime.html#getseconds"><i class="fa fa-check"></i><b>17.4.3</b> getSeconds()</a></li>
+<li class="chapter" data-level="17.4.4" data-path="190_datetime.html"><a href="190_datetime.html#getminutes"><i class="fa fa-check"></i><b>17.4.4</b> getMinutes()</a></li>
+<li class="chapter" data-level="17.4.5" data-path="190_datetime.html"><a href="190_datetime.html#gethours"><i class="fa fa-check"></i><b>17.4.5</b> getHours()</a></li>
+<li class="chapter" data-level="17.4.6" data-path="190_datetime.html"><a href="190_datetime.html#getday-1"><i class="fa fa-check"></i><b>17.4.6</b> getDay()</a></li>
+<li class="chapter" data-level="17.4.7" data-path="190_datetime.html"><a href="190_datetime.html#getmonth-1"><i class="fa fa-check"></i><b>17.4.7</b> getMonth()</a></li>
+<li class="chapter" data-level="17.4.8" data-path="190_datetime.html"><a href="190_datetime.html#getyear-1"><i class="fa fa-check"></i><b>17.4.8</b> getYear()</a></li>
+<li class="chapter" data-level="17.4.9" data-path="190_datetime.html"><a href="190_datetime.html#getweekday-1"><i class="fa fa-check"></i><b>17.4.9</b> getWeekday()</a></li>
+<li class="chapter" data-level="17.4.10" data-path="190_datetime.html"><a href="190_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>17.4.10</b> getYearday()</a></li>
+<li class="chapter" data-level="17.4.11" data-path="190_datetime.html"><a href="190_datetime.html#is_na-1"><i class="fa fa-check"></i><b>17.4.11</b> is_na()</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="190_datetime.html"><a href="190_datetime.html#code-example-1"><i class="fa fa-check"></i><b>17.5</b> Code example</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="200_robject.html"><a href="200_robject.html"><i class="fa fa-check"></i><b>18</b> RObject</a><ul>
+<li class="chapter" data-level="18.1" data-path="200_robject.html"><a href="200_robject.html#member-functions-7"><i class="fa fa-check"></i><b>18.1</b> Member functions</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="200_robject.html"><a href="200_robject.html#inheritsstr-1"><i class="fa fa-check"></i><b>18.1.1</b> inherits(str)</a></li>
+<li class="chapter" data-level="18.1.2" data-path="200_robject.html"><a href="200_robject.html#slotname"><i class="fa fa-check"></i><b>18.1.2</b> slot(name)</a></li>
+<li class="chapter" data-level="18.1.3" data-path="200_robject.html"><a href="200_robject.html#hasslotname"><i class="fa fa-check"></i><b>18.1.3</b> hasSlot(name)</a></li>
+<li class="chapter" data-level="18.1.4" data-path="200_robject.html"><a href="200_robject.html#attrname"><i class="fa fa-check"></i><b>18.1.4</b> attr(name)</a></li>
+<li class="chapter" data-level="18.1.5" data-path="200_robject.html"><a href="200_robject.html#attributenames"><i class="fa fa-check"></i><b>18.1.5</b> attributeNames()</a></li>
+<li class="chapter" data-level="18.1.6" data-path="200_robject.html"><a href="200_robject.html#hasattributename"><i class="fa fa-check"></i><b>18.1.6</b> hasAttribute(name)</a></li>
+<li class="chapter" data-level="18.1.7" data-path="200_robject.html"><a href="200_robject.html#isnull"><i class="fa fa-check"></i><b>18.1.7</b> isNULL()</a></li>
+<li class="chapter" data-level="18.1.8" data-path="200_robject.html"><a href="200_robject.html#sexp_type"><i class="fa fa-check"></i><b>18.1.8</b> sexp_type()</a></li>
+<li class="chapter" data-level="18.1.9" data-path="200_robject.html"><a href="200_robject.html#isobject"><i class="fa fa-check"></i><b>18.1.9</b> isObject()</a></li>
+<li class="chapter" data-level="18.1.10" data-path="200_robject.html"><a href="200_robject.html#iss4"><i class="fa fa-check"></i><b>18.1.10</b> isS4()</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="200_robject.html"><a href="200_robject.html#determining-type-of-object-assigned-to-robject"><i class="fa fa-check"></i><b>18.2</b> Determining type of object assigned to RObject</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="201_caution_vector.html"><a href="201_caution_vector.html"><i class="fa fa-check"></i><b>19</b> Cautions in handling Rcpp objects</a><ul>
+<li class="chapter" data-level="19.0.1" data-path="201_caution_vector.html"><a href="201_caution_vector.html#assigning-between-vectors"><i class="fa fa-check"></i><b>19.0.1</b> Assigning between vectors</a></li>
+<li class="chapter" data-level="19.0.2" data-path="201_caution_vector.html"><a href="201_caution_vector.html#data-type-of-numerical-index"><i class="fa fa-check"></i><b>19.0.2</b> Data type of numerical index</a></li>
+<li class="chapter" data-level="19.0.3" data-path="201_caution_vector.html"><a href="201_caution_vector.html#return-type-of-operator"><i class="fa fa-check"></i><b>19.0.3</b> Return type of operator[]</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="202_attributes.html"><a href="202_attributes.html"><i class="fa fa-check"></i><b>20</b> Attributes</a><ul>
+<li class="chapter" data-level="20.1" data-path="202_attributes.html"><a href="202_attributes.html#attributes-related-functions"><i class="fa fa-check"></i><b>20.1</b> Attributes related functions</a></li>
+<li class="chapter" data-level="20.2" data-path="202_attributes.html"><a href="202_attributes.html#access-functions-for-common-attributes"><i class="fa fa-check"></i><b>20.2</b> Access functions for common attributes</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html"><i class="fa fa-check"></i><b>21</b> R-like functions</a><ul>
+<li class="chapter" data-level="21.1" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#list-of-r-like-functions"><i class="fa fa-check"></i><b>21.1</b> List of R-like functions</a><ul>
+<li class="chapter" data-level="21.1.1" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#vector-related-functions"><i class="fa fa-check"></i><b>21.1.1</b> Vector related functions</a></li>
+<li class="chapter" data-level="21.1.2" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#string-related-functions"><i class="fa fa-check"></i><b>21.1.2</b> String related functions</a></li>
+<li class="chapter" data-level="21.1.3" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#finding-values"><i class="fa fa-check"></i><b>21.1.3</b> Finding values</a></li>
+<li class="chapter" data-level="21.1.4" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#duplicated-values"><i class="fa fa-check"></i><b>21.1.4</b> Duplicated values</a></li>
+<li class="chapter" data-level="21.1.5" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#set-operation"><i class="fa fa-check"></i><b>21.1.5</b> Set operation</a></li>
+<li class="chapter" data-level="21.1.6" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-maximum-and-minimum-values"><i class="fa fa-check"></i><b>21.1.6</b> Functions related to maximum and minimum values</a></li>
+<li class="chapter" data-level="21.1.7" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-summaries"><i class="fa fa-check"></i><b>21.1.7</b> Functions related to summaries</a></li>
+<li class="chapter" data-level="21.1.8" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-rounding-values"><i class="fa fa-check"></i><b>21.1.8</b> Functions related to rounding values</a></li>
+<li class="chapter" data-level="21.1.9" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-math"><i class="fa fa-check"></i><b>21.1.9</b> Functions related to math</a></li>
+<li class="chapter" data-level="21.1.10" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-logical-values"><i class="fa fa-check"></i><b>21.1.10</b> Functions related to logical values</a></li>
+<li class="chapter" data-level="21.1.11" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-na-inf-nan"><i class="fa fa-check"></i><b>21.1.11</b> Functions related to NA Inf NaN</a></li>
+<li class="chapter" data-level="21.1.12" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#apply-functions"><i class="fa fa-check"></i><b>21.1.12</b> apply functions</a></li>
+<li class="chapter" data-level="21.1.13" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#cbind-function"><i class="fa fa-check"></i><b>21.1.13</b> cbind function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html"><i class="fa fa-check"></i><b>22</b> Probability distribution</a><ul>
+<li class="chapter" data-level="22.1" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#basic-structure-of-probability-distribution-function"><i class="fa fa-check"></i><b>22.1</b> Basic structure of probability distribution function</a></li>
+<li class="chapter" data-level="22.2" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#list-of-probability-distribution-functions"><i class="fa fa-check"></i><b>22.2</b> List of probability distribution functions</a><ul>
+<li class="chapter" data-level="22.2.1" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#continuous-probability-distribution"><i class="fa fa-check"></i><b>22.2.1</b> Continuous probability distribution</a></li>
+<li class="chapter" data-level="22.2.2" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#discrete-probability-distribution"><i class="fa fa-check"></i><b>22.2.2</b> Discrete probability distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#continuous-probability-distribution-1"><i class="fa fa-check"></i><b>22.3</b> Continuous probability distribution</a><ul>
+<li class="chapter" data-level="22.3.1" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#uniform-distribution"><i class="fa fa-check"></i><b>22.3.1</b> Uniform distribution</a></li>
+<li class="chapter" data-level="22.3.2" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#normal-distribution"><i class="fa fa-check"></i><b>22.3.2</b> Normal distribution</a></li>
+<li class="chapter" data-level="22.3.3" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#log-normal-distribution"><i class="fa fa-check"></i><b>22.3.3</b> Log-normal distribution</a></li>
+<li class="chapter" data-level="22.3.4" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#gamma-distribution"><i class="fa fa-check"></i><b>22.3.4</b> Gamma distribution</a></li>
+<li class="chapter" data-level="22.3.5" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#beta-distribution"><i class="fa fa-check"></i><b>22.3.5</b> Beta distribution</a></li>
+<li class="chapter" data-level="22.3.6" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#noncentral-beta-distribution"><i class="fa fa-check"></i><b>22.3.6</b> Noncentral beta distribution</a></li>
+<li class="chapter" data-level="22.3.7" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#chi-squared-distribution"><i class="fa fa-check"></i><b>22.3.7</b> Chi-squared distribution</a></li>
+<li class="chapter" data-level="22.3.8" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#noncentral-chi-squared-distribution"><i class="fa fa-check"></i><b>22.3.8</b> Noncentral chi-squared distribution</a></li>
+<li class="chapter" data-level="22.3.9" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#t-distribution"><i class="fa fa-check"></i><b>22.3.9</b> t-distribution</a></li>
+<li class="chapter" data-level="22.3.10" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#noncentral-t-distribution"><i class="fa fa-check"></i><b>22.3.10</b> Noncentral t-distribution</a></li>
+<li class="chapter" data-level="22.3.11" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#f-distribution"><i class="fa fa-check"></i><b>22.3.11</b> F-distribution</a></li>
+<li class="chapter" data-level="22.3.12" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#noncentral-f-distribution"><i class="fa fa-check"></i><b>22.3.12</b> Noncentral F-distribution</a></li>
+<li class="chapter" data-level="22.3.13" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#cauchy-distribution"><i class="fa fa-check"></i><b>22.3.13</b> Cauchy distribution</a></li>
+<li class="chapter" data-level="22.3.14" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#exponential-distribution"><i class="fa fa-check"></i><b>22.3.14</b> Exponential distribution</a></li>
+<li class="chapter" data-level="22.3.15" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#logistic-distribution"><i class="fa fa-check"></i><b>22.3.15</b> Logistic distribution</a></li>
+<li class="chapter" data-level="22.3.16" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#weibull-distribution"><i class="fa fa-check"></i><b>22.3.16</b> Weibull distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#discrete-probability-distribution-1"><i class="fa fa-check"></i><b>22.4</b> Discrete probability distribution</a><ul>
+<li class="chapter" data-level="22.4.1" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#binomial-distribution"><i class="fa fa-check"></i><b>22.4.1</b> Binomial distribution</a></li>
+<li class="chapter" data-level="22.4.2" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#negative-binomial-distribution-with-success-probability-as-parameter"><i class="fa fa-check"></i><b>22.4.2</b> Negative binomial distribution (with success probability as parameter)</a></li>
+<li class="chapter" data-level="22.4.3" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#negative-binomial-distribution-with-mean-as-parameter"><i class="fa fa-check"></i><b>22.4.3</b> Negative binomial distribution (with mean as parameter)</a></li>
+<li class="chapter" data-level="22.4.4" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#poisson-distribution"><i class="fa fa-check"></i><b>22.4.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="22.4.5" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#geometric-distribution"><i class="fa fa-check"></i><b>22.4.5</b> Geometric distribution</a></li>
+<li class="chapter" data-level="22.4.6" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#hypergeometric-distribution"><i class="fa fa-check"></i><b>22.4.6</b> Hypergeometric distribution</a></li>
+<li class="chapter" data-level="22.4.7" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#distribution-of-wilcoxon-rank-sum-test-statistic"><i class="fa fa-check"></i><b>22.4.7</b> Distribution of Wilcoxon rank-sum test statistic</a></li>
+<li class="chapter" data-level="22.4.8" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html#distribution-of-wilcoxon-signed-rank-test-statistic"><i class="fa fa-check"></i><b>22.4.8</b> Distribution of Wilcoxon signed-rank test statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="230_R_function.html"><a href="230_R_function.html"><i class="fa fa-check"></i><b>23</b> Using R functions</a><ul>
+<li class="chapter" data-level="23.1" data-path="230_R_function.html"><a href="230_R_function.html#function"><i class="fa fa-check"></i><b>23.1</b> Function</a></li>
+<li class="chapter" data-level="23.2" data-path="230_R_function.html"><a href="230_R_function.html#environment"><i class="fa fa-check"></i><b>23.2</b> Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html"><i class="fa fa-check"></i><b>24</b> NA NaN Inf NULL</a><ul>
+<li class="chapter" data-level="24.1" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html#notations-of-na-nan-inf"><i class="fa fa-check"></i><b>24.1</b> Notations of NA NaN Inf</a></li>
+<li class="chapter" data-level="24.2" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html#evaluating-na-nan-inf"><i class="fa fa-check"></i><b>24.2</b> Evaluating NA NaN Inf</a><ul>
+<li class="chapter" data-level="24.2.1" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html#evaluating-all-the-elements-of-a-vector-at-once"><i class="fa fa-check"></i><b>24.2.1</b> Evaluating all the elements of a vector at once</a></li>
+<li class="chapter" data-level="24.2.2" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html#evaluating-single-element-of-a-vector"><i class="fa fa-check"></i><b>24.2.2</b> Evaluating single element of a vector</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html#null"><i class="fa fa-check"></i><b>24.3</b> NULL</a></li>
+<li class="chapter" data-level="24.4" data-path="240_na_nan_inf.html"><a href="240_na_nan_inf.html#points-to-note-when-handling-na-with-rcpp"><i class="fa fa-check"></i><b>24.4</b> Points to note when handling NA with Rcpp</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="250_factor.html"><a href="250_factor.html"><i class="fa fa-check"></i><b>25</b> factor</a></li>
+<li class="chapter" data-level="26" data-path="260_error.html"><a href="260_error.html"><i class="fa fa-check"></i><b>26</b> Error handling</a></li>
+<li class="chapter" data-level="27" data-path="270_miscellaneous.html"><a href="270_miscellaneous.html"><i class="fa fa-check"></i><b>27</b> Cancel handling</a><ul>
+<li class="chapter" data-level="27.0.1" data-path="270_miscellaneous.html"><a href="270_miscellaneous.html#accepting-cancellation-from-user."><i class="fa fa-check"></i><b>27.0.1</b> Accepting cancellation from user.</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="280_iterator.html"><a href="280_iterator.html"><i class="fa fa-check"></i><b>28</b> Iterator</a></li>
+<li class="chapter" data-level="29" data-path="290_environment.html"><a href="290_environment.html"><i class="fa fa-check"></i><b>29</b> Environment</a><ul>
+<li class="chapter" data-level="29.1" data-path="290_environment.html"><a href="290_environment.html#creating-environment-object"><i class="fa fa-check"></i><b>29.1</b> Creating Environment object</a></li>
+<li class="chapter" data-level="29.2" data-path="290_environment.html"><a href="290_environment.html#accessing-object-in-a-environment"><i class="fa fa-check"></i><b>29.2</b> Accessing object in a environment</a></li>
+<li class="chapter" data-level="29.3" data-path="290_environment.html"><a href="290_environment.html#creating-new-environment"><i class="fa fa-check"></i><b>29.3</b> Creating new environment</a><ul>
+<li class="chapter" data-level="29.3.1" data-path="290_environment.html"><a href="290_environment.html#new_envsize-29"><i class="fa fa-check"></i><b>29.3.1</b> new_env(size = 29)</a></li>
+<li class="chapter" data-level="29.3.2" data-path="290_environment.html"><a href="290_environment.html#new_envparent-size-29"><i class="fa fa-check"></i><b>29.3.2</b> new_env(parent, size = 29)</a></li>
+</ul></li>
+<li class="chapter" data-level="29.4" data-path="290_environment.html"><a href="290_environment.html#member-functions-8"><i class="fa fa-check"></i><b>29.4</b> Member functions</a><ul>
+<li class="chapter" data-level="29.4.1" data-path="290_environment.html"><a href="290_environment.html#getname"><i class="fa fa-check"></i><b>29.4.1</b> get(name)</a></li>
+<li class="chapter" data-level="29.4.2" data-path="290_environment.html"><a href="290_environment.html#lsall"><i class="fa fa-check"></i><b>29.4.2</b> ls(all)</a></li>
+<li class="chapter" data-level="29.4.3" data-path="290_environment.html"><a href="290_environment.html#findname"><i class="fa fa-check"></i><b>29.4.3</b> find(name)</a></li>
+<li class="chapter" data-level="29.4.4" data-path="290_environment.html"><a href="290_environment.html#existsname"><i class="fa fa-check"></i><b>29.4.4</b> exists(name)</a></li>
+<li class="chapter" data-level="29.4.5" data-path="290_environment.html"><a href="290_environment.html#assign-name-x"><i class="fa fa-check"></i><b>29.4.5</b> assign( name, x )</a></li>
+<li class="chapter" data-level="29.4.6" data-path="290_environment.html"><a href="290_environment.html#islocked"><i class="fa fa-check"></i><b>29.4.6</b> isLocked()</a></li>
+<li class="chapter" data-level="29.4.7" data-path="290_environment.html"><a href="290_environment.html#removename"><i class="fa fa-check"></i><b>29.4.7</b> remove(name)</a></li>
+<li class="chapter" data-level="29.4.8" data-path="290_environment.html"><a href="290_environment.html#lockbindings-false"><i class="fa fa-check"></i><b>29.4.8</b> lock(bindings = false)</a></li>
+<li class="chapter" data-level="29.4.9" data-path="290_environment.html"><a href="290_environment.html#lockbindingname"><i class="fa fa-check"></i><b>29.4.9</b> lockBinding(name)</a></li>
+<li class="chapter" data-level="29.4.10" data-path="290_environment.html"><a href="290_environment.html#unlockbindingname"><i class="fa fa-check"></i><b>29.4.10</b> unlockBinding(name){</a></li>
+<li class="chapter" data-level="29.4.11" data-path="290_environment.html"><a href="290_environment.html#bindingislockedname"><i class="fa fa-check"></i><b>29.4.11</b> bindingIsLocked(name)</a></li>
+<li class="chapter" data-level="29.4.12" data-path="290_environment.html"><a href="290_environment.html#bindingisactivename"><i class="fa fa-check"></i><b>29.4.12</b> bindingIsActive(name)</a></li>
+<li class="chapter" data-level="29.4.13" data-path="290_environment.html"><a href="290_environment.html#is_user_database"><i class="fa fa-check"></i><b>29.4.13</b> is_user_database()</a></li>
+<li class="chapter" data-level="29.4.14" data-path="290_environment.html"><a href="290_environment.html#parent"><i class="fa fa-check"></i><b>29.4.14</b> parent()</a></li>
+<li class="chapter" data-level="29.4.15" data-path="290_environment.html"><a href="290_environment.html#new_childhashed"><i class="fa fa-check"></i><b>29.4.15</b> new_child(hashed)</a></li>
+</ul></li>
+<li class="chapter" data-level="29.5" data-path="290_environment.html"><a href="290_environment.html#static-member-functions-1"><i class="fa fa-check"></i><b>29.5</b> Static member functions</a><ul>
+<li class="chapter" data-level="29.5.1" data-path="290_environment.html"><a href="290_environment.html#environmentglobal_env"><i class="fa fa-check"></i><b>29.5.1</b> Environment::global_env()</a></li>
+<li class="chapter" data-level="29.5.2" data-path="290_environment.html"><a href="290_environment.html#environmentempty_env"><i class="fa fa-check"></i><b>29.5.2</b> Environment::empty_env()</a></li>
+<li class="chapter" data-level="29.5.3" data-path="290_environment.html"><a href="290_environment.html#environmentbase_env"><i class="fa fa-check"></i><b>29.5.3</b> Environment::base_env()</a></li>
+<li class="chapter" data-level="29.5.4" data-path="290_environment.html"><a href="290_environment.html#environmentbase_namespace"><i class="fa fa-check"></i><b>29.5.4</b> Environment::base_namespace()</a></li>
+<li class="chapter" data-level="29.5.5" data-path="290_environment.html"><a href="290_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>29.5.5</b> Environment::Rcpp_namespace()</a></li>
+<li class="chapter" data-level="29.5.6" data-path="290_environment.html"><a href="290_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>29.5.6</b> Environment::namespace_env(package)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="300_Rmath.html"><a href="300_Rmath.html"><i class="fa fa-check"></i><b>30</b> R Math Library</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rcpp for everyone</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="error-handling" class="section level1">
+<h1><span class="header-section-number">Chapter 26</span> Error handling</h1>
+<p>In a situation in which the normal progress of the program is hindered, you can print an error message and stop the program. If you want to warn the user without stopping the program, use <code>warning()</code> function. Both functions <code>stop()</code> and <code>warning()</code> can display messages by specifying the format as same as the <code>Rprintf()</code> function.</p>
+<pre><code>stop(&quot;Error: Unexpected condition occurred&quot;);
+stop(&quot;Error: Column %i is not numeric.&quot;, i+1);
+
+warning(&quot;Warning: Unexpected condition occurred&quot;);
+warning(&quot;Warning: Column %i is not numeric.&quot;, i+1);</code></pre>
+<p>In the code example below, an error is printed and execution is stopped if the value given to the function is negative.</p>
+<pre><code>// [[Rcpp::export]]
+double rcpp_log(double x) {
+    if (x &lt;= 0.0) {
+        stop(&quot;&#39;x&#39; must be a positive value.&quot;);
+    }
+    return log(x);
+}</code></pre>
+<p>Execution result</p>
+<pre><code>&gt; rcpp_log(-1)
+ Error: &#39;x&#39; must be a positive value.</code></pre>
+<!-- # Throwing C++ exception -->
+<!-- By using you can throw a C++ exception. -->
+<!-- ``` -->
+<!-- throw exception("Unexpected condition occurred"); -->
+<!-- ``` -->
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="250_factor.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="270_miscellaneous.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["rcpp4everyone_en.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

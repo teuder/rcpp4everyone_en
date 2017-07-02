@@ -1,0 +1,430 @@
+# R-like functions
+
+Here is a list of Rcpp functions similar to R functions.
+
+Also, if you can guarantee that `NA` is not included in the vector given to these functions, you can use `noNA()` to mark the vector. Then the functions below no longer checks for `NA`, so the calculation may speed up.
+
+```
+NumericVector res = mean(noNA(v));
+```
+
+## List of R-like functions
+
+
+- [Vector related functions](#vector-related-functions)
+- [String related functions](#string-related-functions)
+- [Functions related to finding values](#functions-related-to-finding-values)
+- [Functions related to duplicated values](#functions-related-to-duplicated-values)
+- [Functions related to set operation](#functions-related-to-set-operation)
+- [Functions related to maximum and minimum values](#functions-related-to-maximum-and-minimum-values)
+- [Functions related to summaries](#functions-related-to-summaries)
+- [Functions related to rounding values](#functions-related-to-rounding-values)
+- [Functions related to math](#functions-related-to-math)
+- [Functions related to logical values](#functions-related-to-logical-values)
+- [Functions related to NA Inf NaN](#functions-related-to-na-inf-nan)
+- [apply functions](#apply-functions)
+- [cbind function](#cbind-function)
+
+
+### Vector related functions
+
+
+
+**head(v, n)**
+
+Returns a vector of `n` elements from the first element of the vector `v`.
+
+
+**tail(v, n)**
+
+Returns a vector of last `n` elements from the last element of vector `v`.
+
+**rev(v)**
+
+Returns a vector that elements of vector `v` are arranged in reverse order.
+
+**rep(x, n)**
+
+Returns a vector that `x` is repeated `n` times. `x` can be a scalar or vector.
+
+**rep_each(v, n)**
+
+Returns a vector that each elements of vector v are repeated `n` times.
+
+**rep_len(v, n)**
+
+ Returns a vector that the vector `v` is repeated until the length of the vector becomes `n`. 
+
+**seq(start, end)**
+
+Returns a vector of consecutive integers from `start` to `end`.
+
+**seq_along(v)**
+
+Returns a vector of consecutive integers from 1 to the number of elements of vector `v`
+
+**seq_len(n)**
+
+Returns a vector of consecutive integers from 1 to `n`
+
+**diff(v)**
+
+Returns a vector that computed `v[i + 1] - v[i]` for each element `i` excluding the last element of the vector `v`.
+
+### String related functions
+
+**collapse(v)**
+
+Returns a string concatenated with each element of the `CharacterVector` v as `String` type.
+
+### Finding values
+
+**match(v, table)**
+
+ Returns an integer vector containing the R style numerical index (starting from 1) of the element of vector `table` that match value to each elements of vector `x`. Namely、if you execute `res = match(v, table);`, then it will be `res[i] ==  j+1` where `j` equals to minimum `j`  satisfying `v[i] == table[j]`
+
+**self_match(v)**
+
+Synonymous with passing the same vector to `match (v, table)`.
+
+**which_max(v)**
+
+Returns the numerical index of the largest element of the vector v.
+
+**which_min(v)**
+
+Returns the numerical index of the smallest element of the vector v.
+
+
+
+### Duplicated values
+
+**duplicated(v)**
+
+Returns a vector containing 1 if the value of each element of vector v exists in the previous element, containing 0 if not.
+
+**unique(v)**
+
+Returns a vector that eliminates the duplication of the element value from the vector `v`.
+
+**sort_unique(v)**
+
+Returns a vector that eliminates the duplication of the element value from the vector `v` and sorts the values in ascending order.
+
+
+### Set operation
+
+**setdiff(v1,v2)**
+
+Returns a vector obtained by subtracting the value of the unique element of the vector `v2` from the unique element of the vector `v1`.
+
+**setequal(v1,v2)**
+
+Returns true if the unique element of vector `v1` is equal to the unique element of vector `v2`.
+
+**intersect(v1,v2)**
+
+Returns a vector containing elements contained in both the unique element of vector `v1` and the unique element of vector `v2`.
+
+**union_(v1,v2)**
+
+Return vector which eliminated value duplication after combining elements of vector `v1` and vector `v2`.
+
+### Functions related to maximum and minimum values
+
+**min(v)**
+
+Returns the minimum value of the vector `v`.
+
+**max(v)**
+
+Returns the maximum value of the vector `v`.
+
+**cummin(v)**
+
+Returns the cumulative minimum elements of vector `v`
+
+**cummax(v)**
+
+Returns the cumulative maximum elements of vector `v`
+
+**pmin(v1,v2)**
+
+Compares the corresponding elements of vectors `v1` and `v2`, and return a vector containing the smaller elements.
+
+**pmax(v1,v2)**
+
+Compares the corresponding elements of vectors `v1` and `v2`, and return a vector containing the larger elements.
+
+**range(v)**
+
+Returns a vector consisting of the minimum and maximum values of vector `v`.
+
+**clamp(min, v, max)**
+
+Returns a vector that the elements of vector `v` smaller than `min` is replaced with `min` and the elements larger than `max` is replaced with `max`.
+
+
+### Functions related to summaries
+
+**sum(v)**
+
+Returns the sum of the elements of vector `v`.
+
+**mean(v)**
+
+Returns the arithmetic mean of the elements of vector `v`.
+
+**median(v)**
+
+Returns the median value of the elements of vector `v`.
+
+**sd(v)**
+
+Returns the standard deviation of the elements of vector `v`.
+
+**var(v)**
+
+Returns the variance of the elements of vector `v`.
+
+**cumsum(v)**
+
+Returns the cumulative sum of the elements of vector `v`
+
+**cumprod(v)**
+
+Returns the cumulative product of the elements of vector `v`
+
+**table(v)**
+
+ Returns a named integer vector that counts the number of elements for each unique element of vector `v`.
+
+
+
+### Functions related to rounding values
+
+**floor(v)**
+
+Returns a vector containing the largest integer not greater than each element of vector `v`.
+
+**ceil(v)**
+
+Returns a vector containing the largest integer not smaller than each element of vector v.
+
+**ceiling(v)**
+
+Synonymous with `ceil()`.
+
+**round(v, digits)**
+
+Returns a vector obtained by rounding each element of the vector `v` with the number of significant figure `digits`.
+
+**trunc(v)**
+
+Returns a vector with rounded down decimal places.
+
+
+
+
+
+### Functions related to math
+
+**sign(v)**
+
+Returns a vector with the signs of the corresponding elements of `v` (the sign of a real number is 1, 0, or -1 if the number is positive, zero, or negative, respectively).
+
+**abs(v)**
+
+Returns a vector containing the absolute value of each element of vector `v`.
+
+**pow(v, n)**
+
+Returns a vector by raising each element of the vector `v` to the `n`th power.
+
+**sqrt(v)**
+
+Returns a vector containing square root of each element of vector v.
+
+**exp(v)**
+
+Returns a vector by raising Napier number (e) to the power of value of each element of the vector v.
+
+**expm1(v)**
+
+Synonymous with `exp(v) - 1`
+
+**log(v)**
+
+Returns a vector containing the natural logarithmic of each element of vector `v`.
+
+**log10(v)**
+
+Returns a vector containing the common logarithmic of each element of vector `v`.
+
+**log1p(v)**
+
+Synonymous with `log(v+1)`
+
+**sin(v)**
+
+Returns a vector containing sine of each element of vector `v`.
+
+**sinh(v)**
+
+Returns a vector containing hyperbolic sine of each element of vector `v`.
+
+**cos(v)**
+
+Returns a vector containing cosine of each element of vector `v`.
+
+**cosh(v)**
+
+Returns a vector containing hyperbolic cosine of each element of vector `v`.
+
+**tan(v)**
+
+Returns a vector containing tangent of each element of vector `v`.
+
+**tanh(v)**
+
+Returns a vector containing hyperbolic tangent of each element of vector `v`.
+
+**acos(v)**
+
+Returns a vector containing arccosine of each element of vector `v`.
+
+**asin(v)**
+
+Returns a vector containing arcsine of each element of vector `v`.
+
+**atan(v)**
+
+Returns a vector containing arctangent of each element of vector `v`.
+
+**gamma(v)**
+
+Returns a vector obtained by transforming each element of vector `v` with the gamma function.
+
+**lgamma(v)**
+
+Synonymous with `log(gamma(v))`
+
+**digamma(v)**
+
+Returns a vector obtained by transforming each element of vector `v` with the first derivative function of `lgamma()`.
+
+**trigamma(v)**
+
+Returns a vector obtained by transforming each element of vector `v` with the second derivative function of `lgamma()`.
+
+**tetragamma(v)**
+
+Returns a vector obtained by transforming each element of vector `v` with the third derivative function of `lgamma()`.
+
+**pentagamma(v)**
+
+Returns a vector obtained by transforming each element of vector `v` with the fourth derivative function of `lgamma()`.
+
+**psigamma(v, deriv)**
+
+Returns a vector obtained by transforming each element of vector `v` with the `deriv`-th derivative function of `lgamma()`.
+
+**factrial(v)**
+
+Returns a vector containing the factorial of the each element of vector `v`.
+
+**lfactorial(v)**
+
+Synonymous with `log(factrial(v))`
+
+**choose(vn, vk)**
+
+Returns a vector obtained by calculating binomial coefficients using the corresponding elements of real vector `vn` and integer vector `vk`.
+
+**lchoose(vn, vk)**
+
+Synonymous with `log(choose(vn, vk))`
+
+**beta(va, vb)**
+
+Returns a vector obtained by calculating the value of the beta function using the corresponding elements of vectors `va` and `vb`.
+
+**lbeta(va, vb)**
+
+Synonymous with `log(beta(va, vb))`
+
+
+
+### Functions related to logical values
+
+**all(v)**
+
+Receives a `LogicalVector` `v` and returns `SingleLogicalResult` type meaning` TRUE` when all of elements are `TRUE`.
+
+**any(v)**
+
+Receives a `LogicalVector` `v` and returns `SingleLogicalResult` type meaning` TRUE` when any of elements are `TRUE`.
+
+**is_true(x)**
+
+Receives a return value of `all()` or `any()` and returns bool type `true` if it means `TRUE`.
+
+**is_false(x)**
+
+Receives a return value of `all()` or `any()` and returns bool type `true` if it means `FALSE`.
+
+**is_na(x)**
+
+Receives a return value of `all()` or `any()` and returns bool type `true` if it means `NA`.
+
+**ifelse(v, x1, x2)**
+
+Receives the `LogicalVector` `v`, and returns a vector containing the corresponding element of x1 or x2 when the element of v is `TRUE` or `FALSE`, respectively. Although `x1` and `x2` can be vectors or scalars, the length of the vector needs to be equal to `v`.
+
+
+### Functions related to NA Inf NaN
+
+**na_omit(v)**
+
+Returns a vector which deleted `NA` from vector `v`.
+
+**is_finite(v)**
+
+Returns a `LogicalVector` containing `TRUE` if corresponding elements of vector `v` is not `Inf` nor `-Inf` nor `NA`.
+
+**is_infinite(v)**
+
+Returns a `LogicalVector` containing `TRUE` if corresponding elements of vector `v` is `Inf` or `-Inf` or `NA`.
+
+**is_na(v)**
+
+Returns a `LogicalVector` containing `TRUE` if corresponding elements of vector `v` is `NA` or `NaN`.
+
+**is_nan(v)**
+
+Returns a `LogicalVector` containing `TRUE` if corresponding elements of vector `v` is `NaN`.
+
+
+### apply functions
+
+**lapply(x, fun)**
+
+Applies a C++ function `fun` to each element of the vector `x` and returns the result as `List`.
+
+**sapply(x, fun)**
+
+Applies a C++ function `fun` to each element of the vector `x` and returns the result as `Vector`.
+
+**mapply(x1, x2, fun2)**
+
+Applies a C++ function `fun` that receives two arguments to each corresponding elements of the vector `x1` and `x2` and returns the result as `Vector`.
+
+**mapply(x1, x2, x3, fun3)**
+
+Applies a C++ function `fun` that receives three arguments to each corresponding elements of the vector `x1` and `x2`, `x3` and returns the result as `Vector`.
+
+### cbind function
+
+**cbind(x1, x2,...)**
+
+Takes `Vector` or `Matrix` `x1` and `x2`, `...` and combine by columns. And returns the result as `Matrix` or `DataFrame`. You can pass up to 50 arguments.

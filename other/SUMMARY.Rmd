@@ -1,0 +1,42 @@
+# Summary
+
+* [Preface](README.md)
+* [Taking advantage of Rcpp](01_Rcpp_merit.md)
+* [Installation](02_install.md)
+* [Basic usage](03_basic_usage.md)
+* [Writing a function](04_function.md)
+* [C++11](05_c++11.md)
+* [Printing messages](06_utility.md)
+* [Data types](07_data_types.md)
+* [Vector](08_01_vector.md)8
+* [Cautions in handling vector](08_02_caution_vector.md)9
+* [Matrix](09_matrix.md)10
+* [Arithmetic and comparison operations](10_calculation.md)11
+* [LogicalVector and logical operations](11_logical.md)12
+* [Attributes](12_attributes.md)13
+* [DataFrame](13_dataframe.md)14
+* [List](14_list.md)15
+* [S3, S4](15_s3_s4.md)16
+* [String](16_string.md)17
+* [Date](17_date.md)18
+* [Datetime](18_datetime.md)19
+* [RObject](19_robject.md)20
+* [R like functions](20_rcpp_functions.md)21
+* [Probability distributions](21_dpqr_functions.md)22
+* [Using R functions](22_R_function.md)23
+* [NA NaN Inf](23_na_nan_inf.md)24
+* [factor](24_factor.md)25
+* [Error handling](25_error.md)26
+* [Interruption](26_miscellaneous.md)27
+* [Iterator](27_iterator.md)28
+* [Environment](28_environment.md)29
+* [Rmath](34_Rmath.md)30
+
+<!--
+* [Creating a package using Rcpp(ja)](31_package.md)
+* [Using standard C++ containers(ja)](32_as_wrap.md)
+* [Using standard C++ algorithms(ja)](33_STL.md)
+* [Boost(ja)](35_boost.md)
+* [RcppParallel(ja)](36_parallel.md)
+* [Learning more(ja)](37_link.md)
+-->

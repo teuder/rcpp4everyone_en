@@ -1,0 +1,500 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={RcppのためのC++入門},
+            pdfauthor={Masaki E. Tsuda},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{RcppのためのC++入門}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Masaki E. Tsuda}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2017-06-24}
+
+%lualatexjaを使うために,ヘッダーとして読み込ませるtexファイル
+%必要なヘッダーはここに記述しておくと楽です
+%個人的な趣味でIPAフォントを利用しています
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\setmainjfont{IPAGothic}
+\setsansjfont{IPAGothic}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{はじめに}
+\addcontentsline{toc}{chapter}{はじめに}
+
+このサイトは Rcpp を使うために最低限必要な C++
+の知識を紹介することを目的としています。基本的にはC++11以降の標準にしたがって記述します。
+
+Rcppのそのものの解説については
+\href{https://www.gitbook.com/book/teuder/introduction-to-rcpp/details/ja}{Introduction
+to Rcpp（日本語）} を参照してください。
+
+\section{本書の構成}
+
+このドキュメントの構成は以下のようになる予定です。
+
+\begin{itemize}
+\item
+  C++の概要
+\item
+  C++の特徴 \_ C++の構成要素
+\item
+  変数
+
+  \begin{itemize}
+  \tightlist
+  \item
+    変数の宣言
+  \item
+    変数の型
+
+    \begin{itemize}
+    \tightlist
+    \item
+      基本型
+    \item
+      ユーザー定義型
+    \item
+      参照型
+    \item
+      配列型（優先度低）
+    \item
+      ポインタ型（優先度低）
+    \end{itemize}
+  \item
+    変数の初期化
+  \item
+    修飾子
+  \item
+    変数のスコープ
+  \end{itemize}
+\item
+  関数
+
+  \begin{itemize}
+  \tightlist
+  \item
+    関数の宣言と定義
+  \item
+    引数
+
+    \begin{itemize}
+    \tightlist
+    \item
+      値渡し
+    \item
+      参照渡し
+    \item
+      ポインタ渡し
+    \end{itemize}
+  \item
+    関数の多重定義
+  \item
+    関数テンプレート
+  \end{itemize}
+\item
+  制御文
+\item
+  for文
+\item
+  if文
+\item
+  switch文
+\item
+  列挙型
+\item
+  構造体とクラス
+
+  \begin{itemize}
+  \tightlist
+  \item
+    メンバ変数
+  \item
+    メンバ関数
+  \item
+    静的メンバ変数・関数
+  \item
+    コンストラクタ
+  \item
+    デストラクタ
+  \item
+    継承
+  \item
+    クラステンプレート
+  \end{itemize}
+\item
+  データ構造とアルゴリズム（STL）
+
+  \begin{itemize}
+  \tightlist
+  \item
+    データ構造
+  \item
+    イテレータ
+  \item
+    アルゴリズム
+  \end{itemize}
+\item
+  名前空間
+\item
+  ヘッダファイルの書き方
+\item
+  複数ファイルにわけて書く方法
+\end{itemize}
+
+\chapter{C++の概要}\label{c}
+
+C++とはどのような言語なのでしょうか？
+
+\section{C++の特徴}\label{c}
+
+\subsection{コンパイル言語}
+
+CやC++は\textbf{コンパイル言語}と呼ばれます。一方、RやPythonなどの言語は\textbf{スクリプト言語}と呼ばれています。その違いを述べる前に、簡単にプログラミング言語とは何なのかを説明すると、コンピューターは、ユーザーが作成したソースコードをそのまま実行することはできません。実行するにはソースコードをコンピューターが実行可能な機械語に変換する必要があります。人間が直接書くのが困難な機械語を、人間に理解しやすい構文で書けるように設計された言語がプログラミング言語です。
+
+\textbf{スクリプト言語}はソースコードを１文ごとにインタープリター（RやPythonの本体）が機械語に変換しながら実行します。RやPythonのコンソールからコードを入力してリターンを押すたびに実行されるので、ユーザーからはソースコードが直接実行されているように見えます。スクリプト言語はユーザーがコードを記述し実行するまでの手間を簡単にすることを目的に設計されているので比較的お手軽に使える利点があります。しかし、実行速度の観点からはコンパイル言語には劣ります。それは、実行時に１文ずつ機械語に変換されるので、変換するための時間もかかりますし、機械語に変換するときの最適化も１文単位でしか行うという限界があるためです。
+
+\textbf{コンパイル言語}はあらかじめソースコードの全体をコンパイラーにより機械語に変換して実行ファイルを作成します。そして実行したいときに、その実行ファイルを実行します。実行ファイルはアプリケーションの本体なのでRやPythonのインタープリタも実行ファイルです。コンパイル言語は実行する前にコンパイルしておかないといけないですし、ソースコードを変更するたびにこのパイルしなおす必要があるので、トライアンドエラーを行うのに手間がかかります。しかし、ソースコード全体をまとめて機械語に変換するため機械語に変換時の最適化はスクリプト言語よりも優れており実行速度に勝ります。ただ、コンパイルにも時間がかかるので、一度コンパイルしたコードを何度も使うような場面には向いていますが、一度しか実行しないような使い捨て作業には向いていません。
+
+（ちなみに使ったことはないですが\href{https://root.cern.ch/cling}{Cling}というC++のインタープリターもあるみたいです。）
+
+\subsection{静的型付け言語}
+
+\subsection{C言語の機能を包含している}\label{c}
+
+C++はC言語の機能を（ほぼ）包含しているので、Cの構文で記述されたプログラムはC++としても動きます。Cの標準ライブラリもC++の標準ライブラリの中に含まれているので基本的にはそのまま利用できます。ただCの標準ライブラリをC++の流儀で使えるように多少変更も加えられています。例えば、Cの
+\texttt{stdio.h} をC++で利用する場合には \texttt{cstdio}
+をインクルードします（同様に \texttt{math.h} は
+\texttt{cmath}）。\texttt{stdio.h} も使えるのですが、C++では
+\texttt{cstdio}
+を利用することが推奨されています。その理由は、標準ライブラリにある関数の名前が、ユーザーが定義した関数や他のライブラリの関数の名前と衝突するのを避けるために
+\texttt{cstdio} では全ての関数が　\texttt{std}
+名前空間の中で定義されているためです。なので \texttt{cstdio}
+の中で定義されている \texttt{printf()} を利用したい場合にはC++では
+\texttt{std::printf()} と指定します。
+
+たまにC++を使うにはまずCを覚えた方が良いのかという話を聞きますが、Cを覚える必要はありません。むしろ、C++の方がシンプルで高機能に記述できるケースが多いと感じています。それを知らずC言語の流儀で書いてしまうクセを回避するために、初めからC++を学ぶことをオススメします。
+
+\section{C++の基本的な構成要素}\label{c}
+
+C++言語の基本的な構成要素は「変数（オブジェクト）」「関数」「制御文」だと思います。それぞれの基本を以下では説明します。
+
+\subsection{変数（オブジェクト）}
+
+変数は値を保持します。Rとは異なり C++
+ではある変数を使うには、使う前に必ず変数を作成する（C++では変数を宣言すると言います）必要があります。さらに、Rとは異なる点は、C++では変数の型は、その変数を宣言するときに必ず決める必要があるということです。そして、その変数の作成後には型を変えることはできません。このような特徴をもつ言語を
+\textbf{静的型付言語}
+と言います。これによりコンパイラーはその変数の値を保持するために必要なメモリの量があらかじめわかるので、最適化を効率よく行うことができるようになります。
+
+\begin{verbatim}
+int x;
+x = 1; 
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  １行目 \texttt{int\ x;}：int 型の変数 x
+  を宣言します（メモリの領域を確保する）
+\item
+  ２行目 \texttt{x\ =\ 1;}：変数 x
+  に値を代入します（そのメモリ領域に値を書き込む）
+\item
+  C++では全ての文の末尾にセミコロン \texttt{;} が必須です。
+\end{itemize}
+
+\subsection{関数}
+
+関数には入力と出力があるものですが、C++では次のように書きます。例えば、int
+型（整数スカラー）の変数 x を入力として、その値を２倍にして int
+型として返す関数 timesTwo を定義するコードは以下のようになります。
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int} \NormalTok{timesTwo(}\DataTypeTok{int} \NormalTok{x)\{}
+  \KeywordTok{return} \DecValTok{2} \NormalTok{* x;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  １行目 \texttt{int\ timesTwo}：timesTwo 関数の返り値の型が int
+  であることを示します。
+\item
+  １行目 \texttt{(int\ x)}：この関数の入力（引数）x の型が int
+  であることを示します。
+\item
+  ２行目 \texttt{return\ 2\ *\ x;}：x
+  を2倍した値を返しています。C++では（main関数ではない）普通の関数では
+  return 文は必須です。また、全ての文の末尾にセミコロン \texttt{;}
+  が必須です。
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+（蛇足）
+
+C/C++の本を読むと必ず main 関数というのが出てきます。C/C++界では main
+関数は特別な関数で、全てのアプリケーションは main
+関数を必ず１つ持っています。ユーザーがアプリケーションを実行するときには、CUIからコマンドを入力してリターンキーを押したり、GUIからアイコンをダブルクリックすることで、OSがアプリケーション本体の実行ファイルを起動します。実行ファイルが起動されると
+main 関数が呼び出され、main
+関数の実行が終了するということはそのアプリケーションの実行が終了するということを意味します。
+
+とはいえ、Rcppを使ってコードを書く際には、main関数を作成することはありません。なぜならmain関数はR側が持っているためです。Rcppの関数はRのmain関数から呼び出されるだけなのでmain関数が必要ないのです。順番としては、ユーザーがRを起動する
+→ Rのmain関数が呼び出される →
+R内でのユーザーの入力に応じてRのその他の関数やRcppの関数が呼び出される →
+ユーザーがRを終了を指示する →
+Rのmain関数の実行が終了する、という感じです。
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{制御文}
+
+プログラミング言語の制御文には「条件分岐」と「繰り返し処理」があります。
+
+\textbf{条件分岐}
+
+C++ の条件分岐には次の３つの方法があります。
+
+\begin{itemize}
+\tightlist
+\item
+  if文
+\item
+  switch 文
+\end{itemize}
+
+ifは条件が true か false
+かに応じて処理を２つに分岐するときにし使用するのに対して、switch
+は条件の値に応じて多重に分岐する場合に用います。
+
+\textbf{繰り返し処理}
+
+C++ の繰り返し処理には次の２つの方法があります。
+
+\begin{itemize}
+\tightlist
+\item
+  for 文
+\item
+  while 文
+\item
+  do while 文
+\end{itemize}
+
+これらは基本的に同一の処理を実現しますが、処理に応じてどれを使えばシンプルにかけるかという観点から使い分けます。このドキュメントではもっともよく使われるであろう
+for 文のみを説明します。
+
+\subsection{標準ライブラリ}
+
+関数・変数・制御文はプログラミングのコアな構成要素です。しかし、実用的なプログラムを作成するには、例えばテキストを画面に表示したり、ファイルを読み書きしたり、ユーザーからの入力を受け付けたり、数学的な計算を行ったりと様々な機能が必要になります。そのためにC++ではそのような機能を標準ライブラリとして提供しています。ライブラリとは特定の機能を提供するモジュールです。「標準」ライブラリとはRで例えるならデフォルトでRと一緒にインストールされるパッケージ（statパッケージなど）のようなものです。
+
+標準ライブラリについては以下のサイトなどを参考にしてください。
+
+\href{https://cpprefjp.github.io/reference.html}{C++日本語リファレンス}
+
+C++は産業や学術などの分野でのメジャーなプログラミング言語となっているので標準ライブラリの他にも、準標準ライブラリの位置づけにある
+boost
+ライブラリを始め、フリーや商用の様々なライブラリが多数存在しています。
+
+\chapter{変数}
+
+\section{変数の宣言}
+
+\href{010_outline.Rmd}{１章の変数のセクション}で述べたようにC++では変数を使う前に必ず宣言しなければいけません。
+
+\section{変数の型}
+
+C++で利用できる基本的なスカラー値の型には以下があります。ベクトルなど複数のスカラー値が組み合わさったデータ構造についてはデータ構造とアルゴリズムのセクションを参照してください。
+
+\begin{longtable}[]{@{}cccl@{}}
+\toprule
+説明 & 型 & 値の例 & 値の範囲\tabularnewline
+\midrule
+\endhead
+論理値 & bool & true & true または false\tabularnewline
+文字 & char & `a' `\n' &
+英数記号文字リテラル（ASCII文字）\tabularnewline
+文字列 & char* & ``abcd\n'' & ASCII文字の列\tabularnewline
+文字列 & std::string & ``abcd\n'', u8``あいうえお'' &
+ASCII文字の列、UTF8のマルチバイト文字列\tabularnewline
+整数（符号あり） & int & 1 & -2147483648 \textasciitilde{}
+2147483647\tabularnewline
+整数（符号あり） & long & 1 & -2147483648 \textasciitilde{}
+2147483647\tabularnewline
+整数（符号あり） & long long & 1 & -9223372036854775808
+\textasciitilde{} 9223372036854775807\tabularnewline
+整数（符号なし） & unsigned int & 1 & 0 \textasciitilde{}
+4294967295\tabularnewline
+整数（符号なし） & unsigned long & 1 & 0 \textasciitilde{}
+4294967295\tabularnewline
+整数（符号なし） & unsigned long long & 1 & 0 \textasciitilde{}
+18446744073709551615\tabularnewline
+浮動小数点数（単精度） & float & 1.0 & -3.40282e+38 \textasciitilde{}
+3.40282e+38\tabularnewline
+浮動小数点数（倍精度） & 1.0 & double & -1.79769313486232e+308
+\textasciitilde{} 1.79769313486232e+308\tabularnewline
+浮動小数点数（拡張倍精度） & 1.0 & double & -1.79769313486232e+308
+\textasciitilde{} 1.79769313486232e+308\tabularnewline
+\bottomrule
+\end{longtable}
+
+be \textbar{} be \textbar{} be \textbar{}\\
+left \textbar{} right \textbar{} center \textbar{}\\
+aligned \textbar{} aligned \textbar{} aligned \textbar{}
+
+C++では同じ整数でも複数の型が存在していますが、それらの違いは扱える値の範囲が異なる点です。広い範囲の値を扱うためにはより大きなメモリ容量が必要となるので、処理に必要な値の範囲に合わせて変数の型を適切に選択することでメモリを効率よく使うことができますし、処理速度も速くなることが期待されます。
+
+しかし、R/Rcppの整数ベクトルの要素の値は int
+型、実数ベクトルの要素の値は double
+型であるので、その範囲外の値をRのベクトルに渡しても正しく扱うことはできません。
+
+ちなみに、ある型が扱える値の範囲（型が使用するメモリ容量）は処理系（コンパイラの種類;
+gcc, clang, visual c++ など）により異なります。このドキュメントでは Rcpp
+が対応している gcc, clang における値の範囲で表記します。
+
+整数型の値の範囲は
+\href{https://cpprefjp.github.io/reference/climits.html}{climits}
+ヘッダに、浮動小数点数型の値の範囲は\href{https://cpprefjp.github.io/reference/cfloat.html}{cfloat}ヘッダに定義されています。
+
+Rcpp
+でそれを簡単に確認するには、例えばRのコンソールに以下のように入力します。
+
+\begin{verbatim}
+> Rcpp::evalCpp("INT_MAX")
+[1] 2147483647
+> Rcpp::evalCpp("DBL_MAX")
+[1] 1.797693e+308
+\end{verbatim}
+
+メモ：std::numeric\_limitsクラスを利用しても同じことができる。
+
+\begin{verbatim}
+> Rcpp::evalCpp("std::numeric_limits<int>::max()")
+[1] 2147483647
+\end{verbatim}
+
+
+\end{document}

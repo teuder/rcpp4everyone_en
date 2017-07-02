@@ -1,0 +1,10 @@
+#書籍ファイル名
+book_filename: "rcpp4everyone_en"
+#チャプターの枕詞
+chapter_name: "Chapter "
+#出力先の指定。docsに指定しています
+output_dir: docs
+#使用するRmdファイル群。指定しなければすべてのRmdを持ってきます
+#rmd_files: ["01-title1.Rmd","index.Rmd","02-title2.md"]
+  
+# 詳しくは公式ドキュメントを参照してください

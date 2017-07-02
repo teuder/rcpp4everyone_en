@@ -1,0 +1,28 @@
+#一番上に指定している形式が,Knitした時に参照されます
+#2番目以降はあまり順番を気にしなくて大丈夫です
+# epub関連の設定
+bookdown::epub_book: default
+# gitbook形式の設定
+bookdown::gitbook:
+  css: style.css
+  split_by: "rmd"
+  config:
+    toc:
+# サイドバーの一番上の要素になります
+      before: |
+        <li><a href="./">Rcpp for everyone</a></li>
+# サイドバーの一番下の要素になります
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+# 日本語タイトルが使えるようにするおまじないです。!import
+  pandoc_args: [
+        "--from", "markdown+autolink_bare_uris+tex_math_single_backslash-implicit_figures"
+        ]
+# pdf形式の設定
+# 細かい設定内容はpramble.texを参照
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: lualatex
+  keep_tex: yes
