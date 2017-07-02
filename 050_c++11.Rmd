@@ -87,11 +87,11 @@ In `{}`, you describe processes you want.
 
 The return type of this function object is automatically set to the type of the returned value described in `{}`. If you want to define return type explicitly, write it like `[]()->int{}`.
 
-**Exapmle**
+**Example**
 
 The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.
 
-*R exapmle*
+*R example*
 
 ``` R
 v <- c(1,2,3,4,5)
@@ -100,7 +100,7 @@ res <-
   sapply(v, function(x){A*x})
 ```
 
-*Rcpp exapmle*
+*Rcpp example*
 
 ``` cpp
 // [[Rcpp::plugins("cpp11")]]
