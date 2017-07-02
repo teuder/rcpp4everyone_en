@@ -1,8 +1,8 @@
 # C++11
 
-C++ 11 is a standard of C++ newly established in 2011, it introduce new functionalities and notations. Compared with the previous standard, many new features are added to make C++ even easier for beginners, so this document will actively exploit the features of C++11.
+C++ 11 is a standard of C++ newly established in 2011, it introduces new functionalities and notations. Compared with the previous standard, many new features have been added to make C++ even easier for beginners. This document will actively exploit these features of C++11.
 
-** Important: Code example in this document is written assuming that C++11 is enabled. **
+** Important: Code examples in this document are written assuming that C++11 is enabled. **
 
 ## Enabling C++11
 
