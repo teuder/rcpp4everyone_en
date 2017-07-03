@@ -1,8 +1,8 @@
 # C++11
 
-C++ 11 is a standard of C++ newly established in 2011, it introduce new functionalities and notations. Compared with the previous standard, many new features are added to make C++ even easier for beginners, so this document will actively exploit the features of C++11.
+C++ 11 is a standard of C++ newly established in 2011, it introduces new functionalities and notations. Compared with the previous standard, many new features have been added to make C++ even easier for beginners. This document will actively exploit these features of C++11.
 
-** Important: Code example in this document is written assuming that C++11 is enabled. **
+** Important: Code examples in this document are written assuming that C++11 is enabled. **
 
 ## Enabling C++11
 
@@ -87,11 +87,11 @@ In `{}`, you describe processes you want.
 
 The return type of this function object is automatically set to the type of the returned value described in `{}`. If you want to define return type explicitly, write it like `[]()->int{}`.
 
-**Exapmle**
+**Example**
 
 The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.
 
-*R exapmle*
+*R example*
 
 ``` R
 v <- c(1,2,3,4,5)
@@ -100,7 +100,7 @@ res <-
   sapply(v, function(x){A*x})
 ```
 
-*Rcpp exapmle*
+*Rcpp example*
 
 ``` cpp
 // [[Rcpp::plugins("cpp11")]]
