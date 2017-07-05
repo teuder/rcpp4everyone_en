@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-07-02">
+<meta name="date" content="2017-07-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -114,7 +114,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="010_Rcpp_merit.html"><a href="010_Rcpp_merit.html"><i class="fa fa-check"></i><b>1</b> Suitable situation to use Rcpp</a></li>
+<li class="chapter" data-level="1" data-path="010_Rcpp_merit.html"><a href="010_Rcpp_merit.html"><i class="fa fa-check"></i><b>1</b> Suitable situations to use Rcpp</a></li>
 <li class="chapter" data-level="2" data-path="020_install.html"><a href="020_install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
 <li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-c-compiler"><i class="fa fa-check"></i><b>2.1</b> Install C++ compiler</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
@@ -455,8 +455,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="c11" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> C++11</h1>
-<p>C++ 11 is a standard of C++ newly established in 2011, it introduce new functionalities and notations. Compared with the previous standard, many new features are added to make C++ even easier for beginners, so this document will actively exploit the features of C++11.</p>
-<p>** Important: Code example in this document is written assuming that C++11 is enabled. **</p>
+<p>C++ 11 is a standard of C++ newly established in 2011, it introduces new functionalities and notations. Compared with the previous standard, many new features have been added to make C++ even easier for beginners. This document will actively exploit these features of C++11.</p>
+<p>** Important: Code examples in this document are written assuming that C++11 is enabled. **</p>
 <div id="enabling-c11" class="section level2">
 <h2><span class="header-section-number">5.1</span> Enabling C++11</h2>
 <p>To enable C ++ 11, add the following description somewhere in your Rcpp code.</p>
@@ -513,14 +513,14 @@ for(auto&amp; x : v) {
 <p>In <code>{}</code>, you describe processes you want.</p>
 <p><strong>Return type of the lambda expression</strong></p>
 <p>The return type of this function object is automatically set to the type of the returned value described in <code>{}</code>. If you want to define return type explicitly, write it like <code>[]()-&gt;int{}</code>.</p>
-<p><strong>Exapmle</strong></p>
+<p><strong>Example</strong></p>
 <p>The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.</p>
-<p><em>R exapmle</em></p>
+<p><em>R example</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)
 A &lt;-<span class="st"> </span><span class="fl">2.0</span>
 res &lt;-
 <span class="st">  </span><span class="kw">sapply</span>(v, function(x){A*x})</code></pre></div>
-<p><em>Rcpp exapmle</em></p>
+<p><em>Rcpp example</em></p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span>
 <span class="co">// [[Rcpp::export]]</span>
 NumericVector rcpp_lambda_1(){
