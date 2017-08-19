@@ -123,17 +123,17 @@ Return a reference `Vector::Column` to the `i`th　column.
 
 ### fill_diag( x )
 
-Fill diagonal elements with scalar value x.
+Fill diagonal elements with scalar value `x`.
 
-### offset(i,j)
+### offset( i, j )
 
-Returns the numerical index in the original vector of the matrix corresponding to the element of row i and column j.
+Returns the numerical index in the original vector of the matrix corresponding to the element of row `i` and column `j`.
 
 
 
 ## Static member functions
 
-`Matrix` basically has the same static member function as` Vector`. The static member functions unique to `Matrix` are shown below.
+`Matrix` basically has the same static member function as `Vector`. The static member functions unique to `Matrix` are shown below.
 
 ### Matrix::diag( size, x )
 
