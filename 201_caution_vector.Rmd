@@ -1,6 +1,6 @@
 # Cautions in handling Rcpp objects
 
-### Assigning between vectors
+## Assigning between vectors
 
 When you assign a object `v1` to another object `v2` using `=` operator (`v2 = v1;`), the value of elements  of `v1` is not copied to `v2` but `v2` will be an alias to `v1`. Thus, if you change the value of some elements in `v1`, the change also applied to `v2`. You should use `clone()`, if you want to avoid coupling between objects (see sample code below).
 
@@ -24,7 +24,7 @@ As explanation for people who have deeper knowledge of C++, a Rcpp object do not
 
 
 
-### Data type of numerical index
+## Data type of numerical index
 
 Maximum number of vector elements is limited to the length of 2^31 - 1 in R <= version 2.0.0 or 32 bit build of R, because `int` is used as data type of numerical index. However, long vector is supported after 64 bit build of R 3.0.0. You should use `R_xlen_t` as data data type for numerical index or the number of elements to support long vector in your Rcpp code.
 
@@ -40,7 +40,7 @@ for(R_xlen_t i=0; i<n; ++i){
 
 
 
-### Return type of operator[]
+## Return type of operator[]
 
 When you access to vector elements using `[]` or `()` operator, the return type is not `Vector` itself but `Vector::Proxy`. Thus, it will cause compile error when you pass `v[i]` directly to some function, if the function only supports `Vector` type. To avoid compile error `v[i]` assign to new object or convert it to type `T` using `as<T>()`.
 

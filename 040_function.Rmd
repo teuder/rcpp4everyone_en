@@ -2,12 +2,12 @@
 
 You can also write Rcpp code in your R code in 3 ways using `sourceCpp()` `cppFunction()` `evalCpp()` respectively.
 
-### sourceCpp()
+## sourceCpp()
 
 Save Rcpp code as string object in R and compile it with `sourceCpp()`.
 
 ``` R
-src<-
+src <-
 "#include <Rcpp.h>
 using namespace Rcpp;
 // [[Rcpp::export]]
@@ -23,7 +23,7 @@ sourceCpp(code = src)
 rcpp_sum(1:10)
 ```
 
-### cppFunction()
+## cppFunction()
 
 The `cppFunction()` offers handy way to create single Rcpp function. You can omit `#include <Rcpp.h>` and `using namespase Rcpp;` when you use `cppFunction()`.
 
@@ -41,7 +41,7 @@ Rcpp::cppFunction(src)
 rcpp_sum(1:10)
 ```
 
-### evalCpp()
+## evalCpp()
 
 You can evaluate single C++ statement by using `evalCpp()`.
 
