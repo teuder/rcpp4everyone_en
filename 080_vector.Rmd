@@ -132,6 +132,17 @@ return an iterator pointing to the first element of the vector.
 return an iterator pointing to the end of the vector (**one past the last element of this vector**).
 
 
+### cbegin()
+
+return a const iterator pointing to the first element of the vector.
+
+### cend()
+
+return a const iterator pointing to the end of the vector (**one past the last element of this vector**).
+
+
+
+
 ### insert( i, x )
 
 insert scalar value `x` to the position pointed by numerical index `i`. Return the iterator pointing the inserted element.

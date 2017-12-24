@@ -428,3 +428,29 @@ Applies a C++ function `fun` that receives three arguments to each corresponding
 **cbind(x1, x2,...)**
 
 Takes `Vector` or `Matrix` `x1` and `x2`, `...` and combine by columns. And returns the result as `Matrix` or `DataFrame`. You can pass up to 50 arguments.
+
+### sampling
+
+**Vector sample(Vector x, int size, replace = false, probs = R_NilValue)**
+
+As with the `sample` function in R, this function takes a sample from a vector `x`. 
+
+- `x` : a vector you want to draw a sample.
+- `size` : sample size of returned vector.
+- `replace` : should sampling be with replacement. default `true`.
+- `probs` : a vector that specify probability weights to be drawn for each elements of vector `x`. default `R_NilValue` (same weight for all elements).
+
+`Vector<RTYPE>
+sample(const Vector<RTYPE>& x, int size, bool replace = false, sugar::probs_t probs = R_NilValue)`
+
+
+**sample(n, size, replace = TRUE, probs = NULL, one_based = TRUE)**
+
+As with the `sample.int` function in R.
+
+`Vector<INTSXP>
+sample(int n, int size, bool replace = false, sugar::probs_t probs = R_NilValue, bool one_based = true);`
+
+
+
+

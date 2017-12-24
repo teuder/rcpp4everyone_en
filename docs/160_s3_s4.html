@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-08-19">
+<meta name="date" content="2017-12-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -171,13 +171,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
 <li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
 <li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.14</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.15</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.16</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.17</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.18</b> erase( first_i, first_i )</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.19</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.20</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, first_i )</a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
@@ -346,6 +348,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.1.11" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-na-inf-nan"><i class="fa fa-check"></i><b>21.1.11</b> Functions related to NA Inf NaN</a></li>
 <li class="chapter" data-level="21.1.12" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#apply-functions"><i class="fa fa-check"></i><b>21.1.12</b> apply functions</a></li>
 <li class="chapter" data-level="21.1.13" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#cbind-function"><i class="fa fa-check"></i><b>21.1.13</b> cbind function</a></li>
+<li class="chapter" data-level="21.1.14" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#sampling"><i class="fa fa-check"></i><b>21.1.14</b> sampling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html"><i class="fa fa-check"></i><b>22</b> Probability distribution</a><ul>
@@ -467,26 +470,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
     <span class="co">// If the object given to this function is not an lm() model object,</span>
     <span class="co">// it outputs an error message and stops execution.</span>
-    <span class="kw">if</span> (! lm_model.inherits(<span class="st">&quot;lm&quot;</span>)) stop(<span class="st">&quot;Input must be a lm() model object.&quot;</span>);
+    <span class="cf">if</span> (! lm_model.inherits(<span class="st">&quot;lm&quot;</span>)) stop(<span class="st">&quot;Input must be a lm() model object.&quot;</span>);
 
     <span class="co">// Extracting residuals (i.e. actual - prediction) from the S3 object</span>
     NumericVector resid  = lm_model[<span class="st">&quot;residuals&quot;</span>];
 
     <span class="co">// Number of elements of the residual vector</span>
-    R_xlen_t n = resid.length();
+    <span class="dt">R_xlen_t</span> n = resid.length();
 
     <span class="co">// The sum of squares of the residual vector</span>
     <span class="dt">double</span> rmse(<span class="fl">0.0</span>);
-    <span class="kw">for</span>(<span class="dt">double</span>&amp; r : resid){
+    <span class="cf">for</span>(<span class="dt">double</span>&amp; r : resid){
         rmse += r*r;
     }
 
     <span class="co">// Divide the residual sum of squares by the number of elements and take the square root</span>
-    <span class="kw">return</span>(sqrt((<span class="fl">1.0</span>/n)*rmse));
+    <span class="cf">return</span>(sqrt((<span class="fl">1.0</span>/n)*rmse));
 }</code></pre></div>
 <p>As an example of execution, use R’s sample data <code>mtcars</code> to calculate the RMSE of the model linearly regressing the fuel efficiency of the car.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg ~<span class="st"> </span>., <span class="dt">data =</span> mtcars)
-&gt;<span class="st"> </span><span class="kw">rcpp_rmse</span>(mod)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> mtcars)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_rmse</span>(mod)
 [<span class="dv">1</span>] <span class="fl">2.146905</span></code></pre></div>
 </div>
 <div id="s4-class" class="section level2">
@@ -522,7 +525,7 @@ x.hasSlot(<span class="st">&quot;slot_name&quot;</span>);</code></pre></div>
 )
 
 <span class="co"># Creating an object of Person class in R</span>
-person_01 &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>,
+person_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>,
                  <span class="dt">name =</span> <span class="st">&quot;Ronald Fisher&quot;</span>,
                  <span class="dt">birth =</span> <span class="kw">as.Date</span>(<span class="st">&quot;1890-02-17&quot;</span>))</code></pre></div>
 <p>The following code example creates an object of Person class in Rcpp and set values for the slots.</p>
@@ -536,7 +539,7 @@ S4 rcpp_s4(){
     x.slot(<span class="st">&quot;name&quot;</span>)  = <span class="st">&quot;Sewall Wright&quot;</span>;
     x.slot(<span class="st">&quot;birth&quot;</span>) = Date(<span class="st">&quot;1889-12-21&quot;</span>);
 
-    <span class="kw">return</span>(x);
+    <span class="cf">return</span>(x);
 }</code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_s4()

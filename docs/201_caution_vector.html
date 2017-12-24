@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-08-19">
+<meta name="date" content="2017-12-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -171,13 +171,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
 <li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
 <li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.14</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.15</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.16</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.17</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.18</b> erase( first_i, first_i )</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.19</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.20</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, first_i )</a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
@@ -346,6 +348,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.1.11" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-na-inf-nan"><i class="fa fa-check"></i><b>21.1.11</b> Functions related to NA Inf NaN</a></li>
 <li class="chapter" data-level="21.1.12" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#apply-functions"><i class="fa fa-check"></i><b>21.1.12</b> apply functions</a></li>
 <li class="chapter" data-level="21.1.13" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#cbind-function"><i class="fa fa-check"></i><b>21.1.13</b> cbind function</a></li>
+<li class="chapter" data-level="21.1.14" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#sampling"><i class="fa fa-check"></i><b>21.1.14</b> sampling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html"><i class="fa fa-check"></i><b>22</b> Probability distribution</a><ul>
@@ -478,10 +481,10 @@ Rcout &lt;&lt; <span class="st">&quot;v3 = &quot;</span> &lt;&lt; v3 &lt;&lt; en
 <h2><span class="header-section-number">19.2</span> Data type of numerical index</h2>
 <p>Maximum number of vector elements is limited to the length of 2^31 - 1 in R &lt;= version 2.0.0 or 32 bit build of R, because <code>int</code> is used as data type of numerical index. However, long vector is supported after 64 bit build of R 3.0.0. You should use <code>R_xlen_t</code> as data data type for numerical index or the number of elements to support long vector in your Rcpp code.</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Declare the number of element &quot;n&quot; using R_xlen_t</span>
-R_xlen_t n = v.length();
+<span class="dt">R_xlen_t</span> n = v.length();
 <span class="dt">double</span> sum = <span class="dv">0</span>;
 <span class="co">// Declare the numerical index &quot;i&quot; using R_xlen_t</span>
-<span class="kw">for</span>(R_xlen_t i=<span class="dv">0</span>; i&lt;n; ++i){
+<span class="cf">for</span>(<span class="dt">R_xlen_t</span> i=<span class="dv">0</span>; i&lt;n; ++i){
   sum += v[i];
 }</code></pre></div>
 </div>

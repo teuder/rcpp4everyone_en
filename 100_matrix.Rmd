@@ -4,7 +4,7 @@
 
 Like Vector, Matrix object can be created in several ways.
 
-```
+```r
 // Create a matrix equivalent to
 // m <- matrix(0, nrow=2, ncol=2)
 NumericMatrix m1( 2 );
@@ -20,7 +20,7 @@ NumericMatrix m3( 2 , 3 , v.begin() );
 In addition, a matrix in R is actually a vector that the number of rows and columns are set in the attribute `dim`. So if you created a vector with attribute `dim` in Rcpp and return it to R. It will be treated as a matrix.
 
 
-```
+```cpp
 // [[Rcpp::export]]
 NumericVector rcpp_matrix(){
     // Creating a vector object
@@ -45,7 +45,7 @@ Execution result
 
 However, even if you set a value to attribute `dim` of a vector object, the type of the object in Rcpp will remain Vector type. To convert it to Matrix type in Rcpp, you need to use `as<T>()` function.
 
-```
+```cpp
 // Set number of rows and columns to attribute dim
 v.attr("dim") = Dimension(2, 2);
 
@@ -61,9 +61,9 @@ You can also use the `[]` operator to access an element as a vector connecting t
 
 
 
-```
+```cpp
 // Creating a 5x5 numerical matrix
-NumericMatrix m(5,5);
+NumericMatrix m( 5, 5 );
 
 // Retrieving the element of row 0 and column 2
 double x = m( 0 , 2 );
@@ -86,14 +86,14 @@ m[5]; // This points to the same element as m(0,1)
 
 Rcpp also provides types that hold "references" to some column and row of a matrix.
 
-```
+```cpp
 NumericMatrix::Column col = m( _ , 1);  // Reference to the column 1
 NumericMatrix::Row    row = m( 1 , _ ); // Reference to the row 1
 NumericMatrix::Sub    sub = m( Range(0,1) , Range(2,3) ); // Reference to sub matrix
 ```
 Substituting a value to a "reference" object of a matrix will assign the value to its original matrix. For example, assigning a value to `col` will assign a value to the column 1 of `m`.
 
-```
+```cpp
 col = 2 * col;             // The value of the column 1 of matrix m will be doubled
 m( _ , 1) = 2 * m( _ , 1 ) // Synonymous with the above example
 ```

@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-08-19">
+<meta name="date" content="2017-12-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -171,13 +171,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
 <li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
 <li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.14</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.15</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.16</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.17</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.18</b> erase( first_i, first_i )</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.19</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.20</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-first_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, first_i )</a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
@@ -346,6 +348,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.1.11" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#functions-related-to-na-inf-nan"><i class="fa fa-check"></i><b>21.1.11</b> Functions related to NA Inf NaN</a></li>
 <li class="chapter" data-level="21.1.12" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#apply-functions"><i class="fa fa-check"></i><b>21.1.12</b> apply functions</a></li>
 <li class="chapter" data-level="21.1.13" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#cbind-function"><i class="fa fa-check"></i><b>21.1.13</b> cbind function</a></li>
+<li class="chapter" data-level="21.1.14" data-path="210_rcpp_functions.html"><a href="210_rcpp_functions.html#sampling"><i class="fa fa-check"></i><b>21.1.14</b> sampling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="220_dpqr_functions.html"><a href="220_dpqr_functions.html"><i class="fa fa-check"></i><b>22</b> Probability distribution</a><ul>
@@ -480,10 +483,10 @@ List::iterator</code></pre>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
 <span class="dt">double</span> rcpp_sum(NumericVector x) {
   <span class="dt">double</span> total = <span class="dv">0</span>;
-  <span class="kw">for</span>(NumericVector::iterator i = x.begin(); i != x.end(); ++i) {
+  <span class="cf">for</span>(NumericVector::iterator i = x.begin(); i != x.end(); ++i) {
     total += *i;
   }
-  <span class="kw">return</span> total;
+  <span class="cf">return</span> total;
 }</code></pre></div>
 
 </div>
