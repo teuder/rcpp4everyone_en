@@ -20,7 +20,7 @@ Rcout << "v1 = " << v1 << endl; // 100 2 3
 Rcout << "v2 = " << v2 << endl; // 100 2 3
 Rcout << "v3 = " << v3 << endl; // 1 2 3
 ```
-As explanation for people who have deeper knowledge of C++, a Rcpp object do not have value of R object (e.g. elements of a vector) itself, but have a pointer to R object. Thus, if you assign object through `v2 = v1;`, the value of pointer of `v1` is copied to `v2`. So, both `v1` and `v2` would be pointing to the same R object. This is called as "shallow copy". On the other hand, if you assign object through `v2 = clone(v1);`, the value of R object that `v1` is pointing is copied to `v2` as new R object. This is called "deep copy".
+As explanation for people who have deeper knowledge of C++, a Rcpp object do not have value of R object (e.g. elements of a vector) itself, but have a pointer to R object. Thus, if you assign object through `v2 = v1;`, the value of pointer of `v1` is copied to `v2`. So, both `v1` and `v2` would be pointing to the same R object. This is called "shallow copy". On the other hand, if you assign object through `v2 = clone(v1);`, the value of R object that `v1` is pointing is copied to `v2` as new R object. This is called "deep copy".
 
 
 
