@@ -55,7 +55,7 @@ Return `true` if this object is a `S4` object.
 
 One useful use of `RObject` is to determine the type of the object. To determine which type the value assigned to `RObject`, use the `is<T>()` function or member function `isS4()` `isNULL()`.
 
-However, matrices and factor vectors can not be determined by only using the function 'is<T>()` because they are vectors with values are set to specific attribute. To determine them, use `Rf_isMatrix()` function or the `Rf_isFactor()` function.
+However, matrices and factor vectors can not be determined by only using the function `is<T>()` because they are vectors with values are set to specific attribute. To determine them, use `Rf_isMatrix()` function or the `Rf_isFactor()` function.
 
 The code example below shows how to determine the type using `RObject`.
 
