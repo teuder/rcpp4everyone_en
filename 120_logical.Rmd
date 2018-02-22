@@ -86,7 +86,7 @@ NumericVector res2     = ifelse( v1>v2, 1.0, 0.0);
 //CharacterVector res3 = ifelse( v1>v2, "T", "F"); // not supported
 
 
-// Since ifelse() does not work with a scalar caracter string,
+// Since ifelse() does not work with a scalar character string,
 // in order to obtain results equivalent to R,
 // we need to use a string vector whose values of elements are all the same.
 CharacterVector chr_v1 = rep(CharacterVector("T"), n);
@@ -111,11 +111,11 @@ Note: `Rf_mkChar ()` is a function that convert C language string (`char*`) to `
 
 ## Evaluation of elements of LogicalVector 
 
-The value of the element of `LogicalVector` should not be used as a conditional expression of `if` statement. Because the conditional expression of the C++ `if` statement evaluates the value of the expression as a `bool` type. `bool` type evaluates all values other than 0 as `true`, thus the` NA of `LogicalVector` (`NA_LOGICAL`) is evaluated as `true`.
+The value of the element of `LogicalVector` should not be used as a conditional expression of `if` statement. Because the conditional expression of the C++ `if` statement evaluates the value of the expression as a `bool` type. `bool` type evaluates all values other than 0 as `true`, thus the `NA` of `LogicalVector` (`NA_LOGICAL`) is evaluated as `true`.
 
 See the following code example for how to evaluate the value of an element of `LogicalVector` with an `if` statement.
 
-```
+```cpp
 // [[Rcpp::export]]
 LogicalVector rcpp_logical(){
 
