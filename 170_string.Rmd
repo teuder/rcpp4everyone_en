@@ -66,12 +66,11 @@ Convert the string of this String object into a C character string constant (con
 
 ### get_encoding()
 
-Returns the character encoding ( "bytes", "latin1", "UTF-8", "unknown").
+Returns the character encoding. The encoding is represented by [`cetype_t`](https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h#L928-L935).
 
-### set_encoding(str)
+### set_encoding(enc)
 
-Set the character encoding specified by the character string `str`.
-
+Set the character encoding specified by [`cetype_t`](https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h#L928-L935).
 
 
 

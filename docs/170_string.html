@@ -273,7 +273,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
-<li class="chapter" data-level="15.3.9" data-path="170_string.html"><a href="170_string.html#set_encodingstr"><i class="fa fa-check"></i><b>15.3.9</b> set_encoding(str)</a></li>
+<li class="chapter" data-level="15.3.9" data-path="170_string.html"><a href="170_string.html#set_encodingenc"><i class="fa fa-check"></i><b>15.3.9</b> set_encoding(enc)</a></li>
 <li class="chapter" data-level="15.3.10" data-path="170_string.html"><a href="170_string.html#code-example"><i class="fa fa-check"></i><b>15.3.10</b> Code example</a></li>
 </ul></li>
 </ul></li>
@@ -516,11 +516,11 @@ Rcout &lt;&lt; s &lt;&lt; &quot;\n&quot;; // &quot;AB&quot;</code></pre>
 </div>
 <div id="get_encoding" class="section level3">
 <h3><span class="header-section-number">15.3.8</span> get_encoding()</h3>
-<p>Returns the character encoding ( “bytes”, “latin1”, “UTF-8”, “unknown”).</p>
+<p>Returns the character encoding. The encoding is represented by <a href="https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h#L928-L935"><code>cetype_t</code></a>.</p>
 </div>
-<div id="set_encodingstr" class="section level3">
-<h3><span class="header-section-number">15.3.9</span> set_encoding(str)</h3>
-<p>Set the character encoding specified by the character string <code>str</code>.</p>
+<div id="set_encodingenc" class="section level3">
+<h3><span class="header-section-number">15.3.9</span> set_encoding(enc)</h3>
+<p>Set the character encoding specified by <a href="https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h#L928-L935"><code>cetype_t</code></a>.</p>
 </div>
 <div id="code-example" class="section level3">
 <h3><span class="header-section-number">15.3.10</span> Code example</h3>
