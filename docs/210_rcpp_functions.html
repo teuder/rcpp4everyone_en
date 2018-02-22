@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-12-24">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -706,11 +706,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>x</code> : a vector you want to draw a sample.</li>
 <li><code>size</code> : sample size of returned vector.</li>
 <li><code>replace</code> : should sampling be with replacement. default <code>true</code>.</li>
-<li><code>probs</code> : a vector that specify probability weights to be drawn for each elements of vector <code>x</code></li>
+<li><code>probs</code> : a vector that specify probability weights to be drawn for each elements of vector <code>x</code>. default <code>R_NilValue</code> (same weight for all elements).</li>
 </ul>
 <p><code>Vector&lt;RTYPE&gt; sample(const Vector&lt;RTYPE&gt;&amp; x, int size, bool replace = false, sugar::probs_t probs = R_NilValue)</code></p>
 <p><strong>sample(n, size, replace = TRUE, probs = NULL, one_based = TRUE)</strong></p>
-<p>As with the <code>sample.int</code> function in R, <code>n</code></p>
+<p>As with the <code>sample.int</code> function in R.</p>
 <p><code>Vector&lt;INTSXP&gt; sample(int n, int size, bool replace = false, sugar::probs_t probs = R_NilValue, bool one_based = true);</code></p>
 
 </div>

@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-12-24">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -475,7 +475,7 @@ v1[<span class="dv">0</span>] = <span class="dv">100</span>; <span class="co">//
 Rcout &lt;&lt; <span class="st">&quot;v1 = &quot;</span> &lt;&lt; v1 &lt;&lt; endl; <span class="co">// 100 2 3</span>
 Rcout &lt;&lt; <span class="st">&quot;v2 = &quot;</span> &lt;&lt; v2 &lt;&lt; endl; <span class="co">// 100 2 3</span>
 Rcout &lt;&lt; <span class="st">&quot;v3 = &quot;</span> &lt;&lt; v3 &lt;&lt; endl; <span class="co">// 1 2 3</span></code></pre></div>
-<p>As explanation for people who have deeper knowledge of C++, a Rcpp object do not have value of R object (e.g. elements of a vector) itself, but have a pointer to R object. Thus, if you assign object through <code>v2 = v1;</code>, the value of pointer of <code>v1</code> is copied to <code>v2</code>. So, both <code>v1</code> and <code>v2</code> would be pointing to the same R object. This is called as “shallow copy”. On the other hand, if you assign object through <code>v2 = clone(v1);</code>, the value of R object that <code>v1</code> is pointing is copied to <code>v2</code> as new R object. This is called “deep copy”.</p>
+<p>As explanation for people who have deeper knowledge of C++, a Rcpp object do not have value of R object (e.g. elements of a vector) itself, but have a pointer to R object. Thus, if you assign object through <code>v2 = v1;</code>, the value of pointer of <code>v1</code> is copied to <code>v2</code>. So, both <code>v1</code> and <code>v2</code> would be pointing to the same R object. This is called “shallow copy”. On the other hand, if you assign object through <code>v2 = clone(v1);</code>, the value of R object that <code>v1</code> is pointing is copied to <code>v2</code> as new R object. This is called “deep copy”.</p>
 </div>
 <div id="data-type-of-numerical-index" class="section level2">
 <h2><span class="header-section-number">19.2</span> Data type of numerical index</h2>

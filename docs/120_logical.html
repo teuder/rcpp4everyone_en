@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-12-24">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -557,7 +557,7 @@ NumericVector res2     = ifelse( v1&gt;v2, <span class="fl">1.0</span>, <span cl
 <span class="co">//CharacterVector res3 = ifelse( v1&gt;v2, &quot;T&quot;, &quot;F&quot;); // not supported</span>
 
 
-<span class="co">// Since ifelse() does not work with a scalar caracter string,</span>
+<span class="co">// Since ifelse() does not work with a scalar character string,</span>
 <span class="co">// in order to obtain results equivalent to R,</span>
 <span class="co">// we need to use a string vector whose values of elements are all the same.</span>
 CharacterVector chr_v1 = rep(CharacterVector(<span class="st">&quot;T&quot;</span>), n);
@@ -580,39 +580,39 @@ CharacterVector res9 = ifelse( v1&gt;v2, chr_v1, chr_v2);</code></pre></div>
 </div>
 <div id="evaluation-of-elements-of-logicalvector" class="section level2">
 <h2><span class="header-section-number">11.4</span> Evaluation of elements of LogicalVector</h2>
-<p>The value of the element of <code>LogicalVector</code> should not be used as a conditional expression of <code>if</code> statement. Because the conditional expression of the C++ <code>if</code> statement evaluates the value of the expression as a <code>bool</code> type. <code>bool</code> type evaluates all values other than 0 as <code>true</code>, thus the<code>NA of</code>LogicalVector<code>(</code>NA_LOGICAL<code>) is evaluated as</code>true`.</p>
+<p>The value of the element of <code>LogicalVector</code> should not be used as a conditional expression of <code>if</code> statement. Because the conditional expression of the C++ <code>if</code> statement evaluates the value of the expression as a <code>bool</code> type. <code>bool</code> type evaluates all values other than 0 as <code>true</code>, thus the <code>NA</code> of <code>LogicalVector</code> (<code>NA_LOGICAL</code>) is evaluated as <code>true</code>.</p>
 <p>See the following code example for how to evaluate the value of an element of <code>LogicalVector</code> with an <code>if</code> statement.</p>
-<pre><code>// [[Rcpp::export]]
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
 LogicalVector rcpp_logical(){
 
-  // Create an integer vector containing NA
-  IntegerVector x = {1,2,3,4,NA_INTEGER};
+  <span class="co">// Create an integer vector containing NA</span>
+  IntegerVector x = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,NA_INTEGER};
 
-  // The result of the comparison operation becomes LogicalVector
-  LogicalVector v = (x &gt;= 3);
+  <span class="co">// The result of the comparison operation becomes LogicalVector</span>
+  LogicalVector v = (x &gt;= <span class="dv">3</span>);
 
-   // If you use the element of LogicalVector directly in the &quot;if&quot; statement
-   // NA_LOGICAL will be evaluated as TRUE
-  for(int i=0; i&lt;v.size();++i) {
-    if(v[i]) Rprintf(&quot;v[%i] is evaluated as true.\n&quot;,i);
-    else Rprintf(&quot;v[%i] is evaluated as false.\n&quot;,i);
+   <span class="co">// If you use the element of LogicalVector directly in the &quot;if&quot; statement</span>
+   <span class="co">// NA_LOGICAL will be evaluated as TRUE</span>
+  <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.size();++i) {
+    <span class="cf">if</span>(v[i]) Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is evaluated as true.</span><span class="sc">\n</span><span class="st">&quot;</span>,i);
+    <span class="cf">else</span> Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is evaluated as false.</span><span class="sc">\n</span><span class="st">&quot;</span>,i);
   }
 
-  // Evaluate the elements of LogicalVector
-  for(int i=0; i&lt;v.size();++i) {
-    if(v[i]==TRUE) Rprintf(&quot;v[%i] is TRUE.\n&quot;,i);
-    else if (v[i]==FALSE) Rprintf(&quot;v[%i] is FALSE.\n&quot;,i);
-    else if (v[i]==NA_LOGICAL) Rprintf(&quot;v[%i] is NA.\n&quot;,i);
-    else Rcout &lt;&lt; &quot;v[&quot; &lt;&lt; i &lt;&lt; &quot;] is not 1\n&quot;;
+  <span class="co">// Evaluate the elements of LogicalVector</span>
+  <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.size();++i) {
+    <span class="cf">if</span>(v[i]==TRUE) Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is TRUE.</span><span class="sc">\n</span><span class="st">&quot;</span>,i);
+    <span class="cf">else</span> <span class="cf">if</span> (v[i]==FALSE) Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is FALSE.</span><span class="sc">\n</span><span class="st">&quot;</span>,i);
+    <span class="cf">else</span> <span class="cf">if</span> (v[i]==NA_LOGICAL) Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NA.</span><span class="sc">\n</span><span class="st">&quot;</span>,i);
+    <span class="cf">else</span> Rcout &lt;&lt; <span class="st">&quot;v[&quot;</span> &lt;&lt; i &lt;&lt; <span class="st">&quot;] is not 1</span><span class="sc">\n</span><span class="st">&quot;</span>;
   }
 
-  // Displays the value of TRUE, FALSE and NA_LOGICAL
-  Rcout &lt;&lt; &quot;TRUE &quot; &lt;&lt; TRUE &lt;&lt; &quot;\n&quot;;
-  Rcout &lt;&lt; &quot;FALSE &quot; &lt;&lt; FALSE &lt;&lt; &quot;\n&quot;;
-  Rcout &lt;&lt; &quot;NA_LOGICAL &quot; &lt;&lt; NA_LOGICAL &lt;&lt; &quot;\n&quot;;
+  <span class="co">// Displays the value of TRUE, FALSE and NA_LOGICAL</span>
+  Rcout &lt;&lt; <span class="st">&quot;TRUE &quot;</span> &lt;&lt; TRUE &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;
+  Rcout &lt;&lt; <span class="st">&quot;FALSE &quot;</span> &lt;&lt; FALSE &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;
+  Rcout &lt;&lt; <span class="st">&quot;NA_LOGICAL &quot;</span> &lt;&lt; NA_LOGICAL &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;
 
-  return v;
-}</code></pre>
+  <span class="cf">return</span> v;
+}</code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_logical()
 v[0] is evaluated as false.

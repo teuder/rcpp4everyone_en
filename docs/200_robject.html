@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2017-12-24">
+<meta name="date" content="2018-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -507,7 +507,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="determining-type-of-object-assigned-to-robject" class="section level2">
 <h2><span class="header-section-number">18.2</span> Determining type of object assigned to RObject</h2>
 <p>One useful use of <code>RObject</code> is to determine the type of the object. To determine which type the value assigned to <code>RObject</code>, use the <code>is&lt;T&gt;()</code> function or member function <code>isS4()</code> <code>isNULL()</code>.</p>
-<p>However, matrices and factor vectors can not be determined by only using the function ’is<T>()<code>because they are vectors with values are set to specific attribute. To determine them, use</code>Rf_isMatrix()<code>function or the</code>Rf_isFactor()` function.</p>
+<p>However, matrices and factor vectors can not be determined by only using the function <code>is&lt;T&gt;()</code> because they are vectors with values are set to specific attribute. To determine them, use <code>Rf_isMatrix()</code> function or the <code>Rf_isFactor()</code> function.</p>
 <p>The code example below shows how to determine the type using <code>RObject</code>.</p>
 <pre><code>// [[Rcpp::export]]
 void rcpp_type(RObject x){
