@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2018-02-22">
+<meta name="date" content="2018-02-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,15 +47,14 @@
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-101879207-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-101879207-2');
 </script>
 
 
@@ -191,7 +190,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
 <li class="chapter" data-level="9.1" data-path="100_matrix.html"><a href="100_matrix.html#creating-matrix-object"><i class="fa fa-check"></i><b>9.1</b> Creating Matrix object</a></li>
-<li class="chapter" data-level="9.2" data-path="100_matrix.html"><a href="100_matrix.html#accessing-to-matrix-elements"><i class="fa fa-check"></i><b>9.2</b> Accessing to Matrix elements</a></li>
+<li class="chapter" data-level="9.2" data-path="100_matrix.html"><a href="100_matrix.html#accessing-to-matrix-elements"><i class="fa fa-check"></i><b>9.2</b> Accessing to Matrix elements</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="100_matrix.html"><a href="100_matrix.html#accessing-as-reference-to-row-column-and-sub-matrix"><i class="fa fa-check"></i><b>9.2.1</b> Accessing as reference to row, column and sub matrix</a></li>
+</ul></li>
 <li class="chapter" data-level="9.3" data-path="100_matrix.html"><a href="100_matrix.html#member-functions-1"><i class="fa fa-check"></i><b>9.3</b> Member functions</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="100_matrix.html"><a href="100_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.3.1</b> nrow() rows()</a></li>
 <li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.3.2</b> ncol()　cols()</a></li>
@@ -461,27 +462,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 9</span> Matrix</h1>
 <div id="creating-matrix-object" class="section level2">
 <h2><span class="header-section-number">9.1</span> Creating Matrix object</h2>
-<p>Like Vector, Matrix object can be created in several ways.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">/</span><span class="er">/</span><span class="st"> </span>Create a matrix equivalent to
-<span class="op">/</span><span class="er">/</span><span class="st"> </span>m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">2</span>)
-NumericMatrix <span class="kw">m1</span>( <span class="dv">2</span> );
+<p>Matrix object can be created in several ways.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Create a Matrix object equivalent to</span>
+<span class="co">// m &lt;- matrix(0, nrow=2, ncol=2)</span>
+NumericMatrix m1( <span class="dv">2</span> );
 
-<span class="op">/</span><span class="er">/</span><span class="st"> </span>Create a matrix equivalent to
-<span class="op">/</span><span class="er">/</span><span class="st"> </span>m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">3</span>)
-NumericMatrix <span class="kw">m2</span>( <span class="dv">2</span> , <span class="dv">3</span> );
+<span class="co">// m &lt;- matrix(0, nrow=2, ncol=3)</span>
+NumericMatrix m2( <span class="dv">2</span> , <span class="dv">3</span> );
 
-<span class="op">/</span><span class="er">/</span><span class="st"> </span>m &lt;-<span class="st"> </span><span class="kw">matrix</span>(v, <span class="dt">nrow=</span><span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">3</span>) と同等の行列を作成します
-NumericMatrix <span class="kw">m3</span>( <span class="dv">2</span> , <span class="dv">3</span> , <span class="kw">v.begin</span>() );</code></pre></div>
-<p>In addition, a matrix in R is actually a vector that the number of rows and columns are set in the attribute <code>dim</code>. So if you created a vector with attribute <code>dim</code> in Rcpp and return it to R. It will be treated as a matrix.</p>
+<span class="co">// m &lt;- matrix(v, nrow=2, ncol=3)</span>
+NumericMatrix m3( <span class="dv">2</span> , <span class="dv">3</span> , v.begin() );</code></pre></div>
+<p>In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute <code>dim</code>. Thus, if you created a vector with attribute <code>dim</code> in Rcpp and return it to R, it will be treated as a matrix.</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
 NumericVector rcpp_matrix(){
     <span class="co">// Creating a vector object</span>
     NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>};
 
-    <span class="co">// Set number of rows and columns to attribute dim</span>
+    <span class="co">// Set the number of rows and columns to attribute dim of the vector object.</span>
     v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);
 
-    <span class="co">// Returns a vector with attribute dim to R</span>
+    <span class="co">// Return the vector to R</span>
     <span class="cf">return</span> v;
 }</code></pre></div>
 <p>Execution result</p>
@@ -489,7 +489,7 @@ NumericVector rcpp_matrix(){
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4</code></pre>
-<p>However, even if you set a value to attribute <code>dim</code> of a vector object, the type of the object in Rcpp will remain Vector type. To convert it to Matrix type in Rcpp, you need to use <code>as&lt;T&gt;()</code> function.</p>
+<p>However, even if you set a value to attribute <code>dim</code> of a vector object, the type of the object remains Vector type in Rcpp code. Thus, if you want to convert it to Matrix type in Rcpp, you need to use <code>as&lt;T&gt;()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Set number of rows and columns to attribute dim</span>
 v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);
 
@@ -498,7 +498,7 @@ NumericMatrix m = as&lt;NumericMatrix&gt;(v);</code></pre></div>
 </div>
 <div id="accessing-to-matrix-elements" class="section level2">
 <h2><span class="header-section-number">9.2</span> Accessing to Matrix elements</h2>
-<p>By using <code>()</code> operator, you can get and assign the values of the elements of the matrix by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol <code>_</code>.</p>
+<p>By using <code>()</code> operator, you can get from and assign to the values of elements of a Matrix object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol <code>_</code>.</p>
 <p>You can also use the <code>[]</code> operator to access an element as a vector connecting the columns of a matrix.</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Creating a 5x5 numerical matrix</span>
 NumericMatrix m( <span class="dv">5</span>, <span class="dv">5</span> );
@@ -517,18 +517,26 @@ NumericMatrix m2 = m( Range(<span class="dv">0</span>,<span class="dv">1</span>)
 
 <span class="co">// Accessing matrix element as vector</span>
 m[<span class="dv">5</span>]; <span class="co">// This points to the same element as m(0,1)</span></code></pre></div>
-<p><strong>References to row, column and sub matrix</strong></p>
-<p>Rcpp also provides types that hold “references” to some column and row of a matrix.</p>
+<div id="accessing-as-reference-to-row-column-and-sub-matrix" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Accessing as reference to row, column and sub matrix</h3>
+<p>Rcpp also provides types that hold “references” to specific part of a matrix.</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  <span class="co">// Reference to the column 1</span>
 NumericMatrix::Row    row = m( <span class="dv">1</span> , _ ); <span class="co">// Reference to the row 1</span>
 NumericMatrix::Sub    sub = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) ); <span class="co">// Reference to sub matrix</span></code></pre></div>
-<p>Substituting a value to a “reference” object of a matrix will assign the value to its original matrix. For example, assigning a value to <code>col</code> will assign a value to the column 1 of <code>m</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">col = <span class="dv">2</span> * col;             <span class="co">// The value of the column 1 of matrix m will be doubled</span>
-m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span class="dv">1</span> ) <span class="co">// Synonymous with the above example</span></code></pre></div>
+<p>Assigning a value to a “reference” object of a matrix is equivalent to assigning the value to its original matrix. For example, assigning a value to <code>col</code> will assign a value to the column 1 of <code>m</code>.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Reference to the column 1</span>
+NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  
+
+<span class="co">// The value of the column 1 of matrix m will be doubled</span>
+col = <span class="dv">2</span> * col;
+
+<span class="co">// Synonymous with the above example</span>
+m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span class="dv">1</span> );</code></pre></div>
+</div>
 </div>
 <div id="member-functions-1" class="section level2">
 <h2><span class="header-section-number">9.3</span> Member functions</h2>
-<p>Since <code>Matrix</code> is actually <code>Vector</code>, <code>Matrix</code> basically has the same member functions as <code>Vector</code>. Below is a member function unique to <code>Matrix</code>.</p>
+<p>Since <code>Matrix</code> is actually <code>Vector</code>, <code>Matrix</code> basically has the same member functions as <code>Vector</code>. Thus, member functions unique to <code>Matrix</code> are only presented below.</p>
 <div id="nrow-rows" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> nrow() rows()</h3>
 <p>Returns the number of rows.</p>

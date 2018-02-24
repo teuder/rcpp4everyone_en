@@ -2,16 +2,19 @@
 
 ## Creating vector object
 
+You can create vector object in several ways.
 
 ```cpp
+//Create a Vector object equivalent to
 // v <- rep(0, 3)
 NumericVector v (3);
 
 // v <- rep(1, 3)
 NumericVector v (3,1);
 
-// v <- c(1,2,3) C++11 Initializer list
-NumericVector v = {1,2,3};
+// v <- c(1,2,3) 
+// C++11 Initializer list
+NumericVector v = {1,2,3}; 
 
 // v <- c(1,2,3)
 NumericVector v = NumericVector::create(1,2,3);
@@ -25,10 +28,7 @@ NumericVector v =
 
 You can access to individual element of a vector object using `[]` or `()` operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. `[]` operator ignores out of bound access, while `()` operator throws an exception `index_out_of_bounds`.
 
-It is important to note that vector indices in C++ start at 0.
-
-** [Important] : Vector indices start at 0 in C++. **
-
+**It is important to note that index of Vector object in C++ start at 0.**
 
 ```cpp
 // [[Rcpp::export]]

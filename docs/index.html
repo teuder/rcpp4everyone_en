@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2018-02-22">
+<meta name="date" content="2018-02-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,15 +47,14 @@
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-101879207-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-101879207-2');
 </script>
 
 
@@ -191,7 +190,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
 <li class="chapter" data-level="9.1" data-path="100_matrix.html"><a href="100_matrix.html#creating-matrix-object"><i class="fa fa-check"></i><b>9.1</b> Creating Matrix object</a></li>
-<li class="chapter" data-level="9.2" data-path="100_matrix.html"><a href="100_matrix.html#accessing-to-matrix-elements"><i class="fa fa-check"></i><b>9.2</b> Accessing to Matrix elements</a></li>
+<li class="chapter" data-level="9.2" data-path="100_matrix.html"><a href="100_matrix.html#accessing-to-matrix-elements"><i class="fa fa-check"></i><b>9.2</b> Accessing to Matrix elements</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="100_matrix.html"><a href="100_matrix.html#accessing-as-reference-to-row-column-and-sub-matrix"><i class="fa fa-check"></i><b>9.2.1</b> Accessing as reference to row, column and sub matrix</a></li>
+</ul></li>
 <li class="chapter" data-level="9.3" data-path="100_matrix.html"><a href="100_matrix.html#member-functions-1"><i class="fa fa-check"></i><b>9.3</b> Member functions</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="100_matrix.html"><a href="100_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.3.1</b> nrow() rows()</a></li>
 <li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.3.2</b> ncol()　cols()</a></li>
@@ -460,7 +461,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Rcpp for everyone</h1>
 <h4 class="author"><em>Masaki E. Tsuda</em></h4>
-<h4 class="date"><em>2018-02-22</em></h4>
+<h4 class="date"><em>2018-02-24</em></h4>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
