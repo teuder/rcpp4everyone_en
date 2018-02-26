@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2018-02-24">
+<meta name="date" content="2018-02-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -500,7 +500,7 @@ RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){
 <li><p><code>// [[Rcpp::export]]</code>：The function defined just below this sentence will be accessible from R.</p></li>
 <li><p><code>using namespace Rcpp;</code> : This sentence is optional. But if you did not write this sentence, you have to add prefix <code>Rcpp::</code> to specify classes and functions defined by the Rcpp. (For example, <code>Rcpp::NumericVector</code>)</p></li>
 <li><p><code>RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){}</code>：You need to specify types of functions and arguments.</p></li>
-<li><p><code>return RETURN_VALUE;</code>：<code>return</code> statement is mandatory.</p></li>
+<li><p><code>return RETURN_VALUE;</code>：<code>return</code> statement is mandatorya return when returning a value, but if you do not return a value (i.e. <code>RETURN_TYPE</code> is <code>void</code>), the return statement can be omitted.</p></li>
 </ul>
 </div>
 </div>
