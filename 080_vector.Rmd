@@ -160,7 +160,7 @@ erase element at the position pointed by numerical index `i`. Return the iterato
 
 erase element at the position pointed by iterator `it`. Return the iterator pointing the element just behind the erased element.
 
-### erase( first_i, first_i )
+### erase( first_i, last_i )
 
 erase elements from the position pointed by numerical index `first_i` to `last_i - 1`. Return the iterator pointing the element just behind the erased elements.
 
