@@ -36,7 +36,7 @@ The following code shows the basic format for defining a Rcpp function.
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){
+RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){
 
     //do something
 
