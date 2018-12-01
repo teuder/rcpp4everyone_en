@@ -1,0 +1,4810 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Rcpp for everyone},
+            pdfauthor={Masaki E. Tsuda},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Rcpp for everyone}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Masaki E. Tsuda}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2018-12-01}
+
+%lualatexjaを使うために,ヘッダーとして読み込ませるtexファイル
+%必要なヘッダーはここに記述しておくと楽です
+%個人的な趣味でIPAフォントを利用しています
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\setmainjfont{IPAGothic}
+\setsansjfont{IPAGothic}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{Welcome}\label{welcome}
+\addcontentsline{toc}{chapter}{Welcome}
+
+Rcpp is a package that enables you to implement R functions in C++. It
+is easy to use even without deep knowledge of C++, because it is
+implemented so as to write your C++ code in a style similar to R. And
+Rcpp does not sacrifice execution speed for the ease of use, anyone can
+get high performance outcome.
+
+This document focuses on providing necessary information to users who
+are not familiar with C++. Therefore, in some cases, I explain usage of
+Rcpp conceptually rather than describing accurately from the viewpoint
+of C++, so that I hope readers can easily understand it.
+
+I would greatly appreciate it if you kindly give me any feedback on this
+document.
+
+\url{https://github.com/teuder/rcpp4everyone_en}
+
+\chapter{Suitable situations to use
+Rcpp}\label{suitable-situations-to-use-rcpp}
+
+R is weak in some kinds of operations. If you need operations listed
+below, it is time to consider using Rcpp.
+
+\begin{itemize}
+\tightlist
+\item
+  Loop operations in which later iterations depend on previous
+  iterations.
+\item
+  Accessing each elements of a vector/matrix.
+\item
+  Recurrent function calls within loops.
+\item
+  Changing the size of vectors dynamically.
+\item
+  Operations that need advanced data structures and algorithms.
+\end{itemize}
+
+\chapter{Installation}\label{installation}
+
+Before developing with Rcpp, you need to install c++ compiler.
+
+\section{Install C++ compiler}\label{install-c-compiler}
+
+\subsection{Windows}\label{windows}
+
+Install
+\href{https://cran.r-project.org/bin/windows/Rtools/index.html}{Rtools}.
+
+It might be helpful to refer instruction of RStan
+(\href{https://github.com/stan-dev/rstan/wiki/Install-Rtools-for-Windows}{Install
+Rtools for Windows}) .
+
+\subsection{Mac}\label{mac}
+
+Install Xcode command line tools. Execute the command
+\texttt{xcode-select\ -\/-install} on Terminal.
+
+\subsection{Linux}\label{linux}
+
+Install gcc and related packages.
+
+In Ubuntu Linux, execute the command
+\texttt{sudo\ apt-get\ install\ r-base-dev} on Terminal.
+
+\subsection{Using other compilers installed by
+yourself}\label{using-other-compilers-installed-by-yourself}
+
+If you installed other compiler (g++, clang++) different from above,
+create the following file under the user's home directory. Then set
+environment variables in the file.
+
+\textbf{Linux, Mac}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{.R/Makevars}
+\end{itemize}
+
+\textbf{Windows}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{.R/Makevars.win}
+\end{itemize}
+
+\textbf{Example settings of environmental variables}
+
+\begin{verbatim}
+CC=/opt/local/bin/gcc-mp-4.7
+CXX=/opt/local/bin/g++-mp-4.7
+CPLUS_INCLUDE_PATH=/opt/local/include:$CPLUS_INCLUDE_PATH
+LD_LIBRARY_PATH=/opt/local/lib:$LD_LIBRARY_PATH
+CXXFLAGS= -g0 -O2 -Wall
+MAKE=make -j4
+\end{verbatim}
+
+\section{Install Rcpp}\label{install-rcpp}
+
+You can install Rcpp by executing following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"Rcpp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Basic usage}\label{basic-usage}
+
+You can use your Rcpp function in 3 steps.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Writing Rcpp source code
+\item
+  Compiling the code
+\item
+  Executing the function
+\end{enumerate}
+
+\section{Writing your Rcpp code}\label{writing-your-rcpp-code}
+
+The below code defines a function \texttt{rcpp\_sum()} that calculates
+the sum of a vector. Save this content as a file named ``sum.cpp''.
+
+\textbf{sum.cpp}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//sum.cpp}
+\PreprocessorTok{#include }\ImportTok{<Rcpp.h>}
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ Rcpp;}
+
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{double}\NormalTok{ rcpp_sum(NumericVector v)\{}
+    \DataTypeTok{double}\NormalTok{ sum = }\DecValTok{0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<v.length(); ++i)\{}
+\NormalTok{        sum += v[i];}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{(sum);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Format for defining a function in
+Rcpp.}\label{format-for-defining-a-function-in-rcpp.}
+
+The following code shows the basic format for defining a Rcpp function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#include}\ImportTok{<Rcpp.h>}
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ Rcpp;}
+
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT)\{}
+
+    \CommentTok{//do something}
+
+    \ControlFlowTok{return}\NormalTok{ RETURN_VALUE;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{\#include\textless{}Rcpp.h\textgreater{}} : This sentence
+  enables you to use classes and functions defined by the Rcpp package.
+\item
+  \texttt{//\ {[}{[}Rcpp::export{]}{]}}：The function defined just below
+  this sentence will be accessible from R.
+\item
+  \texttt{using\ namespace\ Rcpp;} : This sentence is optional. But if
+  you did not write this sentence, you have to add prefix
+  \texttt{Rcpp::} to specify classes and functions defined by the Rcpp.
+  (For example, \texttt{Rcpp::NumericVector})
+\item
+  \texttt{RETURN\_TYPE\ FUNCTION\_NAME(ARGMENT\_TYPE\ ARGMENT)\{\}}：You
+  need to specify types of functions and arguments.
+\item
+  \texttt{return\ RETURN\_VALUE;}：\texttt{return} statement is
+  mandatorya return when returning a value, but if you do not return a
+  value (i.e. \texttt{RETURN\_TYPE} is \texttt{void}), the return
+  statement can be omitted.
+\end{itemize}
+
+\section{Compiling the code}\label{compiling-the-code}
+
+The function \texttt{Rcpp::sourceCpp()} will compile the source code and
+load the function into R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(Rcpp)}
+\KeywordTok{sourceCpp}\NormalTok{(}\StringTok{'sum.cpp'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Executing the function}\label{executing-the-function}
+
+You can use your Rcpp function like as usual R function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{>}\StringTok{ }\KeywordTok{rcpp_sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{55}
+
+\OperatorTok{>}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{55}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Embedding Rcpp code in your R
+code}\label{embedding-rcpp-code-in-your-r-code}
+
+You can also write Rcpp code in your R code in 3 ways using
+\texttt{sourceCpp()} \texttt{cppFunction()} \texttt{evalCpp()}
+respectively.
+
+\section{sourceCpp()}\label{sourcecpp}
+
+Save Rcpp code as string object in R and compile it with
+\texttt{sourceCpp()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{src <-}
+\StringTok{"#include <Rcpp.h>}
+\StringTok{using namespace Rcpp;}
+\StringTok{// [[Rcpp::export]]}
+\StringTok{double rcpp_sum(NumericVector v)\{}
+\StringTok{  double sum = 0;}
+\StringTok{  for(int i=0; i<v.length(); ++i)\{}
+\StringTok{    sum += v[i];}
+\StringTok{  \}}
+\StringTok{  return(sum);}
+\StringTok{\}"}
+
+\KeywordTok{sourceCpp}\NormalTok{(}\DataTypeTok{code =}\NormalTok{ src)}
+\KeywordTok{rcpp_sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{cppFunction()}\label{cppfunction}
+
+The \texttt{cppFunction()} offers handy way to create single Rcpp
+function. You can omit
+\texttt{\#include\ \textless{}Rcpp.h\textgreater{}} and
+\texttt{using\ namespase\ Rcpp;} when you use \texttt{cppFunction()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{src <-}
+\StringTok{  "double rcpp_sum(NumericVector v)\{}
+\StringTok{    double sum = 0;}
+\StringTok{    for(int i=0; i<v.length(); ++i)\{}
+\StringTok{      sum += v[i];}
+\StringTok{    \}}
+\StringTok{    return(sum);}
+\StringTok{  \}}
+\StringTok{  "}
+\NormalTok{Rcpp}\OperatorTok{::}\KeywordTok{cppFunction}\NormalTok{(src)}
+\KeywordTok{rcpp_sum}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{evalCpp()}\label{evalcpp}
+
+You can evaluate single C++ statement by using \texttt{evalCpp()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Showing maximum value of double.}
+\KeywordTok{evalCpp}\NormalTok{(}\StringTok{'std::numeric_limits<double>::max()'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{C++11}\label{c11}
+
+C++ 11 is a standard of C++ newly established in 2011, it introduces new
+functionalities and notations. Compared with the previous standard, many
+new features have been added to make C++ even easier for beginners. This
+document will actively exploit these features of C++11.
+
+** Important: Code examples in this document are written assuming that
+C++11 is enabled. **
+
+\section{Enabling C++11}\label{enabling-c11}
+
+To enable C ++ 11, add the following description somewhere in your Rcpp
+code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::plugins("cpp11")]]}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Recommended C++11 features}\label{recommended-c11-features}
+
+\subsection{Initializer list}\label{initializer-list}
+
+Initialization of variables using \texttt{\{\}}.
+
+\begin{verbatim}
+// Initialize Vector
+// The next three are the same as c (1, 2, 3).
+NumericVector v1 = NumericVector::create(1.0, 2.0, 3.0);
+NumericVector v2 = {1.0, 2.0, 3.0};
+NumericVector v3   {1.0, 2.0, 3.0}; // You can omit "=".
+\end{verbatim}
+
+\subsection{auto}\label{auto}
+
+Using the \texttt{auto} specifier will automatically set the type of the
+variable, according to the value to be assigned.
+
+\begin{verbatim}
+// variable "i" will be int
+auto  i  = 4;
+
+NumericVector v;
+// variable "it" will be NumericVector::iterator
+auto it = v.begin();
+\end{verbatim}
+
+\subsection{decltype}\label{decltype}
+
+With \texttt{decltype} you can declare variables of the same type as
+existing variables.
+
+\begin{verbatim}
+int i;
+decltype(i) x; // variable "x" will be int
+\end{verbatim}
+
+\subsection{Range-based for-loop}\label{range-based-for-loop}
+
+You can write a \texttt{for} statement with the same style as R.
+
+\begin{verbatim}
+IntegerVector v{1,2,3};
+int sum=0;
+for(auto& x : v) {
+  sum += x;
+}
+\end{verbatim}
+
+\subsection{Lambda expression}\label{lambda-expression}
+
+You can create a function object by using lambda expression. Function
+object are usually used as unnamed function passed to other function.
+
+Lambda expressions are written in the form \texttt{{[}{]}()\{\}}.
+
+In \texttt{{[}{]}}, you write a list of local variables you want to use
+in this function object.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{{[}{]}} do not allow access to all the local variables from
+  the function object.
+\item
+  \texttt{{[}={]}} will copy values of the all local variables to the
+  function object.
+\item
+  \texttt{{[}\&{]}} enables direct access to all local variables from
+  the function object.
+\item
+  \texttt{{[}=x,\ \&y{]}} means that the local variable ``x'' will be
+  copied to the function object, and the local variable ``y'' is allowed
+  to be accessed directly from the function object.
+\end{itemize}
+
+In \texttt{()}, you write arguments to be passed to this function
+object.
+
+In \texttt{\{\}}, you describe processes you want.
+
+\textbf{Return type of the lambda expression}
+
+The return type of this function object is automatically set to the type
+of the returned value described in \texttt{\{\}}. If you want to define
+return type explicitly, write it like
+\texttt{{[}{]}()-\textgreater{}int\{\}}.
+
+\textbf{Example}
+
+The following example shows how to use lambda expression. You can find
+Some types of C++ code can be written in the same style as R.
+
+\emph{R example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{A <-}\StringTok{ }\FloatTok{2.0}
+\NormalTok{res <-}
+\StringTok{  }\KeywordTok{sapply}\NormalTok{(v, }\ControlFlowTok{function}\NormalTok{(x)\{A}\OperatorTok{*}\NormalTok{x\})}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Rcpp example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::plugins("cpp11")]]}
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{NumericVector rcpp_lambda_1()\{}
+\NormalTok{  NumericVector v = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\};}
+  \DataTypeTok{double}\NormalTok{ A = }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{  NumericVector res =}
+\NormalTok{    sapply(v, [&](}\DataTypeTok{double}\NormalTok{ x)\{}\ControlFlowTok{return}\NormalTok{ A*x;\});}
+  \ControlFlowTok{return}\NormalTok{ res;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Printing messages}\label{printing-messages}
+
+You can print messages and values of objects on R console screen by
+using \texttt{Rprintf()} and \texttt{Rcout}.
+
+\texttt{REprintf()} and \texttt{Rcerr} can be used for printing error
+messages.
+
+\section{Rcout, Rcerr}\label{rcout-rcerr}
+
+The way of using \texttt{Rcout} and \texttt{Rcerr} is same as
+\texttt{std::cout} and \texttt{std::cerr}. Connecting messages or
+variables with \texttt{\textless{}\textless{}} in the order you want.
+When you give vector object to \texttt{\textless{}\textless{}}, it will
+print all the elements of the vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{void}\NormalTok{ rcpp_rcout(NumericVector v)\{}
+  \CommentTok{// printing value of vector}
+\NormalTok{  Rcout << }\StringTok{"The value of v : "}\NormalTok{ << v << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+
+  \CommentTok{// printing error message}
+\NormalTok{  Rcerr << }\StringTok{"Error message}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Rprintf(), REprintf()}\label{rprintf-reprintf}
+
+The way of using \texttt{Rprintf()} and \texttt{REprintf()} is same as
+\texttt{std::printf()}, it print message by specifying format.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rprintf( format, variables)}
+\end{Highlighting}
+\end{Shaded}
+
+In the \texttt{format} string, you can use following format specifiers
+for printing the values of variables. When you want to print multiple
+variables, you have to pass these variables in the order that its
+corresponding specifier appears in the format string.
+
+Only a part of format specifier is presented below, please refer to
+other documentation for detail (For example,
+\href{http://www.cplusplus.com/reference/cstdio/printf/}{cplusplus.com}).
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+specifier & explanation\tabularnewline
+\midrule
+\endhead
+\texttt{\%i} & printing signed integer (\texttt{int})\tabularnewline
+\texttt{\%u} & printing unsigned integer
+(\texttt{unsigned\ int})\tabularnewline
+\texttt{\%f} & printing floating point number
+(\texttt{double})\tabularnewline
+\texttt{\%e} & printing floating point number (\texttt{double}) in
+exponential style\tabularnewline
+\texttt{\%s} & printing C string (\texttt{char*})\tabularnewline
+\bottomrule
+\end{longtable}
+
+Additionally, \texttt{Rprintf()} and \texttt{REprintf()} can only print
+data types that exist in standard C language, thus you cannot pass data
+types defined by Rcpp package (such as \texttt{NumericVector}) to
+\texttt{Rprintf()} directly. If you want to print the values of elements
+of Rcpp vector using \texttt{Rprintf()}, you have to pass each element
+separately to it (see below).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{void}\NormalTok{ rcpp_rprintf(NumericVector v)\{}
+    \CommentTok{// printing values of all the elements of Rcpp vector  }
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<v.length(); ++i)\{}
+\NormalTok{        Rprintf(}\StringTok{"the value of v[}\SpecialCharTok{%i}\StringTok{] : }\SpecialCharTok{%f}\StringTok{ }\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, v[i]);}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Data types}\label{data-types}
+
+All the basic data types and data structures provided by R are available
+in Rcpp. By using these data types, you can directly access to the
+objects exist in R.
+
+\section{Vector and Matrix}\label{vector-and-matrix}
+
+Following seven data types are often used in R.
+
+\texttt{logical} \texttt{integer} \texttt{numeric} \texttt{complex}
+\texttt{character} \texttt{Date} \texttt{POSIXct}
+
+There are vector type and matrix types in Rcpp corresponding to those of
+R.
+
+In this document, the word \texttt{Vector} and \texttt{Matrix} is used
+to specify all the vector and matrix types in Rcpp.
+
+The table below present the correspondence of data types between
+R/Rcpp/C++.
+
+\begin{longtable}[]{@{}cccccc@{}}
+\toprule
+\begin{minipage}[b]{0.07\columnwidth}\centering\strut
+Value\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\centering\strut
+R vector\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\centering\strut
+Rcpp vector\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\centering\strut
+Rcpp matrix\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\centering\strut
+Rcpp scalar\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\centering\strut
+C++ scalar\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+Logical\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{logical}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{LogicalVector}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{LogicalMatrix}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{bool}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+Integer\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{integer}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{IntegerVector}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{IntegerMatrix}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{int}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+Real\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{numeric}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{NumericVector}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{NumericMatrix}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{double}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+Complex\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{complex}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{ComplexVector}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{ComplexMatrix}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{Rcomplex}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{complex}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+String\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{character}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{CharacterVector} (\texttt{StringVector})\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{CharacterMatrix} (\texttt{StringMatrix})\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{String}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{string}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+Date\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{Date}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{DateVector}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{Date}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+-\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\centering\strut
+Datetime\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{POSIXct}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{DatetimeVector}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+-\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{Datetime}\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\centering\strut
+\texttt{time\_t}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\section{data.frame, list, S3, S4}\label{data.frame-list-s3-s4}
+
+Other than vector and matrix, There are several data structure in R such
+as data.frame, list, S3 class and S4 class. You can handle all of these
+data structuers in Rcpp.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+R & Rcpp\tabularnewline
+\midrule
+\endhead
+\texttt{data.frame} & \texttt{DataFrame}\tabularnewline
+\texttt{list} & \texttt{List}\tabularnewline
+S3 class & \texttt{List}\tabularnewline
+S4 class & \texttt{S4}\tabularnewline
+\bottomrule
+\end{longtable}
+
+In Rcpp, \texttt{Vector}, \texttt{DataFrame}, \texttt{List} are all
+implemented as kinds of vectors. Namely, \texttt{Vector} is a vector
+that its elements are scalar values, \texttt{DataFrame} is a vector that
+its elements are \texttt{Vector}s, \texttt{List} is a vector that its
+elements are any kinds of data types. Thus, \texttt{Vector},
+\texttt{DataFrame}, \texttt{List} has many common member functions in
+Rcpp.
+
+\chapter{Vector}\label{vector}
+
+\section{Creating vector object}\label{creating-vector-object}
+
+You can create vector object in several ways.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//Create a Vector object equivalent to}
+\CommentTok{// v <- rep(0, 3)}
+\NormalTok{NumericVector v (}\DecValTok{3}\NormalTok{);}
+
+\CommentTok{// v <- rep(1, 3)}
+\NormalTok{NumericVector v (}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{);}
+
+\CommentTok{// v <- c(1,2,3) }
+\CommentTok{// C++11 Initializer list}
+\NormalTok{NumericVector v = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{\}; }
+
+\CommentTok{// v <- c(1,2,3)}
+\NormalTok{NumericVector v = NumericVector::create(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{);}
+
+\CommentTok{// v <- c(x=1, y=2, z=3)}
+\NormalTok{NumericVector v =}
+\NormalTok{  NumericVector::create(Named(}\StringTok{"x"}\NormalTok{,}\DecValTok{1}\NormalTok{), Named(}\StringTok{"y"}\NormalTok{)=}\DecValTok{2}\NormalTok{ , _[}\StringTok{"z"}\NormalTok{]=}\DecValTok{3}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Accessing vector elements}\label{accessing-vector-elements}
+
+You can access to individual element of a vector object using
+\texttt{{[}{]}} or \texttt{()} operator. Both operators accept
+NumericVector/IntegerVector (numerical index), CharacterVector (element
+names) and LogicalVector. \texttt{{[}{]}} operator ignores out of bound
+access, while \texttt{()} operator throws an exception
+\texttt{index\_out\_of\_bounds}.
+
+\textbf{It is important to note that index of Vector object in C++ start
+at 0.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{void}\NormalTok{ rcpp_vector_access()\{}
+
+  \CommentTok{// Creating vector}
+\NormalTok{  NumericVector v  \{}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{50}\NormalTok{\};}
+
+  \CommentTok{// Setting element names}
+\NormalTok{  v.names() = CharacterVector(\{}\StringTok{"A"}\NormalTok{,}\StringTok{"B"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"D"}\NormalTok{,}\StringTok{"E"}\NormalTok{\});}
+
+  \CommentTok{// Preparing vector for access}
+\NormalTok{  NumericVector   numeric = \{}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{\};}
+\NormalTok{  IntegerVector   integer = \{}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{\};}
+\NormalTok{  CharacterVector character = \{}\StringTok{"B"}\NormalTok{,}\StringTok{"D"}\NormalTok{\};}
+\NormalTok{  LogicalVector   logical = \{}\KeywordTok{false}\NormalTok{, }\KeywordTok{true}\NormalTok{, }\KeywordTok{false}\NormalTok{, }\KeywordTok{true}\NormalTok{, }\KeywordTok{false}\NormalTok{\};}
+
+  \CommentTok{// Getting values of vector elements}
+  \DataTypeTok{double}\NormalTok{ x1 = v[}\DecValTok{0}\NormalTok{];}
+  \DataTypeTok{double}\NormalTok{ x2 = v[}\StringTok{"A"}\NormalTok{];}
+\NormalTok{  NumericVector res1 = v[numeric];}
+\NormalTok{  NumericVector res2 = v[integer];}
+\NormalTok{  NumericVector res3 = v[character];}
+\NormalTok{  NumericVector res4 = v[logical];}
+
+  \CommentTok{// Assigning values to vector elements}
+\NormalTok{  v[}\DecValTok{0}\NormalTok{]   = }\DecValTok{100}\NormalTok{;}
+\NormalTok{  v[}\StringTok{"A"}\NormalTok{] = }\DecValTok{100}\NormalTok{;}
+\NormalTok{  NumericVector v2 \{}\DecValTok{100}\NormalTok{,}\DecValTok{200}\NormalTok{\};}
+\NormalTok{  v[numeric]   = v2;}
+\NormalTok{  v[integer]   = v2;}
+\NormalTok{  v[character] = v2;}
+\NormalTok{  v[logical]   = v2;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Member functions}\label{member-functions}
+
+Member functions (also called as Methods) are functions that is attached
+to individual object. You can call member functions \texttt{f()} of
+object \texttt{v} in the form of \texttt{v.f()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector v = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\};}
+
+\CommentTok{// Calling member function}
+\DataTypeTok{int}\NormalTok{ n = v.length(); }\CommentTok{// 5}
+\end{Highlighting}
+\end{Shaded}
+
+The Vector object in Rcpp have member functions listed below.
+
+\subsection{length(), size()}\label{length-size}
+
+return the number of elements of this vector object.
+
+\subsection{names()}\label{names}
+
+return the element names of this vector object as CharacterVector.
+
+\subsection{offset( name ), findName( name
+)}\label{offset-name-findname-name}
+
+return numerical index of the element specified by character string
+\texttt{name}.
+
+\subsection{offset( i )}\label{offset-i}
+
+return numerical index of the element specified by numerical index
+\texttt{i} after doing bounds checking to ensure \texttt{i} is valid.
+
+\subsection{fill( x )}\label{fill-x}
+
+fill all the element of this vector object with scalar value \texttt{x}.
+
+\subsection{sort()}\label{sort}
+
+return a vector that sorts this vector object in ascending order.
+
+\subsection{assign( first\_it, last\_it
+)}\label{assign-first_it-last_it}
+
+assign values specified by the iterator \texttt{first\_it} and
+\texttt{last\_it} to this vector object.
+
+\subsection{push\_back( x )}\label{push_back-x}
+
+append a scalar value \texttt{x} to the end of this vector object.
+
+\subsection{push\_back( x, name )}\label{push_back-x-name}
+
+append a scalar value \texttt{x} to the end of this vector object and
+set name of the element as character string \texttt{name}.
+
+\subsection{push\_front( x )}\label{push_front-x}
+
+append a scalar value \texttt{x} to the front of this vector.
+
+\subsection{push\_front( x, name )}\label{push_front-x-name}
+
+append a scalar value \texttt{x} to the front of this vector and set
+name of the element as character string \texttt{name}.
+
+\subsection{begin()}\label{begin}
+
+return an iterator pointing to the first element of the vector.
+
+\subsection{end()}\label{end}
+
+return an iterator pointing to the end of the vector (\textbf{one past
+the last element of this vector}).
+
+\subsection{cbegin()}\label{cbegin}
+
+return a const iterator pointing to the first element of the vector.
+
+\subsection{cend()}\label{cend}
+
+return a const iterator pointing to the end of the vector (\textbf{one
+past the last element of this vector}).
+
+\subsection{insert( i, x )}\label{insert-i-x}
+
+insert scalar value \texttt{x} to the position pointed by numerical
+index \texttt{i}. Return the iterator pointing the inserted element.
+
+\subsection{insert( it, x )}\label{insert-it-x}
+
+insert scalar value \texttt{x} to the position pointed by iterator
+\texttt{it}. Return the iterator pointing the inserted element.
+
+\subsection{erase(i)}\label{erasei}
+
+erase element at the position pointed by numerical index \texttt{i}.
+Return the iterator pointing the element just behind the erased element.
+
+\subsection{erase(it)}\label{eraseit}
+
+erase element at the position pointed by iterator \texttt{it}. Return
+the iterator pointing the element just behind the erased element.
+
+\subsection{erase( first\_i, last\_i )}\label{erase-first_i-last_i}
+
+erase elements from the position pointed by numerical index
+\texttt{first\_i} to \texttt{last\_i\ -\ 1}. Return the iterator
+pointing the element just behind the erased elements.
+
+\subsection{erase( first\_it, last\_it )}\label{erase-first_it-last_it}
+
+erase elements from the position pointed by iterator \texttt{first\_it}
+to \texttt{last\_it\ -\ 1}. Return the iterator pointing the element
+just behind the erased elements.
+
+\subsection{containsElementNamed(name)}\label{containselementnamedname}
+
+return \texttt{true} if this vector contains an element with the name
+specified by character string \texttt{name}.
+
+\section{Static member functions}\label{static-member-functions}
+
+Static member function is the function that is attached to the class
+from which an object being molded. Static member functions is called in
+the form such as \texttt{NumericVector::create()}.
+
+\subsection{get\_na()}\label{get_na}
+
+return the \texttt{NA} value of this \texttt{Vector} class.
+
+\subsection{is\_na(x)}\label{is_nax}
+
+return \texttt{true} if a vector element specified by \texttt{x} is
+\texttt{NA}.
+
+\subsection{create( x1, x2, \ldots{})}\label{create-x1-x2}
+
+create a \texttt{Vector} object containing elements specified by scalar
+value \texttt{x1} and \texttt{x2}. Maximum number of arguments are 20.
+
+\subsection{import( first\_it , last\_it
+)}\label{import-first_it-last_it}
+
+create a \texttt{Vector} object filled with data from the position
+pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1}.
+
+\subsection{import\_transform( first\_it, last\_it,
+func)}\label{import_transform-first_it-last_it-func}
+
+create a \texttt{Vector} object filled with data from the position
+pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1} that
+is transformed by function specified by \texttt{func}.
+
+\chapter{Matrix}\label{matrix}
+
+\section{Creating Matrix object}\label{creating-matrix-object}
+
+Matrix object can be created in several ways.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Create a Matrix object equivalent to}
+\CommentTok{// m <- matrix(0, nrow=2, ncol=2)}
+\NormalTok{NumericMatrix m1( }\DecValTok{2}\NormalTok{ );}
+
+\CommentTok{// m <- matrix(0, nrow=2, ncol=3)}
+\NormalTok{NumericMatrix m2( }\DecValTok{2}\NormalTok{ , }\DecValTok{3}\NormalTok{ );}
+
+\CommentTok{// m <- matrix(v, nrow=2, ncol=3)}
+\NormalTok{NumericMatrix m3( }\DecValTok{2}\NormalTok{ , }\DecValTok{3}\NormalTok{ , v.begin() );}
+\end{Highlighting}
+\end{Shaded}
+
+In addition, a matrix object in R is actually a vector that the number
+of rows and columns are set in the attribute \texttt{dim}. Thus, if you
+created a vector with attribute \texttt{dim} in Rcpp and return it to R,
+it will be treated as a matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{NumericVector rcpp_matrix()\{}
+    \CommentTok{// Creating a vector object}
+\NormalTok{    NumericVector v = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{\};}
+
+    \CommentTok{// Set the number of rows and columns to attribute dim of the vector object.}
+\NormalTok{    v.attr(}\StringTok{"dim"}\NormalTok{) = Dimension(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{);}
+
+    \CommentTok{// Return the vector to R}
+    \ControlFlowTok{return}\NormalTok{ v;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_matrix()
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+\end{verbatim}
+
+However, even if you set a value to attribute \texttt{dim} of a vector
+object, the type of the object remains Vector type in Rcpp code. Thus,
+if you want to convert it to Matrix type in Rcpp, you need to use
+\texttt{as\textless{}T\textgreater{}()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Set number of rows and columns to attribute dim}
+\NormalTok{v.attr(}\StringTok{"dim"}\NormalTok{) = Dimension(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{);}
+
+\CommentTok{// Converting to Rcpp Matrix type}
+\NormalTok{NumericMatrix m = as<NumericMatrix>(v);}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Accessing to Matrix
+elements}\label{accessing-to-matrix-elements}
+
+By using \texttt{()} operator, you can get from and assign to the values
+of elements of a Matrix object by specifying its column number and row
+number. As in the case of vectors, row numbers and column numbers in
+Matrix start with 0. If you want to access to a specific row or column,
+use the symbol \texttt{\_}.
+
+You can also use the \texttt{{[}{]}} operator to access an element as a
+vector connecting the columns of a matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Creating a 5x5 numerical matrix}
+\NormalTok{NumericMatrix m( }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{ );}
+
+\CommentTok{// Retrieving the element of row 0 and column 2}
+\DataTypeTok{double}\NormalTok{ x = m( }\DecValTok{0}\NormalTok{ , }\DecValTok{2}\NormalTok{ );}
+
+\CommentTok{// Copying the value of row 0 to the vector v}
+\NormalTok{NumericVector v = m( }\DecValTok{0}\NormalTok{ , _ );}
+
+\CommentTok{// Copying the value of column 2 to the vector v}
+\NormalTok{NumericVector v = m( _ , }\DecValTok{2}\NormalTok{ );}
+
+\CommentTok{// Copying the row (0 to 1) and column (2 to 3) to the matrix m2}
+\NormalTok{NumericMatrix m2 = m( Range(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{) , Range(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{) );}
+
+\CommentTok{// Accessing matrix element as vector}
+\NormalTok{m[}\DecValTok{5}\NormalTok{]; }\CommentTok{// This points to the same element as m(0,1)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Accessing as reference to row, column and sub
+matrix}\label{accessing-as-reference-to-row-column-and-sub-matrix}
+
+Rcpp also provides types that hold ``references'' to specific part of a
+matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericMatrix::Column col = m( _ , }\DecValTok{1}\NormalTok{);  }\CommentTok{// Reference to the column 1}
+\NormalTok{NumericMatrix::Row    row = m( }\DecValTok{1}\NormalTok{ , _ ); }\CommentTok{// Reference to the row 1}
+\NormalTok{NumericMatrix::Sub    sub = m( Range(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{) , Range(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{) ); }\CommentTok{// Reference to sub matrix}
+\end{Highlighting}
+\end{Shaded}
+
+Assigning a value to a ``reference'' object of a matrix is equivalent to
+assigning the value to its original matrix. For example, assigning a
+value to \texttt{col} will assign a value to the column 1 of \texttt{m}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Reference to the column 1}
+\NormalTok{NumericMatrix::Column col = m( _ , }\DecValTok{1}\NormalTok{);  }
+
+\CommentTok{// The value of the column 1 of matrix m will be doubled}
+\NormalTok{col = }\DecValTok{2}\NormalTok{ * col;}
+
+\CommentTok{// Synonymous with the above example}
+\NormalTok{m( _ , }\DecValTok{1}\NormalTok{) = }\DecValTok{2}\NormalTok{ * m( _ , }\DecValTok{1}\NormalTok{ );}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Member functions}\label{member-functions-1}
+
+Since \texttt{Matrix} is actually \texttt{Vector}, \texttt{Matrix}
+basically has the same member functions as \texttt{Vector}. Thus, member
+functions unique to \texttt{Matrix} are only presented below.
+
+\subsection{nrow() rows()}\label{nrow-rows}
+
+Returns the number of rows.
+
+\subsection{ncol()　cols()}\label{ncolcols}
+
+Returns the number of columns.
+
+\subsection{row( i )}\label{row-i}
+
+Return a reference \texttt{Vector::Row} to the \texttt{i}th　row.
+
+\subsection{column( i )}\label{column-i}
+
+Return a reference \texttt{Vector::Column} to the \texttt{i}th　column.
+
+\subsection{fill\_diag( x )}\label{fill_diag-x}
+
+Fill diagonal elements with scalar value \texttt{x}.
+
+\subsection{offset( i, j )}\label{offset-i-j}
+
+Returns the numerical index in the original vector of the matrix
+corresponding to the element of row \texttt{i} and column \texttt{j}.
+
+\section{Static member functions}\label{static-member-functions-1}
+
+\texttt{Matrix} basically has the same static member function as
+\texttt{Vector}. The static member functions unique to \texttt{Matrix}
+are shown below.
+
+\subsection{Matrix::diag( size, x )}\label{matrixdiag-size-x}
+
+Returns a diagonal matrix whose number of rows and columns equals to
+``size'' and the value of the diagonal element is ``x''.
+
+\section{Other functions related to
+Matrix}\label{other-functions-related-to-matrix}
+
+This section shows functions relating to Matrix.
+
+\subsection{rownames( m )}\label{rownames-m}
+
+Get and set the row name of matrix m.
+
+\begin{verbatim}
+CharacterVector ch = rownames(m);
+rownames(m) = ch;
+\end{verbatim}
+
+\subsection{colnames( m )}\label{colnames-m}
+
+Get and set the column name of matrix m.
+
+\begin{verbatim}
+CharacterVector ch = colnames(m);
+colnames(m) = ch;
+\end{verbatim}
+
+\subsection{transpose( m )}\label{transpose-m}
+
+Returns the transposed matrix of matrix m.
+
+\chapter{Vector operations}\label{vector-operations}
+
+\section{Arithmetic operations}\label{arithmetic-operations}
+
+By using the \texttt{+\ -\ *\ /} operator you can perform elementwise
+arithmetic operations between vectors of the same length.
+
+\begin{verbatim}
+NumericVector x ;
+NumericVector y ;
+
+// Vector and vector operation
+NumericVector res = x + y ;
+NumericVector res = x - y ;
+NumericVector res = x * y ;
+NumericVector res = x / y ;
+
+// Vector and scalar operation
+NumericVector res = x   + 2.0 ;
+NumericVector res = 2.0 - x;
+NumericVector res = y   * 2.0 ;
+NumericVector res = 2.0 / y;
+
+// expression and expression operation
+NumericVector res = x * y + y / 2.0 ;
+NumericVector res = x * ( y - 2.0 ) ;
+NumericVector res = x / ( y * y ) ;
+\end{verbatim}
+
+The \texttt{-} operator inverts the sign.
+
+\begin{verbatim}
+NumericVector res = -x ;
+\end{verbatim}
+
+\section{Comparison operations}\label{comparison-operations}
+
+Comparison of vectors using \texttt{==} \texttt{!\ =}
+\texttt{\textless{}} \texttt{\textgreater{}} \texttt{\textgreater{}\ =}
+\texttt{\textless{}=} operators produces logical vectors. You can also
+access vector elements using logical vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector x ;}
+\NormalTok{NumericVector y ;}
+
+\CommentTok{// Comparison of vector and vector}
+\NormalTok{LogicalVector res = x < y ;}
+\NormalTok{LogicalVector res = x > y ;}
+\NormalTok{LogicalVector res = x <= y ;}
+\NormalTok{LogicalVector res = x >= y ;}
+\NormalTok{LogicalVector res = x == y ;}
+\NormalTok{LogicalVector res = x != y ;}
+
+\CommentTok{// Comparison of vector and scalar}
+\NormalTok{LogicalVector res = x < }\DecValTok{2}\NormalTok{ ;}
+\NormalTok{LogicalVector res = }\DecValTok{2}\NormalTok{ > x;}
+\NormalTok{LogicalVector res = y <= }\DecValTok{2}\NormalTok{ ;}
+\NormalTok{LogicalVector res = }\DecValTok{2}\NormalTok{ != y;}
+
+\CommentTok{// Comparison of expression and expression}
+\NormalTok{LogicalVector res = ( x + y ) < ( x*x ) ;}
+\NormalTok{LogicalVector res = ( x + y ) >= ( x*x ) ;}
+\NormalTok{LogicalVector res = ( x + y ) == ( x*x ) ;}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{!} operator negates the logical value.
+
+\begin{verbatim}
+LogicalVector res = ! ( x < y );
+\end{verbatim}
+
+Accessing the elements of the vector using logical vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector res = x[x < }\DecValTok{2}\NormalTok{];}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Logical operations}\label{logical-operations}
+
+\section{LogicalVector}\label{logicalvector}
+
+\subsection{Data type of LogicalVector
+elements}\label{data-type-of-logicalvector-elements}
+
+Since boolean type in C++ is \texttt{bool}, you may think that the type
+of the element of \texttt{LogicalVector} is also \texttt{bool}, but it
+is \texttt{int}. This is because \texttt{bool} type can only represent
+\texttt{true} or \texttt{false}, but there are three possible values
+\texttt{TRUE},\texttt{FALSE}, and \texttt{NA} for elements of the
+logical vector in R.
+
+In Rcpp, \texttt{TRUE} is represented by 1,\texttt{FALSE} by 0, and
+\texttt{NA} by\texttt{NA\_LOGICAL} (minimum value of int: -2147483648).
+
+\begin{longtable}[]{@{}cccc@{}}
+\toprule
+R & Rcpp & int & bool\tabularnewline
+\midrule
+\endhead
+TRUE & TRUE & 1 (Values other than 0 and -2147483648) &
+true\tabularnewline
+FALSE & FALSE & 0 & false\tabularnewline
+NA & NA\_LOGICAL & -2147483648 & true\tabularnewline
+\bottomrule
+\end{longtable}
+
+\section{Logical operations}\label{logical-operations-1}
+
+Use the operator \texttt{\&} (logical product) \texttt{\textbar{}}
+(logical sum) \texttt{!} (Logical negation) for the logical operation
+for each element of LogicalVector.
+
+\begin{verbatim}
+LogicalVector v1 = {1,1,0,0};
+LogicalVector v2 = {1,0,1,0};
+
+LogicalVector res1 = v1 & v2;
+LogicalVector res2 = v1 | v2;
+LogicalVector res3 = !(v1 | v2);
+
+Rcout << res1 << "\n"; // 1 0 0 0
+Rcout << res2 << "\n"; // 1 1 1 0
+Rcout << res3 << "\n"; // 0 0 0 1
+\end{verbatim}
+
+\section{Function that receives
+LogicalVector}\label{function-that-receives-logicalvector}
+
+Examples of functions that receive \texttt{LogicalVector} are
+\texttt{all()}, \texttt{any()} and \texttt{ifelse()}.
+
+\subsection{all(), any()}\label{all-any}
+
+For \texttt{LogicalVector} v, \texttt{all\ (v)}returns\texttt{TRUE} when
+all elements of v are \texttt{TRUE}, and \texttt{any(v)} returns
+\texttt{TRUE} if any of v's elements are \texttt{TRUE}.
+
+You can not use the return value of the \texttt{all()} and
+\texttt{any()} as the conditional expression of the \texttt{if}
+statement. This is because the return type of the \texttt{all()} and
+\texttt{any()} is not \texttt{bool} but \texttt{SingleLogicalResult}. To
+use the return value of the \texttt{all()} and \texttt{any()} as a
+conditional expression of an \texttt{if} statement, use the function
+\texttt{is\_true()}, \texttt{is\_false()} and \texttt{is\_na()}. These
+functions convert \texttt{SingleLogicalResult} to \texttt{bool}.
+
+The code example below shows how to use the return values of the
+functions \texttt{all()} and \texttt{any()} as a conditional expression
+of an \texttt{if} statement. In this example, the conditional expression
+of all \texttt{if} statements will be \texttt{true}, and the return
+value of \texttt{all()}, \texttt{any()} will be displayed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{List rcpp_logical_03()\{}
+\NormalTok{  LogicalVector v1 = LogicalVector::create(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,NA_LOGICAL);}
+\NormalTok{  LogicalVector v2 = LogicalVector::create(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,NA_LOGICAL);}
+
+  \CommentTok{// Behavior of all (), any () for LogicalVector including NA is the same as R}
+\NormalTok{  LogicalVector lv1 = all( v1 );   }\CommentTok{// NA}
+\NormalTok{  LogicalVector lv2 = all( v2 );   }\CommentTok{// FALSE}
+\NormalTok{  LogicalVector lv3 = any( v2 ); }\CommentTok{// TRUE}
+
+  \CommentTok{// In case assigning to bool}
+  \DataTypeTok{bool}\NormalTok{ b1 = is_true ( all(v1) );  }\CommentTok{// false}
+  \DataTypeTok{bool}\NormalTok{ b2 = is_false( all(v1) );  }\CommentTok{// false}
+  \DataTypeTok{bool}\NormalTok{ b3 = is_na   ( all(v1) );  }\CommentTok{// true}
+
+  \CommentTok{// In case used in conditional expression of if statement}
+  \ControlFlowTok{if}\NormalTok{(is_na(all( v1 ))) \{ }\CommentTok{// OK}
+\NormalTok{    Rcout << }\StringTok{"all( v1 ) is NA}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+\NormalTok{  \}}
+
+  \ControlFlowTok{return}\NormalTok{ List::create(lv1, lv2, lv3, b1, b2, b3);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{ifelse()}\label{ifelse}
+
+\texttt{ifelse\ (v,\ x1,\ x2)} receives the logical vector v, and
+returns the corresponding element of x1 when the element of v is
+\texttt{TRUE} and the corresponding element of x2 when it
+is\texttt{FALSE}. Although x1 and x2 can be vectors or scalars, in the
+case of vectors the length of x1 and x2 must match the length of v.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector v1;}
+\NormalTok{NumericVector v2;}
+
+\CommentTok{//Number of elements of vector}
+\DataTypeTok{int}\NormalTok{ n = v1.length();}
+
+\CommentTok{// In case, both x1 and x2 are scalar}
+\NormalTok{IntegerVector res1     = ifelse( v1>v2, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{);}
+\NormalTok{NumericVector res2     = ifelse( v1>v2, }\FloatTok{1.0}\NormalTok{, }\FloatTok{0.0}\NormalTok{);}
+\CommentTok{//CharacterVector res3 = ifelse( v1>v2, "T", "F"); // not supported}
+
+
+\CommentTok{// Since ifelse() does not work with a scalar character string,}
+\CommentTok{// in order to obtain results equivalent to R,}
+\CommentTok{// we need to use a string vector whose values of elements are all the same.}
+\NormalTok{CharacterVector chr_v1 = rep(CharacterVector(}\StringTok{"T"}\NormalTok{), n);}
+\NormalTok{CharacterVector chr_v2 = rep(CharacterVector(}\StringTok{"F"}\NormalTok{), n);}
+\NormalTok{CharacterVector res3   = ifelse( v1>v2, chr_v1, chr_v2);}
+
+\CommentTok{// In case, x1 and x2 are vector and scalar}
+\NormalTok{IntegerVector int_v1, int_v2;}
+\NormalTok{NumericVector num_v1, num_v2;}
+\NormalTok{IntegerVector   res4 = ifelse( v1>v2, int_v1, }\DecValTok{0}\NormalTok{);}
+\NormalTok{NumericVector   res5 = ifelse( v1>v2, num_v1, }\FloatTok{0.0}\NormalTok{);}
+\NormalTok{CharacterVector res6 = ifelse( v1>v2, chr_v1, Rf_mkChar(}\StringTok{"F"}\NormalTok{)); }\CommentTok{// Note}
+
+\CommentTok{// In case, x1 and x2 are vector and vector}
+\NormalTok{IntegerVector   res7 = ifelse( v1>v2, int_v1, int_v2);}
+\NormalTok{NumericVector   res8 = ifelse( v1>v2, num_v1, num_v2);}
+\NormalTok{CharacterVector res9 = ifelse( v1>v2, chr_v1, chr_v2);}
+\end{Highlighting}
+\end{Shaded}
+
+Note: \texttt{Rf\_mkChar\ ()} is a function that convert C language
+string (\texttt{char*}) to \texttt{CHARSXP} (type of element of
+\texttt{CharacterVector}).
+
+\section{Evaluation of elements of
+LogicalVector}\label{evaluation-of-elements-of-logicalvector}
+
+The value of the element of \texttt{LogicalVector} should not be used as
+a conditional expression of \texttt{if} statement. Because the
+conditional expression of the C++ \texttt{if} statement evaluates the
+value of the expression as a \texttt{bool} type. \texttt{bool} type
+evaluates all values other than 0 as \texttt{true}, thus the \texttt{NA}
+of \texttt{LogicalVector} (\texttt{NA\_LOGICAL}) is evaluated as
+\texttt{true}.
+
+See the following code example for how to evaluate the value of an
+element of \texttt{LogicalVector} with an \texttt{if} statement.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{LogicalVector rcpp_logical()\{}
+
+  \CommentTok{// Create an integer vector containing NA}
+\NormalTok{  IntegerVector x = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,NA_INTEGER\};}
+
+  \CommentTok{// The result of the comparison operation becomes LogicalVector}
+\NormalTok{  LogicalVector v = (x >= }\DecValTok{3}\NormalTok{);}
+
+   \CommentTok{// If you use the element of LogicalVector directly in the "if" statement}
+   \CommentTok{// NA_LOGICAL will be evaluated as TRUE}
+  \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<v.size();++i) \{}
+    \ControlFlowTok{if}\NormalTok{(v[i]) Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is evaluated as true.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,i);}
+    \ControlFlowTok{else}\NormalTok{ Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is evaluated as false.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,i);}
+\NormalTok{  \}}
+
+  \CommentTok{// Evaluate the elements of LogicalVector}
+  \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<v.size();++i) \{}
+    \ControlFlowTok{if}\NormalTok{(v[i]==TRUE) Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is TRUE.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,i);}
+    \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (v[i]==FALSE) Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is FALSE.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,i);}
+    \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (v[i]==NA_LOGICAL) Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is NA.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,i);}
+    \ControlFlowTok{else}\NormalTok{ Rcout << }\StringTok{"v["}\NormalTok{ << i << }\StringTok{"] is not 1}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+\NormalTok{  \}}
+
+  \CommentTok{// Displays the value of TRUE, FALSE and NA_LOGICAL}
+\NormalTok{  Rcout << }\StringTok{"TRUE "}\NormalTok{ << TRUE << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+\NormalTok{  Rcout << }\StringTok{"FALSE "}\NormalTok{ << FALSE << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+\NormalTok{  Rcout << }\StringTok{"NA_LOGICAL "}\NormalTok{ << NA_LOGICAL << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{;}
+
+  \ControlFlowTok{return}\NormalTok{ v;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_logical()
+v[0] is evaluated as false.
+v[1] is evaluated as false.
+v[2] is evaluated as true.
+v[3] is evaluated as true.
+v[4] is evaluated as true.
+v[0] is FALSE.
+v[1] is FALSE.
+v[2] is TRUE.
+v[3] is TRUE.
+v[4] is NA.
+TRUE 1
+FALSE 0
+NA_LOGICAL -2147483648
+[1] FALSE FALSE  TRUE  TRUE    NA
+\end{verbatim}
+
+\chapter{DataFrame}\label{dataframe}
+
+This chapter explains how to create \texttt{DataFrame} object, how to
+access its elements, and its member functions. In Rcpp,
+\texttt{DataFrame} is implemented as a kind of vector. In other words,
+\texttt{Vector} is a vector whose element is scalar value, while
+\texttt{DataFrame} is a vector whose elements are \texttt{Vector}s of
+the same length. Therefore, \texttt{Vector} and \texttt{DataFrame} have
+many common methods of creating objects, accessing elements, and member
+functions.
+
+\section{Creating a DataFrame object}\label{creating-a-dataframe-object}
+
+\texttt{DataFrame::create()} is used to create a \texttt{DataFrame}
+object. Also, use \texttt{Named()} or \texttt{\_{[}{]}} if you want to
+specify column names when creating \texttt{DataFrame}　object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Creating DataFrame df from Vector v1, v2}
+\NormalTok{DataFrame df = DataFrame::create(v1, v2);}
+\CommentTok{// When giving names to columns}
+\NormalTok{DataFrame df = DataFrame::create( Named(}\StringTok{"V1"}\NormalTok{) = v1 , _[}\StringTok{"V2"}\NormalTok{] = v2 );}
+\end{Highlighting}
+\end{Shaded}
+
+When you create a \texttt{DataFrame} with\texttt{DataFrame::create()},
+the value of the original\texttt{Vector} element will not be duplicated
+in the columns of the \texttt{DataFrame}, but the columns will be the
+``reference'' to the original \texttt{Vector}. Therefore, changing the
+value of the original \texttt{Vector} changes the value of the columns.
+To avoid this, we use the \texttt{clone()} function to duplicate the
+value of the \texttt{Vector} element when creating a \texttt{DataFrame}
+column.
+
+To see the difference between using the \texttt{clone()} function and
+not using it, see the code example below. In the code example, we are
+creating \texttt{DataFrame} df from \texttt{Vector} v. There, column V1
+is a reference to v, and column V2 replicates the value of v by the
+\texttt{clone\ ()} function. After that, if you change to
+\texttt{Vector} v, the values of column V1 is changed, but V2 is not
+affected.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{DataFrame rcpp_df()\{}
+    \CommentTok{// Creating vector v}
+\NormalTok{    NumericVector v = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{\};}
+    \CommentTok{// Creating DataFrame df}
+\NormalTok{    DataFrame df = DataFrame::create( Named(}\StringTok{"V1"}\NormalTok{) = v,         }\CommentTok{// simple assign}
+\NormalTok{                                      Named(}\StringTok{"V2"}\NormalTok{) = clone(v)); }\CommentTok{// using clone()}
+    \CommentTok{// Changing vector v}
+\NormalTok{    v = v * }\DecValTok{2}\NormalTok{;}
+    \ControlFlowTok{return}\NormalTok{ df;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_df()
+  V1 V2
+1  2  1
+2  4  2
+\end{verbatim}
+
+\section{Accessing DataFrame
+elements}\label{accessing-dataframe-elements}
+
+When accessing a specific column of \texttt{DataFrame}, the column is
+temporarily assigned to \texttt{Vector} object and accessed via the
+object. As with \texttt{Vector}, the \texttt{DataFrame} column can be
+specified by a numeric vector (column number), a string vector (column
+name), and a logical vector.
+
+\begin{verbatim}
+NumericVector v1 = df[0];
+NumericVector v2 = df["V2"];
+\end{verbatim}
+
+As with \texttt{DataFrame} creation, assigning a\texttt{DataFrame}
+column to \texttt{Vector} in the above way will not copy the column
+value to \texttt{Vector} object, but it will be a ``reference'' to the
+column. Therefore, when you change the values of \texttt{Vector} object,
+the content of the column will also be changed.
+
+If you want to create a \texttt{Vector} by copying the value of the
+column, use \texttt{clone()} function so that the value of the original
+\texttt{DataFrame} column is not changed.
+
+\begin{verbatim}
+NumericVector v1 = df[0]; // v1 becomes "reference" to the 0th column of df
+v1 = v1 * 2;              // Changing the value of v1 also changes the value of df[0]
+
+NumericVector v2 = clone(df[0]); // Duplicate the value of the element of df[0] to v2
+v2 = v2*2;                       // Changing v2 does not change the value of df [0]
+\end{verbatim}
+
+\section{Member functions}\label{member-functions-2}
+
+In Rcpp, \texttt{DataFrame} is implemented as certain kinds of vectors.
+In other words, \texttt{Vector} is a vector whose elements are scalar
+values, and \texttt{DataFrame} is a vector whose elements are
+\texttt{Vector}s. Therefore, \texttt{DataFrame} has many member
+functions common to \texttt{Vector}.
+
+\subsection{length() size()}\label{length-size-1}
+
+Returns the number of columns.
+
+\subsection{nrows()}\label{nrows}
+
+Returns the number of rows.
+
+\subsection{names()}\label{names-1}
+
+Returns the column name as a CharacterVector.
+
+\subsection{offset(name) findName(name)}\label{offsetname-findnamename}
+
+Returns the numerical index of the column with the name specified by the
+string ``name''.
+
+\subsection{fill(v)}\label{fillv}
+
+fills all the columns of this \texttt{DataFrame} with\texttt{Vector} v.
+
+\subsection{assign( first\_it,
+last\_it)}\label{assign-first_it-last_it-1}
+
+Assign columns in the range specified by the iterators first\_it and
+last\_it to this \texttt{DataFrame}.
+
+\subsection{push\_back(v)}\label{push_backv}
+
+Add \texttt{Vector} v to the end of this\texttt{DataFrame}.
+
+\subsection{push\_back( v, name )}\label{push_back-v-name}
+
+Append a \texttt{Vector} v to the end of this\texttt{DataFrame}. Specify
+the name of the added column with the string ``name''.
+
+\subsection{push\_front(x)}\label{push_frontx}
+
+Append a \texttt{Vector} v at the beginning of this\texttt{DataFrame}.
+
+\subsection{push\_front( x, name )}\label{push_front-x-name-1}
+
+Append a \texttt{Vector} v at the beginning of this\texttt{DataFrame}.
+Specify the name of the added column with the string ``name''.
+
+\subsection{begin()}\label{begin-1}
+
+Returns an iterator pointing to the first column of this
+\texttt{DataFrame}.
+
+\subsection{end()}\label{end-1}
+
+Return an iterator pointing to the end of this \texttt{DataFrame}.
+
+\subsection{insert( it, v )}\label{insert-it-v}
+
+Add \texttt{Vector} v to this \texttt{DataFrame} at the position pointed
+by the iterator \texttt{it} and return an iterator to that element.
+
+\subsection{erase(i)}\label{erasei-1}
+
+Delete the \texttt{i}th column of this \texttt{DataFrame} and return an
+iterator to the column just after erased column.
+
+\subsection{erase(it)}\label{eraseit-1}
+
+Deletes the column specified by the iterator \texttt{it} and returns an
+iterator to the column just after erased column.
+
+\subsection{erase(first\_i, last\_i)}\label{erasefirst_i-last_i}
+
+Deletes the \texttt{first\_i}th to \texttt{last\_i\ -\ 1}th columns and
+returns an iterator to the column just after erased column.
+
+\subsection{erase(first\_it, last\_it)}\label{erasefirst_it-last_it}
+
+Deletes the range of columns from those specified by the iterator
+\texttt{first\_it} to those specified by \texttt{last\_it\ -\ 1} and
+returns an iterator to the column just after the erased columns.
+
+\subsection{containsElementNamed(name)}\label{containselementnamedname-1}
+
+Returns true if this \texttt{DataFrame} has a column with the name
+specified by the string \texttt{name}.
+
+\subsection{inherits(str)}\label{inheritsstr}
+
+Returns true if the attribute ``class'' of this object contains the
+string \texttt{str}.
+
+\chapter{List}\label{list}
+
+This chapter explains how to create \texttt{List} object, how to access
+its elements, and its member functions. In Rcpp, \texttt{List} is
+implemented as a kind of vector. In other words, \texttt{Vector} is a
+vector whose element is scalar value, while \texttt{List} is a vector
+whose elements are any kinds of data types. Therefore, \texttt{Vector}
+and \texttt{List} have many common methods of creating objects,
+accessing elements, and member functions.
+
+Since the contents described on the page of
+\href{dataframe.md}{DataFrame} can be mostly valid by replacing
+\texttt{DataFrame} with\texttt{List}, please refer to that for details.
+
+\section{Creating List object}\label{creating-list-object}
+
+To create a \texttt{List} object we use the \texttt{List::create()}
+function. Also, to specify the element name when creating \texttt{List},
+use \texttt{Named()} function or \texttt{\_{[}{]}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Create list L from vector v1, v2}
+\NormalTok{List L = List::create(v1, v2);}
+
+\CommentTok{// When giving names to elements}
+\NormalTok{List L = List::create(Named(}\StringTok{"name1"}\NormalTok{) = v1 , _[}\StringTok{"name2"}\NormalTok{] = v2);}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Accessing List elements}\label{accessing-list-elements}
+
+When accessing a specific element of \texttt{List}, we assign it to the
+other object and access it via that object.
+
+The elements of \texttt{List} can be specified by numerical index,
+element names and logical vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector v1 = L[}\DecValTok{0}\NormalTok{];}
+\NormalTok{NumericVector v2 = L[}\StringTok{"V1"}\NormalTok{];}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Member functions}\label{member-functions-3}
+
+\texttt{List} has the same member functions as \texttt{Vector}.
+
+\chapter{S3・S4 class}\label{s3s4-class}
+
+\section{S3 class}\label{s3-class}
+
+The S3 class is actually a list whose attribute \texttt{class} has its
+own value. For that, see the section \texttt{List} and section
+Attributes for creating S3 objects and accessing its elements.
+
+In the code example below, as an example of handling objects of S3, we
+show the function that receives the return value of function
+\texttt{lm()} and computes RMSE (Root Mean Square Error) as an index of
+the prediction accuracy of the model in the learning data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//Receiving lm() model object and calculate RMSE}
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{double}\NormalTok{ rcpp_rmse(List lm_model) \{}
+    \CommentTok{// Since S3 is a list, data type of the argument is specified as List.}
+
+    \CommentTok{// If the object given to this function is not an lm() model object,}
+    \CommentTok{// it outputs an error message and stops execution.}
+    \ControlFlowTok{if}\NormalTok{ (! lm_model.inherits(}\StringTok{"lm"}\NormalTok{)) stop(}\StringTok{"Input must be a lm() model object."}\NormalTok{);}
+
+    \CommentTok{// Extracting residuals (i.e. actual - prediction) from the S3 object}
+\NormalTok{    NumericVector resid  = lm_model[}\StringTok{"residuals"}\NormalTok{];}
+
+    \CommentTok{// Number of elements of the residual vector}
+    \DataTypeTok{R_xlen_t}\NormalTok{ n = resid.length();}
+
+    \CommentTok{// The sum of squares of the residual vector}
+    \DataTypeTok{double}\NormalTok{ rmse(}\FloatTok{0.0}\NormalTok{);}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{double}\NormalTok{& r : resid)\{}
+\NormalTok{        rmse += r*r;}
+\NormalTok{    \}}
+
+    \CommentTok{// Divide the residual sum of squares by the number of elements and take the square root}
+    \ControlFlowTok{return}\NormalTok{(sqrt((}\FloatTok{1.0}\NormalTok{/n)*rmse));}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+As an example of execution, use R's sample data \texttt{mtcars} to
+calculate the RMSE of the model linearly regressing the fuel efficiency
+of the car.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{>}\StringTok{ }\NormalTok{mod <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ mtcars)}
+\OperatorTok{>}\StringTok{ }\KeywordTok{rcpp_rmse}\NormalTok{(mod)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{2.146905}
+\end{Highlighting}
+\end{Shaded}
+
+\section{S4 class}\label{s4-class}
+
+\subsection{Accessing to slot}\label{accessing-to-slot}
+
+To access the slots of a S4 class object, use the \texttt{slot()} member
+function. Also, use the \texttt{hasSlot()} member function to check if
+the object have a slot with a specific name.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x.slot(}\StringTok{"slot_name"}\NormalTok{);}
+\NormalTok{x.hasSlot(}\StringTok{"slot_name"}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Creating a new S4 class
+object}\label{creating-a-new-s4-class-object}
+
+Rcpp alone can not define a new S4 class, but you can create an S4 class
+object defined in R.
+
+The following code example shows how to define a new S4 class Person in
+R, then create an object of Person class with Rcpp.
+
+We first define S4 class ``Person''. This class holds name and birthday
+of a person in slot \texttt{name} and \texttt{birth}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# R code}
+\CommentTok{# Defining S4 class Person in R}
+\KeywordTok{setClass}\NormalTok{ (}
+  \CommentTok{# Class name}
+  \StringTok{"Person"}\NormalTok{,}
+
+  \CommentTok{# Defining slot type}
+  \KeywordTok{representation}\NormalTok{ (}
+    \DataTypeTok{name =} \StringTok{"character"}\NormalTok{,}
+    \DataTypeTok{birth =} \StringTok{"Date"}
+\NormalTok{  ),}
+
+  \CommentTok{# Initializing slots}
+  \DataTypeTok{prototype =} \KeywordTok{list}\NormalTok{(}
+    \DataTypeTok{name =} \KeywordTok{as.character}\NormalTok{(}\OtherTok{NULL}\NormalTok{),}
+    \DataTypeTok{birth =} \KeywordTok{as.Date}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(}\OtherTok{NULL}\NormalTok{))}
+\NormalTok{  )}
+\NormalTok{)}
+
+\CommentTok{# Creating an object of Person class in R}
+\NormalTok{person_}\DecValTok{01}\NormalTok{ <-}\StringTok{ }\KeywordTok{new}\NormalTok{(}\StringTok{"Person"}\NormalTok{,}
+                 \DataTypeTok{name =} \StringTok{"Ronald Fisher"}\NormalTok{,}
+                 \DataTypeTok{birth =} \KeywordTok{as.Date}\NormalTok{(}\StringTok{"1890-02-17"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+The following code example creates an object of Person class in Rcpp and
+set values for the slots.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{S4 rcpp_s4()\{}
+
+    \CommentTok{// Creating an object of Person class}
+\NormalTok{    S4 x(}\StringTok{"Person"}\NormalTok{);}
+
+    \CommentTok{// Setting values to the slots}
+\NormalTok{    x.slot(}\StringTok{"name"}\NormalTok{)  = }\StringTok{"Sewall Wright"}\NormalTok{;}
+\NormalTok{    x.slot(}\StringTok{"birth"}\NormalTok{) = Date(}\StringTok{"1889-12-21"}\NormalTok{);}
+
+    \ControlFlowTok{return}\NormalTok{(x);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_s4()
+An object of class "Person"
+Slot "name":
+[1] "Sewall Wright"
+
+Slot "birth":
+[1] "1889-12-21"
+\end{verbatim}
+
+\chapter{String}\label{string}
+
+\texttt{String} is a scalar type corresponding to the element of
+\texttt{CharacterVector}. \texttt{String} can also handle NA values
+(\texttt{NA\_STRING}) which are not supported by the C character string
+\texttt{char*} and the C++ string \texttt{std::string}.
+
+\section{Creating String object}\label{creating-string-object}
+
+There are roughly　three ways to create a \texttt{String} object, as
+follows. The first method is to create from a C/C++ string, the second
+is to create it from another \texttt{String} object, and the third is to
+create it from one element of a \texttt{CharacterVector}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Creating from C string}
+\NormalTok{String s(}\StringTok{"X"}\NormalTok{); }\CommentTok{// "X"}
+
+\CommentTok{// Creating from Rcpp String}
+\NormalTok{String s(str);}
+
+\CommentTok{//Creating from single element of CharacterVector object}
+\NormalTok{String s(char_vec[}\DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Operators}\label{operators}
+
+The \texttt{+=} operator is defined in \texttt{String} type. This allows
+you to combine another string object at the end of the string. (Note
+that the \texttt{+} operator is not defined)
+
+\begin{verbatim}
+// Creating String object
+String s("A");
+
+// Conbining a string
+s += "B";
+
+Rcout << s << "\n"; // "AB"
+\end{verbatim}
+
+\section{Member functions}\label{member-functions-4}
+
+Note: The member functions \texttt{replace\_first()},
+\texttt{replace\_last()}, \texttt{replace\_all()} do not just return the
+replaced character string, but instead rewrite the value of this object.
+
+\subsection{replace\_first( str, new\_str
+)}\label{replace_first-str-new_str}
+
+Replace first substring that matches the string \texttt{str} with the
+string \texttt{new\_str}.
+
+\subsection{replace\_last( str, new\_str
+)}\label{replace_last-str-new_str}
+
+Replace last substring that matches the string \texttt{str} with the
+string \texttt{new\_str}.
+
+\subsection{replace\_all( str, new\_str
+)}\label{replace_all-str-new_str}
+
+Replace all substrings that matches the string \texttt{str} with the
+string \texttt{new\_str}.
+
+\subsection{push\_back(str)}\label{push_backstr}
+
+Combine the string \texttt{str} to the end of this \texttt{String}
+object. (Same as += operator)
+
+\subsection{push\_back(str)}\label{push_backstr-1}
+
+Combine the string str at the beginning of this \texttt{String} object.
+
+\subsection{set\_na()}\label{set_na}
+
+Set NA value to this \texttt{String} object.
+
+\subsection{get\_cstring()}\label{get_cstring}
+
+Convert the string of this String object into a C character string
+constant (const char*) and return it.
+
+\subsection{get\_encoding()}\label{get_encoding}
+
+Returns the character encoding. The encoding is represented by
+\href{https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h\#L928-L935}{\texttt{cetype\_t}}.
+
+\subsection{set\_encoding(enc)}\label{set_encodingenc}
+
+Set the character encoding specified by
+\href{https://github.com/wch/r-source/blob/bf0a0a9d12f2ce5d66673dc32cd253524f3270bf/src/include/Rinternals.h\#L928-L935}{\texttt{cetype\_t}}.
+
+\subsection{Code example}\label{code-example}
+
+\begin{verbatim}
+// [[Rcpp::export]]
+void rcpp_replace(){
+
+    // Replace only at the first occurrence of "ab"
+    String s("abcdabcd");
+    s.replace_first("ab", "AB");
+    Rcout << s.get_cstring() << "\n"; // ABcdabcd
+
+    // Replace only at the last occurrence of "ab"
+    s="abcdabcd";
+    s.replace_last("ab", "AB");
+    Rcout << s.get_cstring() << "\n"; // abcdABcd
+
+    // Replace every occurrence of "ab"
+    s="abcdabcd";
+    s.replace_all("ab", "AB");
+    Rcout << s.get_cstring() << "\n"; // ABcdABcd
+}
+\end{verbatim}
+
+\chapter{Date}\label{date}
+
+\texttt{Date} is a scalar type corresponding to an element of
+\texttt{DateVector}.
+
+\section{Creating Date object}\label{creating-date-object}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Date d;       }\CommentTok{//"1970-01-01"}
+\NormalTok{Date d(}\DecValTok{1}\NormalTok{);    }\CommentTok{//"1970-01-01" + 1day}
+\NormalTok{Date d(}\FloatTok{1.1}\NormalTok{);  }\CommentTok{//"1970-01-01" + ceil(1.1)day}
+\NormalTok{Date( }\StringTok{"2000-01-01"}\NormalTok{, }\StringTok{"}\SpecialCharTok{%Y-%}\StringTok{m-}\SpecialCharTok{%d}\StringTok{"}\NormalTok{); }\CommentTok{//default format is "%Y-%m-%d"}
+\NormalTok{Date( }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2000}\NormalTok{); }\CommentTok{// 2000-01-02 Date(mon, day, year)}
+\NormalTok{Date( }\DecValTok{2000}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{); }\CommentTok{// 2000-01-02 Date(year, mon, day)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Operators}\label{operators-1}
+
+\texttt{Date} has operators
+\texttt{+,\ -,\ \textless{},\ \textgreater{},\ \textgreater{}=,\ \textless{}=,\ ==,\ !=}.
+By using these operators, you can perform addition of days (\texttt{+}),
+difference calculation of date (\texttt{-}), comparison of dates
+(\texttt{\textless{},\ \textless{}=,\ \textgreater{},\ \textgreater{}=,\ ==,\ !=})
+.
+
+\begin{verbatim}
+// [[Rcpp::export]]
+DateVector rcpp_date1(){
+    // Creating Date objects
+    Date d1("2000-01-01");
+    Date d2("2000-02-01");
+
+    int  i  = d2 - d1; // difference of dates
+    bool b  = d2 > d1; // comparison of dates
+
+    Rcout << i << "\n"; // 31
+    Rcout << b << "\n"; // 1
+
+
+    DateVector date(1);
+    date[0] = d1 + 1;  // adding 1 day to d1
+
+    return date; // 2000-01-02
+}
+\end{verbatim}
+
+\section{Member functions}\label{member-functions-5}
+
+\subsection{getDay()}\label{getday}
+
+Returns the day of the date.
+
+\subsection{getMonth()}\label{getmonth}
+
+Returns the month of the date.
+
+\subsection{getYear()}\label{getyear}
+
+Returns the year of the date.
+
+\subsection{getWeekday()}\label{getweekday}
+
+Returns the day of the week as an int. (1:Sun 2:Mon 3:Tue 4:Wed 5:Thu
+6:Sat)
+
+\subsection{getYearday()}\label{getyearday}
+
+Returns the number of the date through the year with January 1st as 1
+and December 31st as 365.
+
+\subsection{is\_na()}\label{is_na}
+
+Returns \texttt{true} if this object is NA.
+
+\section{Execution result}\label{execution-result}
+
+\begin{verbatim}
+Date d("2016-1-1");
+Rcout << d.getDay() << endl;     //1
+Rcout << d.getMonth() << endl;   //1
+Rcout << d.getYear() << endl;    //2016
+Rcout << d.getWeekday() << endl; //6
+Rcout << d.getYearday() << endl; //1
+\end{verbatim}
+
+\chapter{Datetime}\label{datetime}
+
+\texttt{Datetime} is a scalar type corresponding to the elements
+of\texttt{DatetimeVector}.
+
+\section{Creating Datetime object}\label{creating-datetime-object}
+
+As with Date, Datetime is also created by specifying the number of
+seconds from 1970-01-01 00:00:00 UTC (Coordinated Universal Time), and
+by explicitly specifying the date and time.
+
+The format to explicitly specify the date and time is
+\texttt{Datetime\ dt(str,\ format)}. This format converts the string
+\texttt{str} to \texttt{Datetime} with the format string
+\texttt{format}. Please refer to \texttt{help(strptime)} in R for
+symbols used in the format string.
+
+\begin{verbatim}
+// Creating Datetime object it with elapsed seconds since 00:00:00 on January 1, 1970
+Datetime dt;         // "1970-01-01 00:00:00 UTC"
+Datetime dt(10.1);   // "1970-01-01 00:00:00 UTC" + 10.1 sec
+
+// Creating by specifying the date and time
+// The default format is "%Y-%m-%d %H:%M:%OS"
+// The specified date and time are interpreted as vthe date and time of the local time zone
+Datetime dt("2000-01-01 00:00:00");
+Datetime dt("2000年1月1日 0時0分0秒", "%Y年%m月%d日 %H時%M分%OS秒");
+\end{verbatim}
+
+\section{Time zone}\label{time-zone}
+
+\texttt{Datetime} internally manages the date and time in seconds (real
+number) from \texttt{1970-01-01\ 00:00:00} in Coordinated Universal Time
+(UTC). For example, \texttt{Datetime\ dt(10)} represents the point after
+10 seconds from \texttt{1970-01-01\ 00:00:00\ UTC}. When this value is
+returned to R, it is displayed as the time converted to the executed
+time zone. For example, in Japan, Japan Standard Time (JST) is UTC + 9
+hours, so \texttt{Datetime\ d(10)} will be
+\texttt{1970-01-01\ 09:00:10\ JST}.
+
+When creating a Datetime object in the form of
+\texttt{Datetime\ dt(str,\ format)}, \texttt{str} is interpreted as the
+time in the local timezone. For example, if you run
+\texttt{Datetime\ dt(2000-01-01\ 00:00:00);} in Japan Standard Time
+(JST), the value of \texttt{1999-12-31\ 15:00:00\ UTC} is set
+internally.
+
+\section{Operators}\label{operators-2}
+
+The
+\texttt{+,\ -,\ \textless{},\ \textgreater{},\ \textgreater{}=,\ \textless{}=,\ ==,\ !=}
+operators are defined in \texttt{Datetime}.
+
+By using these operators, you can perform addition of seconds
+(\texttt{+}), difference of datetime (\texttt{-}) in seconds, comparison
+of datetime
+(\texttt{\textless{},\ \textless{}=,\ \textgreater{},\ \textgreater{}=,\ ==,\ !=})
+.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Datetime dt1(}\StringTok{"2000-01-01 00:00:00"}\NormalTok{);}
+\NormalTok{Datetime dt2(}\StringTok{"2000-01-02 00:00:00"}\NormalTok{);}
+
+\CommentTok{// difference of datetime (seconds)}
+\DataTypeTok{int}\NormalTok{ sec = dt2 - dt1;  }\CommentTok{// 86400}
+
+\CommentTok{// addition of seconds}
+\NormalTok{dt1 = dt1 + }\DecValTok{1}\NormalTok{; }\CommentTok{// "2000-01-01 00:00:01"}
+
+\CommentTok{// comparison of datetime}
+\DataTypeTok{bool}\NormalTok{ b = dt2 > dt1; }\CommentTok{// true}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Member functions}\label{member-functions-6}
+
+Note: The value output using these member functions is the time
+interpreted at the time of Coordinated Universal Time. Therefore, it
+looks different from the date and time of the user's time zone. (For
+example, refer to the execution result of the code at the end of this
+chapter)
+
+\subsection{getFractionalTimestamp()}\label{getfractionaltimestamp}
+
+Returns the number of seconds (real number) from the base date
+(1970-01-01 00: 00: 00 UTC).
+
+\subsection{getMicroSeconds()}\label{getmicroseconds}
+
+Returns the microseconds of the date and time at the Coordinated
+Universal Time. This value express the value of the second after decimal
+point in units of microseconds. (i.e.~0.1 second = 100000 microseconds)
+
+\subsection{getSeconds()}\label{getseconds}
+
+Returns the second of the date and time in Coordinated Universal Time.
+
+\subsection{getMinutes()}\label{getminutes}
+
+Returns the minute of the date and time in Coordinated Universal Time.
+
+\subsection{getHours()}\label{gethours}
+
+Returns the hour of the date and time in Coordinated Universal Time.
+
+\subsection{getDay()}\label{getday-1}
+
+Returns the day of the date and time in Coordinated Universal Time.
+
+\subsection{getMonth()}\label{getmonth-1}
+
+Returns the month of the date and time in Coordinated Universal Time.
+
+\subsection{getYear()}\label{getyear-1}
+
+Returns the year of the date and time in Coordinated Universal Time.
+
+\subsection{getWeekday()}\label{getweekday-1}
+
+Returns the day of the week of the date and time in Coordinated
+Universal Time in \texttt{int}.
+
+1:Sun 2:Mon 3:Tue 4:Wed 5:Thu 6:Sat
+
+\subsection{getYearday()}\label{getyearday-1}
+
+Returns the number of the date through the year with January 1st as 1
+and December 31st as 365.
+
+\subsection{is\_na()}\label{is_na-1}
+
+Returns \texttt{true} if this object is \texttt{NA}.
+
+\section{Code example}\label{code-example-1}
+
+The code example below shows the result of executing in Japan Standard
+Time (JST) environment.
+
+\begin{verbatim}
+// [[Rcpp::export]]
+Datetime rcpp_datetime(){
+    // Creating Datetime object by specifying date and time to
+    Datetime dt("2000-01-01 00:00:00");
+
+    // Displaying parts of the Datetime object in Coordinated Universal Time
+    Rcout << "getYear " << dt.getYear() << "\n";
+    Rcout << "getMonth " << dt.getMonth() << "\n";
+    Rcout << "getDay " << dt.getDay() << "\n";
+
+    Rcout << "getHours " << dt.getHours() << "\n";
+    Rcout << "getMinutes " << dt.getMinutes() << "\n";
+    Rcout << "getSeconds " << dt.getSeconds() << "\n";
+
+    Rcout << "getMicroSeconds " << dt.getMicroSeconds() << "\n";
+    Rcout << "getWeekday " << dt.getWeekday() << "\n";
+    Rcout << "getYearday " << dt.getYearday() << "\n";
+    Rcout << "getFractionalTimestamp " << dt.getFractionalTimestamp() << "\n";
+
+    return dt;
+}
+\end{verbatim}
+
+Execution result
+
+You can see that the time output is 9 hours before Japan Standard Time
+(JST).
+
+\begin{verbatim}
+> rcpp_datetime()
+getYear 1999
+getMonth 12
+getDay 31
+getHours 15
+getMinutes 0
+getSeconds 0
+getMicroSeconds 0
+getWeekday 6
+getYearday 365
+getFractionalTimestamp 9.46652e+08
+[1] "2000-01-01 JST"
+\end{verbatim}
+
+\chapter{RObject}\label{robject}
+
+The \texttt{RObject} type is a type that can be assigned to any type of
+object defined in Rcpp. If you do not know what type is passed to the
+variable at run time, you can use \texttt{RObject}.
+
+\section{Member functions}\label{member-functions-7}
+
+\texttt{RObject} has the following member functions. These member
+functions also exist in all other API classes (such as
+\texttt{NumericVector}) in Rcpp.
+
+\subsection{inherits(str)}\label{inheritsstr-1}
+
+Returns \texttt{true} if this object inherits the class specified by the
+string \texttt{str}.
+
+\subsection{slot(name)}\label{slotname}
+
+Accesses the slot specified by the character string \texttt{name} if
+this object is \texttt{S4}.
+
+\subsection{hasSlot(name)}\label{hasslotname}
+
+Returns \texttt{true} if there is a slot specified by the character
+string name.
+
+\subsection{attr(name)}\label{attrname}
+
+Accesses the attribute specified by the string \texttt{name}.
+
+\subsection{attributeNames()}\label{attributenames}
+
+Return the names of all the attributes of this object as
+\texttt{std::vector\textless{}std::string\textgreater{}}.
+
+\subsection{hasAttribute(name)}\label{hasattributename}
+
+Returns \texttt{true} if this object has an attribute with the name
+specified by the string \texttt{name}.
+
+\subsection{isNULL()}\label{isnull}
+
+Returns true if this object is \texttt{NULL}.
+
+\subsection{sexp\_type()}\label{sexp_type}
+
+Returns \texttt{SXPTYPE} of this object as \texttt{int}. See the
+\href{https://cran.r-project.org/doc/manuals/r-release/R-ints.html\#SEXPTYPEs}{R
+internals} for a list of all \texttt{SEXPTYPE} defined in R.
+
+\subsection{isObject()}\label{isobject}
+
+Returns \texttt{true} if this object has a ``class'' attribute.
+
+\subsection{isS4()}\label{iss4}
+
+Return \texttt{true} if this object is a \texttt{S4} object.
+
+\section{Determining type of object assigned to
+RObject}\label{determining-type-of-object-assigned-to-robject}
+
+One useful use of \texttt{RObject} is to determine the type of the
+object. To determine which type the value assigned to \texttt{RObject},
+use the \texttt{is\textless{}T\textgreater{}()} function or member
+function \texttt{isS4()} \texttt{isNULL()}.
+
+However, matrices and factor vectors can not be determined by only using
+the function \texttt{is\textless{}T\textgreater{}()} because they are
+vectors with values are set to specific attribute. To determine them,
+use \texttt{Rf\_isMatrix()} function or the \texttt{Rf\_isFactor()}
+function.
+
+The code example below shows how to determine the type using
+\texttt{RObject}.
+
+\begin{verbatim}
+// [[Rcpp::export]]
+void rcpp_type(RObject x){
+    if(is<NumericVector>(x)){
+        if(Rf_isMatrix(x)) Rcout << "NumericMatrix\n";
+        else Rcout << "NumericVector\n";       
+    }
+    else if(is<IntegerVector>(x)){
+        if(Rf_isFactor(x)) Rcout << "factor\n";
+        else Rcout << "IntegerVector\n";
+    }
+    else if(is<CharacterVector>(x))
+        Rcout << "CharacterVector\n";
+    else if(is<LogicalVector>(x))
+        Rcout << "LogicalVector\n";
+    else if(is<DataFrame>(x))
+        Rcout << "DataFrame\n";
+    else if(is<List>(x))
+        Rcout << "List\n";
+    else if(x.isS4())
+        Rcout << "S4\n";
+    else if(x.isNULL())
+        Rcout << "NULL\n";
+    else
+        Rcout << "unknown\n";
+}
+\end{verbatim}
+
+Use \texttt{as\textless{}T\textgreater{}()} to convert \texttt{RObject}
+to another Rcpp type after determining the type.
+
+\begin{verbatim}
+// Converting `RObject` to `NumericVector`
+RObject x;
+NumericVector v = as<NumericVector>(x);
+\end{verbatim}
+
+\chapter{Cautions in handling Rcpp
+objects}\label{cautions-in-handling-rcpp-objects}
+
+\section{Assigning between vectors}\label{assigning-between-vectors}
+
+When you assign a object \texttt{v1} to another object \texttt{v2} using
+\texttt{=} operator (\texttt{v2\ =\ v1;}), the value of elements of
+\texttt{v1} is not copied to \texttt{v2} but \texttt{v2} will be an
+alias to \texttt{v1}. Thus, if you change the value of some elements in
+\texttt{v1}, the change also applied to \texttt{v2}. You should use
+\texttt{clone()}, if you want to avoid coupling between objects (see
+sample code below).
+
+The sample code presented below shows that the difference of the shallow
+copy and deep copy when you change value of one of vector after
+assigning.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector v1 = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{\};   }\CommentTok{// create a vector v1}
+\NormalTok{NumericVector v2 = v1;        }\CommentTok{// v1 is assigned to v2 through shallow copy.}
+\NormalTok{NumericVector v3 = clone(v1); }\CommentTok{// v1 is assigned to v3 through deep copy.}
+
+\NormalTok{v1[}\DecValTok{0}\NormalTok{] = }\DecValTok{100}\NormalTok{; }\CommentTok{// changing value of a element of v1}
+
+\CommentTok{// Following output shows that}
+\CommentTok{// the modification of v1 element}
+\CommentTok{// is also applied to v2 but not to v3}
+\NormalTok{Rcout << }\StringTok{"v1 = "}\NormalTok{ << v1 << endl; }\CommentTok{// 100 2 3}
+\NormalTok{Rcout << }\StringTok{"v2 = "}\NormalTok{ << v2 << endl; }\CommentTok{// 100 2 3}
+\NormalTok{Rcout << }\StringTok{"v3 = "}\NormalTok{ << v3 << endl; }\CommentTok{// 1 2 3}
+\end{Highlighting}
+\end{Shaded}
+
+As explanation for people who have deeper knowledge of C++, a Rcpp
+object do not have value of R object (e.g.~elements of a vector) itself,
+but have a pointer to R object. Thus, if you assign object through
+\texttt{v2\ =\ v1;}, the value of pointer of \texttt{v1} is copied to
+\texttt{v2}. So, both \texttt{v1} and \texttt{v2} would be pointing to
+the same R object. This is called ``shallow copy''. On the other hand,
+if you assign object through \texttt{v2\ =\ clone(v1);}, the value of R
+object that \texttt{v1} is pointing is copied to \texttt{v2} as new R
+object. This is called ``deep copy''.
+
+\section{Data type of numerical
+index}\label{data-type-of-numerical-index}
+
+Maximum number of vector elements is limited to the length of 2\^{}31 -
+1 in R \textless{}= version 2.0.0 or 32 bit build of R, because
+\texttt{int} is used as data type of numerical index. However, long
+vector is supported after 64 bit build of R 3.0.0. You should use
+\texttt{R\_xlen\_t} as data data type for numerical index or the number
+of elements to support long vector in your Rcpp code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Declare the number of element "n" using R_xlen_t}
+\DataTypeTok{R_xlen_t}\NormalTok{ n = v.length();}
+\DataTypeTok{double}\NormalTok{ sum = }\DecValTok{0}\NormalTok{;}
+\CommentTok{// Declare the numerical index "i" using R_xlen_t}
+\ControlFlowTok{for}\NormalTok{(}\DataTypeTok{R_xlen_t}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<n; ++i)\{}
+\NormalTok{  sum += v[i];}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Return type of operator{[}{]}}\label{return-type-of-operator}
+
+When you access to vector elements using \texttt{{[}{]}} or \texttt{()}
+operator, the return type is not \texttt{Vector} itself but
+\texttt{Vector::Proxy}. Thus, it will cause compile error when you pass
+\texttt{v{[}i{]}} directly to some function, if the function only
+supports \texttt{Vector} type. To avoid compile error \texttt{v{[}i{]}}
+assign to new object or convert it to type \texttt{T} using
+\texttt{as\textless{}T\textgreater{}()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector v \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\};}
+\NormalTok{IntegerVector i \{}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{\};}
+
+\CommentTok{// Compile error}
+\CommentTok{//double x1 = sum(v[i]);}
+
+\CommentTok{// Save as new object}
+\NormalTok{NumericVector vi = v[i];}
+\DataTypeTok{double}\NormalTok{   x2 = sum(vi);}
+
+\CommentTok{// Convert to NumericVector using as<T>()}
+\DataTypeTok{double}\NormalTok{   x3 = sum(as<NumericVector>(v[i]));}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Attributes}\label{attributes}
+
+\section{Attributes related
+functions}\label{attributes-related-functions}
+
+The following member functions are used to access the attributes of Rcpp
+objects.
+
+\textbf{attr( name )}
+
+accesses the attribute specified by the character string ``name'' and
+gets and sets the value.
+
+\begin{verbatim}
+List L;
+L.attr("class") = "my_class";
+\end{verbatim}
+
+\textbf{attributeNames()}
+
+Returns a list of the attributes the object has. Since the return type
+of this function is
+\texttt{std::vector\textless{}std::string\textgreater{}}, if you want to
+convert it to \texttt{CharacterVector} use \texttt{wrap()} function.
+
+\begin{verbatim}
+CharacterVector ch = wrap(x.attributeNames());
+\end{verbatim}
+
+\textbf{hasAttribute( name )}
+
+If this object has an attribute with the name specified by the string
+``name'', it returns \texttt{true}.
+
+\begin{verbatim}
+bool b = x.hasAttribute("name");
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Creating a List object}
+\NormalTok{NumericVector   v1 = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\};}
+\NormalTok{CharacterVector v2 = \{}\StringTok{"A"}\NormalTok{,}\StringTok{"B"}\NormalTok{,}\StringTok{"C"}\NormalTok{\};}
+\NormalTok{List L = List::create(v1, v2);}
+
+\CommentTok{// Setting element names}
+\NormalTok{L.attr(}\StringTok{"names"}\NormalTok{) = CharacterVector::create(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{);}
+
+\CommentTok{// Creating a new attribute and set its value}
+\NormalTok{L.attr(}\StringTok{"new_attribute"}\NormalTok{) = }\StringTok{"new_value"}\NormalTok{;}
+
+\CommentTok{// Changing the class name of this object to "new_class"}
+\NormalTok{L.attr(}\StringTok{"class"}\NormalTok{) = }\StringTok{"new_class"}\NormalTok{;}
+
+\CommentTok{// Outputting a list of the names of the attributes of this object}
+\NormalTok{CharacterVector ch = wrap(L.attributeNames());}
+\NormalTok{Rcout << ch << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{; }\CommentTok{// "names" "new_attribute" "class"}
+
+\CommentTok{// Check if this object has the attribute "new_attribute".}
+\DataTypeTok{bool}\NormalTok{ b = L.hasAttribute(}\StringTok{"new_attribute"}\NormalTok{);}
+\NormalTok{Rcout << b << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{; }\CommentTok{// 1}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Access functions for common
+attributes}\label{access-functions-for-common-attributes}
+
+Dedicated access functions may be prepared for frequently used
+attributes such as element names.
+
+\begin{verbatim}
+// Element name, the following two sentences are synonymous
+x.attr("names");
+x.names();
+\end{verbatim}
+
+The code example below shows how to access common attributes.
+
+\begin{verbatim}
+Vector v
+v.attr("names"); // Element names
+v.names();       // Element names
+
+Matrix m;
+m.ncol();  // Number of columns
+m.nrow();  // Number of rows
+m.attr(“dim”) = NumericVector::create( nrows, ncols );
+m.attr(“dimnames”) = List::create( row_names, col_names );
+
+DataFrame df;
+df.attr(“names”);     // column names
+df.attr(“row.names”); // row names
+
+List L;
+L.names(); // Element names
+\end{verbatim}
+
+\chapter{R-like functions}\label{r-like-functions}
+
+Here is a list of Rcpp functions similar to R functions.
+
+Also, if you can guarantee that \texttt{NA} is not included in the
+vector given to these functions, you can use \texttt{noNA()} to mark the
+vector. Then the functions below no longer checks for \texttt{NA}, so
+the calculation may speed up.
+
+\begin{verbatim}
+NumericVector res = mean(noNA(v));
+\end{verbatim}
+
+\section{List of R-like functions}\label{list-of-r-like-functions}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{vector-related-functions}{Vector related functions}
+\item
+  \protect\hyperlink{string-related-functions}{String related functions}
+\item
+  \protect\hyperlink{functions-related-to-finding-values}{Functions
+  related to finding values}
+\item
+  \protect\hyperlink{functions-related-to-duplicated-values}{Functions
+  related to duplicated values}
+\item
+  \protect\hyperlink{functions-related-to-set-operation}{Functions
+  related to set operation}
+\item
+  \protect\hyperlink{functions-related-to-maximum-and-minimum-values}{Functions
+  related to maximum and minimum values}
+\item
+  \protect\hyperlink{functions-related-to-summaries}{Functions related
+  to summaries}
+\item
+  \protect\hyperlink{functions-related-to-rounding-values}{Functions
+  related to rounding values}
+\item
+  \protect\hyperlink{functions-related-to-math}{Functions related to
+  math}
+\item
+  \protect\hyperlink{functions-related-to-logical-values}{Functions
+  related to logical values}
+\item
+  \protect\hyperlink{functions-related-to-na-inf-nan}{Functions related
+  to NA Inf NaN}
+\item
+  \protect\hyperlink{apply-functions}{apply functions}
+\item
+  \protect\hyperlink{cbind-function}{cbind function}
+\end{itemize}
+
+\hypertarget{vector-related-functions}{\subsection{Vector related
+functions}\label{vector-related-functions}}
+
+\textbf{head(v, n)}
+
+Returns a vector of \texttt{n} elements from the first element of the
+vector \texttt{v}.
+
+\textbf{tail(v, n)}
+
+Returns a vector of last \texttt{n} elements from the last element of
+vector \texttt{v}.
+
+\textbf{rev(v)}
+
+Returns a vector that elements of vector \texttt{v} are arranged in
+reverse order.
+
+\textbf{rep(x, n)}
+
+Returns a vector that \texttt{x} is repeated \texttt{n} times.
+\texttt{x} can be a scalar or vector.
+
+\textbf{rep\_each(v, n)}
+
+Returns a vector that each elements of vector v are repeated \texttt{n}
+times.
+
+\textbf{rep\_len(v, n)}
+
+Returns a vector that the vector \texttt{v} is repeated until the length
+of the vector becomes \texttt{n}.
+
+\textbf{seq(start, end)}
+
+Returns a vector of consecutive integers from \texttt{start} to
+\texttt{end}.
+
+\textbf{seq\_along(v)}
+
+Returns a vector of consecutive integers from 1 to the number of
+elements of vector \texttt{v}
+
+\textbf{seq\_len(n)}
+
+Returns a vector of consecutive integers from 1 to \texttt{n}
+
+\textbf{diff(v)}
+
+Returns a vector that computed \texttt{v{[}i\ +\ 1{]}\ -\ v{[}i{]}} for
+each element \texttt{i} excluding the last element of the vector
+\texttt{v}.
+
+\hypertarget{string-related-functions}{\subsection{String related
+functions}\label{string-related-functions}}
+
+\textbf{collapse(v)}
+
+Returns a string concatenated with each element of the
+\texttt{CharacterVector} v as \texttt{String} type.
+
+\subsection{Finding values}\label{finding-values}
+
+\textbf{match(v, table)}
+
+Returns an integer vector containing the R style numerical index
+(starting from 1) of the element of vector \texttt{table} that match
+value to each elements of vector \texttt{x}. Namely、if you execute
+\texttt{res\ =\ match(v,\ table);}, then it will be
+\texttt{res{[}i{]}\ ==\ \ j+1} where \texttt{j} equals to minimum
+\texttt{j} satisfying \texttt{v{[}i{]}\ ==\ table{[}j{]}}
+
+\textbf{self\_match(v)}
+
+Synonymous with passing the same vector to \texttt{match\ (v,\ table)}.
+
+\textbf{which\_max(v)}
+
+Returns the numerical index of the largest element of the vector v.
+
+\textbf{which\_min(v)}
+
+Returns the numerical index of the smallest element of the vector v.
+
+\subsection{Duplicated values}\label{duplicated-values}
+
+\textbf{duplicated(v)}
+
+Returns a vector containing 1 if the value of each element of vector v
+exists in the previous element, containing 0 if not.
+
+\textbf{unique(v)}
+
+Returns a vector that eliminates the duplication of the element value
+from the vector \texttt{v}.
+
+\textbf{sort\_unique(v)}
+
+Returns a vector that eliminates the duplication of the element value
+from the vector \texttt{v} and sorts the values in ascending order.
+
+\subsection{Set operation}\label{set-operation}
+
+\textbf{setdiff(v1,v2)}
+
+Returns a vector obtained by subtracting the value of the unique element
+of the vector \texttt{v2} from the unique element of the vector
+\texttt{v1}.
+
+\textbf{setequal(v1,v2)}
+
+Returns true if the unique element of vector \texttt{v1} is equal to the
+unique element of vector \texttt{v2}.
+
+\textbf{intersect(v1,v2)}
+
+Returns a vector containing elements contained in both the unique
+element of vector \texttt{v1} and the unique element of vector
+\texttt{v2}.
+
+\textbf{union\_(v1,v2)}
+
+Return vector which eliminated value duplication after combining
+elements of vector \texttt{v1} and vector \texttt{v2}.
+
+\hypertarget{functions-related-to-maximum-and-minimum-values}{\subsection{Functions
+related to maximum and minimum
+values}\label{functions-related-to-maximum-and-minimum-values}}
+
+\textbf{min(v)}
+
+Returns the minimum value of the vector \texttt{v}.
+
+\textbf{max(v)}
+
+Returns the maximum value of the vector \texttt{v}.
+
+\textbf{cummin(v)}
+
+Returns the cumulative minimum elements of vector \texttt{v}
+
+\textbf{cummax(v)}
+
+Returns the cumulative maximum elements of vector \texttt{v}
+
+\textbf{pmin(v1,v2)}
+
+Compares the corresponding elements of vectors \texttt{v1} and
+\texttt{v2}, and return a vector containing the smaller elements.
+
+\textbf{pmax(v1,v2)}
+
+Compares the corresponding elements of vectors \texttt{v1} and
+\texttt{v2}, and return a vector containing the larger elements.
+
+\textbf{range(v)}
+
+Returns a vector consisting of the minimum and maximum values of vector
+\texttt{v}.
+
+\textbf{clamp(min, v, max)}
+
+Returns a vector that the elements of vector \texttt{v} smaller than
+\texttt{min} is replaced with \texttt{min} and the elements larger than
+\texttt{max} is replaced with \texttt{max}.
+
+\hypertarget{functions-related-to-summaries}{\subsection{Functions
+related to summaries}\label{functions-related-to-summaries}}
+
+\textbf{sum(v)}
+
+Returns the sum of the elements of vector \texttt{v}.
+
+\textbf{mean(v)}
+
+Returns the arithmetic mean of the elements of vector \texttt{v}.
+
+\textbf{median(v)}
+
+Returns the median value of the elements of vector \texttt{v}.
+
+\textbf{sd(v)}
+
+Returns the standard deviation of the elements of vector \texttt{v}.
+
+\textbf{var(v)}
+
+Returns the variance of the elements of vector \texttt{v}.
+
+\textbf{cumsum(v)}
+
+Returns the cumulative sum of the elements of vector \texttt{v}
+
+\textbf{cumprod(v)}
+
+Returns the cumulative product of the elements of vector \texttt{v}
+
+\textbf{table(v)}
+
+Returns a named integer vector that counts the number of elements for
+each unique element of vector \texttt{v}.
+
+\hypertarget{functions-related-to-rounding-values}{\subsection{Functions
+related to rounding values}\label{functions-related-to-rounding-values}}
+
+\textbf{floor(v)}
+
+Returns a vector containing the largest integer not greater than each
+element of vector \texttt{v}.
+
+\textbf{ceil(v)}
+
+Returns a vector containing the largest integer not smaller than each
+element of vector v.
+
+\textbf{ceiling(v)}
+
+Synonymous with \texttt{ceil()}.
+
+\textbf{round(v, digits)}
+
+Returns a vector obtained by rounding each element of the vector
+\texttt{v} with the number of significant figure \texttt{digits}.
+
+\textbf{trunc(v)}
+
+Returns a vector with rounded down decimal places.
+
+\hypertarget{functions-related-to-math}{\subsection{Functions related to
+math}\label{functions-related-to-math}}
+
+\textbf{sign(v)}
+
+Returns a vector with the signs of the corresponding elements of
+\texttt{v} (the sign of a real number is 1, 0, or -1 if the number is
+positive, zero, or negative, respectively).
+
+\textbf{abs(v)}
+
+Returns a vector containing the absolute value of each element of vector
+\texttt{v}.
+
+\textbf{pow(v, n)}
+
+Returns a vector by raising each element of the vector \texttt{v} to the
+\texttt{n}th power.
+
+\textbf{sqrt(v)}
+
+Returns a vector containing square root of each element of vector v.
+
+\textbf{exp(v)}
+
+Returns a vector by raising Napier number (e) to the power of value of
+each element of the vector v.
+
+\textbf{expm1(v)}
+
+Synonymous with \texttt{exp(v)\ -\ 1}
+
+\textbf{log(v)}
+
+Returns a vector containing the natural logarithmic of each element of
+vector \texttt{v}.
+
+\textbf{log10(v)}
+
+Returns a vector containing the common logarithmic of each element of
+vector \texttt{v}.
+
+\textbf{log1p(v)}
+
+Synonymous with \texttt{log(v+1)}
+
+\textbf{sin(v)}
+
+Returns a vector containing sine of each element of vector \texttt{v}.
+
+\textbf{sinh(v)}
+
+Returns a vector containing hyperbolic sine of each element of vector
+\texttt{v}.
+
+\textbf{cos(v)}
+
+Returns a vector containing cosine of each element of vector \texttt{v}.
+
+\textbf{cosh(v)}
+
+Returns a vector containing hyperbolic cosine of each element of vector
+\texttt{v}.
+
+\textbf{tan(v)}
+
+Returns a vector containing tangent of each element of vector
+\texttt{v}.
+
+\textbf{tanh(v)}
+
+Returns a vector containing hyperbolic tangent of each element of vector
+\texttt{v}.
+
+\textbf{acos(v)}
+
+Returns a vector containing arccosine of each element of vector
+\texttt{v}.
+
+\textbf{asin(v)}
+
+Returns a vector containing arcsine of each element of vector
+\texttt{v}.
+
+\textbf{atan(v)}
+
+Returns a vector containing arctangent of each element of vector
+\texttt{v}.
+
+\textbf{gamma(v)}
+
+Returns a vector obtained by transforming each element of vector
+\texttt{v} with the gamma function.
+
+\textbf{lgamma(v)}
+
+Synonymous with \texttt{log(gamma(v))}
+
+\textbf{digamma(v)}
+
+Returns a vector obtained by transforming each element of vector
+\texttt{v} with the first derivative function of \texttt{lgamma()}.
+
+\textbf{trigamma(v)}
+
+Returns a vector obtained by transforming each element of vector
+\texttt{v} with the second derivative function of \texttt{lgamma()}.
+
+\textbf{tetragamma(v)}
+
+Returns a vector obtained by transforming each element of vector
+\texttt{v} with the third derivative function of \texttt{lgamma()}.
+
+\textbf{pentagamma(v)}
+
+Returns a vector obtained by transforming each element of vector
+\texttt{v} with the fourth derivative function of \texttt{lgamma()}.
+
+\textbf{psigamma(v, deriv)}
+
+Returns a vector obtained by transforming each element of vector
+\texttt{v} with the \texttt{deriv}-th derivative function of
+\texttt{lgamma()}.
+
+\textbf{factrial(v)}
+
+Returns a vector containing the factorial of the each element of vector
+\texttt{v}.
+
+\textbf{lfactorial(v)}
+
+Synonymous with \texttt{log(factrial(v))}
+
+\textbf{choose(vn, vk)}
+
+Returns a vector obtained by calculating binomial coefficients using the
+corresponding elements of real vector \texttt{vn} and integer vector
+\texttt{vk}.
+
+\textbf{lchoose(vn, vk)}
+
+Synonymous with \texttt{log(choose(vn,\ vk))}
+
+\textbf{beta(va, vb)}
+
+Returns a vector obtained by calculating the value of the beta function
+using the corresponding elements of vectors \texttt{va} and \texttt{vb}.
+
+\textbf{lbeta(va, vb)}
+
+Synonymous with \texttt{log(beta(va,\ vb))}
+
+\hypertarget{functions-related-to-logical-values}{\subsection{Functions
+related to logical values}\label{functions-related-to-logical-values}}
+
+\textbf{all(v)}
+
+Receives a \texttt{LogicalVector} \texttt{v} and returns
+\texttt{SingleLogicalResult} type meaning\texttt{TRUE} when all of
+elements are \texttt{TRUE}.
+
+\textbf{any(v)}
+
+Receives a \texttt{LogicalVector} \texttt{v} and returns
+\texttt{SingleLogicalResult} type meaning\texttt{TRUE} when any of
+elements are \texttt{TRUE}.
+
+\textbf{is\_true(x)}
+
+Receives a return value of \texttt{all()} or \texttt{any()} and returns
+bool type \texttt{true} if it means \texttt{TRUE}.
+
+\textbf{is\_false(x)}
+
+Receives a return value of \texttt{all()} or \texttt{any()} and returns
+bool type \texttt{true} if it means \texttt{FALSE}.
+
+\textbf{is\_na(x)}
+
+Receives a return value of \texttt{all()} or \texttt{any()} and returns
+bool type \texttt{true} if it means \texttt{NA}.
+
+\textbf{ifelse(v, x1, x2)}
+
+Receives the \texttt{LogicalVector} \texttt{v}, and returns a vector
+containing the corresponding element of x1 or x2 when the element of v
+is \texttt{TRUE} or \texttt{FALSE}, respectively. Although \texttt{x1}
+and \texttt{x2} can be vectors or scalars, the length of the vector
+needs to be equal to \texttt{v}.
+
+\hypertarget{functions-related-to-na-inf-nan}{\subsection{Functions
+related to NA Inf NaN}\label{functions-related-to-na-inf-nan}}
+
+\textbf{na\_omit(v)}
+
+Returns a vector which deleted \texttt{NA} from vector \texttt{v}.
+
+\textbf{is\_finite(v)}
+
+Returns a \texttt{LogicalVector} containing \texttt{TRUE} if
+corresponding elements of vector \texttt{v} is not \texttt{Inf} nor
+\texttt{-Inf} nor \texttt{NA}.
+
+\textbf{is\_infinite(v)}
+
+Returns a \texttt{LogicalVector} containing \texttt{TRUE} if
+corresponding elements of vector \texttt{v} is \texttt{Inf} or
+\texttt{-Inf} or \texttt{NA}.
+
+\textbf{is\_na(v)}
+
+Returns a \texttt{LogicalVector} containing \texttt{TRUE} if
+corresponding elements of vector \texttt{v} is \texttt{NA} or
+\texttt{NaN}.
+
+\textbf{is\_nan(v)}
+
+Returns a \texttt{LogicalVector} containing \texttt{TRUE} if
+corresponding elements of vector \texttt{v} is \texttt{NaN}.
+
+\hypertarget{apply-functions}{\subsection{apply
+functions}\label{apply-functions}}
+
+\textbf{lapply(x, fun)}
+
+Applies a C++ function \texttt{fun} to each element of the vector
+\texttt{x} and returns the result as \texttt{List}.
+
+\textbf{sapply(x, fun)}
+
+Applies a C++ function \texttt{fun} to each element of the vector
+\texttt{x} and returns the result as \texttt{Vector}.
+
+\textbf{mapply(x1, x2, fun2)}
+
+Applies a C++ function \texttt{fun} that receives two arguments to each
+corresponding elements of the vector \texttt{x1} and \texttt{x2} and
+returns the result as \texttt{Vector}.
+
+\textbf{mapply(x1, x2, x3, fun3)}
+
+Applies a C++ function \texttt{fun} that receives three arguments to
+each corresponding elements of the vector \texttt{x1} and \texttt{x2},
+\texttt{x3} and returns the result as \texttt{Vector}.
+
+\hypertarget{cbind-function}{\subsection{cbind
+function}\label{cbind-function}}
+
+\textbf{cbind(x1, x2,\ldots{})}
+
+Takes \texttt{Vector} or \texttt{Matrix} \texttt{x1} and \texttt{x2},
+\texttt{...} and combine by columns. And returns the result as
+\texttt{Matrix} or \texttt{DataFrame}. You can pass up to 50 arguments.
+
+\subsection{sampling}\label{sampling}
+
+\textbf{Vector sample(Vector x, int size, replace = false, probs =
+R\_NilValue)}
+
+As with the \texttt{sample} function in R, this function takes a sample
+from a vector \texttt{x}.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} : a vector you want to draw a sample.
+\item
+  \texttt{size} : sample size of returned vector.
+\item
+  \texttt{replace} : should sampling be with replacement. default
+  \texttt{true}.
+\item
+  \texttt{probs} : a vector that specify probability weights to be drawn
+  for each elements of vector \texttt{x}. default \texttt{R\_NilValue}
+  (same weight for all elements).
+\end{itemize}
+
+\texttt{Vector\textless{}RTYPE\textgreater{}\ sample(const\ Vector\textless{}RTYPE\textgreater{}\&\ x,\ int\ size,\ bool\ replace\ =\ false,\ sugar::probs\_t\ probs\ =\ R\_NilValue)}
+
+\textbf{sample(n, size, replace = TRUE, probs = NULL, one\_based =
+TRUE)}
+
+As with the \texttt{sample.int} function in R.
+
+\texttt{Vector\textless{}INTSXP\textgreater{}\ sample(int\ n,\ int\ size,\ bool\ replace\ =\ false,\ sugar::probs\_t\ probs\ =\ R\_NilValue,\ bool\ one\_based\ =\ true);}
+
+\chapter{Probability distribution}\label{probability-distribution}
+
+Rcpp provides all major probability distribution functions in R. Same as
+R, four functions starting with the character d/p/q/r are defined for
+each probability distribution.
+
+d/p/q/r functions on probability distribution XXX
+
+\begin{itemize}
+\tightlist
+\item
+  dXXX: Probability density function
+\item
+  pXXX: Cumulative distribution function
+\item
+  qXXX: Quantile function
+\item
+  rXXX: Random number generation function
+\end{itemize}
+
+\section{Basic structure of probability distribution
+function}\label{basic-structure-of-probability-distribution-function}
+
+In Rcpp, probability distribution functions with the same name are
+defined in two namespaces, \texttt{R::} and \texttt{Rcpp::}. These
+differences are that the function defined in \texttt{Rcpp::} namespace
+returns a vector, while the function in the \texttt{R::} namespace
+returns a scalar. Basically, the probability distribution functions
+defined in the \texttt{Rcpp::} namespace has the same functionalities as
+those in R. So normally you can use a function in the \texttt{Rcpp::}
+namespace, but if you want a scalar value, it is better to use that
+function in \texttt{R::} namespace because it's faster.
+
+The basic structures of the probability distribution functions defined
+in the \texttt{Rcpp::} namespace are shown below. In fact, the
+definition of the probability distribution function of the
+\texttt{Rcpp\ ::} namespace is not written directly in the source code
+of Rcpp (because it is written using macros). But you can assume that
+the function is defined like as below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector Rcpp::dXXX( NumericVector x, }\DataTypeTok{double}\NormalTok{ par,                    }\DataTypeTok{bool}\NormalTok{ log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{NumericVector Rcpp::pXXX( NumericVector q, }\DataTypeTok{double}\NormalTok{ par, }\DataTypeTok{bool}\NormalTok{ lower = }\KeywordTok{true}\NormalTok{, }\DataTypeTok{bool}\NormalTok{ log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{NumericVector Rcpp::qXXX( NumericVector p, }\DataTypeTok{double}\NormalTok{ par, }\DataTypeTok{bool}\NormalTok{ lower = }\KeywordTok{true}\NormalTok{, }\DataTypeTok{bool}\NormalTok{ log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{NumericVector Rcpp::rXXX(           }\DataTypeTok{int}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ par )}
+\end{Highlighting}
+\end{Shaded}
+
+The basic structures of the probability distribution functions defined
+in the \texttt{R::} namespace are shown below. It basically has the same
+functionality as those defined in the \texttt{Rcpp::} namespace except
+that it accepts and returns \texttt{double} type. In addition, the
+arguments of the function do not have default values, so user must give
+the value explicitly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{double}\NormalTok{ R::dXXX( }\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ par,            }\DataTypeTok{int}\NormalTok{ log )}
+\DataTypeTok{double}\NormalTok{ R::pXXX( }\DataTypeTok{double}\NormalTok{ q, }\DataTypeTok{double}\NormalTok{ par, }\DataTypeTok{int}\NormalTok{ lower, }\DataTypeTok{int}\NormalTok{ log )}
+\DataTypeTok{double}\NormalTok{ R::qXXX( }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ par, }\DataTypeTok{int}\NormalTok{ lower, }\DataTypeTok{int}\NormalTok{ log )}
+\DataTypeTok{double}\NormalTok{ R::rXXX(           }\DataTypeTok{double}\NormalTok{ par )}
+\end{Highlighting}
+\end{Shaded}
+
+The arguments of the probability distribution function are described
+below.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{x, q} : random variable
+\item
+  \textbf{p} : probability
+\item
+  \textbf{n} : number of observation
+\item
+  \textbf{par} : Parameter（the number of distribution parameters varies
+  depending on the distribution）
+\item
+  \textbf{lower} : \texttt{true} : Calculate the probability of the
+  region where the random variable is less than or equal to x,
+  \texttt{false} : Calculate the probability of the region larger than x
+\item
+  \textbf{log} : true : probabilities p are given as log(p)
+\end{itemize}
+
+\section{List of probability distribution
+functions}\label{list-of-probability-distribution-functions}
+
+List of probability distribution functions provided by Rcpp is shown
+below. Here, the names of the distribution parameters are matched with
+those of R, so refer to the R help for details.
+
+\subsection{Continuous probability
+distribution}\label{continuous-probability-distribution}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{uniform-distribution}{Uniform distribution}
+\item
+  \protect\hyperlink{normal-distribution}{Normal distribution}
+\item
+  \protect\hyperlink{log-normal-distribution}{Log-normal distribution}
+\item
+  \protect\hyperlink{gamma-distribution}{Gamma distribution}
+\item
+  \protect\hyperlink{beta-distribution}{Beta distribution}
+\item
+  \protect\hyperlink{noncentral-beta-distribution}{Noncentral beta
+  distribution}
+\item
+  \protect\hyperlink{chi-squared-distribution}{Chi-squared distribution}
+\item
+  \protect\hyperlink{noncentral-chi-squared-distribution}{Noncentral
+  chi-squared distribution}
+\item
+  \protect\hyperlink{t-distribution}{t-distribution}
+\item
+  \protect\hyperlink{noncentral-t-distribution}{Noncentral
+  t-distribution}
+\item
+  \protect\hyperlink{f-distribution}{F-distribution}
+\item
+  \protect\hyperlink{noncentral-f-distribution}{Noncentral
+  F-distribution}
+\item
+  \protect\hyperlink{cauchy-distribution}{Cauchy distribution}
+\item
+  \protect\hyperlink{exponential-distribution}{Exponential distribution}
+\item
+  \protect\hyperlink{logistic-distribution}{Logistic distribution}
+\item
+  \protect\hyperlink{weibull-distribution}{Weibull distribution}
+\end{itemize}
+
+\subsection{Discrete probability
+distribution}\label{discrete-probability-distribution}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{binomial-distribution}{Binomial distribution}
+\item
+  \protect\hyperlink{negative-binomial-distribution-with-success-probability-as-parameter}{Negative
+  binomial distribution (with success probability as parameter)})
+\item
+  \protect\hyperlink{negative-binomial-distribution-with-mean-as-parameter}{Negative
+  binomial distribution (with mean as parameter)}
+\item
+  \protect\hyperlink{poisson-distribution}{Poisson distribution}
+\item
+  \protect\hyperlink{geometric-distribution}{Geometric distribution}
+\item
+  \protect\hyperlink{Hypergeometricux5cux2520distribution}{Hypergeometric
+  distribution}
+\item
+  \protect\hyperlink{distribution-of-wilcoxon-rank-sum-test-statistic}{Distribution
+  of Wilcoxon rank-sum test statistic}
+\item
+  \protect\hyperlink{distribution-of-wilcoxon-signed-rank-test-statistic}{Distribution
+  of Wilcoxon signed-rank test statistic}
+\end{itemize}
+
+\section{Continuous probability
+distribution}\label{continuous-probability-distribution-1}
+
+\hypertarget{uniform-distribution}{\subsection{Uniform
+distribution}\label{uniform-distribution}}
+
+These functions provide information about the uniform distribution on
+the interval from \texttt{min} to \texttt{max}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dunif( x, min = }\FloatTok{0.0}\NormalTok{, max = }\FloatTok{1.0}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::punif( q, min = }\FloatTok{0.0}\NormalTok{, max = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qunif( p, min = }\FloatTok{0.0}\NormalTok{, max = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::runif( n, min = }\FloatTok{0.0}\NormalTok{, max = }\FloatTok{1.0}\NormalTok{ )}
+
+\NormalTok{R::dunif( x, min, max,        log )}
+\NormalTok{R::punif( q, min, max, lower, log )}
+\NormalTok{R::qunif( p, min, max, lower, log )}
+\NormalTok{R::runif(     min, max )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{normal-distribution}{\subsection{Normal
+distribution}\label{normal-distribution}}
+
+These functions provide information about the normal distribution with
+mean equal to \texttt{mean} and standard deviation equal to \texttt{sd}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnorm( x, mean = }\FloatTok{0.0}\NormalTok{, sd = }\FloatTok{1.0}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pnorm( q, mean = }\FloatTok{0.0}\NormalTok{, sd = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qnorm( p, mean = }\FloatTok{0.0}\NormalTok{, sd = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rnorm( n, mean = }\FloatTok{0.0}\NormalTok{, sd = }\FloatTok{1.0}\NormalTok{ )}
+
+\NormalTok{R::dnorm( x, mean, sd,        log )}
+\NormalTok{R::pnorm( q, mean, sd, lower, log )}
+\NormalTok{R::qnorm( p, mean, sd, lower, log )}
+\NormalTok{R::rnorm(    mean, sd )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{log-normal-distribution}{\subsection{Log-normal
+distribution}\label{log-normal-distribution}}
+
+These functions provide information about the log-normal distribution
+whose logarithm has mean equal to \texttt{meanlog} and standard
+deviation equal to \texttt{sdlog}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dlnorm( x, meanlog = }\FloatTok{0.0}\NormalTok{, sdlog = }\FloatTok{1.0}\NormalTok{,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::plnorm( q, meanlog = }\FloatTok{0.0}\NormalTok{, sdlog = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qlnorm( p, meanlog = }\FloatTok{0.0}\NormalTok{, sdlog = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rlnorm( n, meanlog = }\FloatTok{0.0}\NormalTok{, sdlog = }\FloatTok{1.0}\NormalTok{ )}
+
+\NormalTok{R::dlnorm( x, meanlog, sdlog,        log )}
+\NormalTok{R::plnorm( q, meanlog, sdlog, lower, log )}
+\NormalTok{R::qlnorm( p, meanlog, sdlog, lower, log )}
+\NormalTok{R::rlnorm(    meanlog, sdlog )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gamma-distribution}{\subsection{Gamma
+distribution}\label{gamma-distribution}}
+
+These functions provide information about the Gamma distribution with
+parameters \texttt{shape} and \texttt{scale}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dgamma( x, shape, scale = }\FloatTok{1.0}\NormalTok{,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pgamma( q, shape, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qgamma( p, shape, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rgamma( n, shape, scale = }\FloatTok{1.0}\NormalTok{ )}
+
+\NormalTok{R::dgamma( x, shape, scale, log )}
+\NormalTok{R::pgamma( x, shape, scale, lower, log )}
+\NormalTok{R::qgamma( q, shape, scale, lower, log )}
+\NormalTok{R::rgamma(    shape, scale )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{beta-distribution}{\subsection{Beta
+distribution}\label{beta-distribution}}
+
+These functions provide information about the Beta distribution with
+parameters \texttt{shape1} and \texttt{shape2}. These functions are
+equivalent to setting 0 for the noncentrality parameter \texttt{ncp} in
+the Beta distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dbeta( x, shape1, shape2, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pbeta( x, shape1, shape2, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qbeta( q, shape1, shape2, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rbeta( n, shape1, shape2)}
+
+\NormalTok{R::dbeta( x, shape1, shape2,        log )}
+\NormalTok{R::pbeta( x, shape1, shape2, lower, log )}
+\NormalTok{R::qbeta( q, shape1, shape2, lower, log )}
+\NormalTok{R::rbeta(    shape1, shape2 )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{noncentral-beta-distribution}{\subsection{Noncentral beta
+distribution}\label{noncentral-beta-distribution}}
+
+These functions provide information about the Noncentral beta
+distribution with parameters \texttt{shape1} and \texttt{shape2},
+noncentrality parameter \texttt{ncp}. These functions are equivalent to
+setting non 0 value for the noncentrality parameter \texttt{ncp} in the
+Beta distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnbeta( x, shape1, shape2, ncp,               log = }\KeywordTok{false}\NormalTok{ );}
+\NormalTok{Rcpp::pnbeta( x, shape1, shape2, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ );}
+\NormalTok{Rcpp::qnbeta( q, shape1, shape2, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ );}
+\CommentTok{// Rcpp::rnbeta() does not exist}
+
+\NormalTok{R::dnbeta( x, shape1, shape2, ncp,        log )}
+\NormalTok{R::pnbeta( x, shape1, shape2, ncp, lower, log )}
+\NormalTok{R::qnbeta( q, shape1, shape2, ncp, lower, log )}
+\NormalTok{R::rnbeta(    shape1, shape2, ncp )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chi-squared-distribution}{\subsection{Chi-squared
+distribution}\label{chi-squared-distribution}}
+
+These functions provide information about the Chi-squared distribution
+with df degrees of freedom \texttt{df}. These functions are equivalent
+to setting 0 for the noncentrality parameter \texttt{ncp} in the Beta
+distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dchisq( x, df,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pchisq( x, df, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qchisq( q, df, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rchisq( n, df)}
+
+\NormalTok{R::dchisq( x, df,        log )}
+\NormalTok{R::pchisq( x, df, lower, log )}
+\NormalTok{R::qchisq( q, df, lower, log )}
+\NormalTok{R::rchisq(    df )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{noncentral-chi-squared-distribution}{\subsection{Noncentral
+chi-squared distribution}\label{noncentral-chi-squared-distribution}}
+
+These functions provide information about the Noncentral chi-squared
+distribution with df degrees of freedom \texttt{df} and noncentrality
+parameter \texttt{ncp}. These functions are equivalent to setting non 0
+value for the noncentrality parameter \texttt{ncp} in the Chi-squared
+distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnchisq( x, df, ncp,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pnchisq( x, df, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qnchisq( q, df, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rnchisq( n, df, ncp = }\FloatTok{0.0}\NormalTok{ )}
+
+\NormalTok{R::dnchisq( x, df, ncp,        log )}
+\NormalTok{R::pnchisq( x, df, ncp, lower, log )}
+\NormalTok{R::qnchisq( q, df, ncp, lower, log )}
+\NormalTok{R::rnchisq(    df, ncp )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{t-distribution}{\subsection{t-distribution}\label{t-distribution}}
+
+These functions provide information about the t-distribution with df
+degrees of freedom \texttt{df}. These functions are equivalent to
+setting 0 for the noncentrality parameter \texttt{ncp} in the Beta
+distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dt( x, df,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pt( x, df, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qt( q, df, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rt( n, df )}
+
+\NormalTok{R::dt( x, df,        log )}
+\NormalTok{R::pt( x, df, lower, log )}
+\NormalTok{R::qt( q, df, lower, log )}
+\NormalTok{R::rt(    df )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{noncentral-t-distribution}{\subsection{Noncentral
+t-distribution}\label{noncentral-t-distribution}}
+
+These functions provide information about the Noncentral t-distribution
+with df degrees of freedom \texttt{df} and noncentrality parameter
+\texttt{ncp}. These functions are equivalent to setting non 0 value for
+the noncentrality parameter \texttt{ncp} in the t-distribution function
+in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnt( x, df, ncp,               log = }\KeywordTok{false}\NormalTok{  )}
+\NormalTok{Rcpp::pnt( x, df, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{  )}
+\NormalTok{Rcpp::qnt( q, df, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{  )}
+\CommentTok{// Rcpp::rnt() does not exist.}
+
+\NormalTok{R::dnt( x, df, ncp,        log )}
+\NormalTok{R::pnt( x, df, ncp, lower, log )}
+\NormalTok{R::qnt( q, df, ncp, lower, log )}
+\CommentTok{// R::rnt() does not exist.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{f-distribution}{\subsection{F-distribution}\label{f-distribution}}
+
+These functions provide information about the F-distribution with df
+degrees of freedom \texttt{df1} and \texttt{df2}. These functions are
+equivalent to setting 0 for the noncentrality parameter \texttt{ncp} in
+the F-distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::df( x, df1, df2,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pf( x, df1, df2, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qf( q, df1, df2, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rf( n, df1, df1 )}
+
+\NormalTok{R::df( x, df1, df2,        log )}
+\NormalTok{R::pf( x, df1, df2, lower, log )}
+\NormalTok{R::qf( q, df1, df2, lower, log )}
+\NormalTok{R::rf(    df1, df2 )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{noncentral-f-distribution}{\subsection{Noncentral
+F-distribution}\label{noncentral-f-distribution}}
+
+These functions provide information about the F-distribution with df
+degrees of freedom \texttt{df1}, \texttt{df2} and noncentrality
+parameter \texttt{ncp}. These functions are equivalent to setting non 0
+value for the noncentrality parameter \texttt{ncp} in the Noncentral
+F-distribution function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnf( x, df1, df2, ncp,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pnf( x, df1, df2, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qnf( q, df1, df2, ncp, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\CommentTok{// Rcpp::rnf() does not exist.}
+
+\NormalTok{R::dnf( x, df1, df2, ncp,        log )}
+\NormalTok{R::pnf( x, df1, df2, ncp, lower, log )}
+\NormalTok{R::qnf( q, df1, df2, ncp, lower, log )}
+\CommentTok{// R::rnf() does not exist.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{cauchy-distribution}{\subsection{Cauchy
+distribution}\label{cauchy-distribution}}
+
+These functions provide information about the Cauchy distribution with
+location parameter \texttt{location} and scale parameter \texttt{scale}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dcauchy( x, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pcauchy( x, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qcauchy( q, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rcauchy( n, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{)}
+
+\NormalTok{R::dcauchy( x, location, scale,        log )}
+\NormalTok{R::pcauchy( x, location, scale, lower, log )}
+\NormalTok{R::qcauchy( q, location, scale, lower, log )}
+\NormalTok{R::rcauchy(    location, scale )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exponential-distribution}{\subsection{Exponential
+distribution}\label{exponential-distribution}}
+
+These functions provide information about the Exponential distribution
+with rate \texttt{rate} (i.e., mean equals to 1/rate).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dexp( x, rate = }\FloatTok{1.0}\NormalTok{,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pexp( x, rate = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qexp( q, rate = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rexp( n, rate = }\FloatTok{1.0}\NormalTok{)}
+
+\NormalTok{R::dexp( x, rate,        log )}
+\NormalTok{R::pexp( x, rate, lower, log )}
+\NormalTok{R::qexp( q, rate, lower, log )}
+\NormalTok{R::rexp(    rate )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{logistic-distribution}{\subsection{Logistic
+distribution}\label{logistic-distribution}}
+
+These functions provide information about the Logistic distribution with
+parameters \texttt{location} and \texttt{scale}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dlogis( x, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::plogis( x, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qlogis( q, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rlogis( n, location = }\FloatTok{0.0}\NormalTok{, scale = }\FloatTok{1.0}\NormalTok{ )}
+
+\NormalTok{R::dlogis( x, location, scale,        log )}
+\NormalTok{R::plogis( x, location, scale, lower, log )}
+\NormalTok{R::qlogis( q, location, scale, lower, log )}
+\NormalTok{R::rlogis(    location, scale )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{weibull-distribution}{\subsection{Weibull
+distribution}\label{weibull-distribution}}
+
+These functions provide information about the Weibull distribution with
+parameters \texttt{shape} and \texttt{scale}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dweibull( x, shape, scale = }\FloatTok{1.0}\NormalTok{,               log = }\KeywordTok{false}\NormalTok{  )}
+\NormalTok{Rcpp::pweibull( x, shape, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{  )}
+\NormalTok{Rcpp::qweibull( q, shape, scale = }\FloatTok{1.0}\NormalTok{, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{  )}
+\NormalTok{Rcpp::rweibull( n, shape, scale = }\FloatTok{1.0}\NormalTok{ )}
+
+\NormalTok{R::dweibull( x, shape, scale,        log )}
+\NormalTok{R::pweibull( x, shape, scale, lower, log )}
+\NormalTok{R::qweibull( q, shape, scale, lower, log )}
+\NormalTok{R::rweibull(    shape, scale )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Discrete probability
+distribution}\label{discrete-probability-distribution-1}
+
+\hypertarget{binomial-distribution}{\subsection{Binomial
+distribution}\label{binomial-distribution}}
+
+These functions provide information about the Binomial distribution with
+number of trials \texttt{size} and success probability \texttt{prob}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dbinom( x, size, prob,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pbinom( x, size, prob, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qbinom( q, size, prob, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rbinom( n, size, prob )}
+
+\NormalTok{R::dbinom( x, size, prob,        log )}
+\NormalTok{R::pbinom( x, size, prob, lower, log )}
+\NormalTok{R::qbinom( q, size, prob, lower, log )}
+\NormalTok{R::rbinom(    size, prob )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{negative-binomial-distribution-with-success-probability-as-parameter}{\subsection{Negative
+binomial distribution (with success probability as
+parameter)}\label{negative-binomial-distribution-with-success-probability-as-parameter}}
+
+These functions provide information about the Negative binomial
+distribution with number of success \texttt{size} and success
+probability \texttt{prob}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnbinom( x, size, prob,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pnbinom( x, size, prob, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qnbinom( q, size, prob, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rnbinom( n, size, prob )}
+
+\NormalTok{R::dnbinom( x, size, prob,        log )}
+\NormalTok{R::pnbinom( x, size, prob, lower, log )}
+\NormalTok{R::qnbinom( q, size, prob, lower, log )}
+\NormalTok{R::rnbinom(    size, prob )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{negative-binomial-distribution-with-mean-as-parameter}{\subsection{Negative
+binomial distribution (with mean as
+parameter)}\label{negative-binomial-distribution-with-mean-as-parameter}}
+
+These functions provide information about the Negative binomial
+distribution with number of success \texttt{size} and mean \texttt{mu}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dnbinom_mu( x, size, mu,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pnbinom_mu( x, size, mu, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qnbinom_mu( q, size, mu, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rnbinom_mu( n, size, mu )}
+
+\NormalTok{R::dnbinom_mu( x, size, mu,        log )}
+\NormalTok{R::pnbinom_mu( x, size, mu, lower, log )}
+\NormalTok{R::qnbinom_mu( q, size, mu, lower, log )}
+\NormalTok{R::rnbinom_mu(    size, mu )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{poisson-distribution}{\subsection{Poisson
+distribution}\label{poisson-distribution}}
+
+These functions provide information about the Poisson distribution with
+mean and variance are equal to \texttt{lambda}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dpois( x, lambda,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::ppois( x, lambda, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qpois( q, lambda, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rpois( n, lambda )}
+
+\NormalTok{R::dpois( x, lambda, log )}
+\NormalTok{R::ppois( x, lambda, lower, log )}
+\NormalTok{R::qpois( q, lambda, lower, log )}
+\NormalTok{R::rpois(    lambda )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{geometric-distribution}{\subsection{Geometric
+distribution}\label{geometric-distribution}}
+
+These functions provide information about the Geometric distribution
+with success probability \texttt{prob}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dgeom( x, prob,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::pgeom( x, prob, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qgeom( q, prob, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rgeom( n, prob )}
+
+\NormalTok{R::dgeom( x, prob, log )}
+\NormalTok{R::pgeom( x, prob, lower, log )}
+\NormalTok{R::qgeom( q, prob, lower, log )}
+\NormalTok{R::rgeom(    prob )}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Hypergeometric
+distribution}\label{hypergeometric-distribution}
+
+These functions provide information about the Hypergeometric
+distribution with number of success in the population \texttt{m} ,
+number of failure in the population \texttt{n}, number of sample from
+the population \texttt{k}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Rcpp::dhyper( x, m, n, k,               log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::phyper( x, m, n, k, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::qhyper( q, m, n, k, lower = }\KeywordTok{true}\NormalTok{, log = }\KeywordTok{false}\NormalTok{ )}
+\NormalTok{Rcpp::rhyper(nn, m, n, k )}
+
+\NormalTok{R::dhyper( x, m, n, k,        log )}
+\NormalTok{R::phyper( x, m, n, k, lower, log )}
+\NormalTok{R::qhyper( q, m, n, k, lower, log )}
+\NormalTok{R::rhyper(    m, n, k )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{distribution-of-wilcoxon-rank-sum-test-statistic}{\subsection{Distribution
+of Wilcoxon rank-sum test
+statistic}\label{distribution-of-wilcoxon-rank-sum-test-statistic}}
+
+These functions provide information about the distribution of test
+statistic when Wilcoxon rank-sum test (Mann--Whitney U test) is
+performed on two specimens with number of samples \texttt{m} and
+\texttt{n} respectively.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Rcpp::dwilcox() does not exist.}
+\CommentTok{// Rcpp::pwilcox() does not exist.}
+\CommentTok{// Rcpp::qwilcox() does not exist.}
+\NormalTok{Rcpp::rwilcox( nn, m, n );}
+
+\NormalTok{R::dwilcox( x, m, n,        log )}
+\NormalTok{R::pwilcox( x, m, n, lower, log )}
+\NormalTok{R::qwilcox( q, m, n, lower, log )}
+\NormalTok{R::rwilcox(    m, n )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{distribution-of-wilcoxon-signed-rank-test-statistic}{\subsection{Distribution
+of Wilcoxon signed-rank test
+statistic}\label{distribution-of-wilcoxon-signed-rank-test-statistic}}
+
+These functions provide information about the distribution of test
+statistic when Wilcoxon signed-rank test is performed with number of
+samples \texttt{n}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Rcpp::dsignrank() does not exist.}
+\CommentTok{// Rcpp::psignrank() does not exist.}
+\CommentTok{// Rcpp::qsignrank() does not exist.}
+\NormalTok{Rcpp::rsignrank( nn, n )}
+
+\NormalTok{R::dsignrank( x, n,        log )}
+\NormalTok{R::psignrank( x, n, lower, log )}
+\NormalTok{R::qsignrank( q, n, lower, log )}
+\NormalTok{R::rsignrank(    n )}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Using R functions}\label{using-r-functions}
+
+In order to use R functions in Rcpp, you can use \texttt{Function} and
+\texttt{Environment}.
+
+\section{Function}\label{function}
+
+Using the \texttt{Function} class, you can call R functions from Rcpp.
+The argument given to the R function is determined based on position and
+name.
+
+Use \texttt{Named()} or \texttt{\_{[}{]}} to pass a value to an argument
+by specifying argument name. \texttt{Name()} can be used in two ways:
+\texttt{Named("argument\_name",\ value)} or
+\texttt{Named("argument\_name")\ =\ value}.
+
+The code example below shows an example of calling the R function
+\texttt{rnorm\ (n,\ mean,\ sd)}from the function defined in Rcpp.
+However, when calling a package function using \texttt{Function} class,
+you have to add the package environment to the search path using the
+\texttt{library()} function in R in advance.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{NumericVector my_fun()\{}
+    \CommentTok{// calling rnorm()}
+\NormalTok{    Function f(}\StringTok{"rnorm"}\NormalTok{);   }
+
+    \CommentTok{// Next code is interpreted as rnorm(n=5, mean=10, sd=2)}
+    \ControlFlowTok{return}\NormalTok{ f(}\DecValTok{5}\NormalTok{, Named(}\StringTok{"sd"}\NormalTok{)=}\DecValTok{2}\NormalTok{, _[}\StringTok{"mean"}\NormalTok{]=}\DecValTok{10}\NormalTok{);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{>}\StringTok{ }\KeywordTok{my_fun}\NormalTok{()}
+\NormalTok{[}\DecValTok{1}\NormalTok{]  }\FloatTok{8.014863} \FloatTok{10.459980}  \FloatTok{7.741581}  \FloatTok{9.000762} \FloatTok{11.465920}
+\end{Highlighting}
+\end{Shaded}
+
+In the above example, the return type of R function called from Rcpp is
+assumed \texttt{NumericVector}. However, as in the example below, the
+return type of an R function called from Rcpp function is sometimes
+undefined. In such a case it would be better to assign the return value
+of the function into \texttt{RObject} or \texttt{List} element.
+
+The code below shows an example of defining simplified R function
+\texttt{lapply()} with Rcpp.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{List rcpp_lapply(List input, Function f) \{}
+    \CommentTok{// Applies the Function f to each element of the List input and returns the result as List}
+
+    \CommentTok{// Number of elements in the List input}
+    \DataTypeTok{R_xlen_t}\NormalTok{ n = input.length();}
+
+    \CommentTok{// Creating a List for output}
+\NormalTok{    List out(n);}
+
+    \CommentTok{// Applying f() to each element of "input" and store it to "out".}
+    \CommentTok{// The type of the return value of f() is unknown, but it can be assigned to the List element.}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{R_xlen_t}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i < n; ++i) \{}
+\NormalTok{        out[i] = f(input[i]);}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{ out;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Environment}\label{environment}
+
+By using \texttt{Environment} class, you can retrieve objects (variables
+and functions) from packages and other environments.
+
+The code below shows an example of calling \texttt{Matrix()} function in
+the \texttt{Matrix} package. When calling a package function in this
+way, it is not necessary to attach the package using \texttt{library()}
+function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{S4 rcpp_package_function(NumericMatrix m)\{}
+
+    \CommentTok{// Obtaining namespace of Matrix package}
+\NormalTok{    Environment pkg = Environment::namespace_env(}\StringTok{"Matrix"}\NormalTok{);}
+
+    \CommentTok{// Picking up Matrix() function from Matrix package}
+\NormalTok{    Function f = pkg[}\StringTok{"Matrix"}\NormalTok{];}
+
+    \CommentTok{// Executing Matrix( m, sparse = TRIE )}
+    \ControlFlowTok{return}\NormalTok{ f( m, Named(}\StringTok{"sparse"}\NormalTok{, }\KeywordTok{true}\NormalTok{));}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> m <- matrix(c(1,0,0,2), nrow = 2, ncol = 2)
+> rcpp_package_function(m)
+2 x 2 sparse Matrix of class "dsCMatrix"
+
+[1,] 1 .
+[2,] . 2
+\end{verbatim}
+
+\chapter{NA NaN Inf NULL}\label{na-nan-inf-null}
+
+\section{Notations of NA NaN Inf}\label{notations-of-na-nan-inf}
+
+To express the value of \texttt{Inf} \texttt{-Inf} \texttt{NaN} in Rcpp,
+use the symbol \texttt{R\_PosInf} \texttt{R\_NegInf} \texttt{R\_NaN}.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+R & Rcpp\tabularnewline
+\midrule
+\endhead
+\texttt{Inf} & \texttt{R\_PosInf}\tabularnewline
+\texttt{-Inf} & \texttt{R\_NegInf}\tabularnewline
+\texttt{NaN} & \texttt{R\_NaN}\tabularnewline
+\bottomrule
+\end{longtable}
+
+On the other hand, for \texttt{NA}, different symbol of \texttt{NA} are
+defined for each \texttt{Vector} type.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Vector & symbol of NA\tabularnewline
+\midrule
+\endhead
+\texttt{NumericVector} & \texttt{NA\_REAL}\tabularnewline
+\texttt{IntegerVector} & \texttt{NA\_INTEGER}\tabularnewline
+\texttt{LogicalVector} & \texttt{NA\_LOGICAL}\tabularnewline
+\texttt{CharacterVector} & \texttt{NA\_STRING}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The following code example shows how to use these symbols to create
+\texttt{Vector} object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector   v1 = NumericVector::create( }\DecValTok{1}\NormalTok{, NA_REAL, R_NaN, R_PosInf, R_NegInf);}
+\NormalTok{IntegerVector   v2 = IntegerVector::create( }\DecValTok{1}\NormalTok{, NA_INTEGER);}
+\NormalTok{CharacterVector v3 = CharacterVector::create( }\StringTok{"A"}\NormalTok{, NA_STRING);}
+\NormalTok{LogicalVector   v4 = LogicalVector::create( }\KeywordTok{true}\NormalTok{, NA_LOGICAL);}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Evaluating NA NaN Inf}\label{evaluating-na-nan-inf}
+
+\subsection{Evaluating all the elements of a vector at
+once}\label{evaluating-all-the-elements-of-a-vector-at-once}
+
+To evaluate all the \texttt{NA} \texttt{NaN} \texttt{Inf} \texttt{-Inf}
+elements in a vector at once, use the function \texttt{is\_na()}
+\texttt{is\_nan()} \texttt{is\_infinite()}.
+
+In the code example below, we create a vector containing \texttt{NA}
+\texttt{NaN} \texttt{Inf} \texttt{-Inf} and evaluate it. From this
+example we can see that the \texttt{is\_na()} evaluates both \texttt{NA}
+and\texttt{NaN} as \texttt{TRUE} (same as R's \texttt{is.na()}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector v =}
+\NormalTok{    NumericVector::create( }\DecValTok{1}\NormalTok{, NA_REAL, R_NaN, R_PosInf, R_NegInf);}
+\NormalTok{LogicalVector l1 = is_na(v);}
+\NormalTok{LogicalVector l2 = is_nan(v);}
+\NormalTok{LogicalVector l3 = is_infinite(v);}
+\NormalTok{Rcout << l1 << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{; }\CommentTok{// 0 1 1 0 0}
+\NormalTok{Rcout << l2 << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{; }\CommentTok{// 0 0 1 0 0}
+\NormalTok{Rcout << l3 << }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{; }\CommentTok{// 0 0 0 1 1}
+\end{Highlighting}
+\end{Shaded}
+
+You can remove \texttt{NA} \texttt{NaN} \texttt{Inf} from a vector by
+using these functions. You can also use \texttt{na\_omit()} to remove
+\texttt{NA}.
+
+The code example below shows how to remove \texttt{NA} from a vector
+using the \texttt{is\_na()} and \texttt{na\_omit()}.
+
+\begin{verbatim}
+// Creating a Vector object containg NA
+NumericVector v =
+    NumericVector::create( 1, NA_REAL, 2, NA_REAL, 3);
+
+// Removeing NA from the vector
+NumericVector v1 = v[!is_na(v)];
+NumericVector v2 = na_omit(v);
+\end{verbatim}
+
+\subsection{Evaluating single element of a
+vector}\label{evaluating-single-element-of-a-vector}
+
+If you want to evaluate \texttt{NA} \texttt{NaN} \texttt{Inf}
+\texttt{-Inf} on single element of a vector, use the static member
+function \texttt{Vector::is\_na()},
+\texttt{traits::is\_nan\textless{}RTYPE\textgreater{}()},
+\texttt{traits::\ is\_infinite\textless{}RTYPE\textgreater{}()}. In
+\texttt{RTYPE}, specify \texttt{SEXPTYPE} of the vector to be evaluated.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{void}\NormalTok{ rcpp_is_na2() \{}
+
+    \CommentTok{// Creating Vector object containing NA NaN Inf -Inf}
+\NormalTok{    NumericVector v =}
+\NormalTok{        NumericVector::create(}\DecValTok{1}\NormalTok{, NA_REAL, R_NaN, R_PosInf, R_NegInf);}
+
+    \CommentTok{// Evaluating the value for each element of the vector}
+    \DataTypeTok{int}\NormalTok{ n = v.length();}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i < n; ++i) \{}
+        \ControlFlowTok{if}\NormalTok{(NumericVector::is_na(v[i]))}
+\NormalTok{            Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is NA.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i);}
+        \ControlFlowTok{if}\NormalTok{(Rcpp::traits::is_nan<REALSXP>(v[i]))}
+\NormalTok{            Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is NaN.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i);}
+        \ControlFlowTok{if}\NormalTok{(Rcpp::traits::is_infinite<REALSXP>(v[i]))}
+\NormalTok{            Rprintf(}\StringTok{"v[}\SpecialCharTok{%i}\StringTok{] is Inf or -Inf.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i);}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Here is the list of \texttt{SEXPTYPE} of the major Vector class.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+SEXPTYPE & Vector\tabularnewline
+\midrule
+\endhead
+\texttt{LGLSXP} & LogicalVector\tabularnewline
+\texttt{INTSXP} & IntegerVector\tabularnewline
+\texttt{REALSXP} & NumericVector\tabularnewline
+\texttt{CPLXSXP} & ComplexVector\tabularnewline
+\texttt{STRSXP} & CharacterVector (StringVector)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\section{NULL}\label{null}
+
+You use \texttt{R\_NilValue} to handle\texttt{NULL} in Rcpp. The code
+example below shows how to check \texttt{NULL} in the elements of a
+\texttt{List} object and how to assign \texttt{NULL} to clear the value
+of an attribute.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{List rcpp_list()}
+\NormalTok{\{}
+    \CommentTok{// Create a List object with element names}
+    \CommentTok{// One of the two elements is NULL}
+\NormalTok{    List L = List::create(Named(}\StringTok{"x"}\NormalTok{,NumericVector(\{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{\})),}
+\NormalTok{                          Named(}\StringTok{"y"}\NormalTok{,R_NilValue));}
+
+    \CommentTok{// Checking NULL}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<L.length(); ++i)\{}
+        \ControlFlowTok{if}\NormalTok{(L[i]==R_NilValue) \{}
+\NormalTok{            Rprintf(}\StringTok{"L[}\SpecialCharTok{%i}\StringTok{] is NULL.}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{, i}\DecValTok{+1}\NormalTok{);}
+\NormalTok{        \}}
+\NormalTok{    \}}
+
+    \CommentTok{// Delete the value of the attribute (element name) of the object}
+\NormalTok{    L.attr(}\StringTok{"names"}\NormalTok{) = R_NilValue;}
+
+    \ControlFlowTok{return}\NormalTok{(L);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_list()
+L[2] is NULL.
+
+[[1]]
+[1] 1 2 3
+
+[[2]]
+NULL
+\end{verbatim}
+
+\section{Points to note when handling NA with
+Rcpp}\label{points-to-note-when-handling-na-with-rcpp}
+
+Internally \texttt{NA\_INTEGER} and \texttt{NA\_LOGICAL} are equivalent
+to the minimum value of \texttt{int} (-2147483648). Although, functions
+and operators defined in Rcpp handle the minimum value of \texttt{int}
+appropriately as\texttt{NA} (that is, make the result of operation on
+\texttt{NA} element as \texttt{NA}). Standard C++ functions and
+operators treat the minimum value of \texttt{int} as integer value. So
+if you add 1 to \texttt{NA\_INTEGER}, the element is no longer minimum
+value of \texttt{int}, so it is not　treated as \texttt{NA}.
+
+In addition, if you assign \texttt{NA\_LOGICAL} to \texttt{bool} type,
+it will always be evaluated as \texttt{true}. This is because
+\texttt{bool} evaluates all numbers other than 0 as \texttt{true}.
+
+On the other hand, since \texttt{nan} and　\texttt{inf} are defined in
+\texttt{double}, the result of the operation on　\texttt{nan}
+\texttt{inf} in standard C ++ will be the same result as R.
+
+The table below summarizes how values are evaluated when assigning the
+value of \texttt{NA} \texttt{Inf} \texttt{-Inf} \texttt{NaN} to
+\texttt{Vector} or scalar type in C++.
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+& NA & NaN & Inf & -Inf\tabularnewline
+\midrule
+\endhead
+\texttt{NumericVector} & \texttt{NA\_REAL} & \texttt{R\_NaN} &
+\texttt{R\_PosInf} & \texttt{R\_NegInf}\tabularnewline
+\texttt{IntegerVector} & \texttt{NA\_INTEGER} & \texttt{NA\_INTEGER} &
+\texttt{NA\_INTEGER} & \texttt{NA\_INTEGER}\tabularnewline
+\texttt{LogicalVector} & \texttt{NA\_LOGICAL} & \texttt{NA\_LOGICAL} &
+\texttt{NA\_LOGICAL} & \texttt{NA\_LOGICAL}\tabularnewline
+\texttt{CharacterVector} & \texttt{NA\_STRING} & ``NaN'' & ``Inf'' &
+``-Inf''\tabularnewline
+\texttt{String} & \texttt{NA\_STRING} & ``NaN'' & ``Inf'' &
+``-Inf''\tabularnewline
+\texttt{double} & \texttt{nan} & \texttt{nan} & \texttt{inf} &
+\texttt{-inf}\tabularnewline
+\texttt{int} & -2147483648 & -2147483648 & -2147483648 &
+-2147483648\tabularnewline
+\texttt{bool} & \texttt{true} & \texttt{true} & \texttt{true} &
+\texttt{true}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The code example below shows the difference in results when computing
+using the Rcpp operator and the standard C++ operator against
+\texttt{NA\_INTEGER}. From this result, the operator of Rcpp evaluates
+the result of the operation on \texttt{NA} as \texttt{NA}, but you can
+see that the standard C++ operator treats \texttt{NA\_INTEGER} as just a
+integer value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{List rcpp_na_sum()\{}
+
+    \CommentTok{// Creating an integer vector containing NA}
+\NormalTok{    IntegerVector v1  = IntegerVector::create(}\DecValTok{1}\NormalTok{,NA_INTEGER,}\DecValTok{3}\NormalTok{);}
+
+    \CommentTok{// Applying the "+" operator between vector and scalar defined in Rcpp}
+\NormalTok{    IntegerVector res1 = v1 + }\DecValTok{1}\NormalTok{;}
+
+    \CommentTok{// Applying the "+" operator between int and int defined in standard C++}
+\NormalTok{    IntegerVector res2(}\DecValTok{3}\NormalTok{);}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<v1.length(); ++i)\{}
+\NormalTok{        res2[i] = v1[i] + }\DecValTok{1}\NormalTok{;}
+\NormalTok{    \}}
+
+    \CommentTok{// Outputing the result as named list}
+    \ControlFlowTok{return}\NormalTok{ List::create(Named(}\StringTok{"Rcpp plus"}\NormalTok{, res1),}
+\NormalTok{                        Named(}\StringTok{"C++  plus"}\NormalTok{, res2));}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_na_sum()
+$`Rcpp plus`
+[1]  2 NA  4
+
+$`C++  plus`
+[1]  2 -2147483647 4
+\end{verbatim}
+
+\chapter{factor}\label{factor}
+
+The factor vector (\texttt{factor}) is actually an integer vector with
+the attributes \texttt{levels} and \texttt{class} is defined.
+
+In the code below, an example of converting integer vector to
+\texttt{factor} by setting values to attributes.
+
+\begin{verbatim}
+// Creating "factor"
+// [[Rcpp::export]]
+RObject rcpp_factor(){
+  IntegerVector v = {1,2,3,1,2,3};
+  CharacterVector ch = {"A","B","C"};
+  v.attr("class") = "factor";
+  v.attr("levels") = ch;
+  return v;
+}
+\end{verbatim}
+
+The execution result below, we can see that the integer vector returned
+to R is treated as \texttt{factor}.
+
+\begin{verbatim}
+> rcpp_factor()
+[1] A B C A B C
+Levels: A B C
+\end{verbatim}
+
+\chapter{Error handling}\label{error-handling}
+
+In a situation in which the normal progress of the program is hindered,
+you can print an error message and stop the program. If you want to warn
+the user without stopping the program, use \texttt{warning()} function.
+Both functions \texttt{stop()} and \texttt{warning()} can display
+messages by specifying the format as same as the \texttt{Rprintf()}
+function.
+
+\begin{verbatim}
+stop("Error: Unexpected condition occurred");
+stop("Error: Column %i is not numeric.", i+1);
+
+warning("Warning: Unexpected condition occurred");
+warning("Warning: Column %i is not numeric.", i+1);
+\end{verbatim}
+
+In the code example below, an error is printed and execution is stopped
+if the value given to the function is negative.
+
+\begin{verbatim}
+// [[Rcpp::export]]
+double rcpp_log(double x) {
+    if (x <= 0.0) {
+        stop("'x' must be a positive value.");
+    }
+    return log(x);
+}
+\end{verbatim}
+
+Execution result
+
+\begin{verbatim}
+> rcpp_log(-1)
+ Error: 'x' must be a positive value.
+\end{verbatim}
+
+\chapter{Cancel handling}\label{cancel-handling}
+
+\textbf{Accepting cancellation from user}
+
+\texttt{CheckUserInterrupt()} function checks if the `ctrl + c' button
+was pressed, and if it was pressed it will stop the execution of the
+function.
+
+If you want to execute a calculation that takes a long time, you would
+be better to run \texttt{checkUserInterrupt()} approximately once every
+few seconds.
+
+\begin{verbatim}
+for (int i=0; i<100000; ++i) {
+    // Checking interruption every 1000 iterations
+    if (i % 1000 == 0){
+        Rcpp::checkUserInterrupt();
+    }
+
+    // do something ...
+}
+\end{verbatim}
+
+\chapter{Iterator}\label{iterator}
+
+Iterator is an class used to access elements of \texttt{Vector}
+\texttt{DataFrame} \texttt{List}. If you want to use algorithms provided
+by standard C++, you need to understand iterator. Because many of the
+algorithms provided by standard C++ use iterators to specify location or
+range of data to apply the algorithms.
+
+Specific iterator type is defined for each data structure of Rcpp.
+
+\begin{verbatim}
+NumericVector::iterator
+IntegerVector::iterator
+LogicalVector::iterator
+CharacterVector::iterator
+DataFrame::iterator
+List::iterator
+\end{verbatim}
+
+The figure below shows schematically how to access vector elements using
+an iterator.
+
+\begin{figure}
+\centering
+\includegraphics{iterator.png}
+\caption{}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{i\ =\ v.begin()} : The iterator \texttt{i} points to the first
+  element of\texttt{v}.
+\item
+  \texttt{++i} : Updates \texttt{i} to the state pointing to the next
+  element.
+\item
+  \texttt{-\/-i} : Updates \texttt{i} to the state pointing to the
+  previous element.
+\item
+  \texttt{i\ +\ 1} : Represents an iterator pointing to the element 1
+  elements behind of \texttt{i}.
+\item
+  \texttt{i\ -\ 1} : Represents an iterator pointing to the element 1
+  elements ahead of \texttt{i}.
+\item
+  \texttt{*i} : Represents the value of the element pointed by
+  \texttt{i}.
+\item
+  \texttt{v.end()} : Represents an iterator pointing to the end (one
+  after the last element) of \texttt{v}.
+\item
+  \texttt{*(v.begin()+k)} : Represents the value of the \texttt{k}-th
+  element of \texttt{v} (\texttt{v{[}k{]}}).
+\end{itemize}
+
+The following code example shows an example of traversing all the
+elements of a \texttt{NumericVector} using iterator to calculate sum of
+the elements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{double}\NormalTok{ rcpp_sum(NumericVector x) \{}
+  \DataTypeTok{double}\NormalTok{ total = }\DecValTok{0}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{(NumericVector::iterator i = x.begin(); i != x.end(); ++i) \{}
+\NormalTok{    total += *i;}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{ total;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Environment}\label{environment-1}
+
+By using \texttt{Environment} class, you can keep the environment you
+want to access as a variable and retrieve variables and functions from
+the environment.
+
+\section{Creating Environment object}\label{creating-environment-object}
+
+This section shows you how to create an object of the
+\texttt{Environment} class.
+
+\begin{verbatim}
+Environment env();                           // Global environment
+Environment env = Environment::global_env(); // Global environment
+Environment env("package:stats");            // Environment of package "stats"
+Environment env(1); // The i-th environment in onbject search path (i = 1 is global environment)
+\end{verbatim}
+
+To check the object search path, use \texttt{search()} function in R.
+
+\begin{verbatim}
+> search()
+ [1] ".GlobalEnv"        "tools:RGUI"        "package:stats"    
+ [4] "package:graphics"  "package:grDevices" "package:utils"    
+ [7] "package:datasets"  "package:methods"   "Autoloads"        
+[10] "package:base"   
+\end{verbatim}
+
+\section{Accessing object in a
+environment}\label{accessing-object-in-a-environment}
+
+You can use the \texttt{{[}{]}} operator or \texttt{get()} member
+function to access variables and functions in an environment through
+\texttt{Environment} class object. If you access variables or functions
+that do not exist in that environment, \texttt{R\_NilValue}
+(\texttt{NULL}) will be returned.
+
+\begin{verbatim}
+// Retrieving the global environment
+Environment env = Environment::global_env();
+
+// Retrieving object "x" from the global environment
+NumericVector x = env["x"];
+
+// Changing the value of the variable x in the global environment
+x[0] = 100;
+\end{verbatim}
+
+\section{Creating new environment}\label{creating-new-environment}
+
+A new empty environment can be created by using the function
+\texttt{new\_env()} function.
+
+\subsection{new\_env(size = 29)}\label{new_envsize-29}
+
+Returns a new environment. The argument \texttt{size} specifies the
+initial size of the hash table of the environment to be created.
+
+\subsection{new\_env(parent, size = 29)}\label{new_envparent-size-29}
+
+Returns a new environment whose parent environmnet is the
+\texttt{parent}. The argument \texttt{size} specifies the initial size
+of the hash table of the environment to be created.
+
+\section{Member functions}\label{member-functions-8}
+
+\subsection{get(name)}\label{getname}
+
+Retrieves the object with its name specified by the argument
+\texttt{name}. If it can not be found, it returns \texttt{R\_NilValue}.
+
+\subsection{ls(all)}\label{lsall}
+
+Returns a list of objects in this environment as a
+\texttt{CharacterVector}. If the argument \texttt{all} is true, all
+objects are displayed, \texttt{false} excludes objects whose name begins
+with \texttt{.}.
+
+\subsection{find(name)}\label{findname}
+
+Retrieves the object with the name specified by the argument
+\texttt{name} from this environment or its parent environment. If the
+object is not found, the \texttt{binding\_not\_found} exception is
+thrown.
+
+\subsection{exists(name)}\label{existsname}
+
+Returns \texttt{true} if there is an object with the name specified by
+the argument \texttt{name} in this environment.
+
+\subsection{assign( name, x )}\label{assign-name-x}
+
+Assign the value \texttt{x} to the object with the name specified by the
+character string \texttt{name} in this environment. Returns
+\texttt{true} if it succeeds.
+
+\subsection{isLocked()}\label{islocked}
+
+Returns \texttt{true} if this environment is locked.
+
+\subsection{remove(name)}\label{removename}
+
+Removes the object with the name specified by the string \texttt{name}
+from this environment. Returns \texttt{true} if it succeeds.
+
+\subsection{lock(bindings = false)}\label{lockbindings-false}
+
+Locks this environment. If binding = \texttt{true}, it also locks
+bindings of this environment. (The ``binding'' is linking between name
+of the object and data of the object in R.)
+
+\subsection{lockBinding(name)}\label{lockbindingname}
+
+Lock the binding (i.e.~variable) specified by the string \texttt{name}
+in this environment.
+
+\subsection{unlockBinding(name)\{}\label{unlockbindingname}
+
+Unlock the binding (i.e.~variable) specified by the string \texttt{name}
+in this environment.
+
+\subsection{bindingIsLocked(name)}\label{bindingislockedname}
+
+Returns \texttt{true} if the binding (i.e.~variable) specified by the
+string \texttt{name} in this environment is locked.
+
+\subsection{bindingIsActive(name)}\label{bindingisactivename}
+
+Returns \texttt{true} if the binding (i.e.~variable) specified by the
+string \texttt{name} in this environment is active.
+
+\subsection{is\_user\_database()}\label{is_user_database}
+
+Returns true if this environment inherits ``UserDefinedDatabase''.
+
+\subsection{parent()}\label{parent}
+
+Returns the parent environment of this environment.
+
+\subsection{new\_child(hashed)}\label{new_childhashed}
+
+Creates a new environment whose parent is this environment. If hashed ==
+\texttt{true}, the created environment uses hash table.
+
+\section{Static member functions}\label{static-member-functions-2}
+
+\subsection{Environment::global\_env()}\label{environmentglobal_env}
+
+Returns the global environment.
+
+\subsection{Environment::empty\_env()}\label{environmentempty_env}
+
+Returns the empty environment.
+
+\subsection{Environment::base\_env()}\label{environmentbase_env}
+
+Returns the environment of base package.
+
+\subsection{Environment::base\_namespace()}\label{environmentbase_namespace}
+
+Returns the namespace of base package.
+
+\subsection{Environment::Rcpp\_namespace()}\label{environmentrcpp_namespace}
+
+Returns the namespace of Rcpp package.
+
+\subsection{Environment::namespace\_env(package)}\label{environmentnamespace_envpackage}
+
+Returns the namespace of the package whose name is specified by argument
+\texttt{package}. If you use \texttt{Environment::namespace\_env()}, you
+can call package functions without preloading the package with the
+\texttt{library()} function in R. This is equivalent to calling package
+function with the form \texttt{PACKAGE::FUNCTION()}. In addition, you
+can also access functions that are not exported in the package. This is
+equivalent to calling with the form \texttt{PACKAGE:::FUNCTION()} in R.
+
+\chapter{R Math Library}\label{r-math-library}
+
+R Math Library is a library that provides functions such as math and
+statistics defined by R. These functions become available when you
+include \texttt{Rmath.h}. Since Rmath itself is an independent library,
+it can be used from other programs. You can also call the function
+defined in \texttt{Rmath.h} from Rcpp. They are defined in the
+\texttt{R::} namespace.
+
+The function of \texttt{Rmath.h} is written in C language and it is not
+vectorized.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{double}\NormalTok{ R::norm_rand(}\DataTypeTok{void}\NormalTok{)   }
+\DataTypeTok{double}\NormalTok{ R::unif_rand(}\DataTypeTok{void}\NormalTok{)}
+\DataTypeTok{double}\NormalTok{ R::exp_rand(}\DataTypeTok{void}\NormalTok{)}
+
+\DataTypeTok{void}\NormalTok{ R::pnorm_both(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ *cum, }\DataTypeTok{double}\NormalTok{ *ccum, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{void}\NormalTok{ R::rmultinom(}\DataTypeTok{int}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{* prob, }\DataTypeTok{int}\NormalTok{ k, }\DataTypeTok{int}\NormalTok{* rn)}
+
+\DataTypeTok{double}\NormalTok{ R::dsignrank(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lg)         }
+\DataTypeTok{double}\NormalTok{ R::psignrank(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::qsignrank(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::rsignrank(}\DataTypeTok{double}\NormalTok{ n)}
+
+\DataTypeTok{double}\NormalTok{ R::dwilcox(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ m, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::pwilcox(}\DataTypeTok{double}\NormalTok{ q, }\DataTypeTok{double}\NormalTok{ m, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qwilcox(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ m, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rwilcox(}\DataTypeTok{double}\NormalTok{ m, }\DataTypeTok{double}\NormalTok{ n)}
+
+\DataTypeTok{double}\NormalTok{ R::ptukey(}\DataTypeTok{double}\NormalTok{ q, }\DataTypeTok{double}\NormalTok{ rr, }\DataTypeTok{double}\NormalTok{ cc, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qtukey(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ rr, }\DataTypeTok{double}\NormalTok{ cc, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+
+
+\DataTypeTok{double}\NormalTok{ R::log1pmx(}\DataTypeTok{double}\NormalTok{ x)                  }
+\DataTypeTok{double}\NormalTok{ R::log1pexp(}\DataTypeTok{double}\NormalTok{ x)                 }
+\DataTypeTok{double}\NormalTok{ R::lgamma1p(}\DataTypeTok{double}\NormalTok{ a)                 }
+
+\DataTypeTok{double}\NormalTok{ R::logspace_add(}\DataTypeTok{double}\NormalTok{ lx, }\DataTypeTok{double}\NormalTok{ ly)}
+\DataTypeTok{double}\NormalTok{ R::logspace_sub(}\DataTypeTok{double}\NormalTok{ lx, }\DataTypeTok{double}\NormalTok{ ly)}
+
+
+\DataTypeTok{double}\NormalTok{ R::gammafn(}\DataTypeTok{double}\NormalTok{ x)         }
+\DataTypeTok{double}\NormalTok{ R::lgammafn(}\DataTypeTok{double}\NormalTok{ x)            }
+\DataTypeTok{double}\NormalTok{ R::lgammafn_sign(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{int}\NormalTok{ *sgn)}
+
+\DataTypeTok{void}\NormalTok{   R::dpsifn(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{int}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ kode, }\DataTypeTok{int}\NormalTok{ m, }\DataTypeTok{double}\NormalTok{ *ans, }\DataTypeTok{int}\NormalTok{ *nz, }\DataTypeTok{int}\NormalTok{ *ierr)}
+\DataTypeTok{double}\NormalTok{ R::psigamma(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ deriv)}
+\DataTypeTok{double}\NormalTok{ R::digamma(}\DataTypeTok{double}\NormalTok{ x)}
+\DataTypeTok{double}\NormalTok{ R::trigamma(}\DataTypeTok{double}\NormalTok{ x)}
+\DataTypeTok{double}\NormalTok{ R::tetragamma(}\DataTypeTok{double}\NormalTok{ x)}
+\DataTypeTok{double}\NormalTok{ R::pentagamma(}\DataTypeTok{double}\NormalTok{ x)}
+
+\DataTypeTok{double}\NormalTok{ R::beta(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b)}
+\DataTypeTok{double}\NormalTok{ R::lbeta(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b)}
+
+\DataTypeTok{double}\NormalTok{ R::choose(}\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ k)}
+\DataTypeTok{double}\NormalTok{ R::lchoose(}\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ k)}
+
+\DataTypeTok{double}\NormalTok{ R::bessel_i(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al, }\DataTypeTok{double}\NormalTok{ ex)}
+\DataTypeTok{double}\NormalTok{ R::bessel_j(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al)         }
+\DataTypeTok{double}\NormalTok{ R::bessel_k(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al, }\DataTypeTok{double}\NormalTok{ ex)}
+\DataTypeTok{double}\NormalTok{ R::bessel_y(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al)         }
+\DataTypeTok{double}\NormalTok{ R::bessel_i_ex(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al, }\DataTypeTok{double}\NormalTok{ ex, }\DataTypeTok{double}\NormalTok{ *bi)}
+\DataTypeTok{double}\NormalTok{ R::bessel_j_ex(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al, }\DataTypeTok{double}\NormalTok{ *bj)          }
+\DataTypeTok{double}\NormalTok{ R::bessel_k_ex(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al, }\DataTypeTok{double}\NormalTok{ ex, }\DataTypeTok{double}\NormalTok{ *bk)}
+\DataTypeTok{double}\NormalTok{ R::bessel_y_ex(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ al, }\DataTypeTok{double}\NormalTok{ *by)}
+
+\DataTypeTok{double}\NormalTok{ R::hypot(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b)}
+\DataTypeTok{double}\NormalTok{ R::pythag(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b)}
+
+\DataTypeTok{double}\NormalTok{ R::expm1(}\DataTypeTok{double}\NormalTok{ x); }\CommentTok{/* = exp(x)-1 \{care for small x\} */}
+\DataTypeTok{double}\NormalTok{ R::log1p(}\DataTypeTok{double}\NormalTok{ x); }\CommentTok{/* = log(1+x) \{care for small x\} */}
+
+\DataTypeTok{int}\NormalTok{ R::imax2(}\DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{int}\NormalTok{ y)      }
+\DataTypeTok{int}\NormalTok{ R::imin2(}\DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{int}\NormalTok{ y)}
+
+\DataTypeTok{double}\NormalTok{ R::fmax2(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ y)}
+\DataTypeTok{double}\NormalTok{ R::fmin2(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ y)}
+
+\DataTypeTok{double}\NormalTok{ R::sign(}\DataTypeTok{double}\NormalTok{ x)        }
+
+\DataTypeTok{double}\NormalTok{ R::fprec(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ dg)}
+\DataTypeTok{double}\NormalTok{ R::fround(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ dg)}
+\DataTypeTok{double}\NormalTok{ R::fsign(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ y)}
+\DataTypeTok{double}\NormalTok{ R::ftrunc(}\DataTypeTok{double}\NormalTok{ x)      }
+\end{Highlighting}
+\end{Shaded}
+
+The probability distribution function is also described on the page
+\href{21_dpqr_functions.md}{Probability distributions}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{double}\NormalTok{ R::dnorm(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{double}\NormalTok{ sigma, }\DataTypeTok{int}\NormalTok{ lg)              }
+\DataTypeTok{double}\NormalTok{ R::pnorm(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{double}\NormalTok{ sigma, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::qnorm(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{double}\NormalTok{ sigma, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::rnorm(}\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{double}\NormalTok{ sigma)}
+
+\DataTypeTok{double}\NormalTok{ R::dunif(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{int}\NormalTok{ lg)       }
+\DataTypeTok{double}\NormalTok{ R::punif(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)   }
+\DataTypeTok{double}\NormalTok{ R::qunif(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)   }
+\DataTypeTok{double}\NormalTok{ R::runif(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b)                             }
+
+\DataTypeTok{double}\NormalTok{ R::dgamma(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ shp, }\DataTypeTok{double}\NormalTok{ scl, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::pgamma(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ alp, }\DataTypeTok{double}\NormalTok{ scl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qgamma(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ alp, }\DataTypeTok{double}\NormalTok{ scl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rgamma(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ scl)}
+
+\DataTypeTok{double}\NormalTok{ R::dbeta(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{int}\NormalTok{ lg)         }
+\DataTypeTok{double}\NormalTok{ R::pbeta(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ q, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qbeta(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ q, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rbeta(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b)                           }
+
+\DataTypeTok{double}\NormalTok{ R::dlnorm(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ ml, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::plnorm(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ ml, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qlnorm(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ ml, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rlnorm(}\DataTypeTok{double}\NormalTok{ ml, }\DataTypeTok{double}\NormalTok{ sl)}
+
+\DataTypeTok{double}\NormalTok{ R::dchisq(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{int}\NormalTok{ lg)          }
+\DataTypeTok{double}\NormalTok{ R::pchisq(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)  }
+\DataTypeTok{double}\NormalTok{ R::qchisq(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)  }
+\DataTypeTok{double}\NormalTok{ R::rchisq(}\DataTypeTok{double}\NormalTok{ df)                            }
+
+\DataTypeTok{double}\NormalTok{ R::dnchisq(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lg)          }
+\DataTypeTok{double}\NormalTok{ R::pnchisq(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)  }
+\DataTypeTok{double}\NormalTok{ R::qnchisq(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)  }
+\DataTypeTok{double}\NormalTok{ R::rnchisq(}\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ lb)                             }
+
+\DataTypeTok{double}\NormalTok{ R::df(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::pf(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qf(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rf(}\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2)                }
+
+\DataTypeTok{double}\NormalTok{ R::dt(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lg)            }
+\DataTypeTok{double}\NormalTok{ R::pt(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)        }
+\DataTypeTok{double}\NormalTok{ R::qt(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)        }
+\DataTypeTok{double}\NormalTok{ R::rt(}\DataTypeTok{double}\NormalTok{ n)                      }
+
+\DataTypeTok{double}\NormalTok{ R::dbinom(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::pbinom(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)  }
+\DataTypeTok{double}\NormalTok{ R::qbinom(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ m, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)  }
+\DataTypeTok{double}\NormalTok{ R::rbinom(}\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{double}\NormalTok{ p)}
+
+\DataTypeTok{double}\NormalTok{ R::dcauchy(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lg)       }
+\DataTypeTok{double}\NormalTok{ R::pcauchy(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qcauchy(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rcauchy(}\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl)                 }
+
+\DataTypeTok{double}\NormalTok{ R::dexp(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::pexp(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qexp(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rexp(}\DataTypeTok{double}\NormalTok{ sl)               }
+
+\DataTypeTok{double}\NormalTok{ R::dgeom(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::pgeom(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qgeom(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ pb, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rgeom(}\DataTypeTok{double}\NormalTok{ p)               }
+
+\DataTypeTok{double}\NormalTok{ R::dhyper(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ r, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lg)        }
+\DataTypeTok{double}\NormalTok{ R::phyper(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ r, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qhyper(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ r, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ n, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rhyper(}\DataTypeTok{double}\NormalTok{ r, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ n)                  }
+
+\DataTypeTok{double}\NormalTok{ R::dnbinom(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ pb, }\DataTypeTok{int}\NormalTok{ lg)       }
+\DataTypeTok{double}\NormalTok{ R::pnbinom(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ pb, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qnbinom(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ pb, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rnbinom(}\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ pb)                 }
+
+\DataTypeTok{double}\NormalTok{ R::dnbinom_mu(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{int}\NormalTok{ lg)        }
+\DataTypeTok{double}\NormalTok{ R::pnbinom_mu(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qnbinom_mu(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ mu, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rnbinom_mu(}\DataTypeTok{double}\NormalTok{ sz, }\DataTypeTok{double}\NormalTok{ mu)              }
+
+\DataTypeTok{double}\NormalTok{ R::dpois(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ lb, }\DataTypeTok{int}\NormalTok{ lg)        }
+\DataTypeTok{double}\NormalTok{ R::ppois(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ lb, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qpois(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ lb, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rpois(}\DataTypeTok{double}\NormalTok{ mu)              }
+
+\DataTypeTok{double}\NormalTok{ R::dlogis(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lg)        }
+\DataTypeTok{double}\NormalTok{ R::plogis(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qlogis(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rlogis(}\DataTypeTok{double}\NormalTok{ lc, }\DataTypeTok{double}\NormalTok{ sl)                  }
+
+\DataTypeTok{double}\NormalTok{ R::dnbeta(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::pnbeta(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qnbeta(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rnbeta(}\DataTypeTok{double}\NormalTok{ a, }\DataTypeTok{double}\NormalTok{ b, }\DataTypeTok{double}\NormalTok{ np)                 }
+
+\DataTypeTok{double}\NormalTok{ R::dnf(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lg)     }
+\DataTypeTok{double}\NormalTok{ R::pnf(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qnf(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ df1, }\DataTypeTok{double}\NormalTok{ df2, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+
+\DataTypeTok{double}\NormalTok{ R::dnt(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::pnt(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qnt(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ df, }\DataTypeTok{double}\NormalTok{ ncp, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+
+\DataTypeTok{double}\NormalTok{ R::dweibull(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sh, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lg)      }
+\DataTypeTok{double}\NormalTok{ R::pweibull(}\DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{double}\NormalTok{ sh, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::qweibull(}\DataTypeTok{double}\NormalTok{ p, }\DataTypeTok{double}\NormalTok{ sh, }\DataTypeTok{double}\NormalTok{ sl, }\DataTypeTok{int}\NormalTok{ lt, }\DataTypeTok{int}\NormalTok{ lg)}
+\DataTypeTok{double}\NormalTok{ R::rweibull(}\DataTypeTok{double}\NormalTok{ sh, }\DataTypeTok{double}\NormalTok{ sl)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
