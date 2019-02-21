@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Rcpp for everyone</title>
+  <title>Chapter 22 Probability distribution | Rcpp for everyone</title>
   <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 22 Probability distribution | Rcpp for everyone />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 22 Probability distribution | Rcpp for everyone />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2018-12-01">
+<meta name="date" content="2019-02-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="230_R_function.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -702,16 +703,17 @@ R::rcauchy(    location, scale )</code></pre></div>
 </div>
 <div id="exponential-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.14</span> Exponential distribution</h3>
-<p>These functions provide information about the Exponential distribution with rate <code>rate</code> (i.e., mean equals to 1/rate).</p>
+<p>These functions provide information about the Exponential distribution with rate <code>rate</code> (The mean of Exponential distribution equals to 1/rate).</p>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dexp( x, rate = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
 Rcpp::pexp( x, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qexp( q, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rexp( n, rate = <span class="fl">1.0</span>)
 
-R::dexp( x, rate,        log )
-R::pexp( x, rate, lower, log )
-R::qexp( q, rate, lower, log )
-R::rexp(    rate )</code></pre></div>
+<span class="co">// The R namespace version are parameterised in terms of the scale (=1/rate)</span>
+R::dexp( x, scale,        log )
+R::pexp( x, scale, lower, log )
+R::qexp( q, scale, lower, log )
+R::rexp(    scale )</code></pre></div>
 </div>
 <div id="logistic-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.15</span> Logistic distribution</h3>
@@ -866,17 +868,18 @@ R::rsignrank(    n )</code></pre></div>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -884,6 +887,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },

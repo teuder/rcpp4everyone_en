@@ -301,7 +301,7 @@ R::rcauchy(    location, scale )
 
 ### Exponential distribution
 
-These functions provide information about the Exponential distribution with rate `rate` (i.e., mean equals to 1/rate).
+These functions provide information about the Exponential distribution with rate `rate` (The mean of Exponential distribution equals to 1/rate).
 
 ```cpp
 Rcpp::dexp( x, rate = 1.0,               log = false )
@@ -309,10 +309,11 @@ Rcpp::pexp( x, rate = 1.0, lower = true, log = false )
 Rcpp::qexp( q, rate = 1.0, lower = true, log = false )
 Rcpp::rexp( n, rate = 1.0)
 
-R::dexp( x, rate,        log )
-R::pexp( x, rate, lower, log )
-R::qexp( q, rate, lower, log )
-R::rexp(    rate )
+// The R namespace version are parameterised in terms of the scale (=1/rate)
+R::dexp( x, scale,        log )
+R::pexp( x, scale, lower, log )
+R::qexp( q, scale, lower, log )
+R::rexp(    scale )
 ```
 
 ### Logistic distribution
