@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-06-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -60,41 +60,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -116,13 +142,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="1" data-path="010_Rcpp_merit.html"><a href="010_Rcpp_merit.html"><i class="fa fa-check"></i><b>1</b> Suitable situations to use Rcpp</a></li>
 <li class="chapter" data-level="2" data-path="020_install.html"><a href="020_install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
-<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-c-compiler"><i class="fa fa-check"></i><b>2.1</b> Install C++ compiler</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
-<li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
-<li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
-<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.0.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.0.1</b> Windows</a></li>
+<li class="chapter" data-level="2.0.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.0.2</b> Mac</a></li>
+<li class="chapter" data-level="2.0.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.0.3</b> Linux</a></li>
+<li class="chapter" data-level="2.0.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.0.4</b> Using other compilers installed by yourself</a></li>
+<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.1</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -197,10 +221,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.3" data-path="100_matrix.html"><a href="100_matrix.html#member-functions-1"><i class="fa fa-check"></i><b>9.3</b> Member functions</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="100_matrix.html"><a href="100_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.3.1</b> nrow() rows()</a></li>
 <li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.3.2</b> ncol()　cols()</a></li>
-<li class="chapter" data-level="9.3.3" data-path="100_matrix.html"><a href="100_matrix.html#row-i"><i class="fa fa-check"></i><b>9.3.3</b> row( i )</a></li>
-<li class="chapter" data-level="9.3.4" data-path="100_matrix.html"><a href="100_matrix.html#column-i"><i class="fa fa-check"></i><b>9.3.4</b> column( i )</a></li>
-<li class="chapter" data-level="9.3.5" data-path="100_matrix.html"><a href="100_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.3.5</b> fill_diag( x )</a></li>
-<li class="chapter" data-level="9.3.6" data-path="100_matrix.html"><a href="100_matrix.html#offset-i-j"><i class="fa fa-check"></i><b>9.3.6</b> offset( i, j )</a></li>
+<li class="chapter" data-level="9.3.3" data-path="100_matrix.html"><a href="100_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.3.3</b> fill_diag( x )</a></li>
+<li class="chapter" data-level="9.3.4" data-path="100_matrix.html"><a href="100_matrix.html#offset-i-j"><i class="fa fa-check"></i><b>9.3.4</b> offset( i, j )</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="100_matrix.html"><a href="100_matrix.html#static-member-functions-1"><i class="fa fa-check"></i><b>9.4</b> Static member functions</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="100_matrix.html"><a href="100_matrix.html#matrixdiag-size-x"><i class="fa fa-check"></i><b>9.4.1</b> Matrix::diag( size, x )</a></li>
@@ -245,10 +267,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -302,12 +323,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.4.3" data-path="190_datetime.html"><a href="190_datetime.html#getseconds"><i class="fa fa-check"></i><b>17.4.3</b> getSeconds()</a></li>
 <li class="chapter" data-level="17.4.4" data-path="190_datetime.html"><a href="190_datetime.html#getminutes"><i class="fa fa-check"></i><b>17.4.4</b> getMinutes()</a></li>
 <li class="chapter" data-level="17.4.5" data-path="190_datetime.html"><a href="190_datetime.html#gethours"><i class="fa fa-check"></i><b>17.4.5</b> getHours()</a></li>
-<li class="chapter" data-level="17.4.6" data-path="190_datetime.html"><a href="190_datetime.html#getday-1"><i class="fa fa-check"></i><b>17.4.6</b> getDay()</a></li>
-<li class="chapter" data-level="17.4.7" data-path="190_datetime.html"><a href="190_datetime.html#getmonth-1"><i class="fa fa-check"></i><b>17.4.7</b> getMonth()</a></li>
-<li class="chapter" data-level="17.4.8" data-path="190_datetime.html"><a href="190_datetime.html#getyear-1"><i class="fa fa-check"></i><b>17.4.8</b> getYear()</a></li>
-<li class="chapter" data-level="17.4.9" data-path="190_datetime.html"><a href="190_datetime.html#getweekday-1"><i class="fa fa-check"></i><b>17.4.9</b> getWeekday()</a></li>
-<li class="chapter" data-level="17.4.10" data-path="190_datetime.html"><a href="190_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>17.4.10</b> getYearday()</a></li>
-<li class="chapter" data-level="17.4.11" data-path="190_datetime.html"><a href="190_datetime.html#is_na-1"><i class="fa fa-check"></i><b>17.4.11</b> is_na()</a></li>
+<li class="chapter" data-level="17.4.6" data-path="190_datetime.html"><a href="190_datetime.html#getyear-1"><i class="fa fa-check"></i><b>17.4.6</b> getYear()</a></li>
+<li class="chapter" data-level="17.4.7" data-path="190_datetime.html"><a href="190_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>17.4.7</b> getYearday()</a></li>
+<li class="chapter" data-level="17.4.8" data-path="190_datetime.html"><a href="190_datetime.html#is_na-1"><i class="fa fa-check"></i><b>17.4.8</b> is_na()</a></li>
 </ul></li>
 <li class="chapter" data-level="17.5" data-path="190_datetime.html"><a href="190_datetime.html#code-example-1"><i class="fa fa-check"></i><b>17.5</b> Code example</a></li>
 </ul></li>
@@ -430,12 +448,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="29.4.15" data-path="290_environment.html"><a href="290_environment.html#new_childhashed"><i class="fa fa-check"></i><b>29.4.15</b> new_child(hashed)</a></li>
 </ul></li>
 <li class="chapter" data-level="29.5" data-path="290_environment.html"><a href="290_environment.html#static-member-functions-2"><i class="fa fa-check"></i><b>29.5</b> Static member functions</a><ul>
-<li class="chapter" data-level="29.5.1" data-path="290_environment.html"><a href="290_environment.html#environmentglobal_env"><i class="fa fa-check"></i><b>29.5.1</b> Environment::global_env()</a></li>
-<li class="chapter" data-level="29.5.2" data-path="290_environment.html"><a href="290_environment.html#environmentempty_env"><i class="fa fa-check"></i><b>29.5.2</b> Environment::empty_env()</a></li>
-<li class="chapter" data-level="29.5.3" data-path="290_environment.html"><a href="290_environment.html#environmentbase_env"><i class="fa fa-check"></i><b>29.5.3</b> Environment::base_env()</a></li>
-<li class="chapter" data-level="29.5.4" data-path="290_environment.html"><a href="290_environment.html#environmentbase_namespace"><i class="fa fa-check"></i><b>29.5.4</b> Environment::base_namespace()</a></li>
-<li class="chapter" data-level="29.5.5" data-path="290_environment.html"><a href="290_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>29.5.5</b> Environment::Rcpp_namespace()</a></li>
-<li class="chapter" data-level="29.5.6" data-path="290_environment.html"><a href="290_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>29.5.6</b> Environment::namespace_env(package)</a></li>
+<li class="chapter" data-level="29.5.1" data-path="290_environment.html"><a href="290_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>29.5.1</b> Environment::Rcpp_namespace()</a></li>
+<li class="chapter" data-level="29.5.2" data-path="290_environment.html"><a href="290_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>29.5.2</b> Environment::namespace_env(package)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="300_Rmath.html"><a href="300_Rmath.html"><i class="fa fa-check"></i><b>30</b> R Math Library</a></li>
@@ -464,7 +478,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="creating-matrix-object" class="section level2">
 <h2><span class="header-section-number">9.1</span> Creating Matrix object</h2>
 <p>Matrix object can be created in several ways.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Create a Matrix object equivalent to</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Create a Matrix object equivalent to</span>
 <span class="co">// m &lt;- matrix(0, nrow=2, ncol=2)</span>
 NumericMatrix m1( <span class="dv">2</span> );
 
@@ -472,9 +486,9 @@ NumericMatrix m1( <span class="dv">2</span> );
 NumericMatrix m2( <span class="dv">2</span> , <span class="dv">3</span> );
 
 <span class="co">// m &lt;- matrix(v, nrow=2, ncol=3)</span>
-NumericMatrix m3( <span class="dv">2</span> , <span class="dv">3</span> , v.begin() );</code></pre></div>
+NumericMatrix m3( <span class="dv">2</span> , <span class="dv">3</span> , v.begin() );</code></pre>
 <p>In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute <code>dim</code>. Thus, if you created a vector with attribute <code>dim</code> in Rcpp and return it to R, it will be treated as a matrix.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
 NumericVector rcpp_matrix(){
     <span class="co">// Creating a vector object</span>
     NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>};
@@ -484,24 +498,24 @@ NumericVector rcpp_matrix(){
 
     <span class="co">// Return the vector to R</span>
     <span class="cf">return</span> v;
-}</code></pre></div>
+}</code></pre>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_matrix()
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4</code></pre>
 <p>However, even if you set a value to attribute <code>dim</code> of a vector object, the type of the object remains Vector type in Rcpp code. Thus, if you want to convert it to Matrix type in Rcpp, you need to use <code>as&lt;T&gt;()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Set number of rows and columns to attribute dim</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Set number of rows and columns to attribute dim</span>
 v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);
 
 <span class="co">// Converting to Rcpp Matrix type</span>
-NumericMatrix m = as&lt;NumericMatrix&gt;(v);</code></pre></div>
+NumericMatrix m = as&lt;NumericMatrix&gt;(v);</code></pre>
 </div>
 <div id="accessing-to-matrix-elements" class="section level2">
 <h2><span class="header-section-number">9.2</span> Accessing to Matrix elements</h2>
 <p>By using <code>()</code> operator, you can get from and assign to the values of elements of a Matrix object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol <code>_</code>.</p>
 <p>You can also use the <code>[]</code> operator to access an element as a vector connecting the columns of a matrix.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Creating a 5x5 numerical matrix</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Creating a 5x5 numerical matrix</span>
 NumericMatrix m( <span class="dv">5</span>, <span class="dv">5</span> );
 
 <span class="co">// Retrieving the element of row 0 and column 2</span>
@@ -517,22 +531,22 @@ NumericVector v = m( _ , <span class="dv">2</span> );
 NumericMatrix m2 = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) );
 
 <span class="co">// Accessing matrix element as vector</span>
-m[<span class="dv">5</span>]; <span class="co">// This points to the same element as m(0,1)</span></code></pre></div>
+m[<span class="dv">5</span>]; <span class="co">// This points to the same element as m(0,1)</span></code></pre>
 <div id="accessing-as-reference-to-row-column-and-sub-matrix" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Accessing as reference to row, column and sub matrix</h3>
 <p>Rcpp also provides types that hold “references” to specific part of a matrix.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  <span class="co">// Reference to the column 1</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  <span class="co">// Reference to the column 1</span>
 NumericMatrix::Row    row = m( <span class="dv">1</span> , _ ); <span class="co">// Reference to the row 1</span>
-NumericMatrix::Sub    sub = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) ); <span class="co">// Reference to sub matrix</span></code></pre></div>
+NumericMatrix::Sub    sub = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) ); <span class="co">// Reference to sub matrix</span></code></pre>
 <p>Assigning a value to a “reference” object of a matrix is equivalent to assigning the value to its original matrix. For example, assigning a value to <code>col</code> will assign a value to the column 1 of <code>m</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Reference to the column 1</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Reference to the column 1</span>
 NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  
 
 <span class="co">// The value of the column 1 of matrix m will be doubled</span>
 col = <span class="dv">2</span> * col;
 
 <span class="co">// Synonymous with the above example</span>
-m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span class="dv">1</span> );</code></pre></div>
+m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span class="dv">1</span> );</code></pre>
 </div>
 </div>
 <div id="member-functions-1" class="section level2">
@@ -545,21 +559,17 @@ m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span cla
 <div id="ncolcols" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> ncol()　cols()</h3>
 <p>Returns the number of columns.</p>
-</div>
-<div id="row-i" class="section level3">
-<h3><span class="header-section-number">9.3.3</span> row( i )</h3>
+<p>###row( i )</p>
 <p>Return a reference <code>Vector::Row</code> to the <code>i</code>th　row.</p>
-</div>
-<div id="column-i" class="section level3">
-<h3><span class="header-section-number">9.3.4</span> column( i )</h3>
+<p>###column( i )</p>
 <p>Return a reference <code>Vector::Column</code> to the <code>i</code>th　column.</p>
 </div>
 <div id="fill_diag-x" class="section level3">
-<h3><span class="header-section-number">9.3.5</span> fill_diag( x )</h3>
+<h3><span class="header-section-number">9.3.3</span> fill_diag( x )</h3>
 <p>Fill diagonal elements with scalar value <code>x</code>.</p>
 </div>
 <div id="offset-i-j" class="section level3">
-<h3><span class="header-section-number">9.3.6</span> offset( i, j )</h3>
+<h3><span class="header-section-number">9.3.4</span> offset( i, j )</h3>
 <p>Returns the numerical index in the original vector of the matrix corresponding to the element of row <code>i</code> and column <code>j</code>.</p>
 </div>
 </div>
@@ -636,7 +646,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["rcpp4everyone_en.epub"],
+"download": ["rcpp4everyone_en.pdf", "rcpp4everyone_en.epub"],
 "toc": {
 "collapse": "subsection"
 }

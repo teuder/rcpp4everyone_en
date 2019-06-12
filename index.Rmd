@@ -3,6 +3,8 @@ title: "Rcpp for everyone"
 author: "Masaki E. Tsuda"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+
+
 output: bookdown::gitbook
 config:
       toc:

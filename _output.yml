@@ -26,5 +26,10 @@ bookdown::gitbook:
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
-  latex_engine: lualatex
+  latex_engine: xelatex
+  pandoc_args: --top-level-division=chapter
   keep_tex: yes
+
+documentclass: bxjsbook
+classoption: xelatex,ja=standard
+geometry: no

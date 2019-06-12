@@ -25,7 +25,7 @@
 <meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-06-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -60,41 +60,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -116,13 +142,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="1" data-path="010_Rcpp_merit.html"><a href="010_Rcpp_merit.html"><i class="fa fa-check"></i><b>1</b> Suitable situations to use Rcpp</a></li>
 <li class="chapter" data-level="2" data-path="020_install.html"><a href="020_install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
-<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-c-compiler"><i class="fa fa-check"></i><b>2.1</b> Install C++ compiler</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
-<li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
-<li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
-<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.0.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.0.1</b> Windows</a></li>
+<li class="chapter" data-level="2.0.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.0.2</b> Mac</a></li>
+<li class="chapter" data-level="2.0.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.0.3</b> Linux</a></li>
+<li class="chapter" data-level="2.0.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.0.4</b> Using other compilers installed by yourself</a></li>
+<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.1</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -197,10 +221,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.3" data-path="100_matrix.html"><a href="100_matrix.html#member-functions-1"><i class="fa fa-check"></i><b>9.3</b> Member functions</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="100_matrix.html"><a href="100_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.3.1</b> nrow() rows()</a></li>
 <li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.3.2</b> ncol()　cols()</a></li>
-<li class="chapter" data-level="9.3.3" data-path="100_matrix.html"><a href="100_matrix.html#row-i"><i class="fa fa-check"></i><b>9.3.3</b> row( i )</a></li>
-<li class="chapter" data-level="9.3.4" data-path="100_matrix.html"><a href="100_matrix.html#column-i"><i class="fa fa-check"></i><b>9.3.4</b> column( i )</a></li>
-<li class="chapter" data-level="9.3.5" data-path="100_matrix.html"><a href="100_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.3.5</b> fill_diag( x )</a></li>
-<li class="chapter" data-level="9.3.6" data-path="100_matrix.html"><a href="100_matrix.html#offset-i-j"><i class="fa fa-check"></i><b>9.3.6</b> offset( i, j )</a></li>
+<li class="chapter" data-level="9.3.3" data-path="100_matrix.html"><a href="100_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.3.3</b> fill_diag( x )</a></li>
+<li class="chapter" data-level="9.3.4" data-path="100_matrix.html"><a href="100_matrix.html#offset-i-j"><i class="fa fa-check"></i><b>9.3.4</b> offset( i, j )</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="100_matrix.html"><a href="100_matrix.html#static-member-functions-1"><i class="fa fa-check"></i><b>9.4</b> Static member functions</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="100_matrix.html"><a href="100_matrix.html#matrixdiag-size-x"><i class="fa fa-check"></i><b>9.4.1</b> Matrix::diag( size, x )</a></li>
@@ -245,10 +267,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -302,12 +323,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.4.3" data-path="190_datetime.html"><a href="190_datetime.html#getseconds"><i class="fa fa-check"></i><b>17.4.3</b> getSeconds()</a></li>
 <li class="chapter" data-level="17.4.4" data-path="190_datetime.html"><a href="190_datetime.html#getminutes"><i class="fa fa-check"></i><b>17.4.4</b> getMinutes()</a></li>
 <li class="chapter" data-level="17.4.5" data-path="190_datetime.html"><a href="190_datetime.html#gethours"><i class="fa fa-check"></i><b>17.4.5</b> getHours()</a></li>
-<li class="chapter" data-level="17.4.6" data-path="190_datetime.html"><a href="190_datetime.html#getday-1"><i class="fa fa-check"></i><b>17.4.6</b> getDay()</a></li>
-<li class="chapter" data-level="17.4.7" data-path="190_datetime.html"><a href="190_datetime.html#getmonth-1"><i class="fa fa-check"></i><b>17.4.7</b> getMonth()</a></li>
-<li class="chapter" data-level="17.4.8" data-path="190_datetime.html"><a href="190_datetime.html#getyear-1"><i class="fa fa-check"></i><b>17.4.8</b> getYear()</a></li>
-<li class="chapter" data-level="17.4.9" data-path="190_datetime.html"><a href="190_datetime.html#getweekday-1"><i class="fa fa-check"></i><b>17.4.9</b> getWeekday()</a></li>
-<li class="chapter" data-level="17.4.10" data-path="190_datetime.html"><a href="190_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>17.4.10</b> getYearday()</a></li>
-<li class="chapter" data-level="17.4.11" data-path="190_datetime.html"><a href="190_datetime.html#is_na-1"><i class="fa fa-check"></i><b>17.4.11</b> is_na()</a></li>
+<li class="chapter" data-level="17.4.6" data-path="190_datetime.html"><a href="190_datetime.html#getyear-1"><i class="fa fa-check"></i><b>17.4.6</b> getYear()</a></li>
+<li class="chapter" data-level="17.4.7" data-path="190_datetime.html"><a href="190_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>17.4.7</b> getYearday()</a></li>
+<li class="chapter" data-level="17.4.8" data-path="190_datetime.html"><a href="190_datetime.html#is_na-1"><i class="fa fa-check"></i><b>17.4.8</b> is_na()</a></li>
 </ul></li>
 <li class="chapter" data-level="17.5" data-path="190_datetime.html"><a href="190_datetime.html#code-example-1"><i class="fa fa-check"></i><b>17.5</b> Code example</a></li>
 </ul></li>
@@ -430,12 +448,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="29.4.15" data-path="290_environment.html"><a href="290_environment.html#new_childhashed"><i class="fa fa-check"></i><b>29.4.15</b> new_child(hashed)</a></li>
 </ul></li>
 <li class="chapter" data-level="29.5" data-path="290_environment.html"><a href="290_environment.html#static-member-functions-2"><i class="fa fa-check"></i><b>29.5</b> Static member functions</a><ul>
-<li class="chapter" data-level="29.5.1" data-path="290_environment.html"><a href="290_environment.html#environmentglobal_env"><i class="fa fa-check"></i><b>29.5.1</b> Environment::global_env()</a></li>
-<li class="chapter" data-level="29.5.2" data-path="290_environment.html"><a href="290_environment.html#environmentempty_env"><i class="fa fa-check"></i><b>29.5.2</b> Environment::empty_env()</a></li>
-<li class="chapter" data-level="29.5.3" data-path="290_environment.html"><a href="290_environment.html#environmentbase_env"><i class="fa fa-check"></i><b>29.5.3</b> Environment::base_env()</a></li>
-<li class="chapter" data-level="29.5.4" data-path="290_environment.html"><a href="290_environment.html#environmentbase_namespace"><i class="fa fa-check"></i><b>29.5.4</b> Environment::base_namespace()</a></li>
-<li class="chapter" data-level="29.5.5" data-path="290_environment.html"><a href="290_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>29.5.5</b> Environment::Rcpp_namespace()</a></li>
-<li class="chapter" data-level="29.5.6" data-path="290_environment.html"><a href="290_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>29.5.6</b> Environment::namespace_env(package)</a></li>
+<li class="chapter" data-level="29.5.1" data-path="290_environment.html"><a href="290_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>29.5.1</b> Environment::Rcpp_namespace()</a></li>
+<li class="chapter" data-level="29.5.2" data-path="290_environment.html"><a href="290_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>29.5.2</b> Environment::namespace_env(package)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="30" data-path="300_Rmath.html"><a href="300_Rmath.html"><i class="fa fa-check"></i><b>30</b> R Math Library</a></li>
@@ -473,15 +487,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">22.1</span> Basic structure of probability distribution function</h2>
 <p>In Rcpp, probability distribution functions with the same name are defined in two namespaces, <code>R::</code> and <code>Rcpp::</code>. These differences are that the function defined in <code>Rcpp::</code> namespace returns a vector, while the function in the <code>R::</code> namespace returns a scalar. Basically, the probability distribution functions defined in the <code>Rcpp::</code> namespace has the same functionalities as those in R. So normally you can use a function in the <code>Rcpp::</code> namespace, but if you want a scalar value, it is better to use that function in <code>R::</code> namespace because it’s faster.</p>
 <p>The basic structures of the probability distribution functions defined in the <code>Rcpp::</code> namespace are shown below. In fact, the definition of the probability distribution function of the <code>Rcpp ::</code> namespace is not written directly in the source code of Rcpp (because it is written using macros). But you can assume that the function is defined like as below.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector Rcpp::dXXX( NumericVector x, <span class="dt">double</span> par,                    <span class="dt">bool</span> log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector Rcpp::dXXX( NumericVector x, <span class="dt">double</span> par,                    <span class="dt">bool</span> log = <span class="kw">false</span> )
 NumericVector Rcpp::pXXX( NumericVector q, <span class="dt">double</span> par, <span class="dt">bool</span> lower = <span class="kw">true</span>, <span class="dt">bool</span> log = <span class="kw">false</span> )
 NumericVector Rcpp::qXXX( NumericVector p, <span class="dt">double</span> par, <span class="dt">bool</span> lower = <span class="kw">true</span>, <span class="dt">bool</span> log = <span class="kw">false</span> )
-NumericVector Rcpp::rXXX(           <span class="dt">int</span> n, <span class="dt">double</span> par )</code></pre></div>
-<p>The basic structures of the probability distribution functions defined in the <code>R::</code> namespace are shown below. It basically has the same functionality as those defined in the <code>Rcpp::</code> namespace except that it accepts and returns <code>double</code> type. In addition, the arguments of the function do not have default values, so user must give the value explicitly.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">double</span> R::dXXX( <span class="dt">double</span> x, <span class="dt">double</span> par,            <span class="dt">int</span> log )
+NumericVector Rcpp::rXXX(           <span class="dt">int</span> n, <span class="dt">double</span> par )</code></pre>
+<p>The basic structures of the probability distribution functions defined in the <code>R::</code> namespace are shown below.
+It basically has the same functionality as those defined in the <code>Rcpp::</code> namespace except that it accepts and returns <code>double</code> type. In addition, the arguments of the function do not have default values, so user must give the value explicitly.</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">double</span> R::dXXX( <span class="dt">double</span> x, <span class="dt">double</span> par,            <span class="dt">int</span> log )
 <span class="dt">double</span> R::pXXX( <span class="dt">double</span> q, <span class="dt">double</span> par, <span class="dt">int</span> lower, <span class="dt">int</span> log )
 <span class="dt">double</span> R::qXXX( <span class="dt">double</span> p, <span class="dt">double</span> par, <span class="dt">int</span> lower, <span class="dt">int</span> log )
-<span class="dt">double</span> R::rXXX(           <span class="dt">double</span> par )</code></pre></div>
+<span class="dt">double</span> R::rXXX(           <span class="dt">double</span> par )</code></pre>
 <p>The arguments of the probability distribution function are described below.</p>
 <ul>
 <li><strong>x, q</strong> : random variable</li>
@@ -535,7 +550,7 @@ NumericVector Rcpp::rXXX(           <span class="dt">int</span> n, <span class="
 <div id="uniform-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.1</span> Uniform distribution</h3>
 <p>These functions provide information about the uniform distribution on the interval from <code>min</code> to <code>max</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dunif( x, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dunif( x, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, log = <span class="kw">false</span> )
 Rcpp::punif( q, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qunif( p, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::runif( n, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span> )
@@ -543,12 +558,12 @@ Rcpp::runif( n, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</s
 R::dunif( x, min, max,        log )
 R::punif( q, min, max, lower, log )
 R::qunif( p, min, max, lower, log )
-R::runif(     min, max )</code></pre></div>
+R::runif(     min, max )</code></pre>
 </div>
 <div id="normal-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.2</span> Normal distribution</h3>
 <p>These functions provide information about the normal distribution with mean equal to <code>mean</code> and standard deviation equal to <code>sd</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnorm( x, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnorm( x, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, log = <span class="kw">false</span> )
 Rcpp::pnorm( q, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qnorm( p, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rnorm( n, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span> )
@@ -556,12 +571,12 @@ Rcpp::rnorm( n, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</s
 R::dnorm( x, mean, sd,        log )
 R::pnorm( q, mean, sd, lower, log )
 R::qnorm( p, mean, sd, lower, log )
-R::rnorm(    mean, sd )</code></pre></div>
+R::rnorm(    mean, sd )</code></pre>
 </div>
 <div id="log-normal-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.3</span> Log-normal distribution</h3>
 <p>These functions provide information about the log-normal distribution whose logarithm has mean equal to <code>meanlog</code> and standard deviation equal to <code>sdlog</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dlnorm( x, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dlnorm( x, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
 Rcpp::plnorm( q, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qlnorm( p, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rlnorm( n, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span> )
@@ -569,12 +584,12 @@ Rcpp::rlnorm( n, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl"
 R::dlnorm( x, meanlog, sdlog,        log )
 R::plnorm( q, meanlog, sdlog, lower, log )
 R::qlnorm( p, meanlog, sdlog, lower, log )
-R::rlnorm(    meanlog, sdlog )</code></pre></div>
+R::rlnorm(    meanlog, sdlog )</code></pre>
 </div>
 <div id="gamma-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.4</span> Gamma distribution</h3>
 <p>These functions provide information about the Gamma distribution with parameters <code>shape</code> and <code>scale</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dgamma( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dgamma( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
 Rcpp::pgamma( q, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qgamma( p, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rgamma( n, shape, scale = <span class="fl">1.0</span> )
@@ -582,12 +597,12 @@ Rcpp::rgamma( n, shape, scale = <span class="fl">1.0</span> )
 R::dgamma( x, shape, scale, log )
 R::pgamma( x, shape, scale, lower, log )
 R::qgamma( q, shape, scale, lower, log )
-R::rgamma(    shape, scale )</code></pre></div>
+R::rgamma(    shape, scale )</code></pre>
 </div>
 <div id="beta-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.5</span> Beta distribution</h3>
 <p>These functions provide information about the Beta distribution with parameters <code>shape1</code> and <code>shape2</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dbeta( x, shape1, shape2, log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dbeta( x, shape1, shape2, log = <span class="kw">false</span> )
 Rcpp::pbeta( x, shape1, shape2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qbeta( q, shape1, shape2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rbeta( n, shape1, shape2)
@@ -595,12 +610,12 @@ Rcpp::rbeta( n, shape1, shape2)
 R::dbeta( x, shape1, shape2,        log )
 R::pbeta( x, shape1, shape2, lower, log )
 R::qbeta( q, shape1, shape2, lower, log )
-R::rbeta(    shape1, shape2 )</code></pre></div>
+R::rbeta(    shape1, shape2 )</code></pre>
 </div>
 <div id="noncentral-beta-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.6</span> Noncentral beta distribution</h3>
 <p>These functions provide information about the Noncentral beta distribution with parameters <code>shape1</code> and <code>shape2</code>, noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnbeta( x, shape1, shape2, ncp,               log = <span class="kw">false</span> );
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnbeta( x, shape1, shape2, ncp,               log = <span class="kw">false</span> );
 Rcpp::pnbeta( x, shape1, shape2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> );
 Rcpp::qnbeta( q, shape1, shape2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> );
 <span class="co">// Rcpp::rnbeta() does not exist</span>
@@ -608,12 +623,12 @@ Rcpp::qnbeta( q, shape1, shape2, ncp, lower = <span class="kw">true</span>, log 
 R::dnbeta( x, shape1, shape2, ncp,        log )
 R::pnbeta( x, shape1, shape2, ncp, lower, log )
 R::qnbeta( q, shape1, shape2, ncp, lower, log )
-R::rnbeta(    shape1, shape2, ncp )</code></pre></div>
+R::rnbeta(    shape1, shape2, ncp )</code></pre>
 </div>
 <div id="chi-squared-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.7</span> Chi-squared distribution</h3>
 <p>These functions provide information about the Chi-squared distribution with df degrees of freedom <code>df</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dchisq( x, df,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dchisq( x, df,               log = <span class="kw">false</span> )
 Rcpp::pchisq( x, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qchisq( q, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rchisq( n, df)
@@ -621,12 +636,12 @@ Rcpp::rchisq( n, df)
 R::dchisq( x, df,        log )
 R::pchisq( x, df, lower, log )
 R::qchisq( q, df, lower, log )
-R::rchisq(    df )</code></pre></div>
+R::rchisq(    df )</code></pre>
 </div>
 <div id="noncentral-chi-squared-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.8</span> Noncentral chi-squared distribution</h3>
 <p>These functions provide information about the Noncentral chi-squared distribution with df degrees of freedom <code>df</code> and noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the Chi-squared distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnchisq( x, df, ncp,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnchisq( x, df, ncp,               log = <span class="kw">false</span> )
 Rcpp::pnchisq( x, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qnchisq( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rnchisq( n, df, ncp = <span class="fl">0.0</span> )
@@ -634,12 +649,12 @@ Rcpp::rnchisq( n, df, ncp = <span class="fl">0.0</span> )
 R::dnchisq( x, df, ncp,        log )
 R::pnchisq( x, df, ncp, lower, log )
 R::qnchisq( q, df, ncp, lower, log )
-R::rnchisq(    df, ncp )</code></pre></div>
+R::rnchisq(    df, ncp )</code></pre>
 </div>
 <div id="t-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.9</span> t-distribution</h3>
 <p>These functions provide information about the t-distribution with df degrees of freedom <code>df</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dt( x, df,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dt( x, df,               log = <span class="kw">false</span> )
 Rcpp::pt( x, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qt( q, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rt( n, df )
@@ -647,12 +662,12 @@ Rcpp::rt( n, df )
 R::dt( x, df,        log )
 R::pt( x, df, lower, log )
 R::qt( q, df, lower, log )
-R::rt(    df )</code></pre></div>
+R::rt(    df )</code></pre>
 </div>
 <div id="noncentral-t-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.10</span> Noncentral t-distribution</h3>
 <p>These functions provide information about the Noncentral t-distribution with df degrees of freedom <code>df</code> and noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the t-distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnt( x, df, ncp,               log = <span class="kw">false</span>  )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnt( x, df, ncp,               log = <span class="kw">false</span>  )
 Rcpp::pnt( x, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )
 Rcpp::qnt( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )
 <span class="co">// Rcpp::rnt() does not exist.</span>
@@ -660,12 +675,12 @@ Rcpp::qnt( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="
 R::dnt( x, df, ncp,        log )
 R::pnt( x, df, ncp, lower, log )
 R::qnt( q, df, ncp, lower, log )
-<span class="co">// R::rnt() does not exist.</span></code></pre></div>
+<span class="co">// R::rnt() does not exist.</span></code></pre>
 </div>
 <div id="f-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.11</span> F-distribution</h3>
 <p>These functions provide information about the F-distribution with df degrees of freedom <code>df1</code> and <code>df2</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the F-distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::df( x, df1, df2,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::df( x, df1, df2,               log = <span class="kw">false</span> )
 Rcpp::pf( x, df1, df2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qf( q, df1, df2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rf( n, df1, df1 )
@@ -673,12 +688,12 @@ Rcpp::rf( n, df1, df1 )
 R::df( x, df1, df2,        log )
 R::pf( x, df1, df2, lower, log )
 R::qf( q, df1, df2, lower, log )
-R::rf(    df1, df2 )</code></pre></div>
+R::rf(    df1, df2 )</code></pre>
 </div>
 <div id="noncentral-f-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.12</span> Noncentral F-distribution</h3>
 <p>These functions provide information about the F-distribution with df degrees of freedom <code>df1</code>, <code>df2</code> and noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the Noncentral F-distribution function in R.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnf( x, df1, df2, ncp,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnf( x, df1, df2, ncp,               log = <span class="kw">false</span> )
 Rcpp::pnf( x, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qnf( q, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 <span class="co">// Rcpp::rnf() does not exist.</span>
@@ -686,12 +701,12 @@ Rcpp::qnf( q, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span c
 R::dnf( x, df1, df2, ncp,        log )
 R::pnf( x, df1, df2, ncp, lower, log )
 R::qnf( q, df1, df2, ncp, lower, log )
-<span class="co">// R::rnf() does not exist.</span></code></pre></div>
+<span class="co">// R::rnf() does not exist.</span></code></pre>
 </div>
 <div id="cauchy-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.13</span> Cauchy distribution</h3>
 <p>These functions provide information about the Cauchy distribution with location parameter <code>location</code> and scale parameter <code>scale</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
 Rcpp::pcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qcauchy( q, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rcauchy( n, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>)
@@ -699,12 +714,12 @@ Rcpp::rcauchy( n, location = <span class="fl">0.0</span>, scale = <span class="f
 R::dcauchy( x, location, scale,        log )
 R::pcauchy( x, location, scale, lower, log )
 R::qcauchy( q, location, scale, lower, log )
-R::rcauchy(    location, scale )</code></pre></div>
+R::rcauchy(    location, scale )</code></pre>
 </div>
 <div id="exponential-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.14</span> Exponential distribution</h3>
 <p>These functions provide information about the Exponential distribution with rate <code>rate</code> (The mean of Exponential distribution equals to 1/rate).</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dexp( x, rate = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dexp( x, rate = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
 Rcpp::pexp( x, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qexp( q, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rexp( n, rate = <span class="fl">1.0</span>)
@@ -713,12 +728,12 @@ Rcpp::rexp( n, rate = <span class="fl">1.0</span>)
 R::dexp( x, scale,        log )
 R::pexp( x, scale, lower, log )
 R::qexp( q, scale, lower, log )
-R::rexp(    scale )</code></pre></div>
+R::rexp(    scale )</code></pre>
 </div>
 <div id="logistic-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.15</span> Logistic distribution</h3>
 <p>These functions provide information about the Logistic distribution with parameters <code>location</code> and <code>scale</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dlogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dlogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )
 Rcpp::plogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qlogis( q, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rlogis( n, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span> )
@@ -726,12 +741,12 @@ Rcpp::rlogis( n, location = <span class="fl">0.0</span>, scale = <span class="fl
 R::dlogis( x, location, scale,        log )
 R::plogis( x, location, scale, lower, log )
 R::qlogis( q, location, scale, lower, log )
-R::rlogis(    location, scale )</code></pre></div>
+R::rlogis(    location, scale )</code></pre>
 </div>
 <div id="weibull-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.16</span> Weibull distribution</h3>
 <p>These functions provide information about the Weibull distribution with parameters <code>shape</code> and <code>scale</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dweibull( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span>  )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dweibull( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span>  )
 Rcpp::pweibull( x, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )
 Rcpp::qweibull( q, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )
 Rcpp::rweibull( n, shape, scale = <span class="fl">1.0</span> )
@@ -739,7 +754,7 @@ Rcpp::rweibull( n, shape, scale = <span class="fl">1.0</span> )
 R::dweibull( x, shape, scale,        log )
 R::pweibull( x, shape, scale, lower, log )
 R::qweibull( q, shape, scale, lower, log )
-R::rweibull(    shape, scale )</code></pre></div>
+R::rweibull(    shape, scale )</code></pre>
 </div>
 </div>
 <div id="discrete-probability-distribution-1" class="section level2">
@@ -747,7 +762,7 @@ R::rweibull(    shape, scale )</code></pre></div>
 <div id="binomial-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.1</span> Binomial distribution</h3>
 <p>These functions provide information about the Binomial distribution with number of trials <code>size</code> and success probability <code>prob</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dbinom( x, size, prob,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dbinom( x, size, prob,               log = <span class="kw">false</span> )
 Rcpp::pbinom( x, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qbinom( q, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rbinom( n, size, prob )
@@ -755,12 +770,12 @@ Rcpp::rbinom( n, size, prob )
 R::dbinom( x, size, prob,        log )
 R::pbinom( x, size, prob, lower, log )
 R::qbinom( q, size, prob, lower, log )
-R::rbinom(    size, prob )</code></pre></div>
+R::rbinom(    size, prob )</code></pre>
 </div>
 <div id="negative-binomial-distribution-with-success-probability-as-parameter" class="section level3">
 <h3><span class="header-section-number">22.4.2</span> Negative binomial distribution (with success probability as parameter)</h3>
 <p>These functions provide information about the Negative binomial distribution with number of success <code>size</code> and success probability <code>prob</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnbinom( x, size, prob,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnbinom( x, size, prob,               log = <span class="kw">false</span> )
 Rcpp::pnbinom( x, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qnbinom( q, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rnbinom( n, size, prob )
@@ -768,12 +783,12 @@ Rcpp::rnbinom( n, size, prob )
 R::dnbinom( x, size, prob,        log )
 R::pnbinom( x, size, prob, lower, log )
 R::qnbinom( q, size, prob, lower, log )
-R::rnbinom(    size, prob )</code></pre></div>
+R::rnbinom(    size, prob )</code></pre>
 </div>
 <div id="negative-binomial-distribution-with-mean-as-parameter" class="section level3">
 <h3><span class="header-section-number">22.4.3</span> Negative binomial distribution (with mean as parameter)</h3>
 <p>These functions provide information about the Negative binomial distribution with number of success <code>size</code> and mean <code>mu</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnbinom_mu( x, size, mu,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dnbinom_mu( x, size, mu,               log = <span class="kw">false</span> )
 Rcpp::pnbinom_mu( x, size, mu, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qnbinom_mu( q, size, mu, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rnbinom_mu( n, size, mu )
@@ -781,12 +796,12 @@ Rcpp::rnbinom_mu( n, size, mu )
 R::dnbinom_mu( x, size, mu,        log )
 R::pnbinom_mu( x, size, mu, lower, log )
 R::qnbinom_mu( q, size, mu, lower, log )
-R::rnbinom_mu(    size, mu )</code></pre></div>
+R::rnbinom_mu(    size, mu )</code></pre>
 </div>
 <div id="poisson-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.4</span> Poisson distribution</h3>
 <p>These functions provide information about the Poisson distribution with mean and variance are equal to <code>lambda</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dpois( x, lambda,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dpois( x, lambda,               log = <span class="kw">false</span> )
 Rcpp::ppois( x, lambda, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qpois( q, lambda, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rpois( n, lambda )
@@ -794,12 +809,12 @@ Rcpp::rpois( n, lambda )
 R::dpois( x, lambda, log )
 R::ppois( x, lambda, lower, log )
 R::qpois( q, lambda, lower, log )
-R::rpois(    lambda )</code></pre></div>
+R::rpois(    lambda )</code></pre>
 </div>
 <div id="geometric-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.5</span> Geometric distribution</h3>
 <p>These functions provide information about the Geometric distribution with success probability <code>prob</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dgeom( x, prob,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dgeom( x, prob,               log = <span class="kw">false</span> )
 Rcpp::pgeom( x, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qgeom( q, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rgeom( n, prob )
@@ -807,12 +822,12 @@ Rcpp::rgeom( n, prob )
 R::dgeom( x, prob, log )
 R::pgeom( x, prob, lower, log )
 R::qgeom( q, prob, lower, log )
-R::rgeom(    prob )</code></pre></div>
+R::rgeom(    prob )</code></pre>
 </div>
 <div id="hypergeometric-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.6</span> Hypergeometric distribution</h3>
 <p>These functions provide information about the Hypergeometric distribution with number of success in the population <code>m</code> , number of failure in the population <code>n</code>, number of sample from the population <code>k</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dhyper( x, m, n, k,               log = <span class="kw">false</span> )
+<pre class="sourceCode cpp"><code class="sourceCode cpp">Rcpp::dhyper( x, m, n, k,               log = <span class="kw">false</span> )
 Rcpp::phyper( x, m, n, k, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::qhyper( q, m, n, k, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )
 Rcpp::rhyper(nn, m, n, k )
@@ -820,12 +835,12 @@ Rcpp::rhyper(nn, m, n, k )
 R::dhyper( x, m, n, k,        log )
 R::phyper( x, m, n, k, lower, log )
 R::qhyper( q, m, n, k, lower, log )
-R::rhyper(    m, n, k )</code></pre></div>
+R::rhyper(    m, n, k )</code></pre>
 </div>
 <div id="distribution-of-wilcoxon-rank-sum-test-statistic" class="section level3">
 <h3><span class="header-section-number">22.4.7</span> Distribution of Wilcoxon rank-sum test statistic</h3>
 <p>These functions provide information about the distribution of test statistic when Wilcoxon rank-sum test (Mann–Whitney U test) is performed on two specimens with number of samples <code>m</code> and <code>n</code> respectively.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Rcpp::dwilcox() does not exist.</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Rcpp::dwilcox() does not exist.</span>
 <span class="co">// Rcpp::pwilcox() does not exist.</span>
 <span class="co">// Rcpp::qwilcox() does not exist.</span>
 Rcpp::rwilcox( nn, m, n );
@@ -833,12 +848,12 @@ Rcpp::rwilcox( nn, m, n );
 R::dwilcox( x, m, n,        log )
 R::pwilcox( x, m, n, lower, log )
 R::qwilcox( q, m, n, lower, log )
-R::rwilcox(    m, n )</code></pre></div>
+R::rwilcox(    m, n )</code></pre>
 </div>
 <div id="distribution-of-wilcoxon-signed-rank-test-statistic" class="section level3">
 <h3><span class="header-section-number">22.4.8</span> Distribution of Wilcoxon signed-rank test statistic</h3>
 <p>These functions provide information about the distribution of test statistic when Wilcoxon signed-rank test is performed with number of samples <code>n</code>.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Rcpp::dsignrank() does not exist.</span>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Rcpp::dsignrank() does not exist.</span>
 <span class="co">// Rcpp::psignrank() does not exist.</span>
 <span class="co">// Rcpp::qsignrank() does not exist.</span>
 Rcpp::rsignrank( nn, n )
@@ -846,7 +861,7 @@ Rcpp::rsignrank( nn, n )
 R::dsignrank( x, n,        log )
 R::psignrank( x, n, lower, log )
 R::qsignrank( q, n, lower, log )
-R::rsignrank(    n )</code></pre></div>
+R::rsignrank(    n )</code></pre>
 
 </div>
 </div>
@@ -894,7 +909,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["rcpp4everyone_en.epub"],
+"download": ["rcpp4everyone_en.pdf", "rcpp4everyone_en.epub"],
 "toc": {
 "collapse": "subsection"
 }
