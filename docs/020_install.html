@@ -142,11 +142,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="1" data-path="010_Rcpp_merit.html"><a href="010_Rcpp_merit.html"><i class="fa fa-check"></i><b>1</b> Suitable situations to use Rcpp</a></li>
 <li class="chapter" data-level="2" data-path="020_install.html"><a href="020_install.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
-<li class="chapter" data-level="2.0.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.0.1</b> Windows</a></li>
-<li class="chapter" data-level="2.0.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.0.2</b> Mac</a></li>
-<li class="chapter" data-level="2.0.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.0.3</b> Linux</a></li>
-<li class="chapter" data-level="2.0.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.0.4</b> Using other compilers installed by yourself</a></li>
-<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.1</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.1" data-path="020_install.html"><a href="020_install.html#install-c-compiler"><i class="fa fa-check"></i><b>2.1</b> Install C++ compiler</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
+<li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
+<li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
+<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -476,23 +478,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installation" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Installation</h1>
 <p>Before developing with Rcpp, you need to install c++ compiler.</p>
-<p>##Install C++ compiler</p>
+<div id="install-c-compiler" class="section level2">
+<h2><span class="header-section-number">2.1</span> Install C++ compiler</h2>
 <div id="windows" class="section level3">
-<h3><span class="header-section-number">2.0.1</span> Windows</h3>
+<h3><span class="header-section-number">2.1.1</span> Windows</h3>
 <p>Install <a href="https://cran.r-project.org/bin/windows/Rtools/index.html">Rtools</a>.</p>
 <p>It might be helpful to refer instruction of RStan (<a href="https://github.com/stan-dev/rstan/wiki/Install-Rtools-for-Windows">Install Rtools for Windows</a>) .</p>
 </div>
 <div id="mac" class="section level3">
-<h3><span class="header-section-number">2.0.2</span> Mac</h3>
+<h3><span class="header-section-number">2.1.2</span> Mac</h3>
 <p>Install Xcode command line tools. Execute the command <code>xcode-select --install</code> on Terminal.</p>
 </div>
 <div id="linux" class="section level3">
-<h3><span class="header-section-number">2.0.3</span> Linux</h3>
+<h3><span class="header-section-number">2.1.3</span> Linux</h3>
 <p>Install gcc and related packages.</p>
 <p>In Ubuntu Linux, execute the command <code>sudo apt-get install r-base-dev</code> on Terminal.</p>
 </div>
 <div id="using-other-compilers-installed-by-yourself" class="section level3">
-<h3><span class="header-section-number">2.0.4</span> Using other compilers installed by yourself</h3>
+<h3><span class="header-section-number">2.1.4</span> Using other compilers installed by yourself</h3>
 <p>If you installed other compiler (g++, clang++) different from above, create the following file under the user’s home directory. Then set environment variables in the file.</p>
 <p><strong>Linux, Mac</strong></p>
 <ul>
@@ -510,8 +513,9 @@ LD_LIBRARY_PATH=/opt/local/lib:$LD_LIBRARY_PATH
 CXXFLAGS= -g0 -O2 -Wall
 MAKE=make -j4</code></pre>
 </div>
+</div>
 <div id="install-rcpp" class="section level2">
-<h2><span class="header-section-number">2.1</span> Install Rcpp</h2>
+<h2><span class="header-section-number">2.2</span> Install Rcpp</h2>
 <p>You can install Rcpp by executing following code.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;Rcpp&quot;</span>)</code></pre>
 

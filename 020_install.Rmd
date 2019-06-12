@@ -2,7 +2,7 @@
 
 Before developing with Rcpp, you need to install c++ compiler.
 
-##Install C++ compiler
+## Install C++ compiler
 
 ### Windows
 
