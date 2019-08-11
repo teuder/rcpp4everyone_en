@@ -118,11 +118,11 @@ Returns the number of rows.
 
 Returns the number of columns.
 
-###row( i )
+### row( i )
 
 Return a reference `Vector::Row` to the `i`th　row.
 
-###column( i )
+### column( i )
 
 Return a reference `Vector::Column` to the `i`th　column.
 
