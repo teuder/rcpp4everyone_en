@@ -2,6 +2,7 @@
 #2番目以降はあまり順番を気にしなくて大丈夫です
 # epub関連の設定
 bookdown::epub_book: default
+
 # gitbook形式の設定
 bookdown::gitbook:
   includes:
@@ -21,6 +22,7 @@ bookdown::gitbook:
   pandoc_args: [
         "--from", "markdown+autolink_bare_uris+tex_math_single_backslash-implicit_figures"
         ]
+
 # pdf形式の設定
 # 細かい設定内容はpramble.texを参照
 bookdown::pdf_book:
