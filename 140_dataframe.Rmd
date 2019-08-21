@@ -130,7 +130,7 @@ Delete the `i`th column of this `DataFrame` and return an iterator to the column
 
 Deletes the column specified by the iterator `it` and returns an iterator to the column just after erased column.
 
-###erase(first_i, last_i)
+### erase(first_i, last_i)
 
 Deletes the `first_i`th to `last_i - 1`th columns and returns an iterator to the column just after erased column.
 
