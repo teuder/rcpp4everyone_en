@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 25 factor | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 25 factor | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 25 factor | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 25 factor | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 25 factor | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="240_na_nan_inf.html">
-<link rel="next" href="260_error.html">
+<link rel="prev" href="240_na_nan_inf.html"/>
+<link rel="next" href="260_error.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -507,11 +509,13 @@ Levels: A B C</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

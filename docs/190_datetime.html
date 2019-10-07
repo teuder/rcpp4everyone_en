@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Datetime | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 17 Datetime | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 17 Datetime | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 17 Datetime | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 17 Datetime | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="180_date.html">
-<link rel="next" href="200_robject.html">
+<link rel="prev" href="180_date.html"/>
+<link rel="next" href="200_robject.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -503,17 +505,17 @@ Datetime dt(&quot;2000年1月1日 0時0分0秒&quot;, &quot;%Y年%m月%d日 %H�
 <h2><span class="header-section-number">17.3</span> Operators</h2>
 <p>The <code>+, -, &lt;, &gt;, &gt;=, &lt;=, ==, !=</code> operators are defined in <code>Datetime</code>.</p>
 <p>By using these operators, you can perform addition of seconds (<code>+</code>), difference of datetime (<code>-</code>) in seconds, comparison of datetime (<code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code>) .</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp">Datetime dt1(<span class="st">&quot;2000-01-01 00:00:00&quot;</span>);
-Datetime dt2(<span class="st">&quot;2000-01-02 00:00:00&quot;</span>);
-
-<span class="co">// difference of datetime (seconds)</span>
-<span class="dt">int</span> sec = dt2 - dt1;  <span class="co">// 86400</span>
-
-<span class="co">// addition of seconds</span>
-dt1 = dt1 + <span class="dv">1</span>; <span class="co">// &quot;2000-01-01 00:00:01&quot;</span>
-
-<span class="co">// comparison of datetime</span>
-<span class="dt">bool</span> b = dt2 &gt; dt1; <span class="co">// true</span></code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb62-1" data-line-number="1">Datetime dt1(<span class="st">&quot;2000-01-01 00:00:00&quot;</span>);</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">Datetime dt2(<span class="st">&quot;2000-01-02 00:00:00&quot;</span>);</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="co">// difference of datetime (seconds)</span></a>
+<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="dt">int</span> sec = dt2 - dt1;  <span class="co">// 86400</span></a>
+<a class="sourceLine" id="cb62-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb62-7" data-line-number="7"><span class="co">// addition of seconds</span></a>
+<a class="sourceLine" id="cb62-8" data-line-number="8">dt1 = dt1 + <span class="dv">1</span>; <span class="co">// &quot;2000-01-01 00:00:01&quot;</span></a>
+<a class="sourceLine" id="cb62-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb62-10" data-line-number="10"><span class="co">// comparison of datetime</span></a>
+<a class="sourceLine" id="cb62-11" data-line-number="11"><span class="dt">bool</span> b = dt2 &gt; dt1; <span class="co">// true</span></a></code></pre></div>
 </div>
 <div id="member-functions-6" class="section level2">
 <h2><span class="header-section-number">17.4</span> Member functions</h2>
@@ -610,11 +612,13 @@ getFractionalTimestamp 9.46652e+08
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

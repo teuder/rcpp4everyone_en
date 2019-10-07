@@ -52,7 +52,7 @@ Replace all substrings that matches the string `str` with the string `new_str`.
 
 Combine the string `str` to the end of this `String` object. (Same as += operator)
 
-### push_back(str)
+### push_front(str)
 
 Combine the string str at the beginning of this `String` object.
 

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 20 Attributes | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 20 Attributes | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 20 Attributes | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 20 Attributes | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 20 Attributes | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="201_caution_vector.html">
-<link rel="next" href="210_rcpp_functions.html">
+<link rel="prev" href="201_caution_vector.html"/>
+<link rel="next" href="210_rcpp_functions.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -492,27 +494,27 @@ L.attr(&quot;class&quot;) = &quot;my_class&quot;;</code></pre>
 <p><strong>hasAttribute( name )</strong></p>
 <p>If this object has an attribute with the name specified by the string “name”, it returns <code>true</code>.</p>
 <pre><code>bool b = x.hasAttribute(&quot;name&quot;);</code></pre>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Creating a List object</span>
-NumericVector   v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
-CharacterVector v2 = {<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>};
-List L = List::create(v1, v2);
-
-<span class="co">// Setting element names</span>
-L.attr(<span class="st">&quot;names&quot;</span>) = CharacterVector::create(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>);
-
-<span class="co">// Creating a new attribute and set its value</span>
-L.attr(<span class="st">&quot;new_attribute&quot;</span>) = <span class="st">&quot;new_value&quot;</span>;
-
-<span class="co">// Changing the class name of this object to &quot;new_class&quot;</span>
-L.attr(<span class="st">&quot;class&quot;</span>) = <span class="st">&quot;new_class&quot;</span>;
-
-<span class="co">// Outputting a list of the names of the attributes of this object</span>
-CharacterVector ch = wrap(L.attributeNames());
-Rcout &lt;&lt; ch &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// &quot;names&quot; &quot;new_attribute&quot; &quot;class&quot;</span>
-
-<span class="co">// Check if this object has the attribute &quot;new_attribute&quot;.</span>
-<span class="dt">bool</span> b = L.hasAttribute(<span class="st">&quot;new_attribute&quot;</span>);
-Rcout &lt;&lt; b &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 1</span></code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="co">// Creating a List object</span></a>
+<a class="sourceLine" id="cb73-2" data-line-number="2">NumericVector   v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb73-3" data-line-number="3">CharacterVector v2 = {<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>};</a>
+<a class="sourceLine" id="cb73-4" data-line-number="4">List L = List::create(v1, v2);</a>
+<a class="sourceLine" id="cb73-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="co">// Setting element names</span></a>
+<a class="sourceLine" id="cb73-7" data-line-number="7">L.attr(<span class="st">&quot;names&quot;</span>) = CharacterVector::create(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>);</a>
+<a class="sourceLine" id="cb73-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb73-9" data-line-number="9"><span class="co">// Creating a new attribute and set its value</span></a>
+<a class="sourceLine" id="cb73-10" data-line-number="10">L.attr(<span class="st">&quot;new_attribute&quot;</span>) = <span class="st">&quot;new_value&quot;</span>;</a>
+<a class="sourceLine" id="cb73-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb73-12" data-line-number="12"><span class="co">// Changing the class name of this object to &quot;new_class&quot;</span></a>
+<a class="sourceLine" id="cb73-13" data-line-number="13">L.attr(<span class="st">&quot;class&quot;</span>) = <span class="st">&quot;new_class&quot;</span>;</a>
+<a class="sourceLine" id="cb73-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb73-15" data-line-number="15"><span class="co">// Outputting a list of the names of the attributes of this object</span></a>
+<a class="sourceLine" id="cb73-16" data-line-number="16">CharacterVector ch = wrap(L.attributeNames());</a>
+<a class="sourceLine" id="cb73-17" data-line-number="17">Rcout &lt;&lt; ch &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// &quot;names&quot; &quot;new_attribute&quot; &quot;class&quot;</span></a>
+<a class="sourceLine" id="cb73-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb73-19" data-line-number="19"><span class="co">// Check if this object has the attribute &quot;new_attribute&quot;.</span></a>
+<a class="sourceLine" id="cb73-20" data-line-number="20"><span class="dt">bool</span> b = L.hasAttribute(<span class="st">&quot;new_attribute&quot;</span>);</a>
+<a class="sourceLine" id="cb73-21" data-line-number="21">Rcout &lt;&lt; b &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 1</span></a></code></pre></div>
 </div>
 <div id="access-functions-for-common-attributes" class="section level2">
 <h2><span class="header-section-number">20.2</span> Access functions for common attributes</h2>
@@ -551,11 +553,13 @@ L.names(); // Element names</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

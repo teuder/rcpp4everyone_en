@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 S3・S4 class | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 S3・S4 class | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 14 S3・S4 class | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 S3・S4 class | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 14 S3・S4 class | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="150_list.html">
-<link rel="next" href="170_string.html">
+<link rel="prev" href="150_list.html"/>
+<link rel="next" href="170_string.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -483,84 +485,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">14.1</span> S3 class</h2>
 <p>The S3 class is actually a list whose attribute <code>class</code> has its own value. For that, see the section <code>List</code> and section Attributes for creating S3 objects and accessing its elements.</p>
 <p>In the code example below, as an example of handling objects of S3, we show the function that receives the return value of function <code>lm()</code> and computes RMSE (Root Mean Square Error) as an index of the prediction accuracy of the model in the learning data.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//Receiving lm() model object and calculate RMSE</span>
-<span class="co">// [[Rcpp::export]]</span>
-<span class="dt">double</span> rcpp_rmse(List lm_model) {
-    <span class="co">// Since S3 is a list, data type of the argument is specified as List.</span>
-
-    <span class="co">// If the object given to this function is not an lm() model object,</span>
-    <span class="co">// it outputs an error message and stops execution.</span>
-    <span class="cf">if</span> (! lm_model.inherits(<span class="st">&quot;lm&quot;</span>)) stop(<span class="st">&quot;Input must be a lm() model object.&quot;</span>);
-
-    <span class="co">// Extracting residuals (i.e. actual - prediction) from the S3 object</span>
-    NumericVector resid  = lm_model[<span class="st">&quot;residuals&quot;</span>];
-
-    <span class="co">// Number of elements of the residual vector</span>
-    <span class="dt">R_xlen_t</span> n = resid.length();
-
-    <span class="co">// The sum of squares of the residual vector</span>
-    <span class="dt">double</span> rmse(<span class="fl">0.0</span>);
-    <span class="cf">for</span>(<span class="dt">double</span>&amp; r : resid){
-        rmse += r*r;
-    }
-
-    <span class="co">// Divide the residual sum of squares by the number of elements and take the square root</span>
-    <span class="cf">return</span>(sqrt((<span class="fl">1.0</span>/n)*rmse));
-}</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="co">//Receiving lm() model object and calculate RMSE</span></a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="dt">double</span> rcpp_rmse(List lm_model) {</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">    <span class="co">// Since S3 is a list, data type of the argument is specified as List.</span></a>
+<a class="sourceLine" id="cb49-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb49-6" data-line-number="6">    <span class="co">// If the object given to this function is not an lm() model object,</span></a>
+<a class="sourceLine" id="cb49-7" data-line-number="7">    <span class="co">// it outputs an error message and stops execution.</span></a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">    <span class="cf">if</span> (! lm_model.inherits(<span class="st">&quot;lm&quot;</span>)) stop(<span class="st">&quot;Input must be a lm() model object.&quot;</span>);</a>
+<a class="sourceLine" id="cb49-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb49-10" data-line-number="10">    <span class="co">// Extracting residuals (i.e. actual - prediction) from the S3 object</span></a>
+<a class="sourceLine" id="cb49-11" data-line-number="11">    NumericVector resid  = lm_model[<span class="st">&quot;residuals&quot;</span>];</a>
+<a class="sourceLine" id="cb49-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb49-13" data-line-number="13">    <span class="co">// Number of elements of the residual vector</span></a>
+<a class="sourceLine" id="cb49-14" data-line-number="14">    <span class="dt">R_xlen_t</span> n = resid.length();</a>
+<a class="sourceLine" id="cb49-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb49-16" data-line-number="16">    <span class="co">// The sum of squares of the residual vector</span></a>
+<a class="sourceLine" id="cb49-17" data-line-number="17">    <span class="dt">double</span> rmse(<span class="fl">0.0</span>);</a>
+<a class="sourceLine" id="cb49-18" data-line-number="18">    <span class="cf">for</span>(<span class="dt">double</span>&amp; r : resid){</a>
+<a class="sourceLine" id="cb49-19" data-line-number="19">        rmse += r*r;</a>
+<a class="sourceLine" id="cb49-20" data-line-number="20">    }</a>
+<a class="sourceLine" id="cb49-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb49-22" data-line-number="22">    <span class="co">// Divide the residual sum of squares by the number of elements and take the square root</span></a>
+<a class="sourceLine" id="cb49-23" data-line-number="23">    <span class="cf">return</span>(sqrt((<span class="fl">1.0</span>/n)*rmse));</a>
+<a class="sourceLine" id="cb49-24" data-line-number="24">}</a></code></pre></div>
 <p>As an example of execution, use R’s sample data <code>mtcars</code> to calculate the RMSE of the model linearly regressing the fuel efficiency of the car.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> mtcars)
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_rmse</span>(mod)
-[<span class="dv">1</span>] <span class="fl">2.146905</span></code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> mtcars)</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_rmse</span>(mod)</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">[<span class="dv">1</span>] <span class="fl">2.146905</span></a></code></pre></div>
 </div>
 <div id="s4-class" class="section level2">
 <h2><span class="header-section-number">14.2</span> S4 class</h2>
 <div id="accessing-to-slot" class="section level3">
 <h3><span class="header-section-number">14.2.1</span> Accessing to slot</h3>
 <p>To access the slots of a S4 class object, use the <code>slot()</code> member function. Also, use the <code>hasSlot()</code> member function to check if the object have a slot with a specific name.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp">x.slot(<span class="st">&quot;slot_name&quot;</span>);
-x.hasSlot(<span class="st">&quot;slot_name&quot;</span>);</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb51-1" data-line-number="1">x.slot(<span class="st">&quot;slot_name&quot;</span>);</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">x.hasSlot(<span class="st">&quot;slot_name&quot;</span>);</a></code></pre></div>
 </div>
 <div id="creating-a-new-s4-class-object" class="section level3">
 <h3><span class="header-section-number">14.2.2</span> Creating a new S4 class object</h3>
 <p>Rcpp alone can not define a new S4 class, but you can create an S4 class object defined in R.</p>
 <p>The following code example shows how to define a new S4 class Person in R, then create an object of Person class with Rcpp.</p>
 <p>We first define S4 class “Person”. This class holds name and birthday of a person in slot <code>name</code> and <code>birth</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R code</span>
-<span class="co"># Defining S4 class Person in R</span>
-<span class="kw">setClass</span> (
-  <span class="co"># Class name</span>
-  <span class="st">&quot;Person&quot;</span>,
-
-  <span class="co"># Defining slot type</span>
-  <span class="kw">representation</span> (
-    <span class="dt">name =</span> <span class="st">&quot;character&quot;</span>,
-    <span class="dt">birth =</span> <span class="st">&quot;Date&quot;</span>
-  ),
-
-  <span class="co"># Initializing slots</span>
-  <span class="dt">prototype =</span> <span class="kw">list</span>(
-    <span class="dt">name =</span> <span class="kw">as.character</span>(<span class="ot">NULL</span>),
-    <span class="dt">birth =</span> <span class="kw">as.Date</span>(<span class="kw">as.character</span>(<span class="ot">NULL</span>))
-  )
-)
-
-<span class="co"># Creating an object of Person class in R</span>
-person_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>,
-                 <span class="dt">name =</span> <span class="st">&quot;Ronald Fisher&quot;</span>,
-                 <span class="dt">birth =</span> <span class="kw">as.Date</span>(<span class="st">&quot;1890-02-17&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># R code</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="co"># Defining S4 class Person in R</span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="kw">setClass</span> (</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">  <span class="co"># Class name</span></a>
+<a class="sourceLine" id="cb52-5" data-line-number="5">  <span class="st">&quot;Person&quot;</span>,</a>
+<a class="sourceLine" id="cb52-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb52-7" data-line-number="7">  <span class="co"># Defining slot type</span></a>
+<a class="sourceLine" id="cb52-8" data-line-number="8">  <span class="kw">representation</span> (</a>
+<a class="sourceLine" id="cb52-9" data-line-number="9">    <span class="dt">name =</span> <span class="st">&quot;character&quot;</span>,</a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">    <span class="dt">birth =</span> <span class="st">&quot;Date&quot;</span></a>
+<a class="sourceLine" id="cb52-11" data-line-number="11">  ),</a>
+<a class="sourceLine" id="cb52-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb52-13" data-line-number="13">  <span class="co"># Initializing slots</span></a>
+<a class="sourceLine" id="cb52-14" data-line-number="14">  <span class="dt">prototype =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb52-15" data-line-number="15">    <span class="dt">name =</span> <span class="kw">as.character</span>(<span class="ot">NULL</span>),</a>
+<a class="sourceLine" id="cb52-16" data-line-number="16">    <span class="dt">birth =</span> <span class="kw">as.Date</span>(<span class="kw">as.character</span>(<span class="ot">NULL</span>))</a>
+<a class="sourceLine" id="cb52-17" data-line-number="17">  )</a>
+<a class="sourceLine" id="cb52-18" data-line-number="18">)</a>
+<a class="sourceLine" id="cb52-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb52-20" data-line-number="20"><span class="co"># Creating an object of Person class in R</span></a>
+<a class="sourceLine" id="cb52-21" data-line-number="21">person_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;Person&quot;</span>,</a>
+<a class="sourceLine" id="cb52-22" data-line-number="22">                 <span class="dt">name =</span> <span class="st">&quot;Ronald Fisher&quot;</span>,</a>
+<a class="sourceLine" id="cb52-23" data-line-number="23">                 <span class="dt">birth =</span> <span class="kw">as.Date</span>(<span class="st">&quot;1890-02-17&quot;</span>))</a></code></pre></div>
 <p>The following code example creates an object of Person class in Rcpp and set values for the slots.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-S4 rcpp_s4(){
-
-    <span class="co">// Creating an object of Person class</span>
-    S4 x(<span class="st">&quot;Person&quot;</span>);
-
-    <span class="co">// Setting values to the slots</span>
-    x.slot(<span class="st">&quot;name&quot;</span>)  = <span class="st">&quot;Sewall Wright&quot;</span>;
-    x.slot(<span class="st">&quot;birth&quot;</span>) = Date(<span class="st">&quot;1889-12-21&quot;</span>);
-
-    <span class="cf">return</span>(x);
-}</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">S4 rcpp_s4(){</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4">    <span class="co">// Creating an object of Person class</span></a>
+<a class="sourceLine" id="cb53-5" data-line-number="5">    S4 x(<span class="st">&quot;Person&quot;</span>);</a>
+<a class="sourceLine" id="cb53-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb53-7" data-line-number="7">    <span class="co">// Setting values to the slots</span></a>
+<a class="sourceLine" id="cb53-8" data-line-number="8">    x.slot(<span class="st">&quot;name&quot;</span>)  = <span class="st">&quot;Sewall Wright&quot;</span>;</a>
+<a class="sourceLine" id="cb53-9" data-line-number="9">    x.slot(<span class="st">&quot;birth&quot;</span>) = Date(<span class="st">&quot;1889-12-21&quot;</span>);</a>
+<a class="sourceLine" id="cb53-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb53-11" data-line-number="11">    <span class="cf">return</span>(x);</a>
+<a class="sourceLine" id="cb53-12" data-line-number="12">}</a></code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_s4()
 An object of class &quot;Person&quot;
@@ -584,11 +586,13 @@ Slot &quot;birth&quot;:
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

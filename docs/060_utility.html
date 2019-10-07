@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Printing messages | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Printing messages | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 6 Printing messages | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Printing messages | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 6 Printing messages | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="050_c++11.html">
-<link rel="next" href="070_data_types.html">
+<link rel="prev" href="050_c++11.html"/>
+<link rel="next" href="070_data_types.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -484,19 +486,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rcout-rcerr" class="section level2">
 <h2><span class="header-section-number">6.1</span> Rcout, Rcerr</h2>
 <p>The way of using <code>Rcout</code> and <code>Rcerr</code> is same as <code>std::cout</code> and <code>std::cerr</code>. Connecting messages or variables with <code>&lt;&lt;</code> in the order you want. When you give vector object to <code>&lt;&lt;</code>, it will print all the elements of the vector.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-<span class="dt">void</span> rcpp_rcout(NumericVector v){
-  <span class="co">// printing value of vector</span>
-  Rcout &lt;&lt; <span class="st">&quot;The value of v : &quot;</span> &lt;&lt; v &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;
-
-  <span class="co">// printing error message</span>
-  Rcerr &lt;&lt; <span class="st">&quot;Error message</span><span class="sc">\n</span><span class="st">&quot;</span>;
-}</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="dt">void</span> rcpp_rcout(NumericVector v){</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="co">// printing value of vector</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  Rcout &lt;&lt; <span class="st">&quot;The value of v : &quot;</span> &lt;&lt; v &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">  <span class="co">// printing error message</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">  Rcerr &lt;&lt; <span class="st">&quot;Error message</span><span class="sc">\n</span><span class="st">&quot;</span>;</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">}</a></code></pre></div>
 </div>
 <div id="rprintf-reprintf" class="section level2">
 <h2><span class="header-section-number">6.2</span> Rprintf(), REprintf()</h2>
 <p>The way of using <code>Rprintf()</code> and <code>REprintf()</code> is same as <code>std::printf()</code>, it print message by specifying format.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp">Rprintf( format, variables)</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb18-1" data-line-number="1">Rprintf( format, variables)</a></code></pre></div>
 <p>In the <code>format</code> string, you can use following format specifiers for printing the values of variables. When you want to print multiple variables, you have to pass these variables in the order that its corresponding specifier appears in the format string.</p>
 <p>Only a part of format specifier is presented below, please refer to other documentation for detail (For example, <a href="http://www.cplusplus.com/reference/cstdio/printf/">cplusplus.com</a>).</p>
 <table>
@@ -530,13 +532,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Additionally, <code>Rprintf()</code> and <code>REprintf()</code> can only print data types that exist in standard C language, thus you cannot pass data types defined by Rcpp package (such as <code>NumericVector</code>) to <code>Rprintf()</code> directly. If you want to print the values of elements of Rcpp vector using <code>Rprintf()</code>, you have to pass each element separately to it (see below).</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-<span class="dt">void</span> rcpp_rprintf(NumericVector v){
-    <span class="co">// printing values of all the elements of Rcpp vector  </span>
-    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
-        Rprintf(<span class="st">&quot;the value of v[</span><span class="sc">%i</span><span class="st">] : </span><span class="sc">%f</span><span class="st"> </span><span class="sc">\n</span><span class="st">&quot;</span>, i, v[i]);
-    }
-}</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="dt">void</span> rcpp_rprintf(NumericVector v){</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="co">// printing values of all the elements of Rcpp vector  </span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">        Rprintf(<span class="st">&quot;the value of v[</span><span class="sc">%i</span><span class="st">] : </span><span class="sc">%f</span><span class="st"> </span><span class="sc">\n</span><span class="st">&quot;</span>, i, v[i]);</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">}</a></code></pre></div>
 
 </div>
 </div>
@@ -551,11 +553,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

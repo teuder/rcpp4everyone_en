@@ -35,3 +35,4 @@ bookdown::pdf_book:
 documentclass: bxjsbook
 classoption: xelatex,ja=standard
 geometry: no
+

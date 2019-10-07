@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 23 Using R functions | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 23 Using R functions | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 23 Using R functions | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 23 Using R functions | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 23 Using R functions | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="220_dpqr_functions.html">
-<link rel="next" href="240_na_nan_inf.html">
+<link rel="prev" href="220_dpqr_functions.html"/>
+<link rel="next" href="240_na_nan_inf.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -485,53 +487,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Using the <code>Function</code> class, you can call R functions from Rcpp. The argument given to the R function is determined based on position and name.</p>
 <p>Use <code>Named()</code> or <code>_[]</code> to pass a value to an argument by specifying argument name. <code>Name()</code> can be used in two ways: <code>Named(&quot;argument_name&quot;, value)</code> or <code>Named(&quot;argument_name&quot;) = value</code>.</p>
 <p>The code example below shows an example of calling the R function <code>rnorm (n, mean, sd)</code>from the function defined in Rcpp. However, when calling a package function using <code>Function</code> class, you have to add the package environment to the search path using the <code>library()</code> function in R in advance.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-NumericVector my_fun(){
-    <span class="co">// calling rnorm()</span>
-    Function f(<span class="st">&quot;rnorm&quot;</span>);   
-
-    <span class="co">// Next code is interpreted as rnorm(n=5, mean=10, sd=2)</span>
-    <span class="cf">return</span> f(<span class="dv">5</span>, Named(<span class="st">&quot;sd&quot;</span>)=<span class="dv">2</span>, _[<span class="st">&quot;mean&quot;</span>]=<span class="dv">10</span>);
-}</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb103-2" data-line-number="2">NumericVector my_fun(){</a>
+<a class="sourceLine" id="cb103-3" data-line-number="3">    <span class="co">// calling rnorm()</span></a>
+<a class="sourceLine" id="cb103-4" data-line-number="4">    Function f(<span class="st">&quot;rnorm&quot;</span>);   </a>
+<a class="sourceLine" id="cb103-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb103-6" data-line-number="6">    <span class="co">// Next code is interpreted as rnorm(n=5, mean=10, sd=2)</span></a>
+<a class="sourceLine" id="cb103-7" data-line-number="7">    <span class="cf">return</span> f(<span class="dv">5</span>, Named(<span class="st">&quot;sd&quot;</span>)=<span class="dv">2</span>, _[<span class="st">&quot;mean&quot;</span>]=<span class="dv">10</span>);</a>
+<a class="sourceLine" id="cb103-8" data-line-number="8">}</a></code></pre></div>
 <p>Execution example</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">my_fun</span>()
-[<span class="dv">1</span>]  <span class="fl">8.014863</span> <span class="fl">10.459980</span>  <span class="fl">7.741581</span>  <span class="fl">9.000762</span> <span class="fl">11.465920</span></code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">my_fun</span>()</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2">[<span class="dv">1</span>]  <span class="fl">8.014863</span> <span class="fl">10.459980</span>  <span class="fl">7.741581</span>  <span class="fl">9.000762</span> <span class="fl">11.465920</span></a></code></pre></div>
 <p>In the above example, the return type of R function called from Rcpp is assumed <code>NumericVector</code>. However, as in the example below, the return type of an R function called from Rcpp function is sometimes undefined. In such a case it would be better to assign the return value of the function into <code>RObject</code> or <code>List</code> element.</p>
 <p>The code below shows an example of defining simplified R function <code>lapply()</code> with Rcpp.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-List rcpp_lapply(List input, Function f) {
-    <span class="co">// Applies the Function f to each element of the List input and returns the result as List</span>
-
-    <span class="co">// Number of elements in the List input</span>
-    <span class="dt">R_xlen_t</span> n = input.length();
-
-    <span class="co">// Creating a List for output</span>
-    List out(n);
-
-    <span class="co">// Applying f() to each element of &quot;input&quot; and store it to &quot;out&quot;.</span>
-    <span class="co">// The type of the return value of f() is unknown, but it can be assigned to the List element.</span>
-    <span class="cf">for</span>(<span class="dt">R_xlen_t</span> i = <span class="dv">0</span>; i &lt; n; ++i) {
-        out[i] = f(input[i]);
-    }
-    <span class="cf">return</span> out;
-}</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">List rcpp_lapply(List input, Function f) {</a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">    <span class="co">// Applies the Function f to each element of the List input and returns the result as List</span></a>
+<a class="sourceLine" id="cb105-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb105-5" data-line-number="5">    <span class="co">// Number of elements in the List input</span></a>
+<a class="sourceLine" id="cb105-6" data-line-number="6">    <span class="dt">R_xlen_t</span> n = input.length();</a>
+<a class="sourceLine" id="cb105-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb105-8" data-line-number="8">    <span class="co">// Creating a List for output</span></a>
+<a class="sourceLine" id="cb105-9" data-line-number="9">    List out(n);</a>
+<a class="sourceLine" id="cb105-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb105-11" data-line-number="11">    <span class="co">// Applying f() to each element of &quot;input&quot; and store it to &quot;out&quot;.</span></a>
+<a class="sourceLine" id="cb105-12" data-line-number="12">    <span class="co">// The type of the return value of f() is unknown, but it can be assigned to the List element.</span></a>
+<a class="sourceLine" id="cb105-13" data-line-number="13">    <span class="cf">for</span>(<span class="dt">R_xlen_t</span> i = <span class="dv">0</span>; i &lt; n; ++i) {</a>
+<a class="sourceLine" id="cb105-14" data-line-number="14">        out[i] = f(input[i]);</a>
+<a class="sourceLine" id="cb105-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb105-16" data-line-number="16">    <span class="cf">return</span> out;</a>
+<a class="sourceLine" id="cb105-17" data-line-number="17">}</a></code></pre></div>
 </div>
 <div id="environment" class="section level2">
 <h2><span class="header-section-number">23.2</span> Environment</h2>
 <p>By using <code>Environment</code> class, you can retrieve objects (variables and functions) from packages and other environments.</p>
 <p>The code below shows an example of calling <code>Matrix()</code> function in the <code>Matrix</code> package. When calling a package function in this way, it is not necessary to attach the package using <code>library()</code> function.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-S4 rcpp_package_function(NumericMatrix m){
-
-    <span class="co">// Obtaining namespace of Matrix package</span>
-    Environment pkg = Environment::namespace_env(<span class="st">&quot;Matrix&quot;</span>);
-
-    <span class="co">// Picking up Matrix() function from Matrix package</span>
-    Function f = pkg[<span class="st">&quot;Matrix&quot;</span>];
-
-    <span class="co">// Executing Matrix( m, sparse = TRIE )</span>
-    <span class="cf">return</span> f( m, Named(<span class="st">&quot;sparse&quot;</span>, <span class="kw">true</span>));
-}</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">S4 rcpp_package_function(NumericMatrix m){</a>
+<a class="sourceLine" id="cb106-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb106-4" data-line-number="4">    <span class="co">// Obtaining namespace of Matrix package</span></a>
+<a class="sourceLine" id="cb106-5" data-line-number="5">    Environment pkg = Environment::namespace_env(<span class="st">&quot;Matrix&quot;</span>);</a>
+<a class="sourceLine" id="cb106-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb106-7" data-line-number="7">    <span class="co">// Picking up Matrix() function from Matrix package</span></a>
+<a class="sourceLine" id="cb106-8" data-line-number="8">    Function f = pkg[<span class="st">&quot;Matrix&quot;</span>];</a>
+<a class="sourceLine" id="cb106-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb106-10" data-line-number="10">    <span class="co">// Executing Matrix( m, sparse = TRIE )</span></a>
+<a class="sourceLine" id="cb106-11" data-line-number="11">    <span class="cf">return</span> f( m, Named(<span class="st">&quot;sparse&quot;</span>, <span class="kw">true</span>));</a>
+<a class="sourceLine" id="cb106-12" data-line-number="12">}</a></code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; m &lt;- matrix(c(1,0,0,2), nrow = 2, ncol = 2)
 &gt; rcpp_package_function(m)
@@ -553,11 +555,13 @@ S4 rcpp_package_function(NumericMatrix m){
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

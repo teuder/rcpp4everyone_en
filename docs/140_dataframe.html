@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 DataFrame | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 DataFrame | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 12 DataFrame | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 DataFrame | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 12 DataFrame | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-08-11">
+<meta name="date" content="2019-10-07" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="120_logical.html">
-<link rel="next" href="150_list.html">
+<link rel="prev" href="120_logical.html"/>
+<link rel="next" href="150_list.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -271,9 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
 <li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
 <li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
-<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.17</b> containsElementNamed(name)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.18</b> inherits(str)</a></li>
+<li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
+<li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
@@ -296,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.4" data-path="170_string.html"><a href="170_string.html#push_backstr"><i class="fa fa-check"></i><b>15.3.4</b> push_back(str)</a></li>
-<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_backstr-1"><i class="fa fa-check"></i><b>15.3.5</b> push_back(str)</a></li>
+<li class="chapter" data-level="15.3.5" data-path="170_string.html"><a href="170_string.html#push_frontstr"><i class="fa fa-check"></i><b>15.3.5</b> push_front(str)</a></li>
 <li class="chapter" data-level="15.3.6" data-path="170_string.html"><a href="170_string.html#set_na"><i class="fa fa-check"></i><b>15.3.6</b> set_na()</a></li>
 <li class="chapter" data-level="15.3.7" data-path="170_string.html"><a href="170_string.html#get_cstring"><i class="fa fa-check"></i><b>15.3.7</b> get_cstring()</a></li>
 <li class="chapter" data-level="15.3.8" data-path="170_string.html"><a href="170_string.html#get_encoding"><i class="fa fa-check"></i><b>15.3.8</b> get_encoding()</a></li>
@@ -483,23 +485,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-a-dataframe-object" class="section level2">
 <h2><span class="header-section-number">12.1</span> Creating a DataFrame object</h2>
 <p><code>DataFrame::create()</code> is used to create a <code>DataFrame</code> object. Also, use <code>Named()</code> or <code>_[]</code> if you want to specify column names when creating <code>DataFrame</code>　object.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Creating DataFrame df from Vector v1, v2</span>
-DataFrame df = DataFrame::create(v1, v2);
-<span class="co">// When giving names to columns</span>
-DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v1 , _[<span class="st">&quot;V2&quot;</span>] = v2 );</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">// Creating DataFrame df from Vector v1, v2</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">DataFrame df = DataFrame::create(v1, v2);</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="co">// When giving names to columns</span></a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v1 , _[<span class="st">&quot;V2&quot;</span>] = v2 );</a></code></pre></div>
 <p>When you create a <code>DataFrame</code> with<code>DataFrame::create()</code>, the value of the original<code>Vector</code> element will not be duplicated in the columns of the <code>DataFrame</code>, but the columns will be the “reference” to the original <code>Vector</code>. Therefore, changing the value of the original <code>Vector</code> changes the value of the columns. To avoid this, we use the <code>clone()</code> function to duplicate the value of the <code>Vector</code> element when creating a <code>DataFrame</code> column.</p>
 <p>To see the difference between using the <code>clone()</code> function and not using it, see the code example below. In the code example, we are creating <code>DataFrame</code> df from <code>Vector</code> v. There, column V1 is a reference to v, and column V2 replicates the value of v by the <code>clone ()</code> function. After that, if you change to <code>Vector</code> v, the values of column V1 is changed, but V2 is not affected.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-DataFrame rcpp_df(){
-    <span class="co">// Creating vector v</span>
-    NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>};
-    <span class="co">// Creating DataFrame df</span>
-    DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v,         <span class="co">// simple assign</span>
-                                      Named(<span class="st">&quot;V2&quot;</span>) = clone(v)); <span class="co">// using clone()</span>
-    <span class="co">// Changing vector v</span>
-    v = v * <span class="dv">2</span>;
-    <span class="cf">return</span> df;
-}</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">DataFrame rcpp_df(){</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">    <span class="co">// Creating vector v</span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>};</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    <span class="co">// Creating DataFrame df</span></a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v,         <span class="co">// simple assign</span></a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">                                      Named(<span class="st">&quot;V2&quot;</span>) = clone(v)); <span class="co">// using clone()</span></a>
+<a class="sourceLine" id="cb43-8" data-line-number="8">    <span class="co">// Changing vector v</span></a>
+<a class="sourceLine" id="cb43-9" data-line-number="9">    v = v * <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb43-10" data-line-number="10">    <span class="cf">return</span> df;</a>
+<a class="sourceLine" id="cb43-11" data-line-number="11">}</a></code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_df()
   V1 V2
@@ -581,19 +583,21 @@ v2 = v2*2;                       // Changing v2 does not change the value of df 
 <div id="eraseit-1" class="section level3">
 <h3><span class="header-section-number">12.3.15</span> erase(it)</h3>
 <p>Deletes the column specified by the iterator <code>it</code> and returns an iterator to the column just after erased column.</p>
-<p>###erase(first_i, last_i)</p>
+</div>
+<div id="erasefirst_i-last_i" class="section level3">
+<h3><span class="header-section-number">12.3.16</span> erase(first_i, last_i)</h3>
 <p>Deletes the <code>first_i</code>th to <code>last_i - 1</code>th columns and returns an iterator to the column just after erased column.</p>
 </div>
 <div id="erasefirst_it-last_it" class="section level3">
-<h3><span class="header-section-number">12.3.16</span> erase(first_it, last_it)</h3>
+<h3><span class="header-section-number">12.3.17</span> erase(first_it, last_it)</h3>
 <p>Deletes the range of columns from those specified by the iterator <code>first_it</code> to those specified by <code>last_it - 1</code> and returns an iterator to the column just after the erased columns.</p>
 </div>
 <div id="containselementnamedname-1" class="section level3">
-<h3><span class="header-section-number">12.3.17</span> containsElementNamed(name)</h3>
+<h3><span class="header-section-number">12.3.18</span> containsElementNamed(name)</h3>
 <p>Returns true if this <code>DataFrame</code> has a column with the name specified by the string <code>name</code>.</p>
 </div>
 <div id="inheritsstr" class="section level3">
-<h3><span class="header-section-number">12.3.18</span> inherits(str)</h3>
+<h3><span class="header-section-number">12.3.19</span> inherits(str)</h3>
 <p>Returns true if the attribute “class” of this object contains the string <code>str</code>.</p>
 
 </div>
@@ -610,11 +614,13 @@ v2 = v2*2;                       // Changing v2 does not change the value of df 
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

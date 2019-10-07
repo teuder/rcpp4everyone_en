@@ -21,7 +21,6 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Rcpp for everyone},
@@ -107,7 +106,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -123,7 +122,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-08-11}
+    \date{2019-10-07}
 
 %lualatexjaを使うために,ヘッダーとして読み込ませるtexファイル
 %必要なヘッダーはここに記述しておくと楽です
@@ -1591,7 +1590,8 @@ Delete the \texttt{i}th column of this \texttt{DataFrame} and return an iterator
 
 Deletes the column specified by the iterator \texttt{it} and returns an iterator to the column just after erased column.
 
-\#\#\#erase(first\_i, last\_i)
+\hypertarget{erasefirst_i-last_i}{%
+\subsection{erase(first\_i, last\_i)}\label{erasefirst_i-last_i}}
 
 Deletes the \texttt{first\_i}th to \texttt{last\_i\ -\ 1}th columns and returns an iterator to the column just after erased column.
 
@@ -1846,8 +1846,8 @@ Replace all substrings that matches the string \texttt{str} with the string \tex
 
 Combine the string \texttt{str} to the end of this \texttt{String} object. (Same as += operator)
 
-\hypertarget{push_backstr-1}{%
-\subsection{push\_back(str)}\label{push_backstr-1}}
+\hypertarget{push_frontstr}{%
+\subsection{push\_front(str)}\label{push_frontstr}}
 
 Combine the string str at the beginning of this \texttt{String} object.
 
