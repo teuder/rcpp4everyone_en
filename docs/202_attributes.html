@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -494,27 +494,27 @@ L.attr(&quot;class&quot;) = &quot;my_class&quot;;</code></pre>
 <p><strong>hasAttribute( name )</strong></p>
 <p>If this object has an attribute with the name specified by the string “name”, it returns <code>true</code>.</p>
 <pre><code>bool b = x.hasAttribute(&quot;name&quot;);</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="co">// Creating a List object</span></a>
-<a class="sourceLine" id="cb73-2" data-line-number="2">NumericVector   v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
-<a class="sourceLine" id="cb73-3" data-line-number="3">CharacterVector v2 = {<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>};</a>
-<a class="sourceLine" id="cb73-4" data-line-number="4">List L = List::create(v1, v2);</a>
-<a class="sourceLine" id="cb73-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="co">// Setting element names</span></a>
-<a class="sourceLine" id="cb73-7" data-line-number="7">L.attr(<span class="st">&quot;names&quot;</span>) = CharacterVector::create(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>);</a>
-<a class="sourceLine" id="cb73-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb73-9" data-line-number="9"><span class="co">// Creating a new attribute and set its value</span></a>
-<a class="sourceLine" id="cb73-10" data-line-number="10">L.attr(<span class="st">&quot;new_attribute&quot;</span>) = <span class="st">&quot;new_value&quot;</span>;</a>
-<a class="sourceLine" id="cb73-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb73-12" data-line-number="12"><span class="co">// Changing the class name of this object to &quot;new_class&quot;</span></a>
-<a class="sourceLine" id="cb73-13" data-line-number="13">L.attr(<span class="st">&quot;class&quot;</span>) = <span class="st">&quot;new_class&quot;</span>;</a>
-<a class="sourceLine" id="cb73-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb73-15" data-line-number="15"><span class="co">// Outputting a list of the names of the attributes of this object</span></a>
-<a class="sourceLine" id="cb73-16" data-line-number="16">CharacterVector ch = wrap(L.attributeNames());</a>
-<a class="sourceLine" id="cb73-17" data-line-number="17">Rcout &lt;&lt; ch &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// &quot;names&quot; &quot;new_attribute&quot; &quot;class&quot;</span></a>
-<a class="sourceLine" id="cb73-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb73-19" data-line-number="19"><span class="co">// Check if this object has the attribute &quot;new_attribute&quot;.</span></a>
-<a class="sourceLine" id="cb73-20" data-line-number="20"><span class="dt">bool</span> b = L.hasAttribute(<span class="st">&quot;new_attribute&quot;</span>);</a>
-<a class="sourceLine" id="cb73-21" data-line-number="21">Rcout &lt;&lt; b &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co">// Creating a List object</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2">NumericVector   v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">CharacterVector v2 = {<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>};</a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">List L = List::create(v1, v2);</a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="co">// Setting element names</span></a>
+<a class="sourceLine" id="cb74-7" data-line-number="7">L.attr(<span class="st">&quot;names&quot;</span>) = CharacterVector::create(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>);</a>
+<a class="sourceLine" id="cb74-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb74-9" data-line-number="9"><span class="co">// Creating a new attribute and set its value</span></a>
+<a class="sourceLine" id="cb74-10" data-line-number="10">L.attr(<span class="st">&quot;new_attribute&quot;</span>) = <span class="st">&quot;new_value&quot;</span>;</a>
+<a class="sourceLine" id="cb74-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb74-12" data-line-number="12"><span class="co">// Changing the class name of this object to &quot;new_class&quot;</span></a>
+<a class="sourceLine" id="cb74-13" data-line-number="13">L.attr(<span class="st">&quot;class&quot;</span>) = <span class="st">&quot;new_class&quot;</span>;</a>
+<a class="sourceLine" id="cb74-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb74-15" data-line-number="15"><span class="co">// Outputting a list of the names of the attributes of this object</span></a>
+<a class="sourceLine" id="cb74-16" data-line-number="16">CharacterVector ch = wrap(L.attributeNames());</a>
+<a class="sourceLine" id="cb74-17" data-line-number="17">Rcout &lt;&lt; ch &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// &quot;names&quot; &quot;new_attribute&quot; &quot;class&quot;</span></a>
+<a class="sourceLine" id="cb74-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb74-19" data-line-number="19"><span class="co">// Check if this object has the attribute &quot;new_attribute&quot;.</span></a>
+<a class="sourceLine" id="cb74-20" data-line-number="20"><span class="dt">bool</span> b = L.hasAttribute(<span class="st">&quot;new_attribute&quot;</span>);</a>
+<a class="sourceLine" id="cb74-21" data-line-number="21">Rcout &lt;&lt; b &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 1</span></a></code></pre></div>
 </div>
 <div id="access-functions-for-common-attributes" class="section level2">
 <h2><span class="header-section-number">20.2</span> Access functions for common attributes</h2>

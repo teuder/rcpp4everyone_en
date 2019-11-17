@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -509,31 +509,31 @@ NumericVector res = x / ( y * y ) ;</code></pre>
 <div id="comparison-operations" class="section level2">
 <h2><span class="header-section-number">10.2</span> Comparison operations</h2>
 <p>Comparison of vectors using <code>==</code> <code>! =</code> <code>&lt;</code> <code>&gt;</code> <code>&gt; =</code> <code>&lt;=</code> operators produces logical vectors. You can also access vector elements using logical vectors.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb34-1" data-line-number="1">NumericVector x ;</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">NumericVector y ;</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="co">// Comparison of vector and vector</span></a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">LogicalVector res = x &lt; y ;</a>
-<a class="sourceLine" id="cb34-6" data-line-number="6">LogicalVector res = x &gt; y ;</a>
-<a class="sourceLine" id="cb34-7" data-line-number="7">LogicalVector res = x &lt;= y ;</a>
-<a class="sourceLine" id="cb34-8" data-line-number="8">LogicalVector res = x &gt;= y ;</a>
-<a class="sourceLine" id="cb34-9" data-line-number="9">LogicalVector res = x == y ;</a>
-<a class="sourceLine" id="cb34-10" data-line-number="10">LogicalVector res = x != y ;</a>
-<a class="sourceLine" id="cb34-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb34-12" data-line-number="12"><span class="co">// Comparison of vector and scalar</span></a>
-<a class="sourceLine" id="cb34-13" data-line-number="13">LogicalVector res = x &lt; <span class="dv">2</span> ;</a>
-<a class="sourceLine" id="cb34-14" data-line-number="14">LogicalVector res = <span class="dv">2</span> &gt; x;</a>
-<a class="sourceLine" id="cb34-15" data-line-number="15">LogicalVector res = y &lt;= <span class="dv">2</span> ;</a>
-<a class="sourceLine" id="cb34-16" data-line-number="16">LogicalVector res = <span class="dv">2</span> != y;</a>
-<a class="sourceLine" id="cb34-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb34-18" data-line-number="18"><span class="co">// Comparison of expression and expression</span></a>
-<a class="sourceLine" id="cb34-19" data-line-number="19">LogicalVector res = ( x + y ) &lt; ( x*x ) ;</a>
-<a class="sourceLine" id="cb34-20" data-line-number="20">LogicalVector res = ( x + y ) &gt;= ( x*x ) ;</a>
-<a class="sourceLine" id="cb34-21" data-line-number="21">LogicalVector res = ( x + y ) == ( x*x ) ;</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb35-1" data-line-number="1">NumericVector x ;</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">NumericVector y ;</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co">// Comparison of vector and vector</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">LogicalVector res = x &lt; y ;</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">LogicalVector res = x &gt; y ;</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">LogicalVector res = x &lt;= y ;</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">LogicalVector res = x &gt;= y ;</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9">LogicalVector res = x == y ;</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">LogicalVector res = x != y ;</a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12"><span class="co">// Comparison of vector and scalar</span></a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">LogicalVector res = x &lt; <span class="dv">2</span> ;</a>
+<a class="sourceLine" id="cb35-14" data-line-number="14">LogicalVector res = <span class="dv">2</span> &gt; x;</a>
+<a class="sourceLine" id="cb35-15" data-line-number="15">LogicalVector res = y &lt;= <span class="dv">2</span> ;</a>
+<a class="sourceLine" id="cb35-16" data-line-number="16">LogicalVector res = <span class="dv">2</span> != y;</a>
+<a class="sourceLine" id="cb35-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb35-18" data-line-number="18"><span class="co">// Comparison of expression and expression</span></a>
+<a class="sourceLine" id="cb35-19" data-line-number="19">LogicalVector res = ( x + y ) &lt; ( x*x ) ;</a>
+<a class="sourceLine" id="cb35-20" data-line-number="20">LogicalVector res = ( x + y ) &gt;= ( x*x ) ;</a>
+<a class="sourceLine" id="cb35-21" data-line-number="21">LogicalVector res = ( x + y ) == ( x*x ) ;</a></code></pre></div>
 <p>The <code>!</code> operator negates the logical value.</p>
 <pre><code>LogicalVector res = ! ( x &lt; y );</code></pre>
 <p>Accessing the elements of the vector using logical vectors.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb36-1" data-line-number="1">NumericVector res = x[x &lt; <span class="dv">2</span>];</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb37-1" data-line-number="1">NumericVector res = x[x &lt; <span class="dv">2</span>];</a></code></pre></div>
 
 </div>
 </div>

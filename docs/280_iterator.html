@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -502,14 +502,14 @@ List::iterator</code></pre>
 <li><code>*(v.begin()+k)</code> : Represents the value of the <code>k</code>-th element of <code>v</code> (<code>v[k]</code>).</li>
 </ul>
 <p>The following code example shows an example of traversing all the elements of a <code>NumericVector</code> using iterator to calculate sum of the elements.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb123-2" data-line-number="2"><span class="dt">double</span> rcpp_sum(NumericVector x) {</a>
-<a class="sourceLine" id="cb123-3" data-line-number="3">  <span class="dt">double</span> total = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb123-4" data-line-number="4">  <span class="cf">for</span>(NumericVector::iterator i = x.begin(); i != x.end(); ++i) {</a>
-<a class="sourceLine" id="cb123-5" data-line-number="5">    total += *i;</a>
-<a class="sourceLine" id="cb123-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb123-7" data-line-number="7">  <span class="cf">return</span> total;</a>
-<a class="sourceLine" id="cb123-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="dt">double</span> rcpp_sum(NumericVector x) {</a>
+<a class="sourceLine" id="cb124-3" data-line-number="3">  <span class="dt">double</span> total = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb124-4" data-line-number="4">  <span class="cf">for</span>(NumericVector::iterator i = x.begin(); i != x.end(); ++i) {</a>
+<a class="sourceLine" id="cb124-5" data-line-number="5">    total += *i;</a>
+<a class="sourceLine" id="cb124-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb124-7" data-line-number="7">  <span class="cf">return</span> total;</a>
+<a class="sourceLine" id="cb124-8" data-line-number="8">}</a></code></pre></div>
 
 </div>
             </section>

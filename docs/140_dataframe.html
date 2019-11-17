@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -485,23 +485,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-a-dataframe-object" class="section level2">
 <h2><span class="header-section-number">12.1</span> Creating a DataFrame object</h2>
 <p><code>DataFrame::create()</code> is used to create a <code>DataFrame</code> object. Also, use <code>Named()</code> or <code>_[]</code> if you want to specify column names when creating <code>DataFrame</code>　object.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">// Creating DataFrame df from Vector v1, v2</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">DataFrame df = DataFrame::create(v1, v2);</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="co">// When giving names to columns</span></a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v1 , _[<span class="st">&quot;V2&quot;</span>] = v2 );</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co">// Creating DataFrame df from Vector v1, v2</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">DataFrame df = DataFrame::create(v1, v2);</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="co">// When giving names to columns</span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v1 , _[<span class="st">&quot;V2&quot;</span>] = v2 );</a></code></pre></div>
 <p>When you create a <code>DataFrame</code> with<code>DataFrame::create()</code>, the value of the original<code>Vector</code> element will not be duplicated in the columns of the <code>DataFrame</code>, but the columns will be the “reference” to the original <code>Vector</code>. Therefore, changing the value of the original <code>Vector</code> changes the value of the columns. To avoid this, we use the <code>clone()</code> function to duplicate the value of the <code>Vector</code> element when creating a <code>DataFrame</code> column.</p>
 <p>To see the difference between using the <code>clone()</code> function and not using it, see the code example below. In the code example, we are creating <code>DataFrame</code> df from <code>Vector</code> v. There, column V1 is a reference to v, and column V2 replicates the value of v by the <code>clone ()</code> function. After that, if you change to <code>Vector</code> v, the values of column V1 is changed, but V2 is not affected.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">DataFrame rcpp_df(){</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">    <span class="co">// Creating vector v</span></a>
-<a class="sourceLine" id="cb43-4" data-line-number="4">    NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>};</a>
-<a class="sourceLine" id="cb43-5" data-line-number="5">    <span class="co">// Creating DataFrame df</span></a>
-<a class="sourceLine" id="cb43-6" data-line-number="6">    DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v,         <span class="co">// simple assign</span></a>
-<a class="sourceLine" id="cb43-7" data-line-number="7">                                      Named(<span class="st">&quot;V2&quot;</span>) = clone(v)); <span class="co">// using clone()</span></a>
-<a class="sourceLine" id="cb43-8" data-line-number="8">    <span class="co">// Changing vector v</span></a>
-<a class="sourceLine" id="cb43-9" data-line-number="9">    v = v * <span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb43-10" data-line-number="10">    <span class="cf">return</span> df;</a>
-<a class="sourceLine" id="cb43-11" data-line-number="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">DataFrame rcpp_df(){</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">    <span class="co">// Creating vector v</span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">    NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>};</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">    <span class="co">// Creating DataFrame df</span></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">    DataFrame df = DataFrame::create( Named(<span class="st">&quot;V1&quot;</span>) = v,         <span class="co">// simple assign</span></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">                                      Named(<span class="st">&quot;V2&quot;</span>) = clone(v)); <span class="co">// using clone()</span></a>
+<a class="sourceLine" id="cb44-8" data-line-number="8">    <span class="co">// Changing vector v</span></a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">    v = v * <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">    <span class="cf">return</span> df;</a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">}</a></code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_df()
   V1 V2

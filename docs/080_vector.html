@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -484,68 +484,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-vector-object" class="section level2">
 <h2><span class="header-section-number">8.1</span> Creating vector object</h2>
 <p>You can create vector object in several ways.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">//Create a Vector object equivalent to</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">// v &lt;- rep(0, 3)</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">NumericVector v (<span class="dv">3</span>);</a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">// v &lt;- rep(1, 3)</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">NumericVector v (<span class="dv">3</span>,<span class="dv">1</span>);</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">// v &lt;- c(1,2,3) </span></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">// C++11 Initializer list</span></a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}; </a>
-<a class="sourceLine" id="cb20-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">// v &lt;- c(1,2,3)</span></a>
-<a class="sourceLine" id="cb20-13" data-line-number="13">NumericVector v = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);</a>
-<a class="sourceLine" id="cb20-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="co">// v &lt;- c(x=1, y=2, z=3)</span></a>
-<a class="sourceLine" id="cb20-16" data-line-number="16">NumericVector v =</a>
-<a class="sourceLine" id="cb20-17" data-line-number="17">  NumericVector::create(Named(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span>), Named(<span class="st">&quot;y&quot;</span>)=<span class="dv">2</span> , _[<span class="st">&quot;z&quot;</span>]=<span class="dv">3</span>);</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">//Create a Vector object equivalent to</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">// v &lt;- rep(0, 3)</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">NumericVector v (<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">// v &lt;- rep(1, 3)</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">NumericVector v (<span class="dv">3</span>,<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">// v &lt;- c(1,2,3) </span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">// C++11 Initializer list</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}; </a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">// v &lt;- c(1,2,3)</span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">NumericVector v = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="co">// v &lt;- c(x=1, y=2, z=3)</span></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16">NumericVector v =</a>
+<a class="sourceLine" id="cb21-17" data-line-number="17">  NumericVector::create(Named(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span>), Named(<span class="st">&quot;y&quot;</span>)=<span class="dv">2</span> , _[<span class="st">&quot;z&quot;</span>]=<span class="dv">3</span>);</a></code></pre></div>
 </div>
 <div id="accessing-vector-elements" class="section level2">
 <h2><span class="header-section-number">8.2</span> Accessing vector elements</h2>
 <p>You can access to individual element of a vector object using <code>[]</code> or <code>()</code> operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. <code>[]</code> operator ignores out of bound access, while <code>()</code> operator throws an exception <code>index_out_of_bounds</code>.</p>
 <p><strong>It is important to note that index of Vector object in C++ start at 0.</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="dt">void</span> rcpp_vector_access(){</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">  <span class="co">// Creating vector</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">  NumericVector v  {<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>};</a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7">  <span class="co">// Setting element names</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8">  v.names() = CharacterVector({<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>});</a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10">  <span class="co">// Preparing vector for access</span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11">  NumericVector   numeric = {<span class="dv">1</span>,<span class="dv">3</span>};</a>
-<a class="sourceLine" id="cb21-12" data-line-number="12">  IntegerVector   integer = {<span class="dv">1</span>,<span class="dv">3</span>};</a>
-<a class="sourceLine" id="cb21-13" data-line-number="13">  CharacterVector character = {<span class="st">&quot;B&quot;</span>,<span class="st">&quot;D&quot;</span>};</a>
-<a class="sourceLine" id="cb21-14" data-line-number="14">  LogicalVector   logical = {<span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>};</a>
-<a class="sourceLine" id="cb21-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb21-16" data-line-number="16">  <span class="co">// Getting values of vector elements</span></a>
-<a class="sourceLine" id="cb21-17" data-line-number="17">  <span class="dt">double</span> x1 = v[<span class="dv">0</span>];</a>
-<a class="sourceLine" id="cb21-18" data-line-number="18">  <span class="dt">double</span> x2 = v[<span class="st">&quot;A&quot;</span>];</a>
-<a class="sourceLine" id="cb21-19" data-line-number="19">  NumericVector res1 = v[numeric];</a>
-<a class="sourceLine" id="cb21-20" data-line-number="20">  NumericVector res2 = v[integer];</a>
-<a class="sourceLine" id="cb21-21" data-line-number="21">  NumericVector res3 = v[character];</a>
-<a class="sourceLine" id="cb21-22" data-line-number="22">  NumericVector res4 = v[logical];</a>
-<a class="sourceLine" id="cb21-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb21-24" data-line-number="24">  <span class="co">// Assigning values to vector elements</span></a>
-<a class="sourceLine" id="cb21-25" data-line-number="25">  v[<span class="dv">0</span>]   = <span class="dv">100</span>;</a>
-<a class="sourceLine" id="cb21-26" data-line-number="26">  v[<span class="st">&quot;A&quot;</span>] = <span class="dv">100</span>;</a>
-<a class="sourceLine" id="cb21-27" data-line-number="27">  NumericVector v2 {<span class="dv">100</span>,<span class="dv">200</span>};</a>
-<a class="sourceLine" id="cb21-28" data-line-number="28">  v[numeric]   = v2;</a>
-<a class="sourceLine" id="cb21-29" data-line-number="29">  v[integer]   = v2;</a>
-<a class="sourceLine" id="cb21-30" data-line-number="30">  v[character] = v2;</a>
-<a class="sourceLine" id="cb21-31" data-line-number="31">  v[logical]   = v2;</a>
-<a class="sourceLine" id="cb21-32" data-line-number="32">}</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="dt">void</span> rcpp_vector_access(){</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="co">// Creating vector</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">  NumericVector v  {<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>};</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">  <span class="co">// Setting element names</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">  v.names() = CharacterVector({<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>});</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10">  <span class="co">// Preparing vector for access</span></a>
+<a class="sourceLine" id="cb22-11" data-line-number="11">  NumericVector   numeric = {<span class="dv">1</span>,<span class="dv">3</span>};</a>
+<a class="sourceLine" id="cb22-12" data-line-number="12">  IntegerVector   integer = {<span class="dv">1</span>,<span class="dv">3</span>};</a>
+<a class="sourceLine" id="cb22-13" data-line-number="13">  CharacterVector character = {<span class="st">&quot;B&quot;</span>,<span class="st">&quot;D&quot;</span>};</a>
+<a class="sourceLine" id="cb22-14" data-line-number="14">  LogicalVector   logical = {<span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>};</a>
+<a class="sourceLine" id="cb22-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb22-16" data-line-number="16">  <span class="co">// Getting values of vector elements</span></a>
+<a class="sourceLine" id="cb22-17" data-line-number="17">  <span class="dt">double</span> x1 = v[<span class="dv">0</span>];</a>
+<a class="sourceLine" id="cb22-18" data-line-number="18">  <span class="dt">double</span> x2 = v[<span class="st">&quot;A&quot;</span>];</a>
+<a class="sourceLine" id="cb22-19" data-line-number="19">  NumericVector res1 = v[numeric];</a>
+<a class="sourceLine" id="cb22-20" data-line-number="20">  NumericVector res2 = v[integer];</a>
+<a class="sourceLine" id="cb22-21" data-line-number="21">  NumericVector res3 = v[character];</a>
+<a class="sourceLine" id="cb22-22" data-line-number="22">  NumericVector res4 = v[logical];</a>
+<a class="sourceLine" id="cb22-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb22-24" data-line-number="24">  <span class="co">// Assigning values to vector elements</span></a>
+<a class="sourceLine" id="cb22-25" data-line-number="25">  v[<span class="dv">0</span>]   = <span class="dv">100</span>;</a>
+<a class="sourceLine" id="cb22-26" data-line-number="26">  v[<span class="st">&quot;A&quot;</span>] = <span class="dv">100</span>;</a>
+<a class="sourceLine" id="cb22-27" data-line-number="27">  NumericVector v2 {<span class="dv">100</span>,<span class="dv">200</span>};</a>
+<a class="sourceLine" id="cb22-28" data-line-number="28">  v[numeric]   = v2;</a>
+<a class="sourceLine" id="cb22-29" data-line-number="29">  v[integer]   = v2;</a>
+<a class="sourceLine" id="cb22-30" data-line-number="30">  v[character] = v2;</a>
+<a class="sourceLine" id="cb22-31" data-line-number="31">  v[logical]   = v2;</a>
+<a class="sourceLine" id="cb22-32" data-line-number="32">}</a></code></pre></div>
 </div>
 <div id="member-functions" class="section level2">
 <h2><span class="header-section-number">8.3</span> Member functions</h2>
 <p>Member functions (also called as Methods) are functions that is attached to individual object. You can call member functions <code>f()</code> of object <code>v</code> in the form of <code>v.f()</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb22-1" data-line-number="1">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">// Calling member function</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="dt">int</span> n = v.length(); <span class="co">// 5</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb23-1" data-line-number="1">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="co">// Calling member function</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="dt">int</span> n = v.length(); <span class="co">// 5</span></a></code></pre></div>
 <p>The Vector object in Rcpp have member functions listed below.</p>
 <div id="length-size" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> length(), size()</h3>

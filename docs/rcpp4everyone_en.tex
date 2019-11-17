@@ -122,7 +122,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-07}
+    \date{2019-11-17}
 
 %lualatexjaを使うために,ヘッダーとして読み込ませるtexファイル
 %必要なヘッダーはここに記述しておくと楽です
@@ -412,13 +412,19 @@ C++ 11 is a standard of C++ newly established in 2011, it introduces new functio
 \hypertarget{enabling-c11}{%
 \section{Enabling C++11}\label{enabling-c11}}
 
-To enable C ++ 11, add the following description somewhere in your Rcpp code.
+To enable \texttt{C++11}, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with \texttt{Rcpp::sourceCpp()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{// [[Rcpp::plugins("cpp11")]]}
 \end{Highlighting}
 \end{Shaded}
+
+If you want to enable C++11 in your package, add code below in \texttt{DESCRIPTION} file.
+
+\begin{verbatim}
+SystemRequirements: C++11
+\end{verbatim}
 
 \hypertarget{recommended-c11-features}{%
 \section{Recommended C++11 features}\label{recommended-c11-features}}

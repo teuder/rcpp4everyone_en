@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -485,8 +485,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>** Important: Code examples in this document are written assuming that C++11 is enabled. **</p>
 <div id="enabling-c11" class="section level2">
 <h2><span class="header-section-number">5.1</span> Enabling C++11</h2>
-<p>To enable C ++ 11, add the following description somewhere in your Rcpp code.</p>
+<p>To enable <code>C++11</code>, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with <code>Rcpp::sourceCpp()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a></code></pre></div>
+<p>If you want to enable C++11 in your package, add code below in <code>DESCRIPTION</code> file.</p>
+<pre><code>SystemRequirements: C++11</code></pre>
 </div>
 <div id="recommended-c11-features" class="section level2">
 <h2><span class="header-section-number">5.2</span> Recommended C++11 features</h2>
@@ -542,20 +544,20 @@ for(auto&amp; x : v) {
 <p><strong>Example</strong></p>
 <p>The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.</p>
 <p><em>R example</em></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">res &lt;-</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x){A<span class="op">*</span>x})</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="fl">2.0</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">res &lt;-</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x){A<span class="op">*</span>x})</a></code></pre></div>
 <p><em>Rcpp example</em></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">NumericVector rcpp_lambda_1(){</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">  NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">  <span class="dt">double</span> A = <span class="fl">2.0</span>;</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">  NumericVector res =</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">    sapply(v, [&amp;](<span class="dt">double</span> x){<span class="cf">return</span> A*x;});</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">  <span class="cf">return</span> res;</a>
-<a class="sourceLine" id="cb16-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">NumericVector rcpp_lambda_1(){</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">  <span class="dt">double</span> A = <span class="fl">2.0</span>;</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">  NumericVector res =</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">    sapply(v, [&amp;](<span class="dt">double</span> x){<span class="cf">return</span> A*x;});</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">  <span class="cf">return</span> res;</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">}</a></code></pre></div>
 
 </div>
 </div>

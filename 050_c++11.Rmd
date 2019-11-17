@@ -7,11 +7,18 @@ C++ 11 is a standard of C++ newly established in 2011, it introduces new functio
 ## Enabling C++11
 
 
-To enable C ++ 11, add the following description somewhere in your Rcpp code.
+To enable `C++11`, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with `Rcpp::sourceCpp()`.
 
 ```cpp
 // [[Rcpp::plugins("cpp11")]]
 ```
+
+If you want to enable C++11 in your package, add code below in `DESCRIPTION` file.
+
+```
+SystemRequirements: C++11
+```
+
 
 ## Recommended C++11 features
 

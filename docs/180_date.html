@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -484,12 +484,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>Date</code> is a scalar type corresponding to an element of <code>DateVector</code>.</p>
 <div id="creating-date-object" class="section level2">
 <h2><span class="header-section-number">16.1</span> Creating Date object</h2>
-<div class="sourceCode" id="cb58"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb58-1" data-line-number="1">Date d;       <span class="co">//&quot;1970-01-01&quot;</span></a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">Date d(<span class="dv">1</span>);    <span class="co">//&quot;1970-01-01&quot; + 1day</span></a>
-<a class="sourceLine" id="cb58-3" data-line-number="3">Date d(<span class="fl">1.1</span>);  <span class="co">//&quot;1970-01-01&quot; + ceil(1.1)day</span></a>
-<a class="sourceLine" id="cb58-4" data-line-number="4">Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="sc">%Y-%</span><span class="st">m-</span><span class="sc">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span></a>
-<a class="sourceLine" id="cb58-5" data-line-number="5">Date( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2000</span>); <span class="co">// 2000-01-02 Date(mon, day, year)</span></a>
-<a class="sourceLine" id="cb58-6" data-line-number="6">Date( <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">2</span>); <span class="co">// 2000-01-02 Date(year, mon, day)</span></a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb59-1" data-line-number="1">Date d;       <span class="co">//&quot;1970-01-01&quot;</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">Date d(<span class="dv">1</span>);    <span class="co">//&quot;1970-01-01&quot; + 1day</span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">Date d(<span class="fl">1.1</span>);  <span class="co">//&quot;1970-01-01&quot; + ceil(1.1)day</span></a>
+<a class="sourceLine" id="cb59-4" data-line-number="4">Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="sc">%Y-%</span><span class="st">m-</span><span class="sc">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span></a>
+<a class="sourceLine" id="cb59-5" data-line-number="5">Date( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2000</span>); <span class="co">// 2000-01-02 Date(mon, day, year)</span></a>
+<a class="sourceLine" id="cb59-6" data-line-number="6">Date( <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">2</span>); <span class="co">// 2000-01-02 Date(year, mon, day)</span></a></code></pre></div>
 </div>
 <div id="operators-1" class="section level2">
 <h2><span class="header-section-number">16.2</span> Operators</h2>

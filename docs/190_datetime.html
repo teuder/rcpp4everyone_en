@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -505,17 +505,17 @@ Datetime dt(&quot;2000年1月1日 0時0分0秒&quot;, &quot;%Y年%m月%d日 %H�
 <h2><span class="header-section-number">17.3</span> Operators</h2>
 <p>The <code>+, -, &lt;, &gt;, &gt;=, &lt;=, ==, !=</code> operators are defined in <code>Datetime</code>.</p>
 <p>By using these operators, you can perform addition of seconds (<code>+</code>), difference of datetime (<code>-</code>) in seconds, comparison of datetime (<code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code>) .</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb62-1" data-line-number="1">Datetime dt1(<span class="st">&quot;2000-01-01 00:00:00&quot;</span>);</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2">Datetime dt2(<span class="st">&quot;2000-01-02 00:00:00&quot;</span>);</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="co">// difference of datetime (seconds)</span></a>
-<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="dt">int</span> sec = dt2 - dt1;  <span class="co">// 86400</span></a>
-<a class="sourceLine" id="cb62-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb62-7" data-line-number="7"><span class="co">// addition of seconds</span></a>
-<a class="sourceLine" id="cb62-8" data-line-number="8">dt1 = dt1 + <span class="dv">1</span>; <span class="co">// &quot;2000-01-01 00:00:01&quot;</span></a>
-<a class="sourceLine" id="cb62-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb62-10" data-line-number="10"><span class="co">// comparison of datetime</span></a>
-<a class="sourceLine" id="cb62-11" data-line-number="11"><span class="dt">bool</span> b = dt2 &gt; dt1; <span class="co">// true</span></a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb63-1" data-line-number="1">Datetime dt1(<span class="st">&quot;2000-01-01 00:00:00&quot;</span>);</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">Datetime dt2(<span class="st">&quot;2000-01-02 00:00:00&quot;</span>);</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="co">// difference of datetime (seconds)</span></a>
+<a class="sourceLine" id="cb63-5" data-line-number="5"><span class="dt">int</span> sec = dt2 - dt1;  <span class="co">// 86400</span></a>
+<a class="sourceLine" id="cb63-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="co">// addition of seconds</span></a>
+<a class="sourceLine" id="cb63-8" data-line-number="8">dt1 = dt1 + <span class="dv">1</span>; <span class="co">// &quot;2000-01-01 00:00:01&quot;</span></a>
+<a class="sourceLine" id="cb63-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb63-10" data-line-number="10"><span class="co">// comparison of datetime</span></a>
+<a class="sourceLine" id="cb63-11" data-line-number="11"><span class="dt">bool</span> b = dt2 &gt; dt1; <span class="co">// true</span></a></code></pre></div>
 </div>
 <div id="member-functions-6" class="section level2">
 <h2><span class="header-section-number">17.4</span> Member functions</h2>

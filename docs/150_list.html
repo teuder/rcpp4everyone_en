@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -486,18 +486,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-list-object" class="section level2">
 <h2><span class="header-section-number">13.1</span> Creating List object</h2>
 <p>To create a <code>List</code> object we use the <code>List::create()</code> function. Also, to specify the element name when creating <code>List</code>, use <code>Named()</code> function or <code>_[]</code>.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co">// Create list L from vector v1, v2</span></a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">List L = List::create(v1, v2);</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="co">// When giving names to elements</span></a>
-<a class="sourceLine" id="cb47-5" data-line-number="5">List L = List::create(Named(<span class="st">&quot;name1&quot;</span>) = v1 , _[<span class="st">&quot;name2&quot;</span>] = v2);</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">// Create list L from vector v1, v2</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">List L = List::create(v1, v2);</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="co">// When giving names to elements</span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">List L = List::create(Named(<span class="st">&quot;name1&quot;</span>) = v1 , _[<span class="st">&quot;name2&quot;</span>] = v2);</a></code></pre></div>
 </div>
 <div id="accessing-list-elements" class="section level2">
 <h2><span class="header-section-number">13.2</span> Accessing List elements</h2>
 <p>When accessing a specific element of <code>List</code>, we assign it to the other object and access it via that object.</p>
 <p>The elements of <code>List</code> can be specified by numerical index, element names and logical vector.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb48-1" data-line-number="1">NumericVector v1 = L[<span class="dv">0</span>];</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">NumericVector v2 = L[<span class="st">&quot;V1&quot;</span>];</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb49-1" data-line-number="1">NumericVector v1 = L[<span class="dv">0</span>];</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">NumericVector v2 = L[<span class="st">&quot;V1&quot;</span>];</a></code></pre></div>
 </div>
 <div id="member-functions-3" class="section level2">
 <h2><span class="header-section-number">13.3</span> Member functions</h2>

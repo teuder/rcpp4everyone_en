@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2019-10-07" />
+<meta name="date" content="2019-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -493,16 +493,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">22.1</span> Basic structure of probability distribution function</h2>
 <p>In Rcpp, probability distribution functions with the same name are defined in two namespaces, <code>R::</code> and <code>Rcpp::</code>. These differences are that the function defined in <code>Rcpp::</code> namespace returns a vector, while the function in the <code>R::</code> namespace returns a scalar. Basically, the probability distribution functions defined in the <code>Rcpp::</code> namespace has the same functionalities as those in R. So normally you can use a function in the <code>Rcpp::</code> namespace, but if you want a scalar value, it is better to use that function in <code>R::</code> namespace because it’s faster.</p>
 <p>The basic structures of the probability distribution functions defined in the <code>Rcpp::</code> namespace are shown below. In fact, the definition of the probability distribution function of the <code>Rcpp ::</code> namespace is not written directly in the source code of Rcpp (because it is written using macros). But you can assume that the function is defined like as below.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb77-1" data-line-number="1">NumericVector Rcpp::dXXX( NumericVector x, <span class="dt">double</span> par,                    <span class="dt">bool</span> log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2">NumericVector Rcpp::pXXX( NumericVector q, <span class="dt">double</span> par, <span class="dt">bool</span> lower = <span class="kw">true</span>, <span class="dt">bool</span> log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb77-3" data-line-number="3">NumericVector Rcpp::qXXX( NumericVector p, <span class="dt">double</span> par, <span class="dt">bool</span> lower = <span class="kw">true</span>, <span class="dt">bool</span> log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb77-4" data-line-number="4">NumericVector Rcpp::rXXX(           <span class="dt">int</span> n, <span class="dt">double</span> par )</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb78-1" data-line-number="1">NumericVector Rcpp::dXXX( NumericVector x, <span class="dt">double</span> par,                    <span class="dt">bool</span> log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">NumericVector Rcpp::pXXX( NumericVector q, <span class="dt">double</span> par, <span class="dt">bool</span> lower = <span class="kw">true</span>, <span class="dt">bool</span> log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb78-3" data-line-number="3">NumericVector Rcpp::qXXX( NumericVector p, <span class="dt">double</span> par, <span class="dt">bool</span> lower = <span class="kw">true</span>, <span class="dt">bool</span> log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb78-4" data-line-number="4">NumericVector Rcpp::rXXX(           <span class="dt">int</span> n, <span class="dt">double</span> par )</a></code></pre></div>
 <p>The basic structures of the probability distribution functions defined in the <code>R::</code> namespace are shown below.
 It basically has the same functionality as those defined in the <code>Rcpp::</code> namespace except that it accepts and returns <code>double</code> type. In addition, the arguments of the function do not have default values, so user must give the value explicitly.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="dt">double</span> R::dXXX( <span class="dt">double</span> x, <span class="dt">double</span> par,            <span class="dt">int</span> log )</a>
-<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="dt">double</span> R::pXXX( <span class="dt">double</span> q, <span class="dt">double</span> par, <span class="dt">int</span> lower, <span class="dt">int</span> log )</a>
-<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="dt">double</span> R::qXXX( <span class="dt">double</span> p, <span class="dt">double</span> par, <span class="dt">int</span> lower, <span class="dt">int</span> log )</a>
-<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="dt">double</span> R::rXXX(           <span class="dt">double</span> par )</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="dt">double</span> R::dXXX( <span class="dt">double</span> x, <span class="dt">double</span> par,            <span class="dt">int</span> log )</a>
+<a class="sourceLine" id="cb79-2" data-line-number="2"><span class="dt">double</span> R::pXXX( <span class="dt">double</span> q, <span class="dt">double</span> par, <span class="dt">int</span> lower, <span class="dt">int</span> log )</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="dt">double</span> R::qXXX( <span class="dt">double</span> p, <span class="dt">double</span> par, <span class="dt">int</span> lower, <span class="dt">int</span> log )</a>
+<a class="sourceLine" id="cb79-4" data-line-number="4"><span class="dt">double</span> R::rXXX(           <span class="dt">double</span> par )</a></code></pre></div>
 <p>The arguments of the probability distribution function are described below.</p>
 <ul>
 <li><strong>x, q</strong> : random variable</li>
@@ -556,211 +556,211 @@ It basically has the same functionality as those defined in the <code>Rcpp::</co
 <div id="uniform-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.1</span> Uniform distribution</h3>
 <p>These functions provide information about the uniform distribution on the interval from <code>min</code> to <code>max</code>.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb79-1" data-line-number="1">Rcpp::dunif( x, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb79-2" data-line-number="2">Rcpp::punif( q, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb79-3" data-line-number="3">Rcpp::qunif( p, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb79-4" data-line-number="4">Rcpp::runif( n, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span> )</a>
-<a class="sourceLine" id="cb79-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb79-6" data-line-number="6">R::dunif( x, min, max,        log )</a>
-<a class="sourceLine" id="cb79-7" data-line-number="7">R::punif( q, min, max, lower, log )</a>
-<a class="sourceLine" id="cb79-8" data-line-number="8">R::qunif( p, min, max, lower, log )</a>
-<a class="sourceLine" id="cb79-9" data-line-number="9">R::runif(     min, max )</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb80-1" data-line-number="1">Rcpp::dunif( x, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">Rcpp::punif( q, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb80-3" data-line-number="3">Rcpp::qunif( p, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb80-4" data-line-number="4">Rcpp::runif( n, min = <span class="fl">0.0</span>, max = <span class="fl">1.0</span> )</a>
+<a class="sourceLine" id="cb80-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb80-6" data-line-number="6">R::dunif( x, min, max,        log )</a>
+<a class="sourceLine" id="cb80-7" data-line-number="7">R::punif( q, min, max, lower, log )</a>
+<a class="sourceLine" id="cb80-8" data-line-number="8">R::qunif( p, min, max, lower, log )</a>
+<a class="sourceLine" id="cb80-9" data-line-number="9">R::runif(     min, max )</a></code></pre></div>
 </div>
 <div id="normal-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.2</span> Normal distribution</h3>
 <p>These functions provide information about the normal distribution with mean equal to <code>mean</code> and standard deviation equal to <code>sd</code>.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb80-1" data-line-number="1">Rcpp::dnorm( x, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb80-2" data-line-number="2">Rcpp::pnorm( q, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb80-3" data-line-number="3">Rcpp::qnorm( p, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb80-4" data-line-number="4">Rcpp::rnorm( n, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span> )</a>
-<a class="sourceLine" id="cb80-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb80-6" data-line-number="6">R::dnorm( x, mean, sd,        log )</a>
-<a class="sourceLine" id="cb80-7" data-line-number="7">R::pnorm( q, mean, sd, lower, log )</a>
-<a class="sourceLine" id="cb80-8" data-line-number="8">R::qnorm( p, mean, sd, lower, log )</a>
-<a class="sourceLine" id="cb80-9" data-line-number="9">R::rnorm(    mean, sd )</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb81-1" data-line-number="1">Rcpp::dnorm( x, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">Rcpp::pnorm( q, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb81-3" data-line-number="3">Rcpp::qnorm( p, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb81-4" data-line-number="4">Rcpp::rnorm( n, mean = <span class="fl">0.0</span>, sd = <span class="fl">1.0</span> )</a>
+<a class="sourceLine" id="cb81-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb81-6" data-line-number="6">R::dnorm( x, mean, sd,        log )</a>
+<a class="sourceLine" id="cb81-7" data-line-number="7">R::pnorm( q, mean, sd, lower, log )</a>
+<a class="sourceLine" id="cb81-8" data-line-number="8">R::qnorm( p, mean, sd, lower, log )</a>
+<a class="sourceLine" id="cb81-9" data-line-number="9">R::rnorm(    mean, sd )</a></code></pre></div>
 </div>
 <div id="log-normal-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.3</span> Log-normal distribution</h3>
 <p>These functions provide information about the log-normal distribution whose logarithm has mean equal to <code>meanlog</code> and standard deviation equal to <code>sdlog</code>.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb81-1" data-line-number="1">Rcpp::dlnorm( x, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb81-2" data-line-number="2">Rcpp::plnorm( q, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb81-3" data-line-number="3">Rcpp::qlnorm( p, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb81-4" data-line-number="4">Rcpp::rlnorm( n, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span> )</a>
-<a class="sourceLine" id="cb81-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb81-6" data-line-number="6">R::dlnorm( x, meanlog, sdlog,        log )</a>
-<a class="sourceLine" id="cb81-7" data-line-number="7">R::plnorm( q, meanlog, sdlog, lower, log )</a>
-<a class="sourceLine" id="cb81-8" data-line-number="8">R::qlnorm( p, meanlog, sdlog, lower, log )</a>
-<a class="sourceLine" id="cb81-9" data-line-number="9">R::rlnorm(    meanlog, sdlog )</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb82-1" data-line-number="1">Rcpp::dlnorm( x, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2">Rcpp::plnorm( q, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb82-3" data-line-number="3">Rcpp::qlnorm( p, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb82-4" data-line-number="4">Rcpp::rlnorm( n, meanlog = <span class="fl">0.0</span>, sdlog = <span class="fl">1.0</span> )</a>
+<a class="sourceLine" id="cb82-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb82-6" data-line-number="6">R::dlnorm( x, meanlog, sdlog,        log )</a>
+<a class="sourceLine" id="cb82-7" data-line-number="7">R::plnorm( q, meanlog, sdlog, lower, log )</a>
+<a class="sourceLine" id="cb82-8" data-line-number="8">R::qlnorm( p, meanlog, sdlog, lower, log )</a>
+<a class="sourceLine" id="cb82-9" data-line-number="9">R::rlnorm(    meanlog, sdlog )</a></code></pre></div>
 </div>
 <div id="gamma-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.4</span> Gamma distribution</h3>
 <p>These functions provide information about the Gamma distribution with parameters <code>shape</code> and <code>scale</code>.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb82-1" data-line-number="1">Rcpp::dgamma( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb82-2" data-line-number="2">Rcpp::pgamma( q, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb82-3" data-line-number="3">Rcpp::qgamma( p, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb82-4" data-line-number="4">Rcpp::rgamma( n, shape, scale = <span class="fl">1.0</span> )</a>
-<a class="sourceLine" id="cb82-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb82-6" data-line-number="6">R::dgamma( x, shape, scale, log )</a>
-<a class="sourceLine" id="cb82-7" data-line-number="7">R::pgamma( x, shape, scale, lower, log )</a>
-<a class="sourceLine" id="cb82-8" data-line-number="8">R::qgamma( q, shape, scale, lower, log )</a>
-<a class="sourceLine" id="cb82-9" data-line-number="9">R::rgamma(    shape, scale )</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb83-1" data-line-number="1">Rcpp::dgamma( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">Rcpp::pgamma( q, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb83-3" data-line-number="3">Rcpp::qgamma( p, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb83-4" data-line-number="4">Rcpp::rgamma( n, shape, scale = <span class="fl">1.0</span> )</a>
+<a class="sourceLine" id="cb83-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb83-6" data-line-number="6">R::dgamma( x, shape, scale, log )</a>
+<a class="sourceLine" id="cb83-7" data-line-number="7">R::pgamma( x, shape, scale, lower, log )</a>
+<a class="sourceLine" id="cb83-8" data-line-number="8">R::qgamma( q, shape, scale, lower, log )</a>
+<a class="sourceLine" id="cb83-9" data-line-number="9">R::rgamma(    shape, scale )</a></code></pre></div>
 </div>
 <div id="beta-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.5</span> Beta distribution</h3>
 <p>These functions provide information about the Beta distribution with parameters <code>shape1</code> and <code>shape2</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb83-1" data-line-number="1">Rcpp::dbeta( x, shape1, shape2, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb83-2" data-line-number="2">Rcpp::pbeta( x, shape1, shape2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb83-3" data-line-number="3">Rcpp::qbeta( q, shape1, shape2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb83-4" data-line-number="4">Rcpp::rbeta( n, shape1, shape2)</a>
-<a class="sourceLine" id="cb83-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb83-6" data-line-number="6">R::dbeta( x, shape1, shape2,        log )</a>
-<a class="sourceLine" id="cb83-7" data-line-number="7">R::pbeta( x, shape1, shape2, lower, log )</a>
-<a class="sourceLine" id="cb83-8" data-line-number="8">R::qbeta( q, shape1, shape2, lower, log )</a>
-<a class="sourceLine" id="cb83-9" data-line-number="9">R::rbeta(    shape1, shape2 )</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb84-1" data-line-number="1">Rcpp::dbeta( x, shape1, shape2, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">Rcpp::pbeta( x, shape1, shape2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3">Rcpp::qbeta( q, shape1, shape2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb84-4" data-line-number="4">Rcpp::rbeta( n, shape1, shape2)</a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb84-6" data-line-number="6">R::dbeta( x, shape1, shape2,        log )</a>
+<a class="sourceLine" id="cb84-7" data-line-number="7">R::pbeta( x, shape1, shape2, lower, log )</a>
+<a class="sourceLine" id="cb84-8" data-line-number="8">R::qbeta( q, shape1, shape2, lower, log )</a>
+<a class="sourceLine" id="cb84-9" data-line-number="9">R::rbeta(    shape1, shape2 )</a></code></pre></div>
 </div>
 <div id="noncentral-beta-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.6</span> Noncentral beta distribution</h3>
 <p>These functions provide information about the Noncentral beta distribution with parameters <code>shape1</code> and <code>shape2</code>, noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb84-1" data-line-number="1">Rcpp::dnbeta( x, shape1, shape2, ncp,               log = <span class="kw">false</span> );</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2">Rcpp::pnbeta( x, shape1, shape2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> );</a>
-<a class="sourceLine" id="cb84-3" data-line-number="3">Rcpp::qnbeta( q, shape1, shape2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> );</a>
-<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="co">// Rcpp::rnbeta() does not exist</span></a>
-<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb84-6" data-line-number="6">R::dnbeta( x, shape1, shape2, ncp,        log )</a>
-<a class="sourceLine" id="cb84-7" data-line-number="7">R::pnbeta( x, shape1, shape2, ncp, lower, log )</a>
-<a class="sourceLine" id="cb84-8" data-line-number="8">R::qnbeta( q, shape1, shape2, ncp, lower, log )</a>
-<a class="sourceLine" id="cb84-9" data-line-number="9">R::rnbeta(    shape1, shape2, ncp )</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb85-1" data-line-number="1">Rcpp::dnbeta( x, shape1, shape2, ncp,               log = <span class="kw">false</span> );</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">Rcpp::pnbeta( x, shape1, shape2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> );</a>
+<a class="sourceLine" id="cb85-3" data-line-number="3">Rcpp::qnbeta( q, shape1, shape2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> );</a>
+<a class="sourceLine" id="cb85-4" data-line-number="4"><span class="co">// Rcpp::rnbeta() does not exist</span></a>
+<a class="sourceLine" id="cb85-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb85-6" data-line-number="6">R::dnbeta( x, shape1, shape2, ncp,        log )</a>
+<a class="sourceLine" id="cb85-7" data-line-number="7">R::pnbeta( x, shape1, shape2, ncp, lower, log )</a>
+<a class="sourceLine" id="cb85-8" data-line-number="8">R::qnbeta( q, shape1, shape2, ncp, lower, log )</a>
+<a class="sourceLine" id="cb85-9" data-line-number="9">R::rnbeta(    shape1, shape2, ncp )</a></code></pre></div>
 </div>
 <div id="chi-squared-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.7</span> Chi-squared distribution</h3>
 <p>These functions provide information about the Chi-squared distribution with df degrees of freedom <code>df</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb85-1" data-line-number="1">Rcpp::dchisq( x, df,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2">Rcpp::pchisq( x, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb85-3" data-line-number="3">Rcpp::qchisq( q, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb85-4" data-line-number="4">Rcpp::rchisq( n, df)</a>
-<a class="sourceLine" id="cb85-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb85-6" data-line-number="6">R::dchisq( x, df,        log )</a>
-<a class="sourceLine" id="cb85-7" data-line-number="7">R::pchisq( x, df, lower, log )</a>
-<a class="sourceLine" id="cb85-8" data-line-number="8">R::qchisq( q, df, lower, log )</a>
-<a class="sourceLine" id="cb85-9" data-line-number="9">R::rchisq(    df )</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb86-1" data-line-number="1">Rcpp::dchisq( x, df,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">Rcpp::pchisq( x, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb86-3" data-line-number="3">Rcpp::qchisq( q, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb86-4" data-line-number="4">Rcpp::rchisq( n, df)</a>
+<a class="sourceLine" id="cb86-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb86-6" data-line-number="6">R::dchisq( x, df,        log )</a>
+<a class="sourceLine" id="cb86-7" data-line-number="7">R::pchisq( x, df, lower, log )</a>
+<a class="sourceLine" id="cb86-8" data-line-number="8">R::qchisq( q, df, lower, log )</a>
+<a class="sourceLine" id="cb86-9" data-line-number="9">R::rchisq(    df )</a></code></pre></div>
 </div>
 <div id="noncentral-chi-squared-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.8</span> Noncentral chi-squared distribution</h3>
 <p>These functions provide information about the Noncentral chi-squared distribution with df degrees of freedom <code>df</code> and noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the Chi-squared distribution function in R.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb86-1" data-line-number="1">Rcpp::dnchisq( x, df, ncp,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">Rcpp::pnchisq( x, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb86-3" data-line-number="3">Rcpp::qnchisq( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb86-4" data-line-number="4">Rcpp::rnchisq( n, df, ncp = <span class="fl">0.0</span> )</a>
-<a class="sourceLine" id="cb86-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb86-6" data-line-number="6">R::dnchisq( x, df, ncp,        log )</a>
-<a class="sourceLine" id="cb86-7" data-line-number="7">R::pnchisq( x, df, ncp, lower, log )</a>
-<a class="sourceLine" id="cb86-8" data-line-number="8">R::qnchisq( q, df, ncp, lower, log )</a>
-<a class="sourceLine" id="cb86-9" data-line-number="9">R::rnchisq(    df, ncp )</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb87-1" data-line-number="1">Rcpp::dnchisq( x, df, ncp,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">Rcpp::pnchisq( x, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb87-3" data-line-number="3">Rcpp::qnchisq( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb87-4" data-line-number="4">Rcpp::rnchisq( n, df, ncp = <span class="fl">0.0</span> )</a>
+<a class="sourceLine" id="cb87-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb87-6" data-line-number="6">R::dnchisq( x, df, ncp,        log )</a>
+<a class="sourceLine" id="cb87-7" data-line-number="7">R::pnchisq( x, df, ncp, lower, log )</a>
+<a class="sourceLine" id="cb87-8" data-line-number="8">R::qnchisq( q, df, ncp, lower, log )</a>
+<a class="sourceLine" id="cb87-9" data-line-number="9">R::rnchisq(    df, ncp )</a></code></pre></div>
 </div>
 <div id="t-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.9</span> t-distribution</h3>
 <p>These functions provide information about the t-distribution with df degrees of freedom <code>df</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the Beta distribution function in R.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb87-1" data-line-number="1">Rcpp::dt( x, df,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb87-2" data-line-number="2">Rcpp::pt( x, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb87-3" data-line-number="3">Rcpp::qt( q, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb87-4" data-line-number="4">Rcpp::rt( n, df )</a>
-<a class="sourceLine" id="cb87-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb87-6" data-line-number="6">R::dt( x, df,        log )</a>
-<a class="sourceLine" id="cb87-7" data-line-number="7">R::pt( x, df, lower, log )</a>
-<a class="sourceLine" id="cb87-8" data-line-number="8">R::qt( q, df, lower, log )</a>
-<a class="sourceLine" id="cb87-9" data-line-number="9">R::rt(    df )</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb88-1" data-line-number="1">Rcpp::dt( x, df,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">Rcpp::pt( x, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">Rcpp::qt( q, df, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4">Rcpp::rt( n, df )</a>
+<a class="sourceLine" id="cb88-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb88-6" data-line-number="6">R::dt( x, df,        log )</a>
+<a class="sourceLine" id="cb88-7" data-line-number="7">R::pt( x, df, lower, log )</a>
+<a class="sourceLine" id="cb88-8" data-line-number="8">R::qt( q, df, lower, log )</a>
+<a class="sourceLine" id="cb88-9" data-line-number="9">R::rt(    df )</a></code></pre></div>
 </div>
 <div id="noncentral-t-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.10</span> Noncentral t-distribution</h3>
 <p>These functions provide information about the Noncentral t-distribution with df degrees of freedom <code>df</code> and noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the t-distribution function in R.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb88-1" data-line-number="1">Rcpp::dnt( x, df, ncp,               log = <span class="kw">false</span>  )</a>
-<a class="sourceLine" id="cb88-2" data-line-number="2">Rcpp::pnt( x, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
-<a class="sourceLine" id="cb88-3" data-line-number="3">Rcpp::qnt( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
-<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="co">// Rcpp::rnt() does not exist.</span></a>
-<a class="sourceLine" id="cb88-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb88-6" data-line-number="6">R::dnt( x, df, ncp,        log )</a>
-<a class="sourceLine" id="cb88-7" data-line-number="7">R::pnt( x, df, ncp, lower, log )</a>
-<a class="sourceLine" id="cb88-8" data-line-number="8">R::qnt( q, df, ncp, lower, log )</a>
-<a class="sourceLine" id="cb88-9" data-line-number="9"><span class="co">// R::rnt() does not exist.</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb89-1" data-line-number="1">Rcpp::dnt( x, df, ncp,               log = <span class="kw">false</span>  )</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">Rcpp::pnt( x, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">Rcpp::qnt( q, df, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="co">// Rcpp::rnt() does not exist.</span></a>
+<a class="sourceLine" id="cb89-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb89-6" data-line-number="6">R::dnt( x, df, ncp,        log )</a>
+<a class="sourceLine" id="cb89-7" data-line-number="7">R::pnt( x, df, ncp, lower, log )</a>
+<a class="sourceLine" id="cb89-8" data-line-number="8">R::qnt( q, df, ncp, lower, log )</a>
+<a class="sourceLine" id="cb89-9" data-line-number="9"><span class="co">// R::rnt() does not exist.</span></a></code></pre></div>
 </div>
 <div id="f-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.11</span> F-distribution</h3>
 <p>These functions provide information about the F-distribution with df degrees of freedom <code>df1</code> and <code>df2</code>. These functions are equivalent to setting 0 for the noncentrality parameter <code>ncp</code> in the F-distribution function in R.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb89-1" data-line-number="1">Rcpp::df( x, df1, df2,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb89-2" data-line-number="2">Rcpp::pf( x, df1, df2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb89-3" data-line-number="3">Rcpp::qf( q, df1, df2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb89-4" data-line-number="4">Rcpp::rf( n, df1, df1 )</a>
-<a class="sourceLine" id="cb89-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb89-6" data-line-number="6">R::df( x, df1, df2,        log )</a>
-<a class="sourceLine" id="cb89-7" data-line-number="7">R::pf( x, df1, df2, lower, log )</a>
-<a class="sourceLine" id="cb89-8" data-line-number="8">R::qf( q, df1, df2, lower, log )</a>
-<a class="sourceLine" id="cb89-9" data-line-number="9">R::rf(    df1, df2 )</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb90-1" data-line-number="1">Rcpp::df( x, df1, df2,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">Rcpp::pf( x, df1, df2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb90-3" data-line-number="3">Rcpp::qf( q, df1, df2, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb90-4" data-line-number="4">Rcpp::rf( n, df1, df1 )</a>
+<a class="sourceLine" id="cb90-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb90-6" data-line-number="6">R::df( x, df1, df2,        log )</a>
+<a class="sourceLine" id="cb90-7" data-line-number="7">R::pf( x, df1, df2, lower, log )</a>
+<a class="sourceLine" id="cb90-8" data-line-number="8">R::qf( q, df1, df2, lower, log )</a>
+<a class="sourceLine" id="cb90-9" data-line-number="9">R::rf(    df1, df2 )</a></code></pre></div>
 </div>
 <div id="noncentral-f-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.12</span> Noncentral F-distribution</h3>
 <p>These functions provide information about the F-distribution with df degrees of freedom <code>df1</code>, <code>df2</code> and noncentrality parameter <code>ncp</code>. These functions are equivalent to setting non 0 value for the noncentrality parameter <code>ncp</code> in the Noncentral F-distribution function in R.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb90-1" data-line-number="1">Rcpp::dnf( x, df1, df2, ncp,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb90-2" data-line-number="2">Rcpp::pnf( x, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">Rcpp::qnf( q, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb90-4" data-line-number="4"><span class="co">// Rcpp::rnf() does not exist.</span></a>
-<a class="sourceLine" id="cb90-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb90-6" data-line-number="6">R::dnf( x, df1, df2, ncp,        log )</a>
-<a class="sourceLine" id="cb90-7" data-line-number="7">R::pnf( x, df1, df2, ncp, lower, log )</a>
-<a class="sourceLine" id="cb90-8" data-line-number="8">R::qnf( q, df1, df2, ncp, lower, log )</a>
-<a class="sourceLine" id="cb90-9" data-line-number="9"><span class="co">// R::rnf() does not exist.</span></a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb91-1" data-line-number="1">Rcpp::dnf( x, df1, df2, ncp,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">Rcpp::pnf( x, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">Rcpp::qnf( q, df1, df2, ncp, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4"><span class="co">// Rcpp::rnf() does not exist.</span></a>
+<a class="sourceLine" id="cb91-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb91-6" data-line-number="6">R::dnf( x, df1, df2, ncp,        log )</a>
+<a class="sourceLine" id="cb91-7" data-line-number="7">R::pnf( x, df1, df2, ncp, lower, log )</a>
+<a class="sourceLine" id="cb91-8" data-line-number="8">R::qnf( q, df1, df2, ncp, lower, log )</a>
+<a class="sourceLine" id="cb91-9" data-line-number="9"><span class="co">// R::rnf() does not exist.</span></a></code></pre></div>
 </div>
 <div id="cauchy-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.13</span> Cauchy distribution</h3>
 <p>These functions provide information about the Cauchy distribution with location parameter <code>location</code> and scale parameter <code>scale</code>.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb91-1" data-line-number="1">Rcpp::dcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb91-2" data-line-number="2">Rcpp::pcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb91-3" data-line-number="3">Rcpp::qcauchy( q, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb91-4" data-line-number="4">Rcpp::rcauchy( n, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>)</a>
-<a class="sourceLine" id="cb91-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb91-6" data-line-number="6">R::dcauchy( x, location, scale,        log )</a>
-<a class="sourceLine" id="cb91-7" data-line-number="7">R::pcauchy( x, location, scale, lower, log )</a>
-<a class="sourceLine" id="cb91-8" data-line-number="8">R::qcauchy( q, location, scale, lower, log )</a>
-<a class="sourceLine" id="cb91-9" data-line-number="9">R::rcauchy(    location, scale )</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb92-1" data-line-number="1">Rcpp::dcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">Rcpp::pcauchy( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">Rcpp::qcauchy( q, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb92-4" data-line-number="4">Rcpp::rcauchy( n, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb92-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb92-6" data-line-number="6">R::dcauchy( x, location, scale,        log )</a>
+<a class="sourceLine" id="cb92-7" data-line-number="7">R::pcauchy( x, location, scale, lower, log )</a>
+<a class="sourceLine" id="cb92-8" data-line-number="8">R::qcauchy( q, location, scale, lower, log )</a>
+<a class="sourceLine" id="cb92-9" data-line-number="9">R::rcauchy(    location, scale )</a></code></pre></div>
 </div>
 <div id="exponential-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.14</span> Exponential distribution</h3>
 <p>These functions provide information about the Exponential distribution with rate <code>rate</code> (The mean of Exponential distribution equals to 1/rate).</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb92-1" data-line-number="1">Rcpp::dexp( x, rate = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">Rcpp::pexp( x, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb92-3" data-line-number="3">Rcpp::qexp( q, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb92-4" data-line-number="4">Rcpp::rexp( n, rate = <span class="fl">1.0</span>)</a>
-<a class="sourceLine" id="cb92-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb92-6" data-line-number="6"><span class="co">// The R namespace version are parameterised in terms of the scale (=1/rate)</span></a>
-<a class="sourceLine" id="cb92-7" data-line-number="7">R::dexp( x, scale,        log )</a>
-<a class="sourceLine" id="cb92-8" data-line-number="8">R::pexp( x, scale, lower, log )</a>
-<a class="sourceLine" id="cb92-9" data-line-number="9">R::qexp( q, scale, lower, log )</a>
-<a class="sourceLine" id="cb92-10" data-line-number="10">R::rexp(    scale )</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb93-1" data-line-number="1">Rcpp::dexp( x, rate = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">Rcpp::pexp( x, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">Rcpp::qexp( q, rate = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb93-4" data-line-number="4">Rcpp::rexp( n, rate = <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb93-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb93-6" data-line-number="6"><span class="co">// The R namespace version are parameterised in terms of the scale (=1/rate)</span></a>
+<a class="sourceLine" id="cb93-7" data-line-number="7">R::dexp( x, scale,        log )</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8">R::pexp( x, scale, lower, log )</a>
+<a class="sourceLine" id="cb93-9" data-line-number="9">R::qexp( q, scale, lower, log )</a>
+<a class="sourceLine" id="cb93-10" data-line-number="10">R::rexp(    scale )</a></code></pre></div>
 </div>
 <div id="logistic-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.15</span> Logistic distribution</h3>
 <p>These functions provide information about the Logistic distribution with parameters <code>location</code> and <code>scale</code>.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb93-1" data-line-number="1">Rcpp::dlogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb93-2" data-line-number="2">Rcpp::plogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb93-3" data-line-number="3">Rcpp::qlogis( q, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb93-4" data-line-number="4">Rcpp::rlogis( n, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span> )</a>
-<a class="sourceLine" id="cb93-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb93-6" data-line-number="6">R::dlogis( x, location, scale,        log )</a>
-<a class="sourceLine" id="cb93-7" data-line-number="7">R::plogis( x, location, scale, lower, log )</a>
-<a class="sourceLine" id="cb93-8" data-line-number="8">R::qlogis( q, location, scale, lower, log )</a>
-<a class="sourceLine" id="cb93-9" data-line-number="9">R::rlogis(    location, scale )</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb94-1" data-line-number="1">Rcpp::dlogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb94-2" data-line-number="2">Rcpp::plogis( x, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb94-3" data-line-number="3">Rcpp::qlogis( q, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb94-4" data-line-number="4">Rcpp::rlogis( n, location = <span class="fl">0.0</span>, scale = <span class="fl">1.0</span> )</a>
+<a class="sourceLine" id="cb94-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb94-6" data-line-number="6">R::dlogis( x, location, scale,        log )</a>
+<a class="sourceLine" id="cb94-7" data-line-number="7">R::plogis( x, location, scale, lower, log )</a>
+<a class="sourceLine" id="cb94-8" data-line-number="8">R::qlogis( q, location, scale, lower, log )</a>
+<a class="sourceLine" id="cb94-9" data-line-number="9">R::rlogis(    location, scale )</a></code></pre></div>
 </div>
 <div id="weibull-distribution" class="section level3">
 <h3><span class="header-section-number">22.3.16</span> Weibull distribution</h3>
 <p>These functions provide information about the Weibull distribution with parameters <code>shape</code> and <code>scale</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb94-1" data-line-number="1">Rcpp::dweibull( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span>  )</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2">Rcpp::pweibull( x, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
-<a class="sourceLine" id="cb94-3" data-line-number="3">Rcpp::qweibull( q, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
-<a class="sourceLine" id="cb94-4" data-line-number="4">Rcpp::rweibull( n, shape, scale = <span class="fl">1.0</span> )</a>
-<a class="sourceLine" id="cb94-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb94-6" data-line-number="6">R::dweibull( x, shape, scale,        log )</a>
-<a class="sourceLine" id="cb94-7" data-line-number="7">R::pweibull( x, shape, scale, lower, log )</a>
-<a class="sourceLine" id="cb94-8" data-line-number="8">R::qweibull( q, shape, scale, lower, log )</a>
-<a class="sourceLine" id="cb94-9" data-line-number="9">R::rweibull(    shape, scale )</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb95-1" data-line-number="1">Rcpp::dweibull( x, shape, scale = <span class="fl">1.0</span>,               log = <span class="kw">false</span>  )</a>
+<a class="sourceLine" id="cb95-2" data-line-number="2">Rcpp::pweibull( x, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
+<a class="sourceLine" id="cb95-3" data-line-number="3">Rcpp::qweibull( q, shape, scale = <span class="fl">1.0</span>, lower = <span class="kw">true</span>, log = <span class="kw">false</span>  )</a>
+<a class="sourceLine" id="cb95-4" data-line-number="4">Rcpp::rweibull( n, shape, scale = <span class="fl">1.0</span> )</a>
+<a class="sourceLine" id="cb95-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb95-6" data-line-number="6">R::dweibull( x, shape, scale,        log )</a>
+<a class="sourceLine" id="cb95-7" data-line-number="7">R::pweibull( x, shape, scale, lower, log )</a>
+<a class="sourceLine" id="cb95-8" data-line-number="8">R::qweibull( q, shape, scale, lower, log )</a>
+<a class="sourceLine" id="cb95-9" data-line-number="9">R::rweibull(    shape, scale )</a></code></pre></div>
 </div>
 </div>
 <div id="discrete-probability-distribution-1" class="section level2">
@@ -768,106 +768,106 @@ It basically has the same functionality as those defined in the <code>Rcpp::</co
 <div id="binomial-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.1</span> Binomial distribution</h3>
 <p>These functions provide information about the Binomial distribution with number of trials <code>size</code> and success probability <code>prob</code>.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb95-1" data-line-number="1">Rcpp::dbinom( x, size, prob,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb95-2" data-line-number="2">Rcpp::pbinom( x, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb95-3" data-line-number="3">Rcpp::qbinom( q, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb95-4" data-line-number="4">Rcpp::rbinom( n, size, prob )</a>
-<a class="sourceLine" id="cb95-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb95-6" data-line-number="6">R::dbinom( x, size, prob,        log )</a>
-<a class="sourceLine" id="cb95-7" data-line-number="7">R::pbinom( x, size, prob, lower, log )</a>
-<a class="sourceLine" id="cb95-8" data-line-number="8">R::qbinom( q, size, prob, lower, log )</a>
-<a class="sourceLine" id="cb95-9" data-line-number="9">R::rbinom(    size, prob )</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb96-1" data-line-number="1">Rcpp::dbinom( x, size, prob,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb96-2" data-line-number="2">Rcpp::pbinom( x, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb96-3" data-line-number="3">Rcpp::qbinom( q, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb96-4" data-line-number="4">Rcpp::rbinom( n, size, prob )</a>
+<a class="sourceLine" id="cb96-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb96-6" data-line-number="6">R::dbinom( x, size, prob,        log )</a>
+<a class="sourceLine" id="cb96-7" data-line-number="7">R::pbinom( x, size, prob, lower, log )</a>
+<a class="sourceLine" id="cb96-8" data-line-number="8">R::qbinom( q, size, prob, lower, log )</a>
+<a class="sourceLine" id="cb96-9" data-line-number="9">R::rbinom(    size, prob )</a></code></pre></div>
 </div>
 <div id="negative-binomial-distribution-with-success-probability-as-parameter" class="section level3">
 <h3><span class="header-section-number">22.4.2</span> Negative binomial distribution (with success probability as parameter)</h3>
 <p>These functions provide information about the Negative binomial distribution with number of success <code>size</code> and success probability <code>prob</code>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb96-1" data-line-number="1">Rcpp::dnbinom( x, size, prob,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb96-2" data-line-number="2">Rcpp::pnbinom( x, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb96-3" data-line-number="3">Rcpp::qnbinom( q, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb96-4" data-line-number="4">Rcpp::rnbinom( n, size, prob )</a>
-<a class="sourceLine" id="cb96-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb96-6" data-line-number="6">R::dnbinom( x, size, prob,        log )</a>
-<a class="sourceLine" id="cb96-7" data-line-number="7">R::pnbinom( x, size, prob, lower, log )</a>
-<a class="sourceLine" id="cb96-8" data-line-number="8">R::qnbinom( q, size, prob, lower, log )</a>
-<a class="sourceLine" id="cb96-9" data-line-number="9">R::rnbinom(    size, prob )</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb97-1" data-line-number="1">Rcpp::dnbinom( x, size, prob,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2">Rcpp::pnbinom( x, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">Rcpp::qnbinom( q, size, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb97-4" data-line-number="4">Rcpp::rnbinom( n, size, prob )</a>
+<a class="sourceLine" id="cb97-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb97-6" data-line-number="6">R::dnbinom( x, size, prob,        log )</a>
+<a class="sourceLine" id="cb97-7" data-line-number="7">R::pnbinom( x, size, prob, lower, log )</a>
+<a class="sourceLine" id="cb97-8" data-line-number="8">R::qnbinom( q, size, prob, lower, log )</a>
+<a class="sourceLine" id="cb97-9" data-line-number="9">R::rnbinom(    size, prob )</a></code></pre></div>
 </div>
 <div id="negative-binomial-distribution-with-mean-as-parameter" class="section level3">
 <h3><span class="header-section-number">22.4.3</span> Negative binomial distribution (with mean as parameter)</h3>
 <p>These functions provide information about the Negative binomial distribution with number of success <code>size</code> and mean <code>mu</code>.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb97-1" data-line-number="1">Rcpp::dnbinom_mu( x, size, mu,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb97-2" data-line-number="2">Rcpp::pnbinom_mu( x, size, mu, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb97-3" data-line-number="3">Rcpp::qnbinom_mu( q, size, mu, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb97-4" data-line-number="4">Rcpp::rnbinom_mu( n, size, mu )</a>
-<a class="sourceLine" id="cb97-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb97-6" data-line-number="6">R::dnbinom_mu( x, size, mu,        log )</a>
-<a class="sourceLine" id="cb97-7" data-line-number="7">R::pnbinom_mu( x, size, mu, lower, log )</a>
-<a class="sourceLine" id="cb97-8" data-line-number="8">R::qnbinom_mu( q, size, mu, lower, log )</a>
-<a class="sourceLine" id="cb97-9" data-line-number="9">R::rnbinom_mu(    size, mu )</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb98-1" data-line-number="1">Rcpp::dnbinom_mu( x, size, mu,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2">Rcpp::pnbinom_mu( x, size, mu, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb98-3" data-line-number="3">Rcpp::qnbinom_mu( q, size, mu, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb98-4" data-line-number="4">Rcpp::rnbinom_mu( n, size, mu )</a>
+<a class="sourceLine" id="cb98-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb98-6" data-line-number="6">R::dnbinom_mu( x, size, mu,        log )</a>
+<a class="sourceLine" id="cb98-7" data-line-number="7">R::pnbinom_mu( x, size, mu, lower, log )</a>
+<a class="sourceLine" id="cb98-8" data-line-number="8">R::qnbinom_mu( q, size, mu, lower, log )</a>
+<a class="sourceLine" id="cb98-9" data-line-number="9">R::rnbinom_mu(    size, mu )</a></code></pre></div>
 </div>
 <div id="poisson-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.4</span> Poisson distribution</h3>
 <p>These functions provide information about the Poisson distribution with mean and variance are equal to <code>lambda</code>.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb98-1" data-line-number="1">Rcpp::dpois( x, lambda,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb98-2" data-line-number="2">Rcpp::ppois( x, lambda, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb98-3" data-line-number="3">Rcpp::qpois( q, lambda, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb98-4" data-line-number="4">Rcpp::rpois( n, lambda )</a>
-<a class="sourceLine" id="cb98-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb98-6" data-line-number="6">R::dpois( x, lambda, log )</a>
-<a class="sourceLine" id="cb98-7" data-line-number="7">R::ppois( x, lambda, lower, log )</a>
-<a class="sourceLine" id="cb98-8" data-line-number="8">R::qpois( q, lambda, lower, log )</a>
-<a class="sourceLine" id="cb98-9" data-line-number="9">R::rpois(    lambda )</a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb99-1" data-line-number="1">Rcpp::dpois( x, lambda,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb99-2" data-line-number="2">Rcpp::ppois( x, lambda, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb99-3" data-line-number="3">Rcpp::qpois( q, lambda, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb99-4" data-line-number="4">Rcpp::rpois( n, lambda )</a>
+<a class="sourceLine" id="cb99-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb99-6" data-line-number="6">R::dpois( x, lambda, log )</a>
+<a class="sourceLine" id="cb99-7" data-line-number="7">R::ppois( x, lambda, lower, log )</a>
+<a class="sourceLine" id="cb99-8" data-line-number="8">R::qpois( q, lambda, lower, log )</a>
+<a class="sourceLine" id="cb99-9" data-line-number="9">R::rpois(    lambda )</a></code></pre></div>
 </div>
 <div id="geometric-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.5</span> Geometric distribution</h3>
 <p>These functions provide information about the Geometric distribution with success probability <code>prob</code>.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb99-1" data-line-number="1">Rcpp::dgeom( x, prob,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb99-2" data-line-number="2">Rcpp::pgeom( x, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb99-3" data-line-number="3">Rcpp::qgeom( q, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb99-4" data-line-number="4">Rcpp::rgeom( n, prob )</a>
-<a class="sourceLine" id="cb99-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb99-6" data-line-number="6">R::dgeom( x, prob, log )</a>
-<a class="sourceLine" id="cb99-7" data-line-number="7">R::pgeom( x, prob, lower, log )</a>
-<a class="sourceLine" id="cb99-8" data-line-number="8">R::qgeom( q, prob, lower, log )</a>
-<a class="sourceLine" id="cb99-9" data-line-number="9">R::rgeom(    prob )</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb100-1" data-line-number="1">Rcpp::dgeom( x, prob,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">Rcpp::pgeom( x, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">Rcpp::qgeom( q, prob, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4">Rcpp::rgeom( n, prob )</a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">R::dgeom( x, prob, log )</a>
+<a class="sourceLine" id="cb100-7" data-line-number="7">R::pgeom( x, prob, lower, log )</a>
+<a class="sourceLine" id="cb100-8" data-line-number="8">R::qgeom( q, prob, lower, log )</a>
+<a class="sourceLine" id="cb100-9" data-line-number="9">R::rgeom(    prob )</a></code></pre></div>
 </div>
 <div id="hypergeometric-distribution" class="section level3">
 <h3><span class="header-section-number">22.4.6</span> Hypergeometric distribution</h3>
 <p>These functions provide information about the Hypergeometric distribution with number of success in the population <code>m</code> , number of failure in the population <code>n</code>, number of sample from the population <code>k</code>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb100-1" data-line-number="1">Rcpp::dhyper( x, m, n, k,               log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2">Rcpp::phyper( x, m, n, k, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb100-3" data-line-number="3">Rcpp::qhyper( q, m, n, k, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
-<a class="sourceLine" id="cb100-4" data-line-number="4">Rcpp::rhyper(nn, m, n, k )</a>
-<a class="sourceLine" id="cb100-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb100-6" data-line-number="6">R::dhyper( x, m, n, k,        log )</a>
-<a class="sourceLine" id="cb100-7" data-line-number="7">R::phyper( x, m, n, k, lower, log )</a>
-<a class="sourceLine" id="cb100-8" data-line-number="8">R::qhyper( q, m, n, k, lower, log )</a>
-<a class="sourceLine" id="cb100-9" data-line-number="9">R::rhyper(    m, n, k )</a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb101-1" data-line-number="1">Rcpp::dhyper( x, m, n, k,               log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">Rcpp::phyper( x, m, n, k, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb101-3" data-line-number="3">Rcpp::qhyper( q, m, n, k, lower = <span class="kw">true</span>, log = <span class="kw">false</span> )</a>
+<a class="sourceLine" id="cb101-4" data-line-number="4">Rcpp::rhyper(nn, m, n, k )</a>
+<a class="sourceLine" id="cb101-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb101-6" data-line-number="6">R::dhyper( x, m, n, k,        log )</a>
+<a class="sourceLine" id="cb101-7" data-line-number="7">R::phyper( x, m, n, k, lower, log )</a>
+<a class="sourceLine" id="cb101-8" data-line-number="8">R::qhyper( q, m, n, k, lower, log )</a>
+<a class="sourceLine" id="cb101-9" data-line-number="9">R::rhyper(    m, n, k )</a></code></pre></div>
 </div>
 <div id="distribution-of-wilcoxon-rank-sum-test-statistic" class="section level3">
 <h3><span class="header-section-number">22.4.7</span> Distribution of Wilcoxon rank-sum test statistic</h3>
 <p>These functions provide information about the distribution of test statistic when Wilcoxon rank-sum test (Mann–Whitney U test) is performed on two specimens with number of samples <code>m</code> and <code>n</code> respectively.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="co">// Rcpp::dwilcox() does not exist.</span></a>
-<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="co">// Rcpp::pwilcox() does not exist.</span></a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="co">// Rcpp::qwilcox() does not exist.</span></a>
-<a class="sourceLine" id="cb101-4" data-line-number="4">Rcpp::rwilcox( nn, m, n );</a>
-<a class="sourceLine" id="cb101-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb101-6" data-line-number="6">R::dwilcox( x, m, n,        log )</a>
-<a class="sourceLine" id="cb101-7" data-line-number="7">R::pwilcox( x, m, n, lower, log )</a>
-<a class="sourceLine" id="cb101-8" data-line-number="8">R::qwilcox( q, m, n, lower, log )</a>
-<a class="sourceLine" id="cb101-9" data-line-number="9">R::rwilcox(    m, n )</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="co">// Rcpp::dwilcox() does not exist.</span></a>
+<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="co">// Rcpp::pwilcox() does not exist.</span></a>
+<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="co">// Rcpp::qwilcox() does not exist.</span></a>
+<a class="sourceLine" id="cb102-4" data-line-number="4">Rcpp::rwilcox( nn, m, n );</a>
+<a class="sourceLine" id="cb102-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb102-6" data-line-number="6">R::dwilcox( x, m, n,        log )</a>
+<a class="sourceLine" id="cb102-7" data-line-number="7">R::pwilcox( x, m, n, lower, log )</a>
+<a class="sourceLine" id="cb102-8" data-line-number="8">R::qwilcox( q, m, n, lower, log )</a>
+<a class="sourceLine" id="cb102-9" data-line-number="9">R::rwilcox(    m, n )</a></code></pre></div>
 </div>
 <div id="distribution-of-wilcoxon-signed-rank-test-statistic" class="section level3">
 <h3><span class="header-section-number">22.4.8</span> Distribution of Wilcoxon signed-rank test statistic</h3>
 <p>These functions provide information about the distribution of test statistic when Wilcoxon signed-rank test is performed with number of samples <code>n</code>.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="co">// Rcpp::dsignrank() does not exist.</span></a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="co">// Rcpp::psignrank() does not exist.</span></a>
-<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="co">// Rcpp::qsignrank() does not exist.</span></a>
-<a class="sourceLine" id="cb102-4" data-line-number="4">Rcpp::rsignrank( nn, n )</a>
-<a class="sourceLine" id="cb102-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb102-6" data-line-number="6">R::dsignrank( x, n,        log )</a>
-<a class="sourceLine" id="cb102-7" data-line-number="7">R::psignrank( x, n, lower, log )</a>
-<a class="sourceLine" id="cb102-8" data-line-number="8">R::qsignrank( q, n, lower, log )</a>
-<a class="sourceLine" id="cb102-9" data-line-number="9">R::rsignrank(    n )</a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="co">// Rcpp::dsignrank() does not exist.</span></a>
+<a class="sourceLine" id="cb103-2" data-line-number="2"><span class="co">// Rcpp::psignrank() does not exist.</span></a>
+<a class="sourceLine" id="cb103-3" data-line-number="3"><span class="co">// Rcpp::qsignrank() does not exist.</span></a>
+<a class="sourceLine" id="cb103-4" data-line-number="4">Rcpp::rsignrank( nn, n )</a>
+<a class="sourceLine" id="cb103-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb103-6" data-line-number="6">R::dsignrank( x, n,        log )</a>
+<a class="sourceLine" id="cb103-7" data-line-number="7">R::psignrank( x, n, lower, log )</a>
+<a class="sourceLine" id="cb103-8" data-line-number="8">R::qsignrank( q, n, lower, log )</a>
+<a class="sourceLine" id="cb103-9" data-line-number="9">R::rsignrank(    n )</a></code></pre></div>
 
 </div>
 </div>
