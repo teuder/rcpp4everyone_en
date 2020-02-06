@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html >
+
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Chapter 3 Basic usage | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="description" content="Introducing how to use Rcpp">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 3 Basic usage | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 3 Basic usage | Rcpp for everyone />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +17,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Basic usage | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 3 Basic usage | Rcpp for everyone />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda" />
+<meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-11-17" />
+<meta name="date" content="2020-02-06">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="020_install.html"/>
-<link rel="next" href="040_function.html"/>
+<link rel="prev" href="020_install.html">
+<link rel="next" href="040_function.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,17 +48,6 @@
 
 
 
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-101879207-2');
-</script>
 
 
 <style type="text/css">
@@ -67,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -491,31 +481,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Writing your Rcpp code</h2>
 <p>The below code defines a function <code>rcpp_sum()</code> that calculates the sum of a vector. Save this content as a file named “sum.cpp”.</p>
 <p><strong>sum.cpp</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">//sum.cpp</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="dt">double</span> rcpp_sum(NumericVector v){</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="dt">double</span> sum = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">        sum += v[i];</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">    }</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="cf">return</span>(sum);</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//sum.cpp</span>
+<span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
+
+<span class="co">// [[Rcpp::export]]</span>
+<span class="dt">double</span> rcpp_sum(NumericVector v){
+    <span class="dt">double</span> sum = <span class="dv">0</span>;
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v.length(); ++i){
+        sum += v[i];
+    }
+    <span class="cf">return</span>(sum);
+}</code></pre>
 <div id="format-for-defining-a-function-in-rcpp." class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Format for defining a function in Rcpp.</h3>
 <p>The following code shows the basic format for defining a Rcpp function.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="pp">#include</span><span class="im">&lt;Rcpp.h&gt;</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="co">//do something</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="cf">return</span> RETURN_VALUE;</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include</span><span class="im">&lt;Rcpp.h&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
+
+<span class="co">// [[Rcpp::export]]</span>
+RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){
+
+    <span class="co">//do something</span>
+
+    <span class="cf">return</span> RETURN_VALUE;
+}</code></pre>
 <ul>
 <li><p><code>#include&lt;Rcpp.h&gt;</code> : This sentence enables you to use classes and functions defined by the Rcpp package.</p></li>
 <li><p><code>// [[Rcpp::export]]</code>：The function defined just below this sentence will be accessible from R.</p></li>
@@ -528,17 +518,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="compiling-the-code" class="section level2">
 <h2><span class="header-section-number">3.2</span> Compiling the code</h2>
 <p>The function <code>Rcpp::sourceCpp()</code> will compile the source code and load the function into R.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(Rcpp)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">sourceCpp</span>(<span class="st">&#39;sum.cpp&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rcpp)
+<span class="kw">sourceCpp</span>(<span class="st">&#39;sum.cpp&#39;</span>)</code></pre>
 </div>
 <div id="executing-the-function" class="section level2">
 <h2><span class="header-section-number">3.3</span> Executing the function</h2>
 <p>You can use your Rcpp function like as usual R function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">[<span class="dv">1</span>] <span class="dv">55</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="op">&gt;</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">[<span class="dv">1</span>] <span class="dv">55</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+[<span class="dv">1</span>] <span class="dv">55</span>
+
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+[<span class="dv">1</span>] <span class="dv">55</span></code></pre>
 
 </div>
 </div>
@@ -553,13 +543,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

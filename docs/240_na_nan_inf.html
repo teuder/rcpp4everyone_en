@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html >
+
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Chapter 24 NA NaN Inf NULL | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="description" content="Introducing how to use Rcpp">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 24 NA NaN Inf NULL | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 24 NA NaN Inf NULL | Rcpp for everyone />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +17,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 24 NA NaN Inf NULL | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 24 NA NaN Inf NULL | Rcpp for everyone />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda" />
+<meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-11-17" />
+<meta name="date" content="2020-02-06">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="230_R_function.html"/>
-<link rel="next" href="250_factor.html"/>
+<link rel="prev" href="230_R_function.html">
+<link rel="next" href="250_factor.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,17 +48,6 @@
 
 
 
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-101879207-2');
-</script>
 
 
 <style type="text/css">
@@ -67,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -534,10 +524,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>The following code example shows how to use these symbols to create <code>Vector</code> object.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb109-1" data-line-number="1">NumericVector   v1 = NumericVector::create( <span class="dv">1</span>, NA_REAL, R_NaN, R_PosInf, R_NegInf);</a>
-<a class="sourceLine" id="cb109-2" data-line-number="2">IntegerVector   v2 = IntegerVector::create( <span class="dv">1</span>, NA_INTEGER);</a>
-<a class="sourceLine" id="cb109-3" data-line-number="3">CharacterVector v3 = CharacterVector::create( <span class="st">&quot;A&quot;</span>, NA_STRING);</a>
-<a class="sourceLine" id="cb109-4" data-line-number="4">LogicalVector   v4 = LogicalVector::create( <span class="kw">true</span>, NA_LOGICAL);</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector   v1 = NumericVector::create( <span class="dv">1</span>, NA_REAL, R_NaN, R_PosInf, R_NegInf);
+IntegerVector   v2 = IntegerVector::create( <span class="dv">1</span>, NA_INTEGER);
+CharacterVector v3 = CharacterVector::create( <span class="st">&quot;A&quot;</span>, NA_STRING);
+LogicalVector   v4 = LogicalVector::create( <span class="kw">true</span>, NA_LOGICAL);</code></pre>
 </div>
 <div id="evaluating-na-nan-inf" class="section level2">
 <h2><span class="header-section-number">24.2</span> Evaluating NA NaN Inf</h2>
@@ -545,14 +535,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">24.2.1</span> Evaluating all the elements of a vector at once</h3>
 <p>To evaluate all the <code>NA</code> <code>NaN</code> <code>Inf</code> <code>-Inf</code> elements in a vector at once, use the function <code>is_na()</code> <code>is_nan()</code> <code>is_infinite()</code>.</p>
 <p>In the code example below, we create a vector containing <code>NA</code> <code>NaN</code> <code>Inf</code> <code>-Inf</code> and evaluate it. From this example we can see that the <code>is_na()</code> evaluates both <code>NA</code> and<code>NaN</code> as <code>TRUE</code> (same as R’s <code>is.na()</code>).</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb110-1" data-line-number="1">NumericVector v =</a>
-<a class="sourceLine" id="cb110-2" data-line-number="2">    NumericVector::create( <span class="dv">1</span>, NA_REAL, R_NaN, R_PosInf, R_NegInf);</a>
-<a class="sourceLine" id="cb110-3" data-line-number="3">LogicalVector l1 = is_na(v);</a>
-<a class="sourceLine" id="cb110-4" data-line-number="4">LogicalVector l2 = is_nan(v);</a>
-<a class="sourceLine" id="cb110-5" data-line-number="5">LogicalVector l3 = is_infinite(v);</a>
-<a class="sourceLine" id="cb110-6" data-line-number="6">Rcout &lt;&lt; l1 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 1 1 0 0</span></a>
-<a class="sourceLine" id="cb110-7" data-line-number="7">Rcout &lt;&lt; l2 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 1 0 0</span></a>
-<a class="sourceLine" id="cb110-8" data-line-number="8">Rcout &lt;&lt; l3 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 0 1 1</span></a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v =
+    NumericVector::create( <span class="dv">1</span>, NA_REAL, R_NaN, R_PosInf, R_NegInf);
+LogicalVector l1 = is_na(v);
+LogicalVector l2 = is_nan(v);
+LogicalVector l3 = is_infinite(v);
+Rcout &lt;&lt; l1 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 1 1 0 0</span>
+Rcout &lt;&lt; l2 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 1 0 0</span>
+Rcout &lt;&lt; l3 &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// 0 0 0 1 1</span></code></pre>
 <p>You can remove <code>NA</code> <code>NaN</code> <code>Inf</code> from a vector by using these functions. You can also use <code>na_omit()</code> to remove <code>NA</code>.</p>
 <p>The code example below shows how to remove <code>NA</code> from a vector using the <code>is_na()</code> and <code>na_omit()</code>.</p>
 <pre><code>// Creating a Vector object containg NA
@@ -566,24 +556,24 @@ NumericVector v2 = na_omit(v);</code></pre>
 <div id="evaluating-single-element-of-a-vector" class="section level3">
 <h3><span class="header-section-number">24.2.2</span> Evaluating single element of a vector</h3>
 <p>If you want to evaluate <code>NA</code> <code>NaN</code> <code>Inf</code> <code>-Inf</code> on single element of a vector, use the static member function <code>Vector::is_na()</code>, <code>traits::is_nan&lt;RTYPE&gt;()</code>, <code>traits:: is_infinite&lt;RTYPE&gt;()</code>. In <code>RTYPE</code>, specify <code>SEXPTYPE</code> of the vector to be evaluated.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="dt">void</span> rcpp_is_na2() {</a>
-<a class="sourceLine" id="cb112-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb112-4" data-line-number="4">    <span class="co">// Creating Vector object containing NA NaN Inf -Inf</span></a>
-<a class="sourceLine" id="cb112-5" data-line-number="5">    NumericVector v =</a>
-<a class="sourceLine" id="cb112-6" data-line-number="6">        NumericVector::create(<span class="dv">1</span>, NA_REAL, R_NaN, R_PosInf, R_NegInf);</a>
-<a class="sourceLine" id="cb112-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb112-8" data-line-number="8">    <span class="co">// Evaluating the value for each element of the vector</span></a>
-<a class="sourceLine" id="cb112-9" data-line-number="9">    <span class="dt">int</span> n = v.length();</a>
-<a class="sourceLine" id="cb112-10" data-line-number="10">    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; ++i) {</a>
-<a class="sourceLine" id="cb112-11" data-line-number="11">        <span class="cf">if</span>(NumericVector::is_na(v[i]))</a>
-<a class="sourceLine" id="cb112-12" data-line-number="12">            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NA.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);</a>
-<a class="sourceLine" id="cb112-13" data-line-number="13">        <span class="cf">if</span>(Rcpp::traits::is_nan&lt;REALSXP&gt;(v[i]))</a>
-<a class="sourceLine" id="cb112-14" data-line-number="14">            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NaN.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);</a>
-<a class="sourceLine" id="cb112-15" data-line-number="15">        <span class="cf">if</span>(Rcpp::traits::is_infinite&lt;REALSXP&gt;(v[i]))</a>
-<a class="sourceLine" id="cb112-16" data-line-number="16">            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is Inf or -Inf.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);</a>
-<a class="sourceLine" id="cb112-17" data-line-number="17">    }</a>
-<a class="sourceLine" id="cb112-18" data-line-number="18">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
+<span class="dt">void</span> rcpp_is_na2() {
+
+    <span class="co">// Creating Vector object containing NA NaN Inf -Inf</span>
+    NumericVector v =
+        NumericVector::create(<span class="dv">1</span>, NA_REAL, R_NaN, R_PosInf, R_NegInf);
+
+    <span class="co">// Evaluating the value for each element of the vector</span>
+    <span class="dt">int</span> n = v.length();
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; ++i) {
+        <span class="cf">if</span>(NumericVector::is_na(v[i]))
+            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NA.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);
+        <span class="cf">if</span>(Rcpp::traits::is_nan&lt;REALSXP&gt;(v[i]))
+            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is NaN.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);
+        <span class="cf">if</span>(Rcpp::traits::is_infinite&lt;REALSXP&gt;(v[i]))
+            Rprintf(<span class="st">&quot;v[</span><span class="sc">%i</span><span class="st">] is Inf or -Inf.</span><span class="sc">\n</span><span class="st">&quot;</span>, i);
+    }
+}</code></pre>
 <p>Here is the list of <code>SEXPTYPE</code> of the major Vector class.</p>
 <table>
 <thead>
@@ -620,26 +610,26 @@ NumericVector v2 = na_omit(v);</code></pre>
 <div id="null" class="section level2">
 <h2><span class="header-section-number">24.3</span> NULL</h2>
 <p>You use <code>R_NilValue</code> to handle<code>NULL</code> in Rcpp. The code example below shows how to check <code>NULL</code> in the elements of a <code>List</code> object and how to assign <code>NULL</code> to clear the value of an attribute.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb113-2" data-line-number="2">List rcpp_list()</a>
-<a class="sourceLine" id="cb113-3" data-line-number="3">{</a>
-<a class="sourceLine" id="cb113-4" data-line-number="4">    <span class="co">// Create a List object with element names</span></a>
-<a class="sourceLine" id="cb113-5" data-line-number="5">    <span class="co">// One of the two elements is NULL</span></a>
-<a class="sourceLine" id="cb113-6" data-line-number="6">    List L = List::create(Named(<span class="st">&quot;x&quot;</span>,NumericVector({<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>})),</a>
-<a class="sourceLine" id="cb113-7" data-line-number="7">                          Named(<span class="st">&quot;y&quot;</span>,R_NilValue));</a>
-<a class="sourceLine" id="cb113-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb113-9" data-line-number="9">    <span class="co">// Checking NULL</span></a>
-<a class="sourceLine" id="cb113-10" data-line-number="10">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;L.length(); ++i){</a>
-<a class="sourceLine" id="cb113-11" data-line-number="11">        <span class="cf">if</span>(L[i]==R_NilValue) {</a>
-<a class="sourceLine" id="cb113-12" data-line-number="12">            Rprintf(<span class="st">&quot;L[</span><span class="sc">%i</span><span class="st">] is NULL.</span><span class="sc">\n\n</span><span class="st">&quot;</span>, i<span class="dv">+1</span>);</a>
-<a class="sourceLine" id="cb113-13" data-line-number="13">        }</a>
-<a class="sourceLine" id="cb113-14" data-line-number="14">    }</a>
-<a class="sourceLine" id="cb113-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb113-16" data-line-number="16">    <span class="co">// Delete the value of the attribute (element name) of the object</span></a>
-<a class="sourceLine" id="cb113-17" data-line-number="17">    L.attr(<span class="st">&quot;names&quot;</span>) = R_NilValue;</a>
-<a class="sourceLine" id="cb113-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb113-19" data-line-number="19">    <span class="cf">return</span>(L);</a>
-<a class="sourceLine" id="cb113-20" data-line-number="20">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
+List rcpp_list()
+{
+    <span class="co">// Create a List object with element names</span>
+    <span class="co">// One of the two elements is NULL</span>
+    List L = List::create(Named(<span class="st">&quot;x&quot;</span>,NumericVector({<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>})),
+                          Named(<span class="st">&quot;y&quot;</span>,R_NilValue));
+
+    <span class="co">// Checking NULL</span>
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;L.length(); ++i){
+        <span class="cf">if</span>(L[i]==R_NilValue) {
+            Rprintf(<span class="st">&quot;L[</span><span class="sc">%i</span><span class="st">] is NULL.</span><span class="sc">\n\n</span><span class="st">&quot;</span>, i<span class="dv">+1</span>);
+        }
+    }
+
+    <span class="co">// Delete the value of the attribute (element name) of the object</span>
+    L.attr(<span class="st">&quot;names&quot;</span>) = R_NilValue;
+
+    <span class="cf">return</span>(L);
+}</code></pre>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_list()
 L[2] is NULL.
@@ -726,25 +716,25 @@ NULL</code></pre>
 </tbody>
 </table>
 <p>The code example below shows the difference in results when computing using the Rcpp operator and the standard C++ operator against <code>NA_INTEGER</code>. From this result, the operator of Rcpp evaluates the result of the operation on <code>NA</code> as <code>NA</code>, but you can see that the standard C++ operator treats <code>NA_INTEGER</code> as just a integer value.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb115-2" data-line-number="2">List rcpp_na_sum(){</a>
-<a class="sourceLine" id="cb115-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb115-4" data-line-number="4">    <span class="co">// Creating an integer vector containing NA</span></a>
-<a class="sourceLine" id="cb115-5" data-line-number="5">    IntegerVector v1  = IntegerVector::create(<span class="dv">1</span>,NA_INTEGER,<span class="dv">3</span>);</a>
-<a class="sourceLine" id="cb115-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb115-7" data-line-number="7">    <span class="co">// Applying the &quot;+&quot; operator between vector and scalar defined in Rcpp</span></a>
-<a class="sourceLine" id="cb115-8" data-line-number="8">    IntegerVector res1 = v1 + <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb115-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb115-10" data-line-number="10">    <span class="co">// Applying the &quot;+&quot; operator between int and int defined in standard C++</span></a>
-<a class="sourceLine" id="cb115-11" data-line-number="11">    IntegerVector res2(<span class="dv">3</span>);</a>
-<a class="sourceLine" id="cb115-12" data-line-number="12">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v1.length(); ++i){</a>
-<a class="sourceLine" id="cb115-13" data-line-number="13">        res2[i] = v1[i] + <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb115-14" data-line-number="14">    }</a>
-<a class="sourceLine" id="cb115-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb115-16" data-line-number="16">    <span class="co">// Outputing the result as named list</span></a>
-<a class="sourceLine" id="cb115-17" data-line-number="17">    <span class="cf">return</span> List::create(Named(<span class="st">&quot;Rcpp plus&quot;</span>, res1),</a>
-<a class="sourceLine" id="cb115-18" data-line-number="18">                        Named(<span class="st">&quot;C++  plus&quot;</span>, res2));</a>
-<a class="sourceLine" id="cb115-19" data-line-number="19">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
+List rcpp_na_sum(){
+
+    <span class="co">// Creating an integer vector containing NA</span>
+    IntegerVector v1  = IntegerVector::create(<span class="dv">1</span>,NA_INTEGER,<span class="dv">3</span>);
+
+    <span class="co">// Applying the &quot;+&quot; operator between vector and scalar defined in Rcpp</span>
+    IntegerVector res1 = v1 + <span class="dv">1</span>;
+
+    <span class="co">// Applying the &quot;+&quot; operator between int and int defined in standard C++</span>
+    IntegerVector res2(<span class="dv">3</span>);
+    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;v1.length(); ++i){
+        res2[i] = v1[i] + <span class="dv">1</span>;
+    }
+
+    <span class="co">// Outputing the result as named list</span>
+    <span class="cf">return</span> List::create(Named(<span class="st">&quot;Rcpp plus&quot;</span>, res1),
+                        Named(<span class="st">&quot;C++  plus&quot;</span>, res2));
+}</code></pre>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_na_sum()
 $`Rcpp plus`
@@ -766,13 +756,11 @@ $`C++  plus`
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

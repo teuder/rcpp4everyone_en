@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html >
+
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Chapter 13 List | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="description" content="Introducing how to use Rcpp">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 13 List | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 13 List | Rcpp for everyone />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +17,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 List | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 13 List | Rcpp for everyone />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda" />
+<meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-11-17" />
+<meta name="date" content="2020-02-06">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="140_dataframe.html"/>
-<link rel="next" href="160_s3_s4.html"/>
+<link rel="prev" href="140_dataframe.html">
+<link rel="next" href="160_s3_s4.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,17 +48,6 @@
 
 
 
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-101879207-2');
-</script>
 
 
 <style type="text/css">
@@ -67,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -486,18 +476,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-list-object" class="section level2">
 <h2><span class="header-section-number">13.1</span> Creating List object</h2>
 <p>To create a <code>List</code> object we use the <code>List::create()</code> function. Also, to specify the element name when creating <code>List</code>, use <code>Named()</code> function or <code>_[]</code>.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">// Create list L from vector v1, v2</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">List L = List::create(v1, v2);</a>
-<a class="sourceLine" id="cb48-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="co">// When giving names to elements</span></a>
-<a class="sourceLine" id="cb48-5" data-line-number="5">List L = List::create(Named(<span class="st">&quot;name1&quot;</span>) = v1 , _[<span class="st">&quot;name2&quot;</span>] = v2);</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Create list L from vector v1, v2</span>
+List L = List::create(v1, v2);
+
+<span class="co">// When giving names to elements</span>
+List L = List::create(Named(<span class="st">&quot;name1&quot;</span>) = v1 , _[<span class="st">&quot;name2&quot;</span>] = v2);</code></pre>
 </div>
 <div id="accessing-list-elements" class="section level2">
 <h2><span class="header-section-number">13.2</span> Accessing List elements</h2>
 <p>When accessing a specific element of <code>List</code>, we assign it to the other object and access it via that object.</p>
 <p>The elements of <code>List</code> can be specified by numerical index, element names and logical vector.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb49-1" data-line-number="1">NumericVector v1 = L[<span class="dv">0</span>];</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">NumericVector v2 = L[<span class="st">&quot;V1&quot;</span>];</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v1 = L[<span class="dv">0</span>];
+NumericVector v2 = L[<span class="st">&quot;V1&quot;</span>];</code></pre>
 </div>
 <div id="member-functions-3" class="section level2">
 <h2><span class="header-section-number">13.3</span> Member functions</h2>
@@ -516,13 +506,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

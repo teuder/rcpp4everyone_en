@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html >
+
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Chapter 19 Cautions in handling Rcpp objects | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="description" content="Introducing how to use Rcpp">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 19 Cautions in handling Rcpp objects | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 19 Cautions in handling Rcpp objects | Rcpp for everyone />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +17,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Cautions in handling Rcpp objects | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 19 Cautions in handling Rcpp objects | Rcpp for everyone />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda" />
+<meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-11-17" />
+<meta name="date" content="2020-02-06">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="200_robject.html"/>
-<link rel="next" href="202_attributes.html"/>
+<link rel="prev" href="200_robject.html">
+<link rel="next" href="202_attributes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,17 +48,6 @@
 
 
 
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-101879207-2');
-</script>
 
 
 <style type="text/css">
@@ -67,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -485,46 +475,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">19.1</span> Assigning between vectors</h2>
 <p>When you assign a object <code>v1</code> to another object <code>v2</code> using <code>=</code> operator (<code>v2 = v1;</code>), the value of elements of <code>v1</code> is not copied to <code>v2</code> but <code>v2</code> will be an alias to <code>v1</code>. Thus, if you change the value of some elements in <code>v1</code>, the change also applied to <code>v2</code>. You should use <code>clone()</code>, if you want to avoid coupling between objects (see sample code below).</p>
 <p>The sample code presented below shows that the difference of the shallow copy and deep copy when you change value of one of vector after assigning.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb68-1" data-line-number="1">NumericVector v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>};   <span class="co">// create a vector v1</span></a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">NumericVector v2 = v1;        <span class="co">// v1 is assigned to v2 through shallow copy.</span></a>
-<a class="sourceLine" id="cb68-3" data-line-number="3">NumericVector v3 = clone(v1); <span class="co">// v1 is assigned to v3 through deep copy.</span></a>
-<a class="sourceLine" id="cb68-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb68-5" data-line-number="5">v1[<span class="dv">0</span>] = <span class="dv">100</span>; <span class="co">// changing value of a element of v1</span></a>
-<a class="sourceLine" id="cb68-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb68-7" data-line-number="7"><span class="co">// Following output shows that</span></a>
-<a class="sourceLine" id="cb68-8" data-line-number="8"><span class="co">// the modification of v1 element</span></a>
-<a class="sourceLine" id="cb68-9" data-line-number="9"><span class="co">// is also applied to v2 but not to v3</span></a>
-<a class="sourceLine" id="cb68-10" data-line-number="10">Rcout &lt;&lt; <span class="st">&quot;v1 = &quot;</span> &lt;&lt; v1 &lt;&lt; endl; <span class="co">// 100 2 3</span></a>
-<a class="sourceLine" id="cb68-11" data-line-number="11">Rcout &lt;&lt; <span class="st">&quot;v2 = &quot;</span> &lt;&lt; v2 &lt;&lt; endl; <span class="co">// 100 2 3</span></a>
-<a class="sourceLine" id="cb68-12" data-line-number="12">Rcout &lt;&lt; <span class="st">&quot;v3 = &quot;</span> &lt;&lt; v3 &lt;&lt; endl; <span class="co">// 1 2 3</span></a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v1 = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>};   <span class="co">// create a vector v1</span>
+NumericVector v2 = v1;        <span class="co">// v1 is assigned to v2 through shallow copy.</span>
+NumericVector v3 = clone(v1); <span class="co">// v1 is assigned to v3 through deep copy.</span>
+
+v1[<span class="dv">0</span>] = <span class="dv">100</span>; <span class="co">// changing value of a element of v1</span>
+
+<span class="co">// Following output shows that</span>
+<span class="co">// the modification of v1 element</span>
+<span class="co">// is also applied to v2 but not to v3</span>
+Rcout &lt;&lt; <span class="st">&quot;v1 = &quot;</span> &lt;&lt; v1 &lt;&lt; endl; <span class="co">// 100 2 3</span>
+Rcout &lt;&lt; <span class="st">&quot;v2 = &quot;</span> &lt;&lt; v2 &lt;&lt; endl; <span class="co">// 100 2 3</span>
+Rcout &lt;&lt; <span class="st">&quot;v3 = &quot;</span> &lt;&lt; v3 &lt;&lt; endl; <span class="co">// 1 2 3</span></code></pre>
 <p>As explanation for people who have deeper knowledge of C++, a Rcpp object do not have value of R object (e.g. elements of a vector) itself, but have a pointer to R object. Thus, if you assign object through <code>v2 = v1;</code>, the value of pointer of <code>v1</code> is copied to <code>v2</code>. So, both <code>v1</code> and <code>v2</code> would be pointing to the same R object. This is called “shallow copy”. On the other hand, if you assign object through <code>v2 = clone(v1);</code>, the value of R object that <code>v1</code> is pointing is copied to <code>v2</code> as new R object. This is called “deep copy”.</p>
 </div>
 <div id="data-type-of-numerical-index" class="section level2">
 <h2><span class="header-section-number">19.2</span> Data type of numerical index</h2>
 <p>Maximum number of vector elements is limited to the length of 2^31 - 1 in R &lt;= version 2.0.0 or 32 bit build of R, because <code>int</code> is used as data type of numerical index. However, long vector is supported after 64 bit build of R 3.0.0. You should use <code>R_xlen_t</code> as data data type for numerical index or the number of elements to support long vector in your Rcpp code.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="co">// Declare the number of element &quot;n&quot; using R_xlen_t</span></a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="dt">R_xlen_t</span> n = v.length();</a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="dt">double</span> sum = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="co">// Declare the numerical index &quot;i&quot; using R_xlen_t</span></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="cf">for</span>(<span class="dt">R_xlen_t</span> i=<span class="dv">0</span>; i&lt;n; ++i){</a>
-<a class="sourceLine" id="cb69-6" data-line-number="6">  sum += v[i];</a>
-<a class="sourceLine" id="cb69-7" data-line-number="7">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Declare the number of element &quot;n&quot; using R_xlen_t</span>
+<span class="dt">R_xlen_t</span> n = v.length();
+<span class="dt">double</span> sum = <span class="dv">0</span>;
+<span class="co">// Declare the numerical index &quot;i&quot; using R_xlen_t</span>
+<span class="cf">for</span>(<span class="dt">R_xlen_t</span> i=<span class="dv">0</span>; i&lt;n; ++i){
+  sum += v[i];
+}</code></pre>
 </div>
 <div id="return-type-of-operator" class="section level2">
 <h2><span class="header-section-number">19.3</span> Return type of operator[]</h2>
 <p>When you access to vector elements using <code>[]</code> or <code>()</code> operator, the return type is not <code>Vector</code> itself but <code>Vector::Proxy</code>. Thus, it will cause compile error when you pass <code>v[i]</code> directly to some function, if the function only supports <code>Vector</code> type. To avoid compile error <code>v[i]</code> assign to new object or convert it to type <code>T</code> using <code>as&lt;T&gt;()</code>.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb70-1" data-line-number="1">NumericVector v {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
-<a class="sourceLine" id="cb70-2" data-line-number="2">IntegerVector i {<span class="dv">1</span>,<span class="dv">3</span>};</a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="co">// Compile error</span></a>
-<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="co">//double x1 = sum(v[i]);</span></a>
-<a class="sourceLine" id="cb70-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb70-7" data-line-number="7"><span class="co">// Save as new object</span></a>
-<a class="sourceLine" id="cb70-8" data-line-number="8">NumericVector vi = v[i];</a>
-<a class="sourceLine" id="cb70-9" data-line-number="9"><span class="dt">double</span>   x2 = sum(vi);</a>
-<a class="sourceLine" id="cb70-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb70-11" data-line-number="11"><span class="co">// Convert to NumericVector using as&lt;T&gt;()</span></a>
-<a class="sourceLine" id="cb70-12" data-line-number="12"><span class="dt">double</span>   x3 = sum(as&lt;NumericVector&gt;(v[i]));</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
+IntegerVector i {<span class="dv">1</span>,<span class="dv">3</span>};
+
+<span class="co">// Compile error</span>
+<span class="co">//double x1 = sum(v[i]);</span>
+
+<span class="co">// Save as new object</span>
+NumericVector vi = v[i];
+<span class="dt">double</span>   x2 = sum(vi);
+
+<span class="co">// Convert to NumericVector using as&lt;T&gt;()</span>
+<span class="dt">double</span>   x3 = sum(as&lt;NumericVector&gt;(v[i]));</code></pre>
 
 </div>
 </div>
@@ -539,13 +529,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

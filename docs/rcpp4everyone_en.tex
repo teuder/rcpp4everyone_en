@@ -21,6 +21,7 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Rcpp for everyone},
@@ -106,7 +107,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
+\newcommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -122,15 +123,8 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-17}
+    \date{2020-02-06}
 
-%lualatexjaを使うために,ヘッダーとして読み込ませるtexファイル
-%必要なヘッダーはここに記述しておくと楽です
-%個人的な趣味でIPAフォントを利用しています
-%\usepackage{luatexja}
-%\usepackage{luatexja-fontspec}
-%\setmainjfont{IPAexGothic}
-%\setsansjfont{IPAexGothic}
 
 \begin{document}
 \maketitle

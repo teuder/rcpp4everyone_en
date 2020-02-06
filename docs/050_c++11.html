@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html >
+
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Chapter 5 C++11 | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="description" content="Introducing how to use Rcpp">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 5 C++11 | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 5 C++11 | Rcpp for everyone />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +17,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 C++11 | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 5 C++11 | Rcpp for everyone />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda" />
+<meta name="author" content="Masaki E. Tsuda">
 
 
-<meta name="date" content="2019-11-17" />
+<meta name="date" content="2020-02-06">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="040_function.html"/>
-<link rel="next" href="060_utility.html"/>
+<link rel="prev" href="040_function.html">
+<link rel="next" href="060_utility.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,17 +48,6 @@
 
 
 
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-101879207-2');
-</script>
 
 
 <style type="text/css">
@@ -67,6 +56,7 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -486,7 +476,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="enabling-c11" class="section level2">
 <h2><span class="header-section-number">5.1</span> Enabling C++11</h2>
 <p>To enable <code>C++11</code>, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with <code>Rcpp::sourceCpp()</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></code></pre>
 <p>If you want to enable C++11 in your package, add code below in <code>DESCRIPTION</code> file.</p>
 <pre><code>SystemRequirements: C++11</code></pre>
 </div>
@@ -544,20 +534,20 @@ for(auto&amp; x : v) {
 <p><strong>Example</strong></p>
 <p>The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.</p>
 <p><em>R example</em></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">res &lt;-</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x){A<span class="op">*</span>x})</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)
+A &lt;-<span class="st"> </span><span class="fl">2.0</span>
+res &lt;-
+<span class="st">  </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x){A<span class="op">*</span>x})</code></pre>
 <p><em>Rcpp example</em></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">NumericVector rcpp_lambda_1(){</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">  NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">  <span class="dt">double</span> A = <span class="fl">2.0</span>;</a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">  NumericVector res =</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">    sapply(v, [&amp;](<span class="dt">double</span> x){<span class="cf">return</span> A*x;});</a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">  <span class="cf">return</span> res;</a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">}</a></code></pre></div>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span>
+<span class="co">// [[Rcpp::export]]</span>
+NumericVector rcpp_lambda_1(){
+  NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
+  <span class="dt">double</span> A = <span class="fl">2.0</span>;
+  NumericVector res =
+    sapply(v, [&amp;](<span class="dt">double</span> x){<span class="cf">return</span> A*x;});
+  <span class="cf">return</span> res;
+}</code></pre>
 
 </div>
 </div>
@@ -573,13 +563,11 @@ for(auto&amp; x : v) {
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
