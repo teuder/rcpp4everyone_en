@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Vector | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Vector | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 8 Vector | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Vector | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 8 Vector | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-02-27">
+<meta name="date" content="2020-03-31" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="070_data_types.html">
-<link rel="next" href="100_matrix.html">
+<link rel="prev" href="070_data_types.html"/>
+<link rel="next" href="100_matrix.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -172,9 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#lambda-expression"><i class="fa fa-check"></i><b>5.2.5</b> Lambda expression</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
-<li class="chapter" data-level="6.1" data-path="060_utility.html"><a href="060_utility.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
-<li class="chapter" data-level="6.2" data-path="060_utility.html"><a href="060_utility.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
+<li class="chapter" data-level="6" data-path="060_printing_massages.html"><a href="060_printing_massages.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
+<li class="chapter" data-level="6.1" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
+<li class="chapter" data-level="6.2" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="070_data_types.html"><a href="070_data_types.html"><i class="fa fa-check"></i><b>7</b> Data types</a><ul>
 <li class="chapter" data-level="7.1" data-path="070_data_types.html"><a href="070_data_types.html#vector-and-matrix"><i class="fa fa-check"></i><b>7.1</b> Vector and Matrix</a></li>
@@ -184,35 +185,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="080_vector.html"><a href="080_vector.html#creating-vector-object"><i class="fa fa-check"></i><b>8.1</b> Creating vector object</a></li>
 <li class="chapter" data-level="8.2" data-path="080_vector.html"><a href="080_vector.html#accessing-vector-elements"><i class="fa fa-check"></i><b>8.2</b> Accessing vector elements</a></li>
 <li class="chapter" data-level="8.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>8.3</b> Member functions</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> length(), size()</a></li>
-<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> names()</a></li>
-<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> offset( name ), findName( name )</a></li>
-<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> offset( i )</a></li>
-<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> fill( x )</a></li>
-<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> sort()</a></li>
-<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> assign( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> push_back( x )</a></li>
-<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> push_back( x, name )</a></li>
-<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> push_front( x )</a></li>
-<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
-<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
-<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, last_i )</a></li>
-<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> <code>length()</code>, <code>size()</code></a></li>
+<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> <code>names()</code></a></li>
+<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> <code>offset( name )</code>, <code>findName( name )</code></a></li>
+<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> <code>offset( i )</code></a></li>
+<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> <code>fill( x )</code></a></li>
+<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> <code>sort()</code></a></li>
+<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> <code>assign( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> <code>push_back( x )</code></a></li>
+<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> <code>push_back( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> <code>push_front( x )</code></a></li>
+<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> <code>push_front( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> <code>begin()</code></a></li>
+<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> <code>end()</code></a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> <code>cbegin()</code></a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> <code>cend()</code></a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> <code>insert( i, x )</code></a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> <code>insert( it, x )</code></a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> <code>erase(i)</code></a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> <code>erase(it)</code></a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> <code>erase( first_i, last_i )</code></a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> <code>erase( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> <code>containsElementNamed(name)</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
-<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> is_na(x)</a></li>
-<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2"><i class="fa fa-check"></i><b>8.4.3</b> create( x1, x2, …)</a></li>
-<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> import( first_it , last_it )</a></li>
-<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> import_transform( first_it, last_it, func)</a></li>
+<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> <code>get_na()</code></a></li>
+<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> <code>is_na(x)</code></a></li>
+<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2-..."><i class="fa fa-check"></i><b>8.4.3</b> <code>create( x1, x2, ...)</code></a></li>
+<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> <code>import( first_it , last_it )</code></a></li>
+<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> <code>import_transform( first_it, last_it, func)</code></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
@@ -483,180 +484,181 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-vector-object" class="section level2">
 <h2><span class="header-section-number">8.1</span> Creating vector object</h2>
 <p>You can create vector object in several ways.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//Create a Vector object equivalent to</span>
-<span class="co">// v &lt;- rep(0, 3)</span>
-NumericVector v (<span class="dv">3</span>);
-
-<span class="co">// v &lt;- rep(1, 3)</span>
-NumericVector v (<span class="dv">3</span>,<span class="dv">1</span>);
-
-<span class="co">// v &lt;- c(1,2,3) </span>
-<span class="co">// C++11 Initializer list</span>
-NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}; 
-
-<span class="co">// v &lt;- c(1,2,3)</span>
-NumericVector v = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);
-
-<span class="co">// v &lt;- c(x=1, y=2, z=3)</span>
-NumericVector v =
-  NumericVector::create(Named(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span>), Named(<span class="st">&quot;y&quot;</span>)=<span class="dv">2</span> , _[<span class="st">&quot;z&quot;</span>]=<span class="dv">3</span>);</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">// Create a Vector object equivalent to</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">// v &lt;- rep(0, 3)</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">NumericVector v (<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">// v &lt;- rep(1, 3)</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">NumericVector v (<span class="dv">3</span>,<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">// v &lt;- c(1,2,3) </span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">// C++11 Initializer list</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>}; </a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">// v &lt;- c(1,2,3)</span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">NumericVector v = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="co">// v &lt;- c(x=1, y=2, z=3)</span></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16">NumericVector v =</a>
+<a class="sourceLine" id="cb21-17" data-line-number="17">  NumericVector::create(Named(<span class="st">&quot;x&quot;</span>,<span class="dv">1</span>), Named(<span class="st">&quot;y&quot;</span>)=<span class="dv">2</span> , _[<span class="st">&quot;z&quot;</span>]=<span class="dv">3</span>);</a></code></pre></div>
 </div>
 <div id="accessing-vector-elements" class="section level2">
 <h2><span class="header-section-number">8.2</span> Accessing vector elements</h2>
 <p>You can access to individual element of a vector object using <code>[]</code> or <code>()</code> operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. <code>[]</code> operator ignores out of bound access, while <code>()</code> operator throws an exception <code>index_out_of_bounds</code>.</p>
-<p><strong>It is important to note that index of Vector object in C++ start at 0.</strong></p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-<span class="dt">void</span> rcpp_vector_access(){
-
-  <span class="co">// Creating vector</span>
-  NumericVector v  {<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>};
-
-  <span class="co">// Setting element names</span>
-  v.names() = CharacterVector({<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>});
-
-  <span class="co">// Preparing vector for access</span>
-  NumericVector   numeric = {<span class="dv">1</span>,<span class="dv">3</span>};
-  IntegerVector   integer = {<span class="dv">1</span>,<span class="dv">3</span>};
-  CharacterVector character = {<span class="st">&quot;B&quot;</span>,<span class="st">&quot;D&quot;</span>};
-  LogicalVector   logical = {<span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>};
-
-  <span class="co">// Getting values of vector elements</span>
-  <span class="dt">double</span> x1 = v[<span class="dv">0</span>];
-  <span class="dt">double</span> x2 = v[<span class="st">&quot;A&quot;</span>];
-  NumericVector res1 = v[numeric];
-  NumericVector res2 = v[integer];
-  NumericVector res3 = v[character];
-  NumericVector res4 = v[logical];
-
-  <span class="co">// Assigning values to vector elements</span>
-  v[<span class="dv">0</span>]   = <span class="dv">100</span>;
-  v[<span class="st">&quot;A&quot;</span>] = <span class="dv">100</span>;
-  NumericVector v2 {<span class="dv">100</span>,<span class="dv">200</span>};
-  v[numeric]   = v2;
-  v[integer]   = v2;
-  v[character] = v2;
-  v[logical]   = v2;
-}</code></pre>
+<p><strong>Note that the index of the Vector object in C++ starts from 0.</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="dt">void</span> rcpp_vector_access(){</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="co">// Creating vector</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">  NumericVector v  {<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>};</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">  <span class="co">// Setting element names</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">  v.names() = CharacterVector({<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>});</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10">  <span class="co">// Preparing vector for access</span></a>
+<a class="sourceLine" id="cb22-11" data-line-number="11">  NumericVector   numeric = {<span class="dv">1</span>,<span class="dv">3</span>};</a>
+<a class="sourceLine" id="cb22-12" data-line-number="12">  IntegerVector   integer = {<span class="dv">1</span>,<span class="dv">3</span>};</a>
+<a class="sourceLine" id="cb22-13" data-line-number="13">  CharacterVector character = {<span class="st">&quot;B&quot;</span>,<span class="st">&quot;D&quot;</span>};</a>
+<a class="sourceLine" id="cb22-14" data-line-number="14">  LogicalVector   logical = {<span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">false</span>};</a>
+<a class="sourceLine" id="cb22-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb22-16" data-line-number="16">  <span class="co">// Getting values of vector elements</span></a>
+<a class="sourceLine" id="cb22-17" data-line-number="17">  <span class="dt">double</span> x1 = v[<span class="dv">0</span>];</a>
+<a class="sourceLine" id="cb22-18" data-line-number="18">  <span class="dt">double</span> x2 = v[<span class="st">&quot;A&quot;</span>];</a>
+<a class="sourceLine" id="cb22-19" data-line-number="19">  NumericVector res1 = v[numeric];</a>
+<a class="sourceLine" id="cb22-20" data-line-number="20">  NumericVector res2 = v[integer];</a>
+<a class="sourceLine" id="cb22-21" data-line-number="21">  NumericVector res3 = v[character];</a>
+<a class="sourceLine" id="cb22-22" data-line-number="22">  NumericVector res4 = v[logical];</a>
+<a class="sourceLine" id="cb22-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb22-24" data-line-number="24">  <span class="co">// Assigning values to vector elements</span></a>
+<a class="sourceLine" id="cb22-25" data-line-number="25">  v[<span class="dv">0</span>]   = <span class="dv">100</span>;</a>
+<a class="sourceLine" id="cb22-26" data-line-number="26">  v[<span class="st">&quot;A&quot;</span>] = <span class="dv">100</span>;</a>
+<a class="sourceLine" id="cb22-27" data-line-number="27">  NumericVector v2 {<span class="dv">100</span>,<span class="dv">200</span>};</a>
+<a class="sourceLine" id="cb22-28" data-line-number="28">  v[numeric]   = v2;</a>
+<a class="sourceLine" id="cb22-29" data-line-number="29">  v[integer]   = v2;</a>
+<a class="sourceLine" id="cb22-30" data-line-number="30">  v[character] = v2;</a>
+<a class="sourceLine" id="cb22-31" data-line-number="31">  v[logical]   = v2;</a>
+<a class="sourceLine" id="cb22-32" data-line-number="32">}</a></code></pre></div>
 </div>
 <div id="member-functions" class="section level2">
 <h2><span class="header-section-number">8.3</span> Member functions</h2>
-<p>Member functions (also called as Methods) are functions that is attached to individual object. You can call member functions <code>f()</code> of object <code>v</code> in the form of <code>v.f()</code>.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
-
-<span class="co">// Calling member function</span>
-<span class="dt">int</span> n = v.length(); <span class="co">// 5</span></code></pre>
-<p>The Vector object in Rcpp have member functions listed below.</p>
+<p>Member functions (also called as Methods) are functions that is attached to an individual object. You can call member functions <code>f()</code> of object <code>v</code> in the form of <code>v.f()</code>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb23-1" data-line-number="1">NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="co">// Calling member function</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="dt">int</span> n = v.length(); <span class="co">// 5</span></a></code></pre></div>
+<p>The <code>Vector</code> object in Rcpp have member functions listed below.</p>
 <div id="length-size" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> length(), size()</h3>
-<p>return the number of elements of this vector object.</p>
+<h3><span class="header-section-number">8.3.1</span> <code>length()</code>, <code>size()</code></h3>
+<p>Returns the number of elements of this vector object.</p>
 </div>
 <div id="names" class="section level3">
-<h3><span class="header-section-number">8.3.2</span> names()</h3>
-<p>return the element names of this vector object as CharacterVector.</p>
+<h3><span class="header-section-number">8.3.2</span> <code>names()</code></h3>
+<p>Returns the element names of this vector object as <code>CharacterVector.</code></p>
 </div>
 <div id="offset-name-findname-name" class="section level3">
-<h3><span class="header-section-number">8.3.3</span> offset( name ), findName( name )</h3>
-<p>return numerical index of the element specified by character string <code>name</code>.</p>
+<h3><span class="header-section-number">8.3.3</span> <code>offset( name )</code>, <code>findName( name )</code></h3>
+<p>Returns numerical index of the element specified by character string <code>name</code>.</p>
 </div>
 <div id="offset-i" class="section level3">
-<h3><span class="header-section-number">8.3.4</span> offset( i )</h3>
-<p>return numerical index of the element specified by numerical index <code>i</code> after doing bounds checking to ensure <code>i</code> is valid.</p>
+<h3><span class="header-section-number">8.3.4</span> <code>offset( i )</code></h3>
+<p>Returns numerical index of the element specified by numerical index <code>i</code> after doing bounds checking to ensure <code>i</code> is valid.</p>
 </div>
 <div id="fill-x" class="section level3">
-<h3><span class="header-section-number">8.3.5</span> fill( x )</h3>
-<p>fill all the element of this vector object with scalar value <code>x</code>.</p>
+<h3><span class="header-section-number">8.3.5</span> <code>fill( x )</code></h3>
+<p>Fills all the element of this vector object with scalar value <code>x</code>.</p>
 </div>
 <div id="sort" class="section level3">
-<h3><span class="header-section-number">8.3.6</span> sort()</h3>
-<p>return a vector that sorts this vector object in ascending order.</p>
+<h3><span class="header-section-number">8.3.6</span> <code>sort()</code></h3>
+<p>Returns a vector that sorts this vector object in ascending order.</p>
 </div>
 <div id="assign-first_it-last_it" class="section level3">
-<h3><span class="header-section-number">8.3.7</span> assign( first_it, last_it )</h3>
-<p>assign values specified by the iterator <code>first_it</code> and <code>last_it</code> to this vector object.</p>
+<h3><span class="header-section-number">8.3.7</span> <code>assign( first_it, last_it )</code></h3>
+<p>Assigns values specified by the iterator <code>first_it</code> and <code>last_it</code> to this vector object.</p>
 </div>
 <div id="push_back-x" class="section level3">
-<h3><span class="header-section-number">8.3.8</span> push_back( x )</h3>
-<p>append a scalar value <code>x</code> to the end of this vector object.</p>
+<h3><span class="header-section-number">8.3.8</span> <code>push_back( x )</code></h3>
+<p>Append a scalar value <code>x</code> to the end of this vector object.</p>
 </div>
 <div id="push_back-x-name" class="section level3">
-<h3><span class="header-section-number">8.3.9</span> push_back( x, name )</h3>
-<p>append a scalar value <code>x</code> to the end of this vector object and set name of the element as character string <code>name</code>.</p>
+<h3><span class="header-section-number">8.3.9</span> <code>push_back( x, name )</code></h3>
+<p>Append a scalar value <code>x</code> to the end of this vector object and set name of the element as character string <code>name</code>.</p>
 </div>
 <div id="push_front-x" class="section level3">
-<h3><span class="header-section-number">8.3.10</span> push_front( x )</h3>
-<p>append a scalar value <code>x</code> to the front of this vector.</p>
+<h3><span class="header-section-number">8.3.10</span> <code>push_front( x )</code></h3>
+<p>Append a scalar value <code>x</code> to the front of this vector object.</p>
 </div>
 <div id="push_front-x-name" class="section level3">
-<h3><span class="header-section-number">8.3.11</span> push_front( x, name )</h3>
-<p>append a scalar value <code>x</code> to the front of this vector and set name of the element as character string <code>name</code>.</p>
+<h3><span class="header-section-number">8.3.11</span> <code>push_front( x, name )</code></h3>
+<p>Append a scalar value <code>x</code> to the front of this vector and set name of the element as character string <code>name</code>.</p>
 </div>
 <div id="begin" class="section level3">
-<h3><span class="header-section-number">8.3.12</span> begin()</h3>
-<p>return an iterator pointing to the first element of the vector.</p>
+<h3><span class="header-section-number">8.3.12</span> <code>begin()</code></h3>
+<p>Returns an iterator pointing to the first element of this vector. See <a href="280_iterator.html">the Chapter 28 Iterator</a>.</p>
 </div>
 <div id="end" class="section level3">
-<h3><span class="header-section-number">8.3.13</span> end()</h3>
-<p>return an iterator pointing to the end of the vector (<strong>one past the last element of this vector</strong>).</p>
+<h3><span class="header-section-number">8.3.13</span> <code>end()</code></h3>
+<p>Returns an iterator pointing to the end of the vector (<strong>one past the last element of this vector</strong>). See <a href="280_iterator.html">the Chapter 28 Iterator</a>.</p>
 </div>
 <div id="cbegin" class="section level3">
-<h3><span class="header-section-number">8.3.14</span> cbegin()</h3>
-<p>return a const iterator pointing to the first element of the vector.</p>
+<h3><span class="header-section-number">8.3.14</span> <code>cbegin()</code></h3>
+<p>Returns a const iterator pointing to the first element of the vector. See <a href="280_iterator.html">the Chapter 28 Iterator</a>.</p>
 </div>
 <div id="cend" class="section level3">
-<h3><span class="header-section-number">8.3.15</span> cend()</h3>
-<p>return a const iterator pointing to the end of the vector (<strong>one past the last element of this vector</strong>).</p>
+<h3><span class="header-section-number">8.3.15</span> <code>cend()</code></h3>
+<p>Returns a const iterator pointing to the end of the vector (<strong>one past the last element of this vector</strong>). See <a href="280_iterator.html">the Chapter 28 Iterator</a>.</p>
 </div>
 <div id="insert-i-x" class="section level3">
-<h3><span class="header-section-number">8.3.16</span> insert( i, x )</h3>
-<p>insert scalar value <code>x</code> to the position pointed by numerical index <code>i</code>. Return the iterator pointing the inserted element.</p>
+<h3><span class="header-section-number">8.3.16</span> <code>insert( i, x )</code></h3>
+<p>Insert scalar value <code>x</code> to the position pointed by numerical index <code>i</code>. And returns the iterator pointing the inserted element.</p>
 </div>
 <div id="insert-it-x" class="section level3">
-<h3><span class="header-section-number">8.3.17</span> insert( it, x )</h3>
-<p>insert scalar value <code>x</code> to the position pointed by iterator <code>it</code>. Return the iterator pointing the inserted element.</p>
+<h3><span class="header-section-number">8.3.17</span> <code>insert( it, x )</code></h3>
+<p>Insert scalar value <code>x</code> to the position pointed by iterator <code>it</code>. And returns the iterator pointing the inserted element.</p>
 </div>
 <div id="erasei" class="section level3">
-<h3><span class="header-section-number">8.3.18</span> erase(i)</h3>
-<p>erase element at the position pointed by numerical index <code>i</code>. Return the iterator pointing the element just behind the erased element.</p>
+<h3><span class="header-section-number">8.3.18</span> <code>erase(i)</code></h3>
+<p>Erase element at the position pointed by numerical index <code>i</code>. And returns the iterator pointing the element just behind the erased element.</p>
 </div>
 <div id="eraseit" class="section level3">
-<h3><span class="header-section-number">8.3.19</span> erase(it)</h3>
-<p>erase element at the position pointed by iterator <code>it</code>. Return the iterator pointing the element just behind the erased element.</p>
+<h3><span class="header-section-number">8.3.19</span> <code>erase(it)</code></h3>
+<p>Erase element at the position pointed by iterator <code>it</code>. And returns the iterator pointing the element just behind the erased element.</p>
 </div>
 <div id="erase-first_i-last_i" class="section level3">
-<h3><span class="header-section-number">8.3.20</span> erase( first_i, last_i )</h3>
-<p>erase elements from the position pointed by numerical index <code>first_i</code> to <code>last_i - 1</code>. Return the iterator pointing the element just behind the erased elements.</p>
+<h3><span class="header-section-number">8.3.20</span> <code>erase( first_i, last_i )</code></h3>
+<p>Erase elements from the position pointed by numerical index <code>first_i</code> to <code>last_i - 1</code>. And returns the iterator pointing the element just behind the erased elements.</p>
 </div>
 <div id="erase-first_it-last_it" class="section level3">
-<h3><span class="header-section-number">8.3.21</span> erase( first_it, last_it )</h3>
-<p>erase elements from the position pointed by iterator <code>first_it</code> to <code>last_it - 1</code>. Return the iterator pointing the element just behind the erased elements.</p>
+<h3><span class="header-section-number">8.3.21</span> <code>erase( first_it, last_it )</code></h3>
+<p>Erase elements from the position pointed by iterator <code>first_it</code> to <code>last_it - 1</code>. Return the iterator pointing the element just behind the erased elements.</p>
 </div>
 <div id="containselementnamedname" class="section level3">
-<h3><span class="header-section-number">8.3.22</span> containsElementNamed(name)</h3>
-<p>return <code>true</code> if this vector contains an element with the name specified by character string <code>name</code>.</p>
+<h3><span class="header-section-number">8.3.22</span> <code>containsElementNamed(name)</code></h3>
+<p>Returns <code>true</code> if this vector contains an element with the name specified by character string <code>name</code>.</p>
 </div>
 </div>
 <div id="static-member-functions" class="section level2">
 <h2><span class="header-section-number">8.4</span> Static member functions</h2>
-<p>Static member function is the function that is attached to the class from which an object being molded. Static member functions is called in the form such as <code>NumericVector::create()</code>.</p>
+<p>Static member function is functions that is attached to the class from which an object being molded.
+You can call static member functions in the form such as <code>NumericVector::create()</code>.</p>
 <div id="get_na" class="section level3">
-<h3><span class="header-section-number">8.4.1</span> get_na()</h3>
-<p>return the <code>NA</code> value of this <code>Vector</code> class.</p>
+<h3><span class="header-section-number">8.4.1</span> <code>get_na()</code></h3>
+<p>Returns the <code>NA</code> value of this <code>Vector</code> class. See <a href="240_na_nan_inf.html">chapter 24 for NA</a>.</p>
 </div>
 <div id="is_nax" class="section level3">
-<h3><span class="header-section-number">8.4.2</span> is_na(x)</h3>
-<p>return <code>true</code> if a vector element specified by <code>x</code> is <code>NA</code>.</p>
+<h3><span class="header-section-number">8.4.2</span> <code>is_na(x)</code></h3>
+<p>Returns <code>true</code> if a vector element specified by <code>x</code> is <code>NA</code>.</p>
 </div>
-<div id="create-x1-x2" class="section level3">
-<h3><span class="header-section-number">8.4.3</span> create( x1, x2, …)</h3>
-<p>create a <code>Vector</code> object containing elements specified by scalar value <code>x1</code> and <code>x2</code>. Maximum number of arguments are 20.</p>
+<div id="create-x1-x2-..." class="section level3">
+<h3><span class="header-section-number">8.4.3</span> <code>create( x1, x2, ...)</code></h3>
+<p>Creates a <code>Vector</code> object containing elements specified by scalar value <code>x1</code> and <code>x2</code>. Maximum number of arguments are 20.</p>
 </div>
 <div id="import-first_it-last_it" class="section level3">
-<h3><span class="header-section-number">8.4.4</span> import( first_it , last_it )</h3>
-<p>create a <code>Vector</code> object filled with data from the position pointed by iterator <code>first_it</code> to <code>last_it - 1</code>.</p>
+<h3><span class="header-section-number">8.4.4</span> <code>import( first_it , last_it )</code></h3>
+<p>Creates a <code>Vector</code> object filled with the range of data specified by iterator from <code>first_it</code> to <code>last_it - 1</code>.</p>
 </div>
 <div id="import_transform-first_it-last_it-func" class="section level3">
-<h3><span class="header-section-number">8.4.5</span> import_transform( first_it, last_it, func)</h3>
-<p>create a <code>Vector</code> object filled with data from the position pointed by iterator <code>first_it</code> to <code>last_it - 1</code> that is transformed by function specified by <code>func</code>.</p>
+<h3><span class="header-section-number">8.4.5</span> <code>import_transform( first_it, last_it, func)</code></h3>
+<p>Creates a <code>Vector</code> object filled with the range of data specified by iterator from <code>first_it</code> to <code>last_it - 1</code> that is transformed by function specified by <code>func</code>.</p>
 
 </div>
 </div>
@@ -672,11 +674,13 @@ NumericVector v =
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -684,12 +688,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -701,6 +704,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

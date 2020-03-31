@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Embedding Rcpp code in your R code | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Embedding Rcpp code in your R code | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 4 Embedding Rcpp code in your R code | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Embedding Rcpp code in your R code | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 4 Embedding Rcpp code in your R code | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-02-27">
+<meta name="date" content="2020-03-31" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="030_basic_usage.html">
-<link rel="next" href="050_c++11.html">
+<link rel="prev" href="030_basic_usage.html"/>
+<link rel="next" href="050_c++11.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -172,9 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#lambda-expression"><i class="fa fa-check"></i><b>5.2.5</b> Lambda expression</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
-<li class="chapter" data-level="6.1" data-path="060_utility.html"><a href="060_utility.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
-<li class="chapter" data-level="6.2" data-path="060_utility.html"><a href="060_utility.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
+<li class="chapter" data-level="6" data-path="060_printing_massages.html"><a href="060_printing_massages.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
+<li class="chapter" data-level="6.1" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
+<li class="chapter" data-level="6.2" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="070_data_types.html"><a href="070_data_types.html"><i class="fa fa-check"></i><b>7</b> Data types</a><ul>
 <li class="chapter" data-level="7.1" data-path="070_data_types.html"><a href="070_data_types.html#vector-and-matrix"><i class="fa fa-check"></i><b>7.1</b> Vector and Matrix</a></li>
@@ -184,35 +185,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="080_vector.html"><a href="080_vector.html#creating-vector-object"><i class="fa fa-check"></i><b>8.1</b> Creating vector object</a></li>
 <li class="chapter" data-level="8.2" data-path="080_vector.html"><a href="080_vector.html#accessing-vector-elements"><i class="fa fa-check"></i><b>8.2</b> Accessing vector elements</a></li>
 <li class="chapter" data-level="8.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>8.3</b> Member functions</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> length(), size()</a></li>
-<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> names()</a></li>
-<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> offset( name ), findName( name )</a></li>
-<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> offset( i )</a></li>
-<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> fill( x )</a></li>
-<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> sort()</a></li>
-<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> assign( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> push_back( x )</a></li>
-<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> push_back( x, name )</a></li>
-<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> push_front( x )</a></li>
-<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
-<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
-<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, last_i )</a></li>
-<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> <code>length()</code>, <code>size()</code></a></li>
+<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> <code>names()</code></a></li>
+<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> <code>offset( name )</code>, <code>findName( name )</code></a></li>
+<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> <code>offset( i )</code></a></li>
+<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> <code>fill( x )</code></a></li>
+<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> <code>sort()</code></a></li>
+<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> <code>assign( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> <code>push_back( x )</code></a></li>
+<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> <code>push_back( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> <code>push_front( x )</code></a></li>
+<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> <code>push_front( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> <code>begin()</code></a></li>
+<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> <code>end()</code></a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> <code>cbegin()</code></a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> <code>cend()</code></a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> <code>insert( i, x )</code></a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> <code>insert( it, x )</code></a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> <code>erase(i)</code></a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> <code>erase(it)</code></a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> <code>erase( first_i, last_i )</code></a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> <code>erase( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> <code>containsElementNamed(name)</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
-<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> is_na(x)</a></li>
-<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2"><i class="fa fa-check"></i><b>8.4.3</b> create( x1, x2, …)</a></li>
-<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> import( first_it , last_it )</a></li>
-<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> import_transform( first_it, last_it, func)</a></li>
+<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> <code>get_na()</code></a></li>
+<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> <code>is_na(x)</code></a></li>
+<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2-..."><i class="fa fa-check"></i><b>8.4.3</b> <code>create( x1, x2, ...)</code></a></li>
+<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> <code>import( first_it , last_it )</code></a></li>
+<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> <code>import_transform( first_it, last_it, func)</code></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
@@ -484,41 +485,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sourcecpp" class="section level2">
 <h2><span class="header-section-number">4.1</span> sourceCpp()</h2>
 <p>Save Rcpp code as string object in R and compile it with <code>sourceCpp()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">src &lt;-
-<span class="st">&quot;#include &lt;Rcpp.h&gt;</span>
-<span class="st">using namespace Rcpp;</span>
-<span class="st">// [[Rcpp::export]]</span>
-<span class="st">double rcpp_sum(NumericVector v){</span>
-<span class="st">  double sum = 0;</span>
-<span class="st">  for(int i=0; i&lt;v.length(); ++i){</span>
-<span class="st">    sum += v[i];</span>
-<span class="st">  }</span>
-<span class="st">  return(sum);</span>
-<span class="st">}&quot;</span>
-
-<span class="kw">sourceCpp</span>(<span class="dt">code =</span> src)
-<span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">src &lt;-</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">&quot;#include &lt;Rcpp.h&gt;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">using namespace Rcpp;</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">double rcpp_sum(NumericVector v){</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  double sum = 0;</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  for(int i=0; i&lt;v.length(); ++i){</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">    sum += v[i];</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  return(sum);</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">}&quot;</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="kw">sourceCpp</span>(<span class="dt">code =</span> src)</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 </div>
 <div id="cppfunction" class="section level2">
 <h2><span class="header-section-number">4.2</span> cppFunction()</h2>
 <p>The <code>cppFunction()</code> offers handy way to create single Rcpp function. You can omit <code>#include &lt;Rcpp.h&gt;</code> and <code>using namespase Rcpp;</code> when you use <code>cppFunction()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">src &lt;-
-<span class="st">  &quot;double rcpp_sum(NumericVector v){</span>
-<span class="st">    double sum = 0;</span>
-<span class="st">    for(int i=0; i&lt;v.length(); ++i){</span>
-<span class="st">      sum += v[i];</span>
-<span class="st">    }</span>
-<span class="st">    return(sum);</span>
-<span class="st">  }</span>
-<span class="st">  &quot;</span>
-Rcpp<span class="op">::</span><span class="kw">cppFunction</span>(src)
-<span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">src &lt;-</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  &quot;double rcpp_sum(NumericVector v){</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">    double sum = 0;</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">    for(int i=0; i&lt;v.length(); ++i){</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">      sum += v[i];</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">    }</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">    return(sum);</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">  }</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">  &quot;</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">Rcpp<span class="op">::</span><span class="kw">cppFunction</span>(src)</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 </div>
 <div id="evalcpp" class="section level2">
 <h2><span class="header-section-number">4.3</span> evalCpp()</h2>
 <p>You can evaluate single C++ statement by using <code>evalCpp()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Showing maximum value of double.</span>
-<span class="kw">evalCpp</span>(<span class="st">&#39;std::numeric_limits&lt;double&gt;::max()&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Showing maximum value of double.</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">evalCpp</span>(<span class="st">&#39;std::numeric_limits&lt;double&gt;::max()&#39;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -533,11 +534,13 @@ Rcpp<span class="op">::</span><span class="kw">cppFunction</span>(src)
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -545,12 +548,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -562,6 +564,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

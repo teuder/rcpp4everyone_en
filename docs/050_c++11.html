@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 C++11 | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 C++11 | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 5 C++11 | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 C++11 | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 5 C++11 | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-02-27">
+<meta name="date" content="2020-03-31" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="040_function.html">
-<link rel="next" href="060_utility.html">
+<link rel="prev" href="040_function.html"/>
+<link rel="next" href="060_printing_massages.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -172,9 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#lambda-expression"><i class="fa fa-check"></i><b>5.2.5</b> Lambda expression</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
-<li class="chapter" data-level="6.1" data-path="060_utility.html"><a href="060_utility.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
-<li class="chapter" data-level="6.2" data-path="060_utility.html"><a href="060_utility.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
+<li class="chapter" data-level="6" data-path="060_printing_massages.html"><a href="060_printing_massages.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
+<li class="chapter" data-level="6.1" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
+<li class="chapter" data-level="6.2" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="070_data_types.html"><a href="070_data_types.html"><i class="fa fa-check"></i><b>7</b> Data types</a><ul>
 <li class="chapter" data-level="7.1" data-path="070_data_types.html"><a href="070_data_types.html#vector-and-matrix"><i class="fa fa-check"></i><b>7.1</b> Vector and Matrix</a></li>
@@ -184,35 +185,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="080_vector.html"><a href="080_vector.html#creating-vector-object"><i class="fa fa-check"></i><b>8.1</b> Creating vector object</a></li>
 <li class="chapter" data-level="8.2" data-path="080_vector.html"><a href="080_vector.html#accessing-vector-elements"><i class="fa fa-check"></i><b>8.2</b> Accessing vector elements</a></li>
 <li class="chapter" data-level="8.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>8.3</b> Member functions</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> length(), size()</a></li>
-<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> names()</a></li>
-<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> offset( name ), findName( name )</a></li>
-<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> offset( i )</a></li>
-<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> fill( x )</a></li>
-<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> sort()</a></li>
-<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> assign( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> push_back( x )</a></li>
-<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> push_back( x, name )</a></li>
-<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> push_front( x )</a></li>
-<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
-<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
-<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, last_i )</a></li>
-<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> <code>length()</code>, <code>size()</code></a></li>
+<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> <code>names()</code></a></li>
+<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> <code>offset( name )</code>, <code>findName( name )</code></a></li>
+<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> <code>offset( i )</code></a></li>
+<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> <code>fill( x )</code></a></li>
+<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> <code>sort()</code></a></li>
+<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> <code>assign( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> <code>push_back( x )</code></a></li>
+<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> <code>push_back( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> <code>push_front( x )</code></a></li>
+<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> <code>push_front( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> <code>begin()</code></a></li>
+<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> <code>end()</code></a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> <code>cbegin()</code></a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> <code>cend()</code></a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> <code>insert( i, x )</code></a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> <code>insert( it, x )</code></a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> <code>erase(i)</code></a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> <code>erase(it)</code></a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> <code>erase( first_i, last_i )</code></a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> <code>erase( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> <code>containsElementNamed(name)</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
-<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> is_na(x)</a></li>
-<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2"><i class="fa fa-check"></i><b>8.4.3</b> create( x1, x2, …)</a></li>
-<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> import( first_it , last_it )</a></li>
-<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> import_transform( first_it, last_it, func)</a></li>
+<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> <code>get_na()</code></a></li>
+<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> <code>is_na(x)</code></a></li>
+<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2-..."><i class="fa fa-check"></i><b>8.4.3</b> <code>create( x1, x2, ...)</code></a></li>
+<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> <code>import( first_it , last_it )</code></a></li>
+<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> <code>import_transform( first_it, last_it, func)</code></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
@@ -481,12 +482,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="c11" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> C++11</h1>
 <p>C++ 11 is a standard of C++ newly established in 2011, it introduces new functionalities and notations. Compared with the previous standard, many new features have been added to make C++ even easier for beginners. This document will actively exploit these features of C++11.</p>
-<p>** Important: Code examples in this document are written assuming that C++11 is enabled. **</p>
+<p><strong>Important: The code examples in this document are written with C++11 enabled.</strong></p>
 <div id="enabling-c11" class="section level2">
 <h2><span class="header-section-number">5.1</span> Enabling C++11</h2>
 <p>To enable <code>C++11</code>, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with <code>Rcpp::sourceCpp()</code>.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></code></pre>
-<p>If you want to enable C++11 in your package, add code below in <code>DESCRIPTION</code> file.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a></code></pre></div>
+<p>If you want to enable <code>C++11</code> in your package, add code below in <code>DESCRIPTION</code> file of your package.</p>
 <pre><code>SystemRequirements: C++11</code></pre>
 </div>
 <div id="recommended-c11-features" class="section level2">
@@ -502,7 +503,7 @@ NumericVector v3   {1.0, 2.0, 3.0}; // You can omit &quot;=&quot;.</code></pre>
 </div>
 <div id="auto" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> auto</h3>
-<p>Using the <code>auto</code> specifier will automatically set the type of the variable, according to the value to be assigned.</p>
+<p>By using the <code>auto</code> specifier, the type of a defined variable is infered by compiler automatically according to the assigned value.</p>
 <pre><code>// variable &quot;i&quot; will be int
 auto  i  = 4;
 
@@ -512,14 +513,14 @@ auto it = v.begin();</code></pre>
 </div>
 <div id="decltype" class="section level3">
 <h3><span class="header-section-number">5.2.3</span> decltype</h3>
-<p>With <code>decltype</code> you can declare variables of the same type as existing variables.</p>
+<p>By using <code>decltype</code>, you can declare a variable of the same type as an existing variable.</p>
 <pre><code>int i;
 decltype(i) x; // variable &quot;x&quot; will be int</code></pre>
 </div>
 <div id="range-based-for-loop" class="section level3">
 <h3><span class="header-section-number">5.2.4</span> Range-based for-loop</h3>
 <p>You can write a <code>for</code> statement with the same style as R.</p>
-<pre><code>IntegerVector v{1,2,3};
+<pre><code>IntegerVector v {1,2,3};
 int sum=0;
 for(auto&amp; x : v) {
   sum += x;
@@ -527,7 +528,7 @@ for(auto&amp; x : v) {
 </div>
 <div id="lambda-expression" class="section level3">
 <h3><span class="header-section-number">5.2.5</span> Lambda expression</h3>
-<p>You can create a function object by using lambda expression. Function object are usually used as unnamed function passed to other function.</p>
+<p>You can create a function object by using lambda expression. Function object are usually created as unnamed function and passed to the other function.</p>
 <p>Lambda expressions are written in the form <code>[](){}</code>.</p>
 <p>In <code>[]</code>, you write a list of local variables you want to use in this function object.</p>
 <ul>
@@ -543,20 +544,19 @@ for(auto&amp; x : v) {
 <p><strong>Example</strong></p>
 <p>The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.</p>
 <p><em>R example</em></p>
-<pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)
-A &lt;-<span class="st"> </span><span class="fl">2.0</span>
-res &lt;-
-<span class="st">  </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x){A<span class="op">*</span>x})</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="fl">2.0</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">res &lt;-</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x){A<span class="op">*</span>x})</a></code></pre></div>
 <p><em>Rcpp example</em></p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span>
-<span class="co">// [[Rcpp::export]]</span>
-NumericVector rcpp_lambda_1(){
-  NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};
-  <span class="dt">double</span> A = <span class="fl">2.0</span>;
-  NumericVector res =
-    sapply(v, [&amp;](<span class="dt">double</span> x){<span class="cf">return</span> A*x;});
-  <span class="cf">return</span> res;
-}</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">NumericVector rcpp_lambda_1(){</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">double</span> A = <span class="fl">2.0</span>;</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">  NumericVector res =</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">    sapply(v, [&amp;](<span class="dt">double</span> x){<span class="cf">return</span> A*x;});</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">  <span class="cf">return</span> res;</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">}</a></code></pre></div>
 
 </div>
 </div>
@@ -567,16 +567,18 @@ NumericVector rcpp_lambda_1(){
         </div>
       </div>
 <a href="040_function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="060_utility.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="060_printing_massages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -584,12 +586,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -601,6 +602,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

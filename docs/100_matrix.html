@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Matrix | Rcpp for everyone</title>
-  <meta name="description" content="Introducing how to use Rcpp">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Introducing how to use Rcpp" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Matrix | Rcpp for everyone />
+  <meta property="og:title" content="Chapter 9 Matrix | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Matrix | Rcpp for everyone />
+  <meta name="twitter:title" content="Chapter 9 Matrix | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
 
-<meta name="author" content="Masaki E. Tsuda">
+<meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-02-27">
+<meta name="date" content="2020-03-31" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="080_vector.html">
-<link rel="next" href="110_calculation.html">
+<link rel="prev" href="080_vector.html"/>
+<link rel="next" href="110_calculation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -65,7 +67,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -172,9 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="050_c++11.html"><a href="050_c++11.html#lambda-expression"><i class="fa fa-check"></i><b>5.2.5</b> Lambda expression</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="060_utility.html"><a href="060_utility.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
-<li class="chapter" data-level="6.1" data-path="060_utility.html"><a href="060_utility.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
-<li class="chapter" data-level="6.2" data-path="060_utility.html"><a href="060_utility.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
+<li class="chapter" data-level="6" data-path="060_printing_massages.html"><a href="060_printing_massages.html"><i class="fa fa-check"></i><b>6</b> Printing messages</a><ul>
+<li class="chapter" data-level="6.1" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rcout-rcerr"><i class="fa fa-check"></i><b>6.1</b> Rcout, Rcerr</a></li>
+<li class="chapter" data-level="6.2" data-path="060_printing_massages.html"><a href="060_printing_massages.html#rprintf-reprintf"><i class="fa fa-check"></i><b>6.2</b> Rprintf(), REprintf()</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="070_data_types.html"><a href="070_data_types.html"><i class="fa fa-check"></i><b>7</b> Data types</a><ul>
 <li class="chapter" data-level="7.1" data-path="070_data_types.html"><a href="070_data_types.html#vector-and-matrix"><i class="fa fa-check"></i><b>7.1</b> Vector and Matrix</a></li>
@@ -184,35 +185,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="080_vector.html"><a href="080_vector.html#creating-vector-object"><i class="fa fa-check"></i><b>8.1</b> Creating vector object</a></li>
 <li class="chapter" data-level="8.2" data-path="080_vector.html"><a href="080_vector.html#accessing-vector-elements"><i class="fa fa-check"></i><b>8.2</b> Accessing vector elements</a></li>
 <li class="chapter" data-level="8.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>8.3</b> Member functions</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> length(), size()</a></li>
-<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> names()</a></li>
-<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> offset( name ), findName( name )</a></li>
-<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> offset( i )</a></li>
-<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> fill( x )</a></li>
-<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> sort()</a></li>
-<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> assign( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> push_back( x )</a></li>
-<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> push_back( x, name )</a></li>
-<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> push_front( x )</a></li>
-<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> push_front( x, name )</a></li>
-<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> begin()</a></li>
-<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> end()</a></li>
-<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> cbegin()</a></li>
-<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> cend()</a></li>
-<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> insert( i, x )</a></li>
-<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> insert( it, x )</a></li>
-<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> erase(i)</a></li>
-<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> erase(it)</a></li>
-<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> erase( first_i, last_i )</a></li>
-<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> erase( first_it, last_it )</a></li>
-<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="8.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>8.3.1</b> <code>length()</code>, <code>size()</code></a></li>
+<li class="chapter" data-level="8.3.2" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>8.3.2</b> <code>names()</code></a></li>
+<li class="chapter" data-level="8.3.3" data-path="080_vector.html"><a href="080_vector.html#offset-name-findname-name"><i class="fa fa-check"></i><b>8.3.3</b> <code>offset( name )</code>, <code>findName( name )</code></a></li>
+<li class="chapter" data-level="8.3.4" data-path="080_vector.html"><a href="080_vector.html#offset-i"><i class="fa fa-check"></i><b>8.3.4</b> <code>offset( i )</code></a></li>
+<li class="chapter" data-level="8.3.5" data-path="080_vector.html"><a href="080_vector.html#fill-x"><i class="fa fa-check"></i><b>8.3.5</b> <code>fill( x )</code></a></li>
+<li class="chapter" data-level="8.3.6" data-path="080_vector.html"><a href="080_vector.html#sort"><i class="fa fa-check"></i><b>8.3.6</b> <code>sort()</code></a></li>
+<li class="chapter" data-level="8.3.7" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>8.3.7</b> <code>assign( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.8" data-path="080_vector.html"><a href="080_vector.html#push_back-x"><i class="fa fa-check"></i><b>8.3.8</b> <code>push_back( x )</code></a></li>
+<li class="chapter" data-level="8.3.9" data-path="080_vector.html"><a href="080_vector.html#push_back-x-name"><i class="fa fa-check"></i><b>8.3.9</b> <code>push_back( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x"><i class="fa fa-check"></i><b>8.3.10</b> <code>push_front( x )</code></a></li>
+<li class="chapter" data-level="8.3.11" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>8.3.11</b> <code>push_front( x, name )</code></a></li>
+<li class="chapter" data-level="8.3.12" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>8.3.12</b> <code>begin()</code></a></li>
+<li class="chapter" data-level="8.3.13" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>8.3.13</b> <code>end()</code></a></li>
+<li class="chapter" data-level="8.3.14" data-path="080_vector.html"><a href="080_vector.html#cbegin"><i class="fa fa-check"></i><b>8.3.14</b> <code>cbegin()</code></a></li>
+<li class="chapter" data-level="8.3.15" data-path="080_vector.html"><a href="080_vector.html#cend"><i class="fa fa-check"></i><b>8.3.15</b> <code>cend()</code></a></li>
+<li class="chapter" data-level="8.3.16" data-path="080_vector.html"><a href="080_vector.html#insert-i-x"><i class="fa fa-check"></i><b>8.3.16</b> <code>insert( i, x )</code></a></li>
+<li class="chapter" data-level="8.3.17" data-path="080_vector.html"><a href="080_vector.html#insert-it-x"><i class="fa fa-check"></i><b>8.3.17</b> <code>insert( it, x )</code></a></li>
+<li class="chapter" data-level="8.3.18" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>8.3.18</b> <code>erase(i)</code></a></li>
+<li class="chapter" data-level="8.3.19" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>8.3.19</b> <code>erase(it)</code></a></li>
+<li class="chapter" data-level="8.3.20" data-path="080_vector.html"><a href="080_vector.html#erase-first_i-last_i"><i class="fa fa-check"></i><b>8.3.20</b> <code>erase( first_i, last_i )</code></a></li>
+<li class="chapter" data-level="8.3.21" data-path="080_vector.html"><a href="080_vector.html#erase-first_it-last_it"><i class="fa fa-check"></i><b>8.3.21</b> <code>erase( first_it, last_it )</code></a></li>
+<li class="chapter" data-level="8.3.22" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>8.3.22</b> <code>containsElementNamed(name)</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>8.4</b> Static member functions</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> get_na()</a></li>
-<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> is_na(x)</a></li>
-<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2"><i class="fa fa-check"></i><b>8.4.3</b> create( x1, x2, …)</a></li>
-<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> import( first_it , last_it )</a></li>
-<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> import_transform( first_it, last_it, func)</a></li>
+<li class="chapter" data-level="8.4.1" data-path="080_vector.html"><a href="080_vector.html#get_na"><i class="fa fa-check"></i><b>8.4.1</b> <code>get_na()</code></a></li>
+<li class="chapter" data-level="8.4.2" data-path="080_vector.html"><a href="080_vector.html#is_nax"><i class="fa fa-check"></i><b>8.4.2</b> <code>is_na(x)</code></a></li>
+<li class="chapter" data-level="8.4.3" data-path="080_vector.html"><a href="080_vector.html#create-x1-x2-..."><i class="fa fa-check"></i><b>8.4.3</b> <code>create( x1, x2, ...)</code></a></li>
+<li class="chapter" data-level="8.4.4" data-path="080_vector.html"><a href="080_vector.html#import-first_it-last_it"><i class="fa fa-check"></i><b>8.4.4</b> <code>import( first_it , last_it )</code></a></li>
+<li class="chapter" data-level="8.4.5" data-path="080_vector.html"><a href="080_vector.html#import_transform-first_it-last_it-func"><i class="fa fa-check"></i><b>8.4.5</b> <code>import_transform( first_it, last_it, func)</code></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="100_matrix.html"><a href="100_matrix.html"><i class="fa fa-check"></i><b>9</b> Matrix</a><ul>
@@ -483,75 +484,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-matrix-object" class="section level2">
 <h2><span class="header-section-number">9.1</span> Creating Matrix object</h2>
 <p>Matrix object can be created in several ways.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Create a Matrix object equivalent to</span>
-<span class="co">// m &lt;- matrix(0, nrow=2, ncol=2)</span>
-NumericMatrix m1( <span class="dv">2</span> );
-
-<span class="co">// m &lt;- matrix(0, nrow=2, ncol=3)</span>
-NumericMatrix m2( <span class="dv">2</span> , <span class="dv">3</span> );
-
-<span class="co">// m &lt;- matrix(v, nrow=2, ncol=3)</span>
-NumericMatrix m3( <span class="dv">2</span> , <span class="dv">3</span> , v.begin() );</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">// Create a Matrix object equivalent to</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">// m &lt;- matrix(0, nrow=2, ncol=2)</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">NumericMatrix m1( <span class="dv">2</span> );</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co">// m &lt;- matrix(0, nrow=2, ncol=3)</span></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">NumericMatrix m2( <span class="dv">2</span> , <span class="dv">3</span> );</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">// m &lt;- matrix(v, nrow=2, ncol=3)</span></a>
+<a class="sourceLine" id="cb24-9" data-line-number="9">NumericMatrix m3( <span class="dv">2</span> , <span class="dv">3</span> , v.begin() );</a></code></pre></div>
 <p>In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute <code>dim</code>. Thus, if you created a vector with attribute <code>dim</code> in Rcpp and return it to R, it will be treated as a matrix.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// [[Rcpp::export]]</span>
-NumericVector rcpp_matrix(){
-    <span class="co">// Creating a vector object</span>
-    NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>};
-
-    <span class="co">// Set the number of rows and columns to attribute dim of the vector object.</span>
-    v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);
-
-    <span class="co">// Return the vector to R</span>
-    <span class="cf">return</span> v;
-}</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">NumericVector rcpp_matrix(){</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="co">// Creating a vector object</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">    NumericVector v = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>};</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">    <span class="co">// Set the number of rows and columns to attribute dim of the vector object.</span></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">    v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">    <span class="co">// Return the vector to R</span></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">    <span class="cf">return</span> v;</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">}</a></code></pre></div>
 <p>Execution result</p>
 <pre><code>&gt; rcpp_matrix()
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4</code></pre>
 <p>However, even if you set a value to attribute <code>dim</code> of a vector object, the type of the object remains Vector type in Rcpp code. Thus, if you want to convert it to Matrix type in Rcpp, you need to use <code>as&lt;T&gt;()</code> function.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Set number of rows and columns to attribute dim</span>
-v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);
-
-<span class="co">// Converting to Rcpp Matrix type</span>
-NumericMatrix m = as&lt;NumericMatrix&gt;(v);</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">// Set number of rows and columns to attribute dim</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="co">// Converting to Rcpp Matrix type</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">NumericMatrix m = as&lt;NumericMatrix&gt;(v);</a></code></pre></div>
 </div>
 <div id="accessing-to-matrix-elements" class="section level2">
 <h2><span class="header-section-number">9.2</span> Accessing to Matrix elements</h2>
 <p>By using <code>()</code> operator, you can get from and assign to the values of elements of a Matrix object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol <code>_</code>.</p>
 <p>You can also use the <code>[]</code> operator to access an element as a vector connecting the columns of a matrix.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Creating a 5x5 numerical matrix</span>
-NumericMatrix m( <span class="dv">5</span>, <span class="dv">5</span> );
-
-<span class="co">// Retrieving the element of row 0 and column 2</span>
-<span class="dt">double</span> x = m( <span class="dv">0</span> , <span class="dv">2</span> );
-
-<span class="co">// Copying the value of row 0 to the vector v</span>
-NumericVector v = m( <span class="dv">0</span> , _ );
-
-<span class="co">// Copying the value of column 2 to the vector v</span>
-NumericVector v = m( _ , <span class="dv">2</span> );
-
-<span class="co">// Copying the row (0 to 1) and column (2 to 3) to the matrix m2</span>
-NumericMatrix m2 = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) );
-
-<span class="co">// Accessing matrix element as vector</span>
-m[<span class="dv">5</span>]; <span class="co">// This points to the same element as m(0,1)</span></code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co">// Creating a 5x5 numerical matrix</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">NumericMatrix m( <span class="dv">5</span>, <span class="dv">5</span> );</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co">// Retrieving the element of row 0 and column 2</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="dt">double</span> x = m( <span class="dv">0</span> , <span class="dv">2</span> );</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co">// Copying the value of row 0 to the vector v</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">NumericVector v = m( <span class="dv">0</span> , _ );</a>
+<a class="sourceLine" id="cb28-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="co">// Copying the value of column 2 to the vector v</span></a>
+<a class="sourceLine" id="cb28-11" data-line-number="11">NumericVector v = m( _ , <span class="dv">2</span> );</a>
+<a class="sourceLine" id="cb28-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb28-13" data-line-number="13"><span class="co">// Copying the row (0 to 1) and column (2 to 3) to the matrix m2</span></a>
+<a class="sourceLine" id="cb28-14" data-line-number="14">NumericMatrix m2 = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) );</a>
+<a class="sourceLine" id="cb28-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb28-16" data-line-number="16"><span class="co">// Accessing matrix element as vector</span></a>
+<a class="sourceLine" id="cb28-17" data-line-number="17">m[<span class="dv">5</span>]; <span class="co">// This points to the same element as m(0,1)</span></a></code></pre></div>
 <div id="accessing-as-reference-to-row-column-and-sub-matrix" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Accessing as reference to row, column and sub matrix</h3>
 <p>Rcpp also provides types that hold “references” to specific part of a matrix.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  <span class="co">// Reference to the column 1</span>
-NumericMatrix::Row    row = m( <span class="dv">1</span> , _ ); <span class="co">// Reference to the row 1</span>
-NumericMatrix::Sub    sub = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) ); <span class="co">// Reference to sub matrix</span></code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb29-1" data-line-number="1">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  <span class="co">// Reference to the column 1</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">NumericMatrix::Row    row = m( <span class="dv">1</span> , _ ); <span class="co">// Reference to the row 1</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">NumericMatrix::Sub    sub = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) ); <span class="co">// Reference to sub matrix</span></a></code></pre></div>
 <p>Assigning a value to a “reference” object of a matrix is equivalent to assigning the value to its original matrix. For example, assigning a value to <code>col</code> will assign a value to the column 1 of <code>m</code>.</p>
-<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Reference to the column 1</span>
-NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  
-
-<span class="co">// The value of the column 1 of matrix m will be doubled</span>
-col = <span class="dv">2</span> * col;
-
-<span class="co">// Synonymous with the above example</span>
-m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span class="dv">1</span> );</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co">// Reference to the column 1</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  </a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="co">// The value of the column 1 of matrix m will be doubled</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">col = <span class="dv">2</span> * col;</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="co">// Synonymous with the above example</span></a>
+<a class="sourceLine" id="cb30-8" data-line-number="8">m( _ , <span class="dv">1</span>) = <span class="dv">2</span> * m( _ , <span class="dv">1</span> );</a></code></pre></div>
 </div>
 </div>
 <div id="member-functions-1" class="section level2">
@@ -623,11 +624,13 @@ colnames(m) = ch;</code></pre>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -635,12 +638,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -652,6 +654,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

@@ -1,3 +1,6 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,24 +9,26 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \usepackage{hyperref}
-\hypersetup{unicode=true,
+\hypersetup{
             pdftitle={Rcpp for everyone},
             pdfauthor={Masaki E. Tsuda},
             pdfborder={0 0 0},
@@ -70,6 +75,8 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -79,12 +86,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -99,32 +100,15 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
-%%% Change title format to be more compact
-\usepackage{titling}
 
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Rcpp for everyone}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Masaki E. Tsuda}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2020-02-06}
-
+\title{Rcpp for everyone}
+\author{Masaki E. Tsuda}
+\date{2020-03-31}
 
 \begin{document}
 \maketitle
@@ -176,8 +160,6 @@ Before developing with Rcpp, you need to install c++ compiler.
 \subsection{Windows}\label{windows}}
 
 Install \href{https://cran.r-project.org/bin/windows/Rtools/index.html}{Rtools}.
-
-It might be helpful to refer instruction of RStan (\href{https://github.com/stan-dev/rstan/wiki/Install-Rtools-for-Windows}{Install Rtools for Windows}) .
 
 \hypertarget{mac}{%
 \subsection{Mac}\label{mac}}
@@ -298,19 +280,19 @@ The following code shows the basic format for defining a Rcpp function.
 \item
   \texttt{\#include\textless{}Rcpp.h\textgreater{}} : This sentence enables you to use classes and functions defined by the Rcpp package.
 \item
-  \texttt{//\ {[}{[}Rcpp::export{]}{]}}：The function defined just below this sentence will be accessible from R.
+  \texttt{//\ {[}{[}Rcpp::export{]}{]}}：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every functions you want to use from R.
 \item
-  \texttt{using\ namespace\ Rcpp;} : This sentence is optional. But if you did not write this sentence, you have to add prefix \texttt{Rcpp::} to specify classes and functions defined by the Rcpp. (For example, \texttt{Rcpp::NumericVector})
+  \texttt{using\ namespace\ Rcpp;} : This sentence is optional. But if you did not write this sentence, you have to add prefix \texttt{Rcpp::} to specify classes and functions defined by Rcpp. (For example, \texttt{Rcpp::NumericVector})
 \item
-  \texttt{RETURN\_TYPE\ FUNCTION\_NAME(ARGMENT\_TYPE\ ARGMENT)\{\}}：You need to specify types of functions and arguments.
+  \texttt{RETURN\_TYPE\ FUNCTION\_NAME(ARGMENT\_TYPE\ ARGMENT)\{\}}：You need to specify data types of functions and arguments.
 \item
-  \texttt{return\ RETURN\_VALUE;}：\texttt{return} statement is mandatorya return when returning a value, but if you do not return a value (i.e. \texttt{RETURN\_TYPE} is \texttt{void}), the return statement can be omitted.
+  \texttt{return\ RETURN\_VALUE;}：\texttt{return} statement is mandatory if your function would return a value. However, if your function do not return a value (i.e. \texttt{RETURN\_TYPE} is \texttt{void}), the return statement can be omitted.
 \end{itemize}
 
 \hypertarget{compiling-the-code}{%
 \section{Compiling the code}\label{compiling-the-code}}
 
-The function \texttt{Rcpp::sourceCpp()} will compile the source code and load the function into R.
+The function \texttt{Rcpp::sourceCpp()} will compile your source code and load the defined function into R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -401,7 +383,7 @@ You can evaluate single C++ statement by using \texttt{evalCpp()}.
 
 C++ 11 is a standard of C++ newly established in 2011, it introduces new functionalities and notations. Compared with the previous standard, many new features have been added to make C++ even easier for beginners. This document will actively exploit these features of C++11.
 
-** Important: Code examples in this document are written assuming that C++11 is enabled. **
+\textbf{Important: The code examples in this document are written with C++11 enabled.}
 
 \hypertarget{enabling-c11}{%
 \section{Enabling C++11}\label{enabling-c11}}
@@ -414,7 +396,7 @@ To enable \texttt{C++11}, add the following description somewhere in your Rcpp c
 \end{Highlighting}
 \end{Shaded}
 
-If you want to enable C++11 in your package, add code below in \texttt{DESCRIPTION} file.
+If you want to enable \texttt{C++11} in your package, add code below in \texttt{DESCRIPTION} file of your package.
 
 \begin{verbatim}
 SystemRequirements: C++11
@@ -439,7 +421,7 @@ NumericVector v3   {1.0, 2.0, 3.0}; // You can omit "=".
 \hypertarget{auto}{%
 \subsection{auto}\label{auto}}
 
-Using the \texttt{auto} specifier will automatically set the type of the variable, according to the value to be assigned.
+By using the \texttt{auto} specifier, the type of a defined variable is infered by compiler automatically according to the assigned value.
 
 \begin{verbatim}
 // variable "i" will be int
@@ -453,7 +435,7 @@ auto it = v.begin();
 \hypertarget{decltype}{%
 \subsection{decltype}\label{decltype}}
 
-With \texttt{decltype} you can declare variables of the same type as existing variables.
+By using \texttt{decltype}, you can declare a variable of the same type as an existing variable.
 
 \begin{verbatim}
 int i;
@@ -466,7 +448,7 @@ decltype(i) x; // variable "x" will be int
 You can write a \texttt{for} statement with the same style as R.
 
 \begin{verbatim}
-IntegerVector v{1,2,3};
+IntegerVector v {1,2,3};
 int sum=0;
 for(auto& x : v) {
   sum += x;
@@ -476,7 +458,7 @@ for(auto& x : v) {
 \hypertarget{lambda-expression}{%
 \subsection{Lambda expression}\label{lambda-expression}}
 
-You can create a function object by using lambda expression. Function object are usually used as unnamed function passed to other function.
+You can create a function object by using lambda expression. Function object are usually created as unnamed function and passed to the other function.
 
 Lambda expressions are written in the form \texttt{{[}{]}()\{\}}.
 
@@ -521,7 +503,6 @@ The following example shows how to use lambda expression. You can find Some type
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{// [[Rcpp::plugins("cpp11")]]}
 \CommentTok{// [[Rcpp::export]]}
 \NormalTok{NumericVector rcpp_lambda_1()\{}
 \NormalTok{  NumericVector v = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\};}
@@ -758,7 +739,7 @@ You can create vector object in several ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{//Create a Vector object equivalent to}
+\CommentTok{// Create a Vector object equivalent to}
 \CommentTok{// v <- rep(0, 3)}
 \NormalTok{NumericVector v (}\DecValTok{3}\NormalTok{);}
 
@@ -783,7 +764,7 @@ You can create vector object in several ways.
 
 You can access to individual element of a vector object using \texttt{{[}{]}} or \texttt{()} operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. \texttt{{[}{]}} operator ignores out of bound access, while \texttt{()} operator throws an exception \texttt{index\_out\_of\_bounds}.
 
-\textbf{It is important to note that index of Vector object in C++ start at 0.}
+\textbf{Note that the index of the Vector object in C++ starts from 0.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -825,7 +806,7 @@ You can access to individual element of a vector object using \texttt{{[}{]}} or
 \hypertarget{member-functions}{%
 \section{Member functions}\label{member-functions}}
 
-Member functions (also called as Methods) are functions that is attached to individual object. You can call member functions \texttt{f()} of object \texttt{v} in the form of \texttt{v.f()}.
+Member functions (also called as Methods) are functions that is attached to an individual object. You can call member functions \texttt{f()} of object \texttt{v} in the form of \texttt{v.f()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -836,147 +817,148 @@ Member functions (also called as Methods) are functions that is attached to indi
 \end{Highlighting}
 \end{Shaded}
 
-The Vector object in Rcpp have member functions listed below.
+The \texttt{Vector} object in Rcpp have member functions listed below.
 
 \hypertarget{length-size}{%
-\subsection{length(), size()}\label{length-size}}
+\subsection{\texorpdfstring{\texttt{length()}, \texttt{size()}}{length(), size()}}\label{length-size}}
 
-return the number of elements of this vector object.
+Returns the number of elements of this vector object.
 
 \hypertarget{names}{%
-\subsection{names()}\label{names}}
+\subsection{\texorpdfstring{\texttt{names()}}{names()}}\label{names}}
 
-return the element names of this vector object as CharacterVector.
+Returns the element names of this vector object as \texttt{CharacterVector.}
 
 \hypertarget{offset-name-findname-name}{%
-\subsection{offset( name ), findName( name )}\label{offset-name-findname-name}}
+\subsection{\texorpdfstring{\texttt{offset(\ name\ )}, \texttt{findName(\ name\ )}}{offset( name ), findName( name )}}\label{offset-name-findname-name}}
 
-return numerical index of the element specified by character string \texttt{name}.
+Returns numerical index of the element specified by character string \texttt{name}.
 
 \hypertarget{offset-i}{%
-\subsection{offset( i )}\label{offset-i}}
+\subsection{\texorpdfstring{\texttt{offset(\ i\ )}}{offset( i )}}\label{offset-i}}
 
-return numerical index of the element specified by numerical index \texttt{i} after doing bounds checking to ensure \texttt{i} is valid.
+Returns numerical index of the element specified by numerical index \texttt{i} after doing bounds checking to ensure \texttt{i} is valid.
 
 \hypertarget{fill-x}{%
-\subsection{fill( x )}\label{fill-x}}
+\subsection{\texorpdfstring{\texttt{fill(\ x\ )}}{fill( x )}}\label{fill-x}}
 
-fill all the element of this vector object with scalar value \texttt{x}.
+Fills all the element of this vector object with scalar value \texttt{x}.
 
 \hypertarget{sort}{%
-\subsection{sort()}\label{sort}}
+\subsection{\texorpdfstring{\texttt{sort()}}{sort()}}\label{sort}}
 
-return a vector that sorts this vector object in ascending order.
+Returns a vector that sorts this vector object in ascending order.
 
 \hypertarget{assign-first_it-last_it}{%
-\subsection{assign( first\_it, last\_it )}\label{assign-first_it-last_it}}
+\subsection{\texorpdfstring{\texttt{assign(\ first\_it,\ last\_it\ )}}{assign( first\_it, last\_it )}}\label{assign-first_it-last_it}}
 
-assign values specified by the iterator \texttt{first\_it} and \texttt{last\_it} to this vector object.
+Assigns values specified by the iterator \texttt{first\_it} and \texttt{last\_it} to this vector object.
 
 \hypertarget{push_back-x}{%
-\subsection{push\_back( x )}\label{push_back-x}}
+\subsection{\texorpdfstring{\texttt{push\_back(\ x\ )}}{push\_back( x )}}\label{push_back-x}}
 
-append a scalar value \texttt{x} to the end of this vector object.
+Append a scalar value \texttt{x} to the end of this vector object.
 
 \hypertarget{push_back-x-name}{%
-\subsection{push\_back( x, name )}\label{push_back-x-name}}
+\subsection{\texorpdfstring{\texttt{push\_back(\ x,\ name\ )}}{push\_back( x, name )}}\label{push_back-x-name}}
 
-append a scalar value \texttt{x} to the end of this vector object and set name of the element as character string \texttt{name}.
+Append a scalar value \texttt{x} to the end of this vector object and set name of the element as character string \texttt{name}.
 
 \hypertarget{push_front-x}{%
-\subsection{push\_front( x )}\label{push_front-x}}
+\subsection{\texorpdfstring{\texttt{push\_front(\ x\ )}}{push\_front( x )}}\label{push_front-x}}
 
-append a scalar value \texttt{x} to the front of this vector.
+Append a scalar value \texttt{x} to the front of this vector object.
 
 \hypertarget{push_front-x-name}{%
-\subsection{push\_front( x, name )}\label{push_front-x-name}}
+\subsection{\texorpdfstring{\texttt{push\_front(\ x,\ name\ )}}{push\_front( x, name )}}\label{push_front-x-name}}
 
-append a scalar value \texttt{x} to the front of this vector and set name of the element as character string \texttt{name}.
+Append a scalar value \texttt{x} to the front of this vector and set name of the element as character string \texttt{name}.
 
 \hypertarget{begin}{%
-\subsection{begin()}\label{begin}}
+\subsection{\texorpdfstring{\texttt{begin()}}{begin()}}\label{begin}}
 
-return an iterator pointing to the first element of the vector.
+Returns an iterator pointing to the first element of this vector. See \href{280_iterator.html}{the Chapter 28 Iterator}.
 
 \hypertarget{end}{%
-\subsection{end()}\label{end}}
+\subsection{\texorpdfstring{\texttt{end()}}{end()}}\label{end}}
 
-return an iterator pointing to the end of the vector (\textbf{one past the last element of this vector}).
+Returns an iterator pointing to the end of the vector (\textbf{one past the last element of this vector}). See \href{280_iterator.html}{the Chapter 28 Iterator}.
 
 \hypertarget{cbegin}{%
-\subsection{cbegin()}\label{cbegin}}
+\subsection{\texorpdfstring{\texttt{cbegin()}}{cbegin()}}\label{cbegin}}
 
-return a const iterator pointing to the first element of the vector.
+Returns a const iterator pointing to the first element of the vector. See \href{280_iterator.html}{the Chapter 28 Iterator}.
 
 \hypertarget{cend}{%
-\subsection{cend()}\label{cend}}
+\subsection{\texorpdfstring{\texttt{cend()}}{cend()}}\label{cend}}
 
-return a const iterator pointing to the end of the vector (\textbf{one past the last element of this vector}).
+Returns a const iterator pointing to the end of the vector (\textbf{one past the last element of this vector}). See \href{280_iterator.html}{the Chapter 28 Iterator}.
 
 \hypertarget{insert-i-x}{%
-\subsection{insert( i, x )}\label{insert-i-x}}
+\subsection{\texorpdfstring{\texttt{insert(\ i,\ x\ )}}{insert( i, x )}}\label{insert-i-x}}
 
-insert scalar value \texttt{x} to the position pointed by numerical index \texttt{i}. Return the iterator pointing the inserted element.
+Insert scalar value \texttt{x} to the position pointed by numerical index \texttt{i}. And returns the iterator pointing the inserted element.
 
 \hypertarget{insert-it-x}{%
-\subsection{insert( it, x )}\label{insert-it-x}}
+\subsection{\texorpdfstring{\texttt{insert(\ it,\ x\ )}}{insert( it, x )}}\label{insert-it-x}}
 
-insert scalar value \texttt{x} to the position pointed by iterator \texttt{it}. Return the iterator pointing the inserted element.
+Insert scalar value \texttt{x} to the position pointed by iterator \texttt{it}. And returns the iterator pointing the inserted element.
 
 \hypertarget{erasei}{%
-\subsection{erase(i)}\label{erasei}}
+\subsection{\texorpdfstring{\texttt{erase(i)}}{erase(i)}}\label{erasei}}
 
-erase element at the position pointed by numerical index \texttt{i}. Return the iterator pointing the element just behind the erased element.
+Erase element at the position pointed by numerical index \texttt{i}. And returns the iterator pointing the element just behind the erased element.
 
 \hypertarget{eraseit}{%
-\subsection{erase(it)}\label{eraseit}}
+\subsection{\texorpdfstring{\texttt{erase(it)}}{erase(it)}}\label{eraseit}}
 
-erase element at the position pointed by iterator \texttt{it}. Return the iterator pointing the element just behind the erased element.
+Erase element at the position pointed by iterator \texttt{it}. And returns the iterator pointing the element just behind the erased element.
 
 \hypertarget{erase-first_i-last_i}{%
-\subsection{erase( first\_i, last\_i )}\label{erase-first_i-last_i}}
+\subsection{\texorpdfstring{\texttt{erase(\ first\_i,\ last\_i\ )}}{erase( first\_i, last\_i )}}\label{erase-first_i-last_i}}
 
-erase elements from the position pointed by numerical index \texttt{first\_i} to \texttt{last\_i\ -\ 1}. Return the iterator pointing the element just behind the erased elements.
+Erase elements from the position pointed by numerical index \texttt{first\_i} to \texttt{last\_i\ -\ 1}. And returns the iterator pointing the element just behind the erased elements.
 
 \hypertarget{erase-first_it-last_it}{%
-\subsection{erase( first\_it, last\_it )}\label{erase-first_it-last_it}}
+\subsection{\texorpdfstring{\texttt{erase(\ first\_it,\ last\_it\ )}}{erase( first\_it, last\_it )}}\label{erase-first_it-last_it}}
 
-erase elements from the position pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1}. Return the iterator pointing the element just behind the erased elements.
+Erase elements from the position pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1}. Return the iterator pointing the element just behind the erased elements.
 
 \hypertarget{containselementnamedname}{%
-\subsection{containsElementNamed(name)}\label{containselementnamedname}}
+\subsection{\texorpdfstring{\texttt{containsElementNamed(name)}}{containsElementNamed(name)}}\label{containselementnamedname}}
 
-return \texttt{true} if this vector contains an element with the name specified by character string \texttt{name}.
+Returns \texttt{true} if this vector contains an element with the name specified by character string \texttt{name}.
 
 \hypertarget{static-member-functions}{%
 \section{Static member functions}\label{static-member-functions}}
 
-Static member function is the function that is attached to the class from which an object being molded. Static member functions is called in the form such as \texttt{NumericVector::create()}.
+Static member function is functions that is attached to the class from which an object being molded.
+You can call static member functions in the form such as \texttt{NumericVector::create()}.
 
 \hypertarget{get_na}{%
-\subsection{get\_na()}\label{get_na}}
+\subsection{\texorpdfstring{\texttt{get\_na()}}{get\_na()}}\label{get_na}}
 
-return the \texttt{NA} value of this \texttt{Vector} class.
+Returns the \texttt{NA} value of this \texttt{Vector} class. See \href{240_na_nan_inf.html}{chapter 24 for NA}.
 
 \hypertarget{is_nax}{%
-\subsection{is\_na(x)}\label{is_nax}}
+\subsection{\texorpdfstring{\texttt{is\_na(x)}}{is\_na(x)}}\label{is_nax}}
 
-return \texttt{true} if a vector element specified by \texttt{x} is \texttt{NA}.
+Returns \texttt{true} if a vector element specified by \texttt{x} is \texttt{NA}.
 
-\hypertarget{create-x1-x2}{%
-\subsection{create( x1, x2, \ldots{})}\label{create-x1-x2}}
+\hypertarget{create-x1-x2-...}{%
+\subsection{\texorpdfstring{\texttt{create(\ x1,\ x2,\ ...)}}{create( x1, x2, ...)}}\label{create-x1-x2-...}}
 
-create a \texttt{Vector} object containing elements specified by scalar value \texttt{x1} and \texttt{x2}. Maximum number of arguments are 20.
+Creates a \texttt{Vector} object containing elements specified by scalar value \texttt{x1} and \texttt{x2}. Maximum number of arguments are 20.
 
 \hypertarget{import-first_it-last_it}{%
-\subsection{import( first\_it , last\_it )}\label{import-first_it-last_it}}
+\subsection{\texorpdfstring{\texttt{import(\ first\_it\ ,\ last\_it\ )}}{import( first\_it , last\_it )}}\label{import-first_it-last_it}}
 
-create a \texttt{Vector} object filled with data from the position pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1}.
+Creates a \texttt{Vector} object filled with the range of data specified by iterator from \texttt{first\_it} to \texttt{last\_it\ -\ 1}.
 
 \hypertarget{import_transform-first_it-last_it-func}{%
-\subsection{import\_transform( first\_it, last\_it, func)}\label{import_transform-first_it-last_it-func}}
+\subsection{\texorpdfstring{\texttt{import\_transform(\ first\_it,\ last\_it,\ func)}}{import\_transform( first\_it, last\_it, func)}}\label{import_transform-first_it-last_it-func}}
 
-create a \texttt{Vector} object filled with data from the position pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1} that is transformed by function specified by \texttt{func}.
+Creates a \texttt{Vector} object filled with the range of data specified by iterator from \texttt{first\_it} to \texttt{last\_it\ -\ 1} that is transformed by function specified by \texttt{func}.
 
 \hypertarget{matrix}{%
 \chapter{Matrix}\label{matrix}}
@@ -4300,6 +4282,5 @@ The probability distribution function is also described on the page \href{21_dpq
 \DataTypeTok{double}\NormalTok{ R::rweibull(}\DataTypeTok{double}\NormalTok{ sh, }\DataTypeTok{double}\NormalTok{ sl)}
 \end{Highlighting}
 \end{Shaded}
-
 
 \end{document}
