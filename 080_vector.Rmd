@@ -5,7 +5,7 @@
 You can create vector object in several ways.
 
 ```cpp
-//Create a Vector object equivalent to
+// Create a Vector object equivalent to
 // v <- rep(0, 3)
 NumericVector v (3);
 
@@ -28,7 +28,7 @@ NumericVector v =
 
 You can access to individual element of a vector object using `[]` or `()` operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. `[]` operator ignores out of bound access, while `()` operator throws an exception `index_out_of_bounds`.
 
-**It is important to note that index of Vector object in C++ start at 0.**
+**Note that the index of the Vector object in C++ starts from 0.**
 
 ```cpp
 // [[Rcpp::export]]
@@ -67,7 +67,7 @@ void rcpp_vector_access(){
 
 ## Member functions
 
-Member functions (also called as Methods) are functions that is attached to individual object. You can call member functions `f()` of object `v` in the form of `v.f()`.
+Member functions (also called as Methods) are functions that is attached to an individual object. You can call member functions `f()` of object `v` in the form of `v.f()`.
 
 ```cpp
 NumericVector v = {1,2,3,4,5};
@@ -76,124 +76,125 @@ NumericVector v = {1,2,3,4,5};
 int n = v.length(); // 5
 ```
 
-The Vector object in Rcpp have member functions listed below.
+The `Vector` object in Rcpp have member functions listed below.
 
 
-### length(), size()
+### `length()`, `size()`
 
-return the number of elements of this vector object.
+Returns the number of elements of this vector object.
 
-### names()
+### `names()`
 
-return the element names of this vector object as CharacterVector.
+Returns the element names of this vector object as `CharacterVector.`
 
-### offset( name ), findName( name )
+### `offset( name )`, `findName( name )`
 
-return numerical index of the element specified by character string `name`.
+Returns numerical index of the element specified by character string `name`.
 
-### offset( i )
+### `offset( i )`
 
-return numerical index of the element specified by numerical index `i` after doing bounds checking to ensure `i` is valid.
+Returns numerical index of the element specified by numerical index `i` after doing bounds checking to ensure `i` is valid.
 
-### fill( x )
+### `fill( x )`
 
-fill all the element of this vector object with scalar value `x`.
+Fills all the element of this vector object with scalar value `x`.
 
-### sort()
+### `sort()`
 
-return a vector that sorts this vector object in ascending order.
+Returns a vector that sorts this vector object in ascending order.
 
-### assign( first_it, last_it )
+### `assign( first_it, last_it )`
 
-assign values specified by the iterator `first_it` and `last_it` to this vector object.
+Assigns values specified by the iterator `first_it` and `last_it` to this vector object.
 
-### push_back( x )
+### `push_back( x )`
 
-append a scalar value `x` to the end of this vector object.
+Append a scalar value `x` to the end of this vector object.
 
-### push_back( x, name )
+### `push_back( x, name )`
 
-append a scalar value `x` to the end of this vector object and set name of the element as character string `name`.
+Append a scalar value `x` to the end of this vector object and set name of the element as character string `name`.
 
-### push_front( x )
+### `push_front( x )`
 
-append a scalar value `x` to the front of this vector.
+Append a scalar value `x` to the front of this vector object.
 
-### push_front( x, name )
+### `push_front( x, name )`
 
-append a scalar value `x` to the front of this vector and set name of the element as character string `name`.
+Append a scalar value `x` to the front of this vector and set name of the element as character string `name`.
 
-### begin()
+### `begin()`
 
-return an iterator pointing to the first element of the vector.
+Returns an iterator pointing to the first element of this vector. See [the Chapter 28 Iterator](280_iterator.html).
 
-### end()
+### `end()`
 
-return an iterator pointing to the end of the vector (**one past the last element of this vector**).
-
-
-### cbegin()
-
-return a const iterator pointing to the first element of the vector.
-
-### cend()
-
-return a const iterator pointing to the end of the vector (**one past the last element of this vector**).
+Returns an iterator pointing to the end of the vector (**one past the last element of this vector**). See [the Chapter 28 Iterator](280_iterator.html).
 
 
+### `cbegin()`
+
+Returns a const iterator pointing to the first element of the vector. See [the Chapter 28 Iterator](280_iterator.html).
+
+### `cend()`
+
+Returns a const iterator pointing to the end of the vector (**one past the last element of this vector**). See [the Chapter 28 Iterator](280_iterator.html).
 
 
-### insert( i, x )
-
-insert scalar value `x` to the position pointed by numerical index `i`. Return the iterator pointing the inserted element.
 
 
-### insert( it, x )
+### `insert( i, x )`
 
-insert scalar value `x` to the position pointed by iterator `it`. Return the iterator pointing the inserted element.
+Insert scalar value `x` to the position pointed by numerical index `i`. And returns the iterator pointing the inserted element.
 
-### erase(i)
 
-erase element at the position pointed by numerical index `i`. Return the iterator pointing the element just behind the erased element.
+### `insert( it, x )`
 
-### erase(it)
+Insert scalar value `x` to the position pointed by iterator `it`. And returns the iterator pointing the inserted element.
 
-erase element at the position pointed by iterator `it`. Return the iterator pointing the element just behind the erased element.
+### `erase(i)`
 
-### erase( first_i, last_i )
+Erase element at the position pointed by numerical index `i`. And returns the iterator pointing the element just behind the erased element.
 
-erase elements from the position pointed by numerical index `first_i` to `last_i - 1`. Return the iterator pointing the element just behind the erased elements.
+### `erase(it)`
 
-### erase( first_it, last_it )
+Erase element at the position pointed by iterator `it`. And returns the iterator pointing the element just behind the erased element.
 
-erase elements from the position pointed by iterator `first_it` to `last_it - 1`. Return the iterator pointing the element just behind the erased elements.
+### `erase( first_i, last_i )`
 
-### containsElementNamed(name)
+Erase elements from the position pointed by numerical index `first_i` to `last_i - 1`. And returns the iterator pointing the element just behind the erased elements.
 
-return `true` if this vector contains an element with the name specified by character string `name`.
+### `erase( first_it, last_it )`
+
+Erase elements from the position pointed by iterator `first_it` to `last_it - 1`. Return the iterator pointing the element just behind the erased elements.
+
+### `containsElementNamed(name)`
+
+Returns `true` if this vector contains an element with the name specified by character string `name`.
 
 
 ## Static member functions
 
-Static member function is the function that is attached to the class from which an object being molded. Static member functions is called in the form such as `NumericVector::create()`.
+Static member function is functions that is attached to the class from which an object being molded. 
+You can call static member functions in the form such as `NumericVector::create()`.
 
-### get_na()
+### `get_na()`
 
-return the `NA` value of this `Vector` class.
+Returns the `NA` value of this `Vector` class. See [chapter 24 for NA](240_na_nan_inf.html).
 
-### is_na(x)
+### `is_na(x)`
 
-return `true` if a vector element specified by `x` is `NA`.
+Returns `true` if a vector element specified by `x` is `NA`.
 
 
-### create( x1, x2, ...)
+### `create( x1, x2, ...)`
 
-create a `Vector` object containing elements specified by scalar value `x1` and `x2`. Maximum number of arguments are 20.
+Creates a `Vector` object containing elements specified by scalar value `x1` and `x2`. Maximum number of arguments are 20.
 
-### import( first_it , last_it )
+### `import( first_it , last_it )`
 
-create a `Vector` object filled with data from the position pointed by iterator `first_it` to `last_it - 1`.
+Creates a `Vector` object filled with the range of data specified by iterator from `first_it` to `last_it - 1`.
 
-### import_transform( first_it, last_it, func)
+### `import_transform( first_it, last_it, func)`
 
-create a `Vector` object filled with data from the position pointed by iterator `first_it` to `last_it - 1` that is transformed by function specified by `func`.
+Creates a `Vector` object filled with the range of data specified by iterator from `first_it` to `last_it - 1` that is transformed by function specified by `func`.

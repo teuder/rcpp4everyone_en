@@ -46,19 +46,19 @@ RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){
 
 * `#include<Rcpp.h>` : This sentence enables you to use classes and functions defined by the Rcpp package.
 
-* `// [[Rcpp::export]]`：The function defined just below this sentence will be accessible from R.
+* `// [[Rcpp::export]]`：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every functions you want to use from R.
 
-* `using namespace Rcpp;` : This sentence is optional. But if you did not write this sentence, you have to add prefix `Rcpp::` to specify classes and functions defined by the Rcpp. (For example, `Rcpp::NumericVector`)
+* `using namespace Rcpp;` : This sentence is optional. But if you did not write this sentence, you have to add prefix `Rcpp::` to specify classes and functions defined by Rcpp. (For example, `Rcpp::NumericVector`)
 
-* `RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){}`：You need to specify types of functions and arguments.
+* `RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){}`：You need to specify data types of functions and arguments.
 
-* `return RETURN_VALUE;`：`return` statement is mandatorya return when returning a value, but if you do not return a value (i.e. `RETURN_TYPE` is `void`), the return statement can be omitted.
+* `return RETURN_VALUE;`：`return` statement is mandatory if your function would return a value. However, if your function do not return a value (i.e. `RETURN_TYPE` is `void`), the return statement can be omitted.
 
  
 
 ## Compiling the code
 
-The function `Rcpp::sourceCpp()` will compile the source code and load the function into R.
+The function `Rcpp::sourceCpp()` will compile your source code and load the defined function into R.
 
 ```R
 library(Rcpp)

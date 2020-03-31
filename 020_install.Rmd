@@ -8,10 +8,6 @@ Before developing with Rcpp, you need to install c++ compiler.
 
 Install [Rtools](https://cran.r-project.org/bin/windows/Rtools/index.html).
 
-It might be helpful to refer instruction of RStan ([Install Rtools for Windows](https://github.com/stan-dev/rstan/wiki/Install-Rtools-for-Windows)) .
-
-
-
 ### Mac
 
 Install Xcode command line tools. Execute the command `xcode-select --install` on Terminal.

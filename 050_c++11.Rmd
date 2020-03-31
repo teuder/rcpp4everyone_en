@@ -2,10 +2,9 @@
 
 C++ 11 is a standard of C++ newly established in 2011, it introduces new functionalities and notations. Compared with the previous standard, many new features have been added to make C++ even easier for beginners. This document will actively exploit these features of C++11.
 
-** Important: Code examples in this document are written assuming that C++11 is enabled. **
+ **Important: The code examples in this document are written with C++11 enabled.**
 
 ## Enabling C++11
-
 
 To enable `C++11`, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with `Rcpp::sourceCpp()`.
 
@@ -13,7 +12,7 @@ To enable `C++11`, add the following description somewhere in your Rcpp code, th
 // [[Rcpp::plugins("cpp11")]]
 ```
 
-If you want to enable C++11 in your package, add code below in `DESCRIPTION` file.
+If you want to enable `C++11` in your package, add code below in `DESCRIPTION` file of your package.
 
 ```
 SystemRequirements: C++11
@@ -38,7 +37,7 @@ NumericVector v3   {1.0, 2.0, 3.0}; // You can omit "=".
 
 ### auto
 
-Using the `auto` specifier will automatically set the type of the variable, according to the value to be assigned.
+By using the `auto` specifier, the type of a defined variable is infered by compiler automatically according to the assigned value.
 
 ```
 // variable "i" will be int
@@ -52,7 +51,7 @@ auto it = v.begin();
 
 ### decltype
 
-With `decltype` you can declare variables of the same type as existing variables.
+By using `decltype`, you can declare a variable of the same type as an existing variable.
 
 ```
 int i;
@@ -65,7 +64,7 @@ decltype(i) x; // variable "x" will be int
 You can write a `for` statement with the same style as R.
 
 ```
-IntegerVector v{1,2,3};
+IntegerVector v {1,2,3};
 int sum=0;
 for(auto& x : v) {
   sum += x;
@@ -75,7 +74,7 @@ for(auto& x : v) {
 
 ### Lambda expression
 
-You can create a function object by using lambda expression. Function object are usually used as unnamed function passed to other function.
+You can create a function object by using lambda expression. Function object are usually created as unnamed function and passed to the other function.
 
 Lambda expressions are written in the form `[](){}`.
 
@@ -110,7 +109,6 @@ res <-
 *Rcpp example*
 
 ``` cpp
-// [[Rcpp::plugins("cpp11")]]
 // [[Rcpp::export]]
 NumericVector rcpp_lambda_1(){
   NumericVector v = {1,2,3,4,5};
