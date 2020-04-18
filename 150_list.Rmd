@@ -1,8 +1,8 @@
 # List
 
-This chapter explains how to create `List` object, how to access its elements, and its member functions. In Rcpp, `List` is implemented as a kind of vector. In other words, `Vector` is a vector whose element is scalar value, while `List` is a vector whose elements are any kinds of data types. Therefore, `Vector` and `List` have many common methods of creating objects, accessing elements, and member functions.
+This chapter explains how to create `List` object, how to access its elements, and its member functions. In Rcpp, `List` is implemented as a kind of vector. In other words, `Vector` is a vector whose element is scalar value, while `List` is a vector whose elements are any kinds of data types. Therefore, `Vector` and `List` generally have common member functions.
 
-Since the contents described on the page of [DataFrame](dataframe.md) can be mostly valid by replacing `DataFrame` with `List`, please refer to that for details.
+Since the contents described on the page of [DataFrame](140_dataframe.html) can be mostly valid for `List` if replacing `DataFrame` with `List`, please refer to that for details.
 
 ## Creating List object
 

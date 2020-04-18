@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-03-31" />
+<meta name="date" content="2020-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -481,8 +481,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="list" class="section level1">
 <h1><span class="header-section-number">Chapter 13</span> List</h1>
-<p>This chapter explains how to create <code>List</code> object, how to access its elements, and its member functions. In Rcpp, <code>List</code> is implemented as a kind of vector. In other words, <code>Vector</code> is a vector whose element is scalar value, while <code>List</code> is a vector whose elements are any kinds of data types. Therefore, <code>Vector</code> and <code>List</code> have many common methods of creating objects, accessing elements, and member functions.</p>
-<p>Since the contents described on the page of <a href="dataframe.md">DataFrame</a> can be mostly valid by replacing <code>DataFrame</code> with<code>List</code>, please refer to that for details.</p>
+<p>This chapter explains how to create <code>List</code> object, how to access its elements, and its member functions. In Rcpp, <code>List</code> is implemented as a kind of vector. In other words, <code>Vector</code> is a vector whose element is scalar value, while <code>List</code> is a vector whose elements are any kinds of data types. Therefore, <code>Vector</code> and <code>List</code> generally have common member functions.</p>
+<p>Since the contents described on the page of <a href="140_dataframe.html">DataFrame</a> can be mostly valid for <code>List</code> if replacing <code>DataFrame</code> with <code>List</code>, please refer to that for details.</p>
 <div id="creating-list-object" class="section level2">
 <h2><span class="header-section-number">13.1</span> Creating List object</h2>
 <p>To create a <code>List</code> object we use the <code>List::create()</code> function. Also, to specify the element name when creating <code>List</code>, use <code>Named()</code> function or <code>_[]</code>.</p>
