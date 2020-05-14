@@ -12,7 +12,7 @@ To enable `C++11`, add the following description somewhere in your Rcpp code, th
 // [[Rcpp::plugins("cpp11")]]
 ```
 
-If you want to enable `C++11` in your package, add code below in `DESCRIPTION` file of your package.
+If you want to enable `C++11` in your package, add code below in the `DESCRIPTION` file of your package.
 
 ```
 SystemRequirements: C++11
@@ -37,7 +37,7 @@ NumericVector v3   {1.0, 2.0, 3.0}; // You can omit "=".
 
 ### auto
 
-By using the `auto` specifier, the type of a defined variable is infered by compiler automatically according to the assigned value.
+By using the `auto` specifier, the type of a defined variable is inferred by the compiler automatically according to the assigned value.
 
 ```
 // variable "i" will be int
@@ -74,7 +74,7 @@ for(auto& x : v) {
 
 ### Lambda expression
 
-You can create a function object by using lambda expression. Function object are usually created as unnamed function and passed to the other function.
+You can create a function object by using a lambda expression. A function object is usually created as an unnamed function and passed to the other function.
 
 Lambda expressions are written in the form `[](){}`.
 
@@ -95,7 +95,7 @@ The return type of this function object is automatically set to the type of the 
 
 **Example**
 
-The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.
+The following example shows how to use a lambda expression. You can find Some types of C++ code can be written in the same style as R.
 
 *R example*
 
@@ -118,3 +118,6 @@ NumericVector rcpp_lambda_1(){
   return res;
 }
 ```
+
+
+

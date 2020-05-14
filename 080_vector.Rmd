@@ -2,7 +2,7 @@
 
 ## Creating vector object
 
-You can create vector object in several ways.
+You can create vector objects in several ways.
 
 ```cpp
 // Create a Vector object equivalent to
@@ -26,7 +26,7 @@ NumericVector v =
 
 ## Accessing vector elements
 
-You can access to individual element of a vector object using `[]` or `()` operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. `[]` operator ignores out of bound access, while `()` operator throws an exception `index_out_of_bounds`.
+You can access an individual element of a vector object using `[]` or `()` operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. `[]` operator ignores out of bound access, while `()` operator throws an exception `index_out_of_bounds`.
 
 **Note that the index of the Vector object in C++ starts from 0.**
 
@@ -67,7 +67,7 @@ void rcpp_vector_access(){
 
 ## Member functions
 
-Member functions (also called as Methods) are functions that is attached to an individual object. You can call member functions `f()` of object `v` in the form of `v.f()`.
+Member functions (also called Methods) are functions that are attached to an individual object. You can call member functions `f()` of object `v` in the form of `v.f()`.
 
 ```cpp
 NumericVector v = {1,2,3,4,5};
@@ -76,7 +76,7 @@ NumericVector v = {1,2,3,4,5};
 int n = v.length(); // 5
 ```
 
-The `Vector` object in Rcpp have member functions listed below.
+The `Vector` object in Rcpp has member functions listed below.
 
 
 ### `length()`, `size()`
@@ -97,7 +97,7 @@ Returns numerical index of the element specified by numerical index `i` after do
 
 ### `fill( x )`
 
-Fills all the element of this vector object with scalar value `x`.
+Fills all the elements of this vector object with scalar value `x`.
 
 ### `sort()`
 
@@ -145,28 +145,28 @@ Returns a const iterator pointing to the end of the vector (**one past the last 
 
 ### `insert( i, x )`
 
-Insert scalar value `x` to the position pointed by numerical index `i`. And returns the iterator pointing the inserted element.
+Insert scalar value `x` to the position pointed by numerical index `i`. And returns the iterator pointing to the inserted element.
 
 
 ### `insert( it, x )`
 
-Insert scalar value `x` to the position pointed by iterator `it`. And returns the iterator pointing the inserted element.
+Insert scalar value `x` to the position pointed by iterator `it`. And returns the iterator pointing to the inserted element.
 
 ### `erase(i)`
 
-Erase element at the position pointed by numerical index `i`. And returns the iterator pointing the element just behind the erased element.
+Erase element at the position pointed by numerical index `i`. And returns the iterator pointing to the element just behind the erased element.
 
 ### `erase(it)`
 
-Erase element at the position pointed by iterator `it`. And returns the iterator pointing the element just behind the erased element.
+Erase element at the position pointed by iterator `it`. And returns the iterator pointing to the element just behind the erased element.
 
 ### `erase( first_i, last_i )`
 
-Erase elements from the position pointed by numerical index `first_i` to `last_i - 1`. And returns the iterator pointing the element just behind the erased elements.
+Erase elements from the position pointed by numerical index `first_i` to `last_i - 1`. And returns the iterator pointing to the element just behind the erased elements.
 
 ### `erase( first_it, last_it )`
 
-Erase elements from the position pointed by iterator `first_it` to `last_it - 1`. Return the iterator pointing the element just behind the erased elements.
+Erase elements from the position pointed by the iterator `first_it` to `last_it - 1`. Return the iterator pointing the element just behind the erased elements.
 
 ### `containsElementNamed(name)`
 
@@ -175,7 +175,8 @@ Returns `true` if this vector contains an element with the name specified by cha
 
 ## Static member functions
 
-Static member function is functions that is attached to the class from which an object being molded. 
+Static member function is a function that is attached to the class rather than a from which an object is being molded. 
+
 You can call static member functions in the form such as `NumericVector::create()`.
 
 ### `get_na()`
@@ -189,12 +190,15 @@ Returns `true` if a vector element specified by `x` is `NA`.
 
 ### `create( x1, x2, ...)`
 
-Creates a `Vector` object containing elements specified by scalar value `x1` and `x2`. Maximum number of arguments are 20.
+Creates a `Vector` object containing elements specified by scalar value `x1` and `x2`. Maximum number of arguments is 20.
 
 ### `import( first_it , last_it )`
 
-Creates a `Vector` object filled with the range of data specified by iterator from `first_it` to `last_it - 1`.
+Creates a `Vector` object filled with the range of data specified by the iterator from `first_it` to `last_it - 1`.
 
 ### `import_transform( first_it, last_it, func)`
 
-Creates a `Vector` object filled with the range of data specified by iterator from `first_it` to `last_it - 1` that is transformed by function specified by `func`.
+Creates a `Vector` object filled with the range of data specified by the iterator from `first_it` to `last_it - 1` that is transformed by function specified by `func`.
+
+
+

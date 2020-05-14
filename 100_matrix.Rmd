@@ -2,7 +2,7 @@
 
 ## Creating Matrix object
 
-Matrix object can be created in several ways.
+`Matrix` objects can be created in several ways.
 
 ```cpp
 // Create a Matrix object equivalent to
@@ -16,7 +16,7 @@ NumericMatrix m2( 2 , 3 );
 NumericMatrix m3( 2 , 3 , v.begin() );
 ```
 
-In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute `dim`. Thus, if you created a vector with attribute `dim` in Rcpp and return it to R, it will be treated as a matrix.
+In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute `dim`. Thus, if you create a vector with attribute `dim` in Rcpp and return it to R, it will be treated as a matrix.
 
 
 ```cpp
@@ -42,7 +42,7 @@ Execution result
 [2,]    2    4
 ```
 
-However, even if you set a value to attribute `dim` of a vector object, the type of the object remains Vector type in Rcpp code. Thus, if you want to convert it to Matrix type in Rcpp, you need to use `as<T>()` function.
+However, even if you set a value to attribute `dim` of a `Vector` object, the type of the object remains a `Vector` type in Rcpp code. Thus, if you want to convert it to `Matrix` type in Rcpp, you need to use `as<T>()` function.
 
 ```cpp
 // Set number of rows and columns to attribute dim
@@ -54,7 +54,7 @@ NumericMatrix m = as<NumericMatrix>(v);
 
 ## Accessing to Matrix elements
 
-By using `()` operator, you can get from and assign to the values of elements of a Matrix object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol `_`.
+By using the `()` operator, you can get from and assign to the values of elements of a `Matrix` object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in `Matrix` start with 0. If you want to access a specific row or column, use the symbol `_`.
 
 You can also use the `[]` operator to access an element as a vector connecting the columns of a matrix.
 
@@ -83,7 +83,7 @@ m[5]; // This points to the same element as m(0,1)
 
 ### Accessing as reference to row, column and sub matrix
 
-Rcpp also provides types that hold "references" to specific part of a matrix.
+Rcpp also provides types that hold "references" to specific parts of a matrix.
 
 ```cpp
 NumericMatrix::Column col = m( _ , 1);  // Reference to the column 1
@@ -148,7 +148,7 @@ Returns a diagonal matrix whose number of rows and columns equals to "size" and 
 
 ## Other functions related to Matrix
 
-This section shows functions relating to Matrix.
+This section shows functions relating to the `Matrix`.
 
 ### rownames( m )
 
@@ -172,3 +172,6 @@ colnames(m) = ch;
 ### transpose( m )
 
 Returns the transposed matrix of matrix m.
+
+
+

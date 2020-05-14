@@ -25,7 +25,7 @@ rcpp_sum(1:10)
 
 ## cppFunction()
 
-The `cppFunction()` offers handy way to create single Rcpp function. You can omit `#include <Rcpp.h>` and `using namespase Rcpp;` when you use `cppFunction()`.
+The `cppFunction()` offers a handy way to create a single Rcpp function. You can omit `#include <Rcpp.h>` and `using namespase Rcpp;` when you use `cppFunction()`.
 
 ```r
 src <-
@@ -43,10 +43,12 @@ rcpp_sum(1:10)
 
 ## evalCpp()
 
-You can evaluate single C++ statement by using `evalCpp()`.
+You can evaluate a single C++ statement by using `evalCpp()`.
 
 ```r
 # Showing maximum value of double.
 evalCpp('std::numeric_limits<double>::max()')
 ```
+
+
 

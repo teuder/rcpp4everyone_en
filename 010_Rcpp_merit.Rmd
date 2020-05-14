@@ -3,7 +3,8 @@
 R is weak in some kinds of operations. If you need operations listed below, it is time to consider using Rcpp.
 
 - Loop operations in which later iterations depend on previous iterations.
-- Accessing each elements of a vector/matrix.
+- Accessing each element of a vector/matrix.
 - Recurrent function calls within loops.
 - Changing the size of vectors dynamically.
 - Operations that need advanced data structures and algorithms.
+

@@ -46,9 +46,9 @@ RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){
 
 * `#include<Rcpp.h>` : This sentence enables you to use classes and functions defined by the Rcpp package.
 
-* `// [[Rcpp::export]]`：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every functions you want to use from R.
+* `// [[Rcpp::export]]`：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every function you want to use from R.
 
-* `using namespace Rcpp;` : This sentence is optional. But if you did not write this sentence, you have to add prefix `Rcpp::` to specify classes and functions defined by Rcpp. (For example, `Rcpp::NumericVector`)
+* `using namespace Rcpp;` : This sentence is optional. But if you did not write this sentence, you have to add the prefix `Rcpp::` to specify classes and functions defined by Rcpp. (For example, `Rcpp::NumericVector`)
 
 * `RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){}`：You need to specify data types of functions and arguments.
 
@@ -67,7 +67,7 @@ sourceCpp('sum.cpp')
 
 ## Executing the function
 
-You can use your Rcpp function like as usual R function.
+You can use your Rcpp functions as usual R functions.
 
 ```r
 > rcpp_sum(1:10)
@@ -76,3 +76,6 @@ You can use your Rcpp function like as usual R function.
 > sum(1:10)
 [1] 55
 ```
+
+
+

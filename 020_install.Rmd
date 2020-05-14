@@ -1,6 +1,6 @@
 # Installation
 
-Before developing with Rcpp, you need to install c++ compiler.
+Before developing with Rcpp, you need to install a C++ compiler.
 
 ## Install C++ compiler
 
@@ -19,17 +19,17 @@ Install gcc and related packages.
 In Ubuntu Linux, execute the command `sudo apt-get install r-base-dev` on Terminal.
 
 
-### Using other compilers installed by yourself
+## Using other compilers installed by yourself
 
 If you installed other compiler (g++, clang++) different from above, create the following file under the user's home directory. Then set environment variables in the file.
 
 **Linux, Mac**
 
-* `.R/Makevars`
+ - `.R/Makevars`
 
 **Windows**
 
-* `.R/Makevars.win`
+ - `.R/Makevars.win`
 
 **Example settings of environmental variables**
 
@@ -45,8 +45,11 @@ MAKE=make -j4
 
 ## Install Rcpp
 
-You can install Rcpp by executing following code.
+You can install Rcpp by executing the following code.
 
 ```r
 install.packages("Rcpp")
 ```
+
+
+
