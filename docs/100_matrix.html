@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-04-18" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
 <li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
 <li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
-<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.2</b> Using other compilers installed by yourself</a></li>
+<li class="chapter" data-level="2.3" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.3</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -483,7 +483,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 9</span> Matrix</h1>
 <div id="creating-matrix-object" class="section level2">
 <h2><span class="header-section-number">9.1</span> Creating Matrix object</h2>
-<p>Matrix object can be created in several ways.</p>
+<p><code>Matrix</code> objects can be created in several ways.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">// Create a Matrix object equivalent to</span></a>
 <a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">// m &lt;- matrix(0, nrow=2, ncol=2)</span></a>
 <a class="sourceLine" id="cb24-3" data-line-number="3">NumericMatrix m1( <span class="dv">2</span> );</a>
@@ -493,7 +493,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb24-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">// m &lt;- matrix(v, nrow=2, ncol=3)</span></a>
 <a class="sourceLine" id="cb24-9" data-line-number="9">NumericMatrix m3( <span class="dv">2</span> , <span class="dv">3</span> , v.begin() );</a></code></pre></div>
-<p>In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute <code>dim</code>. Thus, if you created a vector with attribute <code>dim</code> in Rcpp and return it to R, it will be treated as a matrix.</p>
+<p>In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute <code>dim</code>. Thus, if you create a vector with attribute <code>dim</code> in Rcpp and return it to R, it will be treated as a matrix.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
 <a class="sourceLine" id="cb25-2" data-line-number="2">NumericVector rcpp_matrix(){</a>
 <a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="co">// Creating a vector object</span></a>
@@ -510,7 +510,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
      [,1] [,2]
 [1,]    1    3
 [2,]    2    4</code></pre>
-<p>However, even if you set a value to attribute <code>dim</code> of a vector object, the type of the object remains Vector type in Rcpp code. Thus, if you want to convert it to Matrix type in Rcpp, you need to use <code>as&lt;T&gt;()</code> function.</p>
+<p>However, even if you set a value to attribute <code>dim</code> of a <code>Vector</code> object, the type of the object remains a <code>Vector</code> type in Rcpp code. Thus, if you want to convert it to <code>Matrix</code> type in Rcpp, you need to use <code>as&lt;T&gt;()</code> function.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">// Set number of rows and columns to attribute dim</span></a>
 <a class="sourceLine" id="cb27-2" data-line-number="2">v.attr(<span class="st">&quot;dim&quot;</span>) = Dimension(<span class="dv">2</span>, <span class="dv">2</span>);</a>
 <a class="sourceLine" id="cb27-3" data-line-number="3"></a>
@@ -519,7 +519,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="accessing-to-matrix-elements" class="section level2">
 <h2><span class="header-section-number">9.2</span> Accessing to Matrix elements</h2>
-<p>By using <code>()</code> operator, you can get from and assign to the values of elements of a Matrix object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol <code>_</code>.</p>
+<p>By using the <code>()</code> operator, you can get from and assign to the values of elements of a <code>Matrix</code> object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in <code>Matrix</code> start with 0. If you want to access a specific row or column, use the symbol <code>_</code>.</p>
 <p>You can also use the <code>[]</code> operator to access an element as a vector connecting the columns of a matrix.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co">// Creating a 5x5 numerical matrix</span></a>
 <a class="sourceLine" id="cb28-2" data-line-number="2">NumericMatrix m( <span class="dv">5</span>, <span class="dv">5</span> );</a>
@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb28-17" data-line-number="17">m[<span class="dv">5</span>]; <span class="co">// This points to the same element as m(0,1)</span></a></code></pre></div>
 <div id="accessing-as-reference-to-row-column-and-sub-matrix" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Accessing as reference to row, column and sub matrix</h3>
-<p>Rcpp also provides types that hold “references” to specific part of a matrix.</p>
+<p>Rcpp also provides types that hold “references” to specific parts of a matrix.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb29-1" data-line-number="1">NumericMatrix::Column col = m( _ , <span class="dv">1</span>);  <span class="co">// Reference to the column 1</span></a>
 <a class="sourceLine" id="cb29-2" data-line-number="2">NumericMatrix::Row    row = m( <span class="dv">1</span> , _ ); <span class="co">// Reference to the row 1</span></a>
 <a class="sourceLine" id="cb29-3" data-line-number="3">NumericMatrix::Sub    sub = m( Range(<span class="dv">0</span>,<span class="dv">1</span>) , Range(<span class="dv">2</span>,<span class="dv">3</span>) ); <span class="co">// Reference to sub matrix</span></a></code></pre></div>
@@ -593,7 +593,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="other-functions-related-to-matrix" class="section level2">
 <h2><span class="header-section-number">9.5</span> Other functions related to Matrix</h2>
-<p>This section shows functions relating to Matrix.</p>
+<p>This section shows functions relating to the <code>Matrix</code>.</p>
 <div id="rownames-m" class="section level3">
 <h3><span class="header-section-number">9.5.1</span> rownames( m )</h3>
 <p>Get and set the row name of matrix m.</p>

@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-04-18" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
 <li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
 <li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
-<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.2</b> Using other compilers installed by yourself</a></li>
+<li class="chapter" data-level="2.3" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.3</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -481,14 +481,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-types" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Data types</h1>
-<p>All the basic data types and data structures provided by R are available in Rcpp. By using these data types, you can directly access to the objects exist in R.</p>
+<p>All the basic data types and data structures provided by R are available in Rcpp. By using these data types, you can directly access the objects that exist in R.</p>
 <div id="vector-and-matrix" class="section level2">
 <h2><span class="header-section-number">7.1</span> Vector and Matrix</h2>
 <p>Following seven data types are often used in R.</p>
 <p><code>logical</code> <code>integer</code> <code>numeric</code> <code>complex</code> <code>character</code> <code>Date</code> <code>POSIXct</code></p>
 <p>There are vector type and matrix types in Rcpp corresponding to those of R.</p>
 <p>In this document, the word <code>Vector</code> and <code>Matrix</code> is used to specify all the vector and matrix types in Rcpp.</p>
-<p>The table below present the correspondence of data types between R/Rcpp/C++.</p>
+<p>The table below presents the correspondence of data types between R/Rcpp/C++.</p>
 <table style="width:100%;">
 <colgroup>
 <col width="16%" />
@@ -570,7 +570,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data.frame-list-s3-s4" class="section level2">
 <h2><span class="header-section-number">7.2</span> data.frame, list, S3, S4</h2>
-<p>Other than vector and matrix, There are several data structure in R such as data.frame, list, S3 class and S4 class. You can handle all of these data structuers in Rcpp.</p>
+<p>Other than <code>Vector</code> and <code>Matrix</code>, There are several data structures in R such as data.frame, list, S3 class and S4 class. You can handle all of these data structures in Rcpp.</p>
 <table>
 <thead>
 <tr class="header">
@@ -597,16 +597,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>In Rcpp, <code>Vector</code>, <code>DataFrame</code>, <code>List</code> are all implemented as kinds of vectors. Namely, <code>Vector</code> is a vector that its elements are scalar values, <code>DataFrame</code> is a vector that its elements are <code>Vector</code>s, <code>List</code> is a vector that its elements are any kinds of data types. Thus, <code>Vector</code>, <code>DataFrame</code>, <code>List</code> has many common member functions in Rcpp.</p>
-<!--
-`Dataframe` は、様々な型のベクトルを要素として格納することができます。しかし、要素となる全てのベクトルの長さは等しいという制約があります。
-
-`List` は、`Dataframe` や `List` を含む、どのような型のオブジェクトでも要素として持つことができます。要素となるベクトルの長さにも制限はありません。
-
-S3 クラスは属性 `class` に独自の名前が設定されたリストですので、使い方は `List` と同様です。
-
-S4 クラスはスロット（`slot`）と呼ばれる内部データを持っています。Rcpp の `S4` を用いることで R で定義した S4 クラスのオブジェクトの作成、および、スロットへのアクセスが可能になります。
--->
+<p>In Rcpp, <code>Vector</code>, <code>DataFrame</code>, <code>List</code> are all implemented as kinds of vectors. Namely, <code>Vector</code> is a vector that its elements are scalar values, <code>DataFrame</code> is a vector that its elements are <code>Vector</code>s, <code>List</code> is a vector that its elements are any kind of data types. Thus, <code>Vector</code>, <code>DataFrame</code>, <code>List</code> has many common member functions in Rcpp.</p>
 
 </div>
 </div>

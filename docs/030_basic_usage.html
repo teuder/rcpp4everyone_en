@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-04-18" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
 <li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
 <li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
-<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.2</b> Using other compilers installed by yourself</a></li>
+<li class="chapter" data-level="2.3" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.3</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -518,8 +518,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-10" data-line-number="10">}</a></code></pre></div>
 <ul>
 <li><p><code>#include&lt;Rcpp.h&gt;</code> : This sentence enables you to use classes and functions defined by the Rcpp package.</p></li>
-<li><p><code>// [[Rcpp::export]]</code>：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every functions you want to use from R.</p></li>
-<li><p><code>using namespace Rcpp;</code> : This sentence is optional. But if you did not write this sentence, you have to add prefix <code>Rcpp::</code> to specify classes and functions defined by Rcpp. (For example, <code>Rcpp::NumericVector</code>)</p></li>
+<li><p><code>// [[Rcpp::export]]</code>：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every function you want to use from R.</p></li>
+<li><p><code>using namespace Rcpp;</code> : This sentence is optional. But if you did not write this sentence, you have to add the prefix <code>Rcpp::</code> to specify classes and functions defined by Rcpp. (For example, <code>Rcpp::NumericVector</code>)</p></li>
 <li><p><code>RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){}</code>：You need to specify data types of functions and arguments.</p></li>
 <li><p><code>return RETURN_VALUE;</code>：<code>return</code> statement is mandatory if your function would return a value. However, if your function do not return a value (i.e. <code>RETURN_TYPE</code> is <code>void</code>), the return statement can be omitted.</p></li>
 </ul>
@@ -533,7 +533,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="executing-the-function" class="section level2">
 <h2><span class="header-section-number">3.3</span> Executing the function</h2>
-<p>You can use your Rcpp function like as usual R function.</p>
+<p>You can use your Rcpp functions as usual R functions.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rcpp_sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">[<span class="dv">1</span>] <span class="dv">55</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"></a>

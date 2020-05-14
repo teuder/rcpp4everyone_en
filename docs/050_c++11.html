@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-04-18" />
+<meta name="date" content="2020-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="020_install.html"><a href="020_install.html#windows"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
 <li class="chapter" data-level="2.1.2" data-path="020_install.html"><a href="020_install.html#mac"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
 <li class="chapter" data-level="2.1.3" data-path="020_install.html"><a href="020_install.html#linux"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
-<li class="chapter" data-level="2.1.4" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.1.4</b> Using other compilers installed by yourself</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.2</b> Install Rcpp</a></li>
+<li class="chapter" data-level="2.2" data-path="020_install.html"><a href="020_install.html#using-other-compilers-installed-by-yourself"><i class="fa fa-check"></i><b>2.2</b> Using other compilers installed by yourself</a></li>
+<li class="chapter" data-level="2.3" data-path="020_install.html"><a href="020_install.html#install-rcpp"><i class="fa fa-check"></i><b>2.3</b> Install Rcpp</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="030_basic_usage.html"><a href="030_basic_usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a><ul>
 <li class="chapter" data-level="3.1" data-path="030_basic_usage.html"><a href="030_basic_usage.html#writing-your-rcpp-code"><i class="fa fa-check"></i><b>3.1</b> Writing your Rcpp code</a><ul>
@@ -487,7 +487,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Enabling C++11</h2>
 <p>To enable <code>C++11</code>, add the following description somewhere in your Rcpp code, this is sufficient when you compile your rcpp code with <code>Rcpp::sourceCpp()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a></code></pre></div>
-<p>If you want to enable <code>C++11</code> in your package, add code below in <code>DESCRIPTION</code> file of your package.</p>
+<p>If you want to enable <code>C++11</code> in your package, add code below in the <code>DESCRIPTION</code> file of your package.</p>
 <pre><code>SystemRequirements: C++11</code></pre>
 </div>
 <div id="recommended-c11-features" class="section level2">
@@ -503,7 +503,7 @@ NumericVector v3   {1.0, 2.0, 3.0}; // You can omit &quot;=&quot;.</code></pre>
 </div>
 <div id="auto" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> auto</h3>
-<p>By using the <code>auto</code> specifier, the type of a defined variable is infered by compiler automatically according to the assigned value.</p>
+<p>By using the <code>auto</code> specifier, the type of a defined variable is inferred by the compiler automatically according to the assigned value.</p>
 <pre><code>// variable &quot;i&quot; will be int
 auto  i  = 4;
 
@@ -528,7 +528,7 @@ for(auto&amp; x : v) {
 </div>
 <div id="lambda-expression" class="section level3">
 <h3><span class="header-section-number">5.2.5</span> Lambda expression</h3>
-<p>You can create a function object by using lambda expression. Function object are usually created as unnamed function and passed to the other function.</p>
+<p>You can create a function object by using a lambda expression. A function object is usually created as an unnamed function and passed to the other function.</p>
 <p>Lambda expressions are written in the form <code>[](){}</code>.</p>
 <p>In <code>[]</code>, you write a list of local variables you want to use in this function object.</p>
 <ul>
@@ -542,7 +542,7 @@ for(auto&amp; x : v) {
 <p><strong>Return type of the lambda expression</strong></p>
 <p>The return type of this function object is automatically set to the type of the returned value described in <code>{}</code>. If you want to define return type explicitly, write it like <code>[]()-&gt;int{}</code>.</p>
 <p><strong>Example</strong></p>
-<p>The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.</p>
+<p>The following example shows how to use a lambda expression. You can find Some types of C++ code can be written in the same style as R.</p>
 <p><em>R example</em></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">A &lt;-<span class="st"> </span><span class="fl">2.0</span></a>

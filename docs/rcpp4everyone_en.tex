@@ -108,7 +108,7 @@
 
 \title{Rcpp for everyone}
 \author{Masaki E. Tsuda}
-\date{2020-04-18}
+\date{2020-05-14}
 
 \begin{document}
 \maketitle
@@ -139,7 +139,7 @@ R is weak in some kinds of operations. If you need operations listed below, it i
 \item
   Loop operations in which later iterations depend on previous iterations.
 \item
-  Accessing each elements of a vector/matrix.
+  Accessing each element of a vector/matrix.
 \item
   Recurrent function calls within loops.
 \item
@@ -151,7 +151,7 @@ R is weak in some kinds of operations. If you need operations listed below, it i
 \hypertarget{installation}{%
 \chapter{Installation}\label{installation}}
 
-Before developing with Rcpp, you need to install c++ compiler.
+Before developing with Rcpp, you need to install a C++ compiler.
 
 \hypertarget{install-c-compiler}{%
 \section{Install C++ compiler}\label{install-c-compiler}}
@@ -174,7 +174,7 @@ Install gcc and related packages.
 In Ubuntu Linux, execute the command \texttt{sudo\ apt-get\ install\ r-base-dev} on Terminal.
 
 \hypertarget{using-other-compilers-installed-by-yourself}{%
-\subsection{Using other compilers installed by yourself}\label{using-other-compilers-installed-by-yourself}}
+\section{Using other compilers installed by yourself}\label{using-other-compilers-installed-by-yourself}}
 
 If you installed other compiler (g++, clang++) different from above, create the following file under the user's home directory. Then set environment variables in the file.
 
@@ -208,7 +208,7 @@ MAKE=make -j4
 \hypertarget{install-rcpp}{%
 \section{Install Rcpp}\label{install-rcpp}}
 
-You can install Rcpp by executing following code.
+You can install Rcpp by executing the following code.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -280,9 +280,9 @@ The following code shows the basic format for defining a Rcpp function.
 \item
   \texttt{\#include\textless{}Rcpp.h\textgreater{}} : This sentence enables you to use classes and functions defined by the Rcpp package.
 \item
-  \texttt{//\ {[}{[}Rcpp::export{]}{]}}：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every functions you want to use from R.
+  \texttt{//\ {[}{[}Rcpp::export{]}{]}}：The function defined just below this sentence will be accessible from R. You need to attach this sentence to every function you want to use from R.
 \item
-  \texttt{using\ namespace\ Rcpp;} : This sentence is optional. But if you did not write this sentence, you have to add prefix \texttt{Rcpp::} to specify classes and functions defined by Rcpp. (For example, \texttt{Rcpp::NumericVector})
+  \texttt{using\ namespace\ Rcpp;} : This sentence is optional. But if you did not write this sentence, you have to add the prefix \texttt{Rcpp::} to specify classes and functions defined by Rcpp. (For example, \texttt{Rcpp::NumericVector})
 \item
   \texttt{RETURN\_TYPE\ FUNCTION\_NAME(ARGMENT\_TYPE\ ARGMENT)\{\}}：You need to specify data types of functions and arguments.
 \item
@@ -304,7 +304,7 @@ The function \texttt{Rcpp::sourceCpp()} will compile your source code and load t
 \hypertarget{executing-the-function}{%
 \section{Executing the function}\label{executing-the-function}}
 
-You can use your Rcpp function like as usual R function.
+You can use your Rcpp functions as usual R functions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -348,7 +348,7 @@ Save Rcpp code as string object in R and compile it with \texttt{sourceCpp()}.
 \hypertarget{cppfunction}{%
 \section{cppFunction()}\label{cppfunction}}
 
-The \texttt{cppFunction()} offers handy way to create single Rcpp function. You can omit \texttt{\#include\ \textless{}Rcpp.h\textgreater{}} and \texttt{using\ namespase\ Rcpp;} when you use \texttt{cppFunction()}.
+The \texttt{cppFunction()} offers a handy way to create a single Rcpp function. You can omit \texttt{\#include\ \textless{}Rcpp.h\textgreater{}} and \texttt{using\ namespase\ Rcpp;} when you use \texttt{cppFunction()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -369,7 +369,7 @@ The \texttt{cppFunction()} offers handy way to create single Rcpp function. You 
 \hypertarget{evalcpp}{%
 \section{evalCpp()}\label{evalcpp}}
 
-You can evaluate single C++ statement by using \texttt{evalCpp()}.
+You can evaluate a single C++ statement by using \texttt{evalCpp()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -396,7 +396,7 @@ To enable \texttt{C++11}, add the following description somewhere in your Rcpp c
 \end{Highlighting}
 \end{Shaded}
 
-If you want to enable \texttt{C++11} in your package, add code below in \texttt{DESCRIPTION} file of your package.
+If you want to enable \texttt{C++11} in your package, add code below in the \texttt{DESCRIPTION} file of your package.
 
 \begin{verbatim}
 SystemRequirements: C++11
@@ -421,7 +421,7 @@ NumericVector v3   {1.0, 2.0, 3.0}; // You can omit "=".
 \hypertarget{auto}{%
 \subsection{auto}\label{auto}}
 
-By using the \texttt{auto} specifier, the type of a defined variable is infered by compiler automatically according to the assigned value.
+By using the \texttt{auto} specifier, the type of a defined variable is inferred by the compiler automatically according to the assigned value.
 
 \begin{verbatim}
 // variable "i" will be int
@@ -458,7 +458,7 @@ for(auto& x : v) {
 \hypertarget{lambda-expression}{%
 \subsection{Lambda expression}\label{lambda-expression}}
 
-You can create a function object by using lambda expression. Function object are usually created as unnamed function and passed to the other function.
+You can create a function object by using a lambda expression. A function object is usually created as an unnamed function and passed to the other function.
 
 Lambda expressions are written in the form \texttt{{[}{]}()\{\}}.
 
@@ -486,7 +486,7 @@ The return type of this function object is automatically set to the type of the 
 
 \textbf{Example}
 
-The following example shows how to use lambda expression. You can find Some types of C++ code can be written in the same style as R.
+The following example shows how to use a lambda expression. You can find Some types of C++ code can be written in the same style as R.
 
 \emph{R example}
 
@@ -517,14 +517,14 @@ The following example shows how to use lambda expression. You can find Some type
 \hypertarget{printing-messages}{%
 \chapter{Printing messages}\label{printing-messages}}
 
-You can print messages and values of objects on R console screen by using \texttt{Rprintf()} and \texttt{Rcout}.
+You can print messages and values of objects on the R console screen by using \texttt{Rprintf()} and \texttt{Rcout}.
 
 \texttt{REprintf()} and \texttt{Rcerr} can be used for printing error messages.
 
 \hypertarget{rcout-rcerr}{%
 \section{Rcout, Rcerr}\label{rcout-rcerr}}
 
-The way of using \texttt{Rcout} and \texttt{Rcerr} is same as \texttt{std::cout} and \texttt{std::cerr}. Connecting messages or variables with \texttt{\textless{}\textless{}} in the order you want. When you give vector object to \texttt{\textless{}\textless{}}, it will print all the elements of the vector.
+The way of using \texttt{Rcout} and \texttt{Rcerr} is the same as \texttt{std::cout} and \texttt{std::cerr}. Connecting messages or variables with \texttt{\textless{}\textless{}} in the order you want. When you give a vector object to \texttt{\textless{}\textless{}}, it will print all the elements of the vector.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -542,7 +542,7 @@ The way of using \texttt{Rcout} and \texttt{Rcerr} is same as \texttt{std::cout}
 \hypertarget{rprintf-reprintf}{%
 \section{Rprintf(), REprintf()}\label{rprintf-reprintf}}
 
-The way of using \texttt{Rprintf()} and \texttt{REprintf()} is same as \texttt{std::printf()}, it print message by specifying format.
+The way of using \texttt{Rprintf()} and \texttt{REprintf()} is the same as \texttt{std::printf()}, it prints a message by specifying format.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -552,7 +552,7 @@ The way of using \texttt{Rprintf()} and \texttt{REprintf()} is same as \texttt{s
 
 In the \texttt{format} string, you can use following format specifiers for printing the values of variables. When you want to print multiple variables, you have to pass these variables in the order that its corresponding specifier appears in the format string.
 
-Only a part of format specifier is presented below, please refer to other documentation for detail (For example, \href{http://www.cplusplus.com/reference/cstdio/printf/}{cplusplus.com}).
+Only a part of the format specifier is presented below, please refer to other documentation for detail (For example, \href{http://www.cplusplus.com/reference/cstdio/printf/}{cplusplus.com}).
 
 \begin{longtable}[]{@{}cl@{}}
 \toprule
@@ -567,7 +567,7 @@ specifier & explanation\tabularnewline
 \bottomrule
 \end{longtable}
 
-Additionally, \texttt{Rprintf()} and \texttt{REprintf()} can only print data types that exist in standard C language, thus you cannot pass data types defined by Rcpp package (such as \texttt{NumericVector}) to \texttt{Rprintf()} directly. If you want to print the values of elements of Rcpp vector using \texttt{Rprintf()}, you have to pass each element separately to it (see below).
+Additionally, \texttt{Rprintf()} and \texttt{REprintf()} can only print data types that exist in standard C language, thus you cannot pass data types defined by Rcpp package (such as \texttt{NumericVector}) to \texttt{Rprintf()} directly. If you want to print the values of elements of an Rcpp vector using \texttt{Rprintf()}, you have to pass each element separately to it (see below).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -584,7 +584,7 @@ Additionally, \texttt{Rprintf()} and \texttt{REprintf()} can only print data typ
 \hypertarget{data-types}{%
 \chapter{Data types}\label{data-types}}
 
-All the basic data types and data structures provided by R are available in Rcpp. By using these data types, you can directly access to the objects exist in R.
+All the basic data types and data structures provided by R are available in Rcpp. By using these data types, you can directly access the objects that exist in R.
 
 \hypertarget{vector-and-matrix}{%
 \section{Vector and Matrix}\label{vector-and-matrix}}
@@ -597,7 +597,7 @@ There are vector type and matrix types in Rcpp corresponding to those of R.
 
 In this document, the word \texttt{Vector} and \texttt{Matrix} is used to specify all the vector and matrix types in Rcpp.
 
-The table below present the correspondence of data types between R/Rcpp/C++.
+The table below presents the correspondence of data types between R/Rcpp/C++.
 
 \begin{longtable}[]{@{}cccccc@{}}
 \toprule
@@ -713,7 +713,7 @@ Datetime\strut
 \hypertarget{data.frame-list-s3-s4}{%
 \section{data.frame, list, S3, S4}\label{data.frame-list-s3-s4}}
 
-Other than vector and matrix, There are several data structure in R such as data.frame, list, S3 class and S4 class. You can handle all of these data structuers in Rcpp.
+Other than \texttt{Vector} and \texttt{Matrix}, There are several data structures in R such as data.frame, list, S3 class and S4 class. You can handle all of these data structures in Rcpp.
 
 \begin{longtable}[]{@{}cc@{}}
 \toprule
@@ -727,7 +727,7 @@ S4 class & \texttt{S4}\tabularnewline
 \bottomrule
 \end{longtable}
 
-In Rcpp, \texttt{Vector}, \texttt{DataFrame}, \texttt{List} are all implemented as kinds of vectors. Namely, \texttt{Vector} is a vector that its elements are scalar values, \texttt{DataFrame} is a vector that its elements are \texttt{Vector}s, \texttt{List} is a vector that its elements are any kinds of data types. Thus, \texttt{Vector}, \texttt{DataFrame}, \texttt{List} has many common member functions in Rcpp.
+In Rcpp, \texttt{Vector}, \texttt{DataFrame}, \texttt{List} are all implemented as kinds of vectors. Namely, \texttt{Vector} is a vector that its elements are scalar values, \texttt{DataFrame} is a vector that its elements are \texttt{Vector}s, \texttt{List} is a vector that its elements are any kind of data types. Thus, \texttt{Vector}, \texttt{DataFrame}, \texttt{List} has many common member functions in Rcpp.
 
 \hypertarget{vector}{%
 \chapter{Vector}\label{vector}}
@@ -735,7 +735,7 @@ In Rcpp, \texttt{Vector}, \texttt{DataFrame}, \texttt{List} are all implemented 
 \hypertarget{creating-vector-object}{%
 \section{Creating vector object}\label{creating-vector-object}}
 
-You can create vector object in several ways.
+You can create vector objects in several ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -762,7 +762,7 @@ You can create vector object in several ways.
 \hypertarget{accessing-vector-elements}{%
 \section{Accessing vector elements}\label{accessing-vector-elements}}
 
-You can access to individual element of a vector object using \texttt{{[}{]}} or \texttt{()} operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. \texttt{{[}{]}} operator ignores out of bound access, while \texttt{()} operator throws an exception \texttt{index\_out\_of\_bounds}.
+You can access an individual element of a vector object using \texttt{{[}{]}} or \texttt{()} operator. Both operators accept NumericVector/IntegerVector (numerical index), CharacterVector (element names) and LogicalVector. \texttt{{[}{]}} operator ignores out of bound access, while \texttt{()} operator throws an exception \texttt{index\_out\_of\_bounds}.
 
 \textbf{Note that the index of the Vector object in C++ starts from 0.}
 
@@ -806,7 +806,7 @@ You can access to individual element of a vector object using \texttt{{[}{]}} or
 \hypertarget{member-functions}{%
 \section{Member functions}\label{member-functions}}
 
-Member functions (also called as Methods) are functions that is attached to an individual object. You can call member functions \texttt{f()} of object \texttt{v} in the form of \texttt{v.f()}.
+Member functions (also called Methods) are functions that are attached to an individual object. You can call member functions \texttt{f()} of object \texttt{v} in the form of \texttt{v.f()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -817,7 +817,7 @@ Member functions (also called as Methods) are functions that is attached to an i
 \end{Highlighting}
 \end{Shaded}
 
-The \texttt{Vector} object in Rcpp have member functions listed below.
+The \texttt{Vector} object in Rcpp has member functions listed below.
 
 \hypertarget{length-size}{%
 \subsection{\texorpdfstring{\texttt{length()}, \texttt{size()}}{length(), size()}}\label{length-size}}
@@ -842,7 +842,7 @@ Returns numerical index of the element specified by numerical index \texttt{i} a
 \hypertarget{fill-x}{%
 \subsection{\texorpdfstring{\texttt{fill(\ x\ )}}{fill( x )}}\label{fill-x}}
 
-Fills all the element of this vector object with scalar value \texttt{x}.
+Fills all the elements of this vector object with scalar value \texttt{x}.
 
 \hypertarget{sort}{%
 \subsection{\texorpdfstring{\texttt{sort()}}{sort()}}\label{sort}}
@@ -897,32 +897,32 @@ Returns a const iterator pointing to the end of the vector (\textbf{one past the
 \hypertarget{insert-i-x}{%
 \subsection{\texorpdfstring{\texttt{insert(\ i,\ x\ )}}{insert( i, x )}}\label{insert-i-x}}
 
-Insert scalar value \texttt{x} to the position pointed by numerical index \texttt{i}. And returns the iterator pointing the inserted element.
+Insert scalar value \texttt{x} to the position pointed by numerical index \texttt{i}. And returns the iterator pointing to the inserted element.
 
 \hypertarget{insert-it-x}{%
 \subsection{\texorpdfstring{\texttt{insert(\ it,\ x\ )}}{insert( it, x )}}\label{insert-it-x}}
 
-Insert scalar value \texttt{x} to the position pointed by iterator \texttt{it}. And returns the iterator pointing the inserted element.
+Insert scalar value \texttt{x} to the position pointed by iterator \texttt{it}. And returns the iterator pointing to the inserted element.
 
 \hypertarget{erasei}{%
 \subsection{\texorpdfstring{\texttt{erase(i)}}{erase(i)}}\label{erasei}}
 
-Erase element at the position pointed by numerical index \texttt{i}. And returns the iterator pointing the element just behind the erased element.
+Erase element at the position pointed by numerical index \texttt{i}. And returns the iterator pointing to the element just behind the erased element.
 
 \hypertarget{eraseit}{%
 \subsection{\texorpdfstring{\texttt{erase(it)}}{erase(it)}}\label{eraseit}}
 
-Erase element at the position pointed by iterator \texttt{it}. And returns the iterator pointing the element just behind the erased element.
+Erase element at the position pointed by iterator \texttt{it}. And returns the iterator pointing to the element just behind the erased element.
 
 \hypertarget{erase-first_i-last_i}{%
 \subsection{\texorpdfstring{\texttt{erase(\ first\_i,\ last\_i\ )}}{erase( first\_i, last\_i )}}\label{erase-first_i-last_i}}
 
-Erase elements from the position pointed by numerical index \texttt{first\_i} to \texttt{last\_i\ -\ 1}. And returns the iterator pointing the element just behind the erased elements.
+Erase elements from the position pointed by numerical index \texttt{first\_i} to \texttt{last\_i\ -\ 1}. And returns the iterator pointing to the element just behind the erased elements.
 
 \hypertarget{erase-first_it-last_it}{%
 \subsection{\texorpdfstring{\texttt{erase(\ first\_it,\ last\_it\ )}}{erase( first\_it, last\_it )}}\label{erase-first_it-last_it}}
 
-Erase elements from the position pointed by iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1}. Return the iterator pointing the element just behind the erased elements.
+Erase elements from the position pointed by the iterator \texttt{first\_it} to \texttt{last\_it\ -\ 1}. Return the iterator pointing the element just behind the erased elements.
 
 \hypertarget{containselementnamedname}{%
 \subsection{\texorpdfstring{\texttt{containsElementNamed(name)}}{containsElementNamed(name)}}\label{containselementnamedname}}
@@ -932,7 +932,8 @@ Returns \texttt{true} if this vector contains an element with the name specified
 \hypertarget{static-member-functions}{%
 \section{Static member functions}\label{static-member-functions}}
 
-Static member function is functions that is attached to the class from which an object being molded.
+Static member function is a function that is attached to the class rather than a from which an object is being molded.
+
 You can call static member functions in the form such as \texttt{NumericVector::create()}.
 
 \hypertarget{get_na}{%
@@ -948,17 +949,17 @@ Returns \texttt{true} if a vector element specified by \texttt{x} is \texttt{NA}
 \hypertarget{create-x1-x2-...}{%
 \subsection{\texorpdfstring{\texttt{create(\ x1,\ x2,\ ...)}}{create( x1, x2, ...)}}\label{create-x1-x2-...}}
 
-Creates a \texttt{Vector} object containing elements specified by scalar value \texttt{x1} and \texttt{x2}. Maximum number of arguments are 20.
+Creates a \texttt{Vector} object containing elements specified by scalar value \texttt{x1} and \texttt{x2}. Maximum number of arguments is 20.
 
 \hypertarget{import-first_it-last_it}{%
 \subsection{\texorpdfstring{\texttt{import(\ first\_it\ ,\ last\_it\ )}}{import( first\_it , last\_it )}}\label{import-first_it-last_it}}
 
-Creates a \texttt{Vector} object filled with the range of data specified by iterator from \texttt{first\_it} to \texttt{last\_it\ -\ 1}.
+Creates a \texttt{Vector} object filled with the range of data specified by the iterator from \texttt{first\_it} to \texttt{last\_it\ -\ 1}.
 
 \hypertarget{import_transform-first_it-last_it-func}{%
 \subsection{\texorpdfstring{\texttt{import\_transform(\ first\_it,\ last\_it,\ func)}}{import\_transform( first\_it, last\_it, func)}}\label{import_transform-first_it-last_it-func}}
 
-Creates a \texttt{Vector} object filled with the range of data specified by iterator from \texttt{first\_it} to \texttt{last\_it\ -\ 1} that is transformed by function specified by \texttt{func}.
+Creates a \texttt{Vector} object filled with the range of data specified by the iterator from \texttt{first\_it} to \texttt{last\_it\ -\ 1} that is transformed by function specified by \texttt{func}.
 
 \hypertarget{matrix}{%
 \chapter{Matrix}\label{matrix}}
@@ -966,7 +967,7 @@ Creates a \texttt{Vector} object filled with the range of data specified by iter
 \hypertarget{creating-matrix-object}{%
 \section{Creating Matrix object}\label{creating-matrix-object}}
 
-Matrix object can be created in several ways.
+\texttt{Matrix} objects can be created in several ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -982,7 +983,7 @@ Matrix object can be created in several ways.
 \end{Highlighting}
 \end{Shaded}
 
-In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute \texttt{dim}. Thus, if you created a vector with attribute \texttt{dim} in Rcpp and return it to R, it will be treated as a matrix.
+In addition, a matrix object in R is actually a vector that the number of rows and columns are set in the attribute \texttt{dim}. Thus, if you create a vector with attribute \texttt{dim} in Rcpp and return it to R, it will be treated as a matrix.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1009,7 +1010,7 @@ Execution result
 [2,]    2    4
 \end{verbatim}
 
-However, even if you set a value to attribute \texttt{dim} of a vector object, the type of the object remains Vector type in Rcpp code. Thus, if you want to convert it to Matrix type in Rcpp, you need to use \texttt{as\textless{}T\textgreater{}()} function.
+However, even if you set a value to attribute \texttt{dim} of a \texttt{Vector} object, the type of the object remains a \texttt{Vector} type in Rcpp code. Thus, if you want to convert it to \texttt{Matrix} type in Rcpp, you need to use \texttt{as\textless{}T\textgreater{}()} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1024,7 +1025,7 @@ However, even if you set a value to attribute \texttt{dim} of a vector object, t
 \hypertarget{accessing-to-matrix-elements}{%
 \section{Accessing to Matrix elements}\label{accessing-to-matrix-elements}}
 
-By using \texttt{()} operator, you can get from and assign to the values of elements of a Matrix object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in Matrix start with 0. If you want to access to a specific row or column, use the symbol \texttt{\_}.
+By using the \texttt{()} operator, you can get from and assign to the values of elements of a \texttt{Matrix} object by specifying its column number and row number. As in the case of vectors, row numbers and column numbers in \texttt{Matrix} start with 0. If you want to access a specific row or column, use the symbol \texttt{\_}.
 
 You can also use the \texttt{{[}{]}} operator to access an element as a vector connecting the columns of a matrix.
 
@@ -1053,7 +1054,7 @@ You can also use the \texttt{{[}{]}} operator to access an element as a vector c
 \hypertarget{accessing-as-reference-to-row-column-and-sub-matrix}{%
 \subsection{Accessing as reference to row, column and sub matrix}\label{accessing-as-reference-to-row-column-and-sub-matrix}}
 
-Rcpp also provides types that hold ``references'' to specific part of a matrix.
+Rcpp also provides types that hold ``references'' to specific parts of a matrix.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1126,7 +1127,7 @@ Returns a diagonal matrix whose number of rows and columns equals to ``size'' an
 \hypertarget{other-functions-related-to-matrix}{%
 \section{Other functions related to Matrix}\label{other-functions-related-to-matrix}}
 
-This section shows functions relating to Matrix.
+This section shows functions relating to the \texttt{Matrix}.
 
 \hypertarget{rownames-m}{%
 \subsection{rownames( m )}\label{rownames-m}}
