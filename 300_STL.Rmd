@@ -1,0 +1,193 @@
+# Standard C++ data structures and algorithms
+
+## Standard C++ data structure
+
+Standard C++ provides various data structures (containers), such as `std::vector` `std::list` `std::map` `std::set`. They differ in their efficiency in accessing, adding, and deleting elements. Thus, you are able to implement the process more efficiently by choosing appropriate data structures.
+
+For example, consider the situation that you want to add an element to a vector, both Rcpp's `Rcpp::Vector` and standard C++'s `std::vector` provides a member function `push_back()` which adds an element to the end of a vector. However, there is a big difference in efficiency between these. This is because each time `Rcpp::Vector` executes a member function `push_back()` the whole value of the vector is copied to another place in memory, whereas `std::vector` allows you to add an element to the end without copying the whole value in many cases.
+
+Standard C++ classes and functions are defined in the `std::` namespace, so they are specified with `std::` for example, `std::vector`. You can also omit writing `std::` by adding `using namespace std;` in your code.
+
+Below is an example of using `std::vector` to get the row and column numbers of non-zero matrix elements.
+
+```cpp
+// [[Rcpp::export]]
+DataFrame matix_rows_cols(NumericMatrix m){
+    // Returns the column and row numbers of non-zero elements from the matrix.
+    // For simplicity, we assume that the matrix does not contain NA.
+
+    // Tolal number of rows and cols
+    int I = m.rows();
+    int J = m.cols();
+
+    // variables to store row and column numbers
+    // store the result in a std::vector
+    std::vector<int> rows, cols;
+
+    // The number of elements can be up to the number of elements in matrix m,
+    // so we allocate memory for that in advance.
+    rows.reserve(m.length());
+    cols.reserve(m.length());
+
+    // Accesses all elements of matrix M
+    // and stores the row and column numbers of elements whose values are not zero.
+    for(int i=0; i<I; ++i){
+        for(int j=0; j<J; ++j){
+            if(m(i,j)!=0.0){
+                rows.push_back(i+1);
+                cols.push_back(j+1);
+            }
+        }
+    }
+
+    // Returns the result as a data.frame.
+    return DataFrame::create(Named("rows", rows),
+                             Named("cols", cols));
+}
+```
+
+Below is an overview of some of the major standard C++ data structures.
+
+|Standard C++ Data Structure|Outline|
+|:-:|:---|
+| `std::vector` |Variable length array: each element is arranged continuously in memory.|
+| `std::list`  |Variable length array: each element is distributed in memory.|
+| `std::map`, `std::unordered_map` | Associative array: Holds data in key-value format.|
+| `std::set`, `std::unordered_set` | Set: Keeps a set of unduplicated values.|
+
+`std::vector` has faster access to elements than `std::list`. On the other hand, `std::list` is faster at adding elements.
+
+`std::map` holds elements in the order sorted by their keys. On the other hand, `std::unordered_map` does not guarantee the order of its elements, but is faster to insert and access elements.
+
+Similarly, `std::set` holds elements in the order sorted by element values. On the other hand, the order is not guaranteed with `std::unordered_set`, but it is faster to insert and access elements.
+
+
+## Conversion between standard C++ data structures and Rcpp data structures
+
+The `as<T>()` and `wrap()` functions are used to convert the data structures between Rcpp and standard C++.
+
+* `as<CPP>(RCPP)`   : Converts the Rcpp data structure (`RCPP`) to the standard C++ data structure (`CPP`)
+* `wrap(CPP)` : Converts the standard C++ data structure (`CPP`) to the Rcpp data structure (`RCPP`)
+
+The following table shows the correspondence between Rcpp and C++ the data structures that can be converted each other.
+
+(`+` indicates compatible, `-` indicates not compatible)
+
+
+| Rcpp | C++ | as | wrap |
+|:---:|:---:|:---:| :---: |
+| `Vector` | `vector`, `list`, `deque`   |+|+|
+| `List`, `DataFrame` | `vector<vector>`, `list<vector>` etc.|+|+|
+|  Named `Vector` | `map`, `unordered_map`|-|+|
+| `Vector` | `set`, `unordered_set`|-|+|
+
+
+The following example shows how to convert `Rcpp::Vector` to a standard C++ sequence container (a container which can be treated as a series of values such as `std::vector`, `std::list`, `std::deque`, etc.).
+
+
+```cpp
+NumericVector   rcpp_vector = {1,2,3,4,5};
+
+// Conversion from Rcpp::Vector to std::vector  
+std::vector<double>  cpp_vector = as< std::vector<double> >(rcpp_vector);
+
+// Conversion from std::vector to Rcpp::Vector  
+NumericVector v1 = wrap(cpp_vector);
+```
+
+The following code example shows how to convert a 2-dimensional container, which is nested C++ sequence containers, into a `DataFrame` or `List`.
+
+```cpp
+using namespace std;
+
+// A two-dimensional vector with all element vectors of equal length
+// can be converted to a DataFrame
+
+vector<vector<double>> cpp_vector_2d_01 = {{1,2},{3,4}};
+DataFrame df = wrap(cpp_vector_2d_01);
+
+// A two-dimensional vector with different length of element vectors
+// can be converted to a list
+
+vector<vector<double>> cpp_vector_2d_02 = {{1,2},{3,4,5}};
+List li = wrap(cpp_vector_2d_02);
+```
+
+The following code example shows that standard C++ `std::map<key, value>` and `std::unordered_map<key, value>` are converted to named `Rcpp::Vector` with `key` as the name of the element and `value` as the type of the element.
+
+
+```cpp
+#include<map>
+// [[Rcpp::export]]
+NumericVector std_map(){
+    std::map<std::string, double> cpp_num_map;
+    cpp_num_map["C"] = 3;    
+    cpp_num_map["B"] = 2;
+    cpp_num_map["A"] = 1;
+
+    std::un<std::string, double> cpp_num_map;
+    cpp_num_map["C"] = 3;    
+    cpp_num_map["B"] = 2;
+    cpp_num_map["A"] = 1;
+
+    Listli li = List::create(cpp_num_map, cpp_num_map);
+}
+```
+
+execution result
+
+You can see that `std::map` is sorted by key value, whereas `std::unordered_map` is not guaranteed to be ordered.
+
+```
+> std_map()
+[[1]]
+A B C
+2 1 3
+
+[[2]]
+A C B
+2 3 1
+```
+
+
+## Use standard C++ data structures as arguments and return values of Rcpp functions
+
+
+Standard C++ data structures that can be converted by the `as()` and `wrap()` functions can also be used as arguments or return values of Rcpp functions. The `as()` and `wrap()` is callded implicitly when you use C++ data structures as Rcpp function's arguments or return values. Thus, you need not to write `as()` and `wrap()` explicitly in your Rcpp functions.
+
+
+```cpp
+// [[Rcpp::plugins("cpp11")]]
+// [[Rcpp::export]]
+vector<double> times_two_std_vector(vector<double> v){ // as() is called implicitly
+    for(double &x : v){
+        x *= 2;
+    }
+    return v; // wrap() is called implicitly
+}
+```
+
+
+
+
+## Standard C++ Algorithms
+
+The standard C++ `<algorithm>` and `<numeric>` header files provide various generic algorithms. As mentioned in [the chapter on iterators](310_iterator.html), many of C++ algorithm use iterators to specify the location and extent to which the algorithm is applied.
+
+The following example shows how to use the `std::count()` function of the `<algorithm>` to count the number of elements equal to the specified value.
+
+```
+#include <algorithm>
+// [[Rcpp::export]]
+int rcpp_count(){
+    // create a string vector
+    CharacterVector v =
+        CharacterVector::create("A", "B", "A", "C", NA_STRING);
+
+    // count the number of elements whose value is "A" from the string vector v
+    return std::count(v.begin(), v.end(), "A"); // 2
+}
+```
+
+For many other algorithms included in standard C++, please refer to other C++ resources.
+
