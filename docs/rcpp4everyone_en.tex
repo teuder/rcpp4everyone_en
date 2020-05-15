@@ -108,7 +108,7 @@
 
 \title{Rcpp for everyone}
 \author{Masaki E. Tsuda}
-\date{2020-05-14}
+\date{2020-05-15}
 
 \begin{document}
 \maketitle
@@ -3865,61 +3865,6 @@ for (int i=0; i<100000; ++i) {
 }
 \end{verbatim}
 
-\hypertarget{iterator}{%
-\chapter{Iterator}\label{iterator}}
-
-Iterator is an class used to access elements of \texttt{Vector} \texttt{DataFrame} \texttt{List}. If you want to use algorithms provided by standard C++, you need to understand iterator. Because many of the algorithms provided by standard C++ use iterators to specify location or range of data to apply the algorithms.
-
-Specific iterator type is defined for each data structure of Rcpp.
-
-\begin{verbatim}
-NumericVector::iterator
-IntegerVector::iterator
-LogicalVector::iterator
-CharacterVector::iterator
-DataFrame::iterator
-List::iterator
-\end{verbatim}
-
-The figure below shows schematically how to access vector elements using an iterator.
-
-\includegraphics{iterator.png}
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{i\ =\ v.begin()} : The iterator \texttt{i} points to the first element of\texttt{v}.
-\item
-  \texttt{++i} : Updates \texttt{i} to the state pointing to the next element.
-\item
-  \texttt{-\/-i} : Updates \texttt{i} to the state pointing to the previous element.
-\item
-  \texttt{i\ +\ 1} : Represents an iterator pointing to the element 1 elements behind of \texttt{i}.
-\item
-  \texttt{i\ -\ 1} : Represents an iterator pointing to the element 1 elements ahead of \texttt{i}.
-\item
-  \texttt{*i} : Represents the value of the element pointed by \texttt{i}.
-\item
-  \texttt{v.end()} : Represents an iterator pointing to the end (one after the last element) of \texttt{v}.
-\item
-  \texttt{*(v.begin()+k)} : Represents the value of the \texttt{k}-th element of \texttt{v} (\texttt{v{[}k{]}}).
-\end{itemize}
-
-The following code example shows an example of traversing all the elements of a \texttt{NumericVector} using iterator to calculate sum of the elements.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{// [[Rcpp::export]]}
-\DataTypeTok{double}\NormalTok{ rcpp_sum(NumericVector x) \{}
-  \DataTypeTok{double}\NormalTok{ total = }\DecValTok{0}\NormalTok{;}
-  \ControlFlowTok{for}\NormalTok{(NumericVector::iterator i = x.begin(); i != x.end(); ++i) \{}
-\NormalTok{    total += *i;}
-\NormalTok{  \}}
-  \ControlFlowTok{return}\NormalTok{ total;}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{environment-1}{%
 \chapter{Environment}\label{environment-1}}
 
@@ -4084,6 +4029,293 @@ Returns the namespace of Rcpp package.
 \subsection{Environment::namespace\_env(package)}\label{environmentnamespace_envpackage}}
 
 Returns the namespace of the package whose name is specified by argument \texttt{package}. If you use \texttt{Environment::namespace\_env()}, you can call package functions without preloading the package with the \texttt{library()} function in R. This is equivalent to calling package function with the form \texttt{PACKAGE::FUNCTION()}. In addition, you can also access functions that are not exported in the package. This is equivalent to calling with the form \texttt{PACKAGE:::FUNCTION()} in R.
+
+\hypertarget{iterator}{%
+\chapter{Iterator}\label{iterator}}
+
+Iterator is an class used to access elements of \texttt{Vector} \texttt{DataFrame} \texttt{List}. If you want to use algorithms provided by standard C++, you need to understand iterator. Because many of the algorithms provided by standard C++ use iterators to specify location or range of data to apply the algorithms.
+
+Specific iterator type is defined for each data structure of Rcpp.
+
+\begin{verbatim}
+NumericVector::iterator
+IntegerVector::iterator
+LogicalVector::iterator
+CharacterVector::iterator
+DataFrame::iterator
+List::iterator
+\end{verbatim}
+
+The figure below shows schematically how to access vector elements using an iterator.
+
+\includegraphics{iterator.png}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{i\ =\ v.begin()} : The iterator \texttt{i} points to the first element of\texttt{v}.
+\item
+  \texttt{++i} : Updates \texttt{i} to the state pointing to the next element.
+\item
+  \texttt{-\/-i} : Updates \texttt{i} to the state pointing to the previous element.
+\item
+  \texttt{i\ +\ 1} : Represents an iterator pointing to the element 1 elements behind of \texttt{i}.
+\item
+  \texttt{i\ -\ 1} : Represents an iterator pointing to the element 1 elements ahead of \texttt{i}.
+\item
+  \texttt{*i} : Represents the value of the element pointed by \texttt{i}.
+\item
+  \texttt{v.end()} : Represents an iterator pointing to the end (one after the last element) of \texttt{v}.
+\item
+  \texttt{*(v.begin()+k)} : Represents the value of the \texttt{k}-th element of \texttt{v} (\texttt{v{[}k{]}}).
+\end{itemize}
+
+The following code example shows an example of traversing all the elements of a \texttt{NumericVector} using iterator to calculate sum of the elements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\DataTypeTok{double}\NormalTok{ rcpp_sum(NumericVector x) \{}
+  \DataTypeTok{double}\NormalTok{ total = }\DecValTok{0}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{(NumericVector::iterator i = x.begin(); i != x.end(); ++i) \{}
+\NormalTok{    total += *i;}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{ total;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{standard-c-data-structures-and-algorithms}{%
+\chapter{Standard C++ data structures and algorithms}\label{standard-c-data-structures-and-algorithms}}
+
+\hypertarget{standard-c-data-structure}{%
+\section{Standard C++ data structure}\label{standard-c-data-structure}}
+
+Standard C++ provides various data structures (containers), such as \texttt{std::vector} \texttt{std::list} \texttt{std::map} \texttt{std::set}. They differ in their efficiency in accessing, adding, and deleting elements. Thus, you are able to implement the process more efficiently by choosing appropriate data structures.
+
+For example, consider the situation that you want to add an element to a vector, both Rcpp's \texttt{Rcpp::Vector} and standard C++'s \texttt{std::vector} provides a member function \texttt{push\_back()} which adds an element to the end of a vector. However, there is a big difference in efficiency between these. This is because each time \texttt{Rcpp::Vector} executes a member function \texttt{push\_back()} the whole value of the vector is copied to another place in memory, whereas \texttt{std::vector} allows you to add an element to the end without copying the whole value in many cases.
+
+Standard C++ classes and functions are defined in the \texttt{std::} namespace, so they are specified with \texttt{std::} for example, \texttt{std::vector}. You can also omit writing \texttt{std::} by adding \texttt{using\ namespace\ std;} in your code.
+
+Below is an example of using \texttt{std::vector} to get the row and column numbers of non-zero matrix elements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{DataFrame matix_rows_cols(NumericMatrix m)\{}
+    \CommentTok{// Returns the column and row numbers of non-zero elements from the matrix.}
+    \CommentTok{// For simplicity, we assume that the matrix does not contain NA.}
+
+    \CommentTok{// Tolal number of rows and cols}
+    \DataTypeTok{int}\NormalTok{ I = m.rows();}
+    \DataTypeTok{int}\NormalTok{ J = m.cols();}
+
+    \CommentTok{// variables to store row and column numbers}
+    \CommentTok{// store the result in a std::vector}
+    \BuiltInTok{std::}\NormalTok{vector<}\DataTypeTok{int}\NormalTok{> rows, cols;}
+
+    \CommentTok{// The number of elements can be up to the number of elements in matrix m,}
+    \CommentTok{// so we allocate memory for that in advance.}
+\NormalTok{    rows.reserve(m.length());}
+\NormalTok{    cols.reserve(m.length());}
+
+    \CommentTok{// Accesses all elements of matrix M}
+    \CommentTok{// and stores the row and column numbers of elements whose values are not zero.}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ i=}\DecValTok{0}\NormalTok{; i<I; ++i)\{}
+        \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{int}\NormalTok{ j=}\DecValTok{0}\NormalTok{; j<J; ++j)\{}
+            \ControlFlowTok{if}\NormalTok{(m(i,j)!=}\FloatTok{0.0}\NormalTok{)\{}
+\NormalTok{                rows.push_back(i}\DecValTok{+1}\NormalTok{);}
+\NormalTok{                cols.push_back(j}\DecValTok{+1}\NormalTok{);}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{    \}}
+
+    \CommentTok{// Returns the result as a data.frame.}
+    \ControlFlowTok{return}\NormalTok{ DataFrame::create(Named(}\StringTok{"rows"}\NormalTok{, rows),}
+\NormalTok{                             Named(}\StringTok{"cols"}\NormalTok{, cols));}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Below is an overview of some of the major standard C++ data structures.
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\begin{minipage}[b]{0.40\columnwidth}\centering
+Standard C++ Data Structure\strut
+\end{minipage} & \begin{minipage}[b]{0.54\columnwidth}\raggedright
+Outline\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.40\columnwidth}\centering
+\texttt{std::vector}\strut
+\end{minipage} & \begin{minipage}[t]{0.54\columnwidth}\raggedright
+Variable length array: each element is arranged continuously in memory.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.40\columnwidth}\centering
+\texttt{std::list}\strut
+\end{minipage} & \begin{minipage}[t]{0.54\columnwidth}\raggedright
+Variable length array: each element is distributed in memory.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.40\columnwidth}\centering
+\texttt{std::map}, \texttt{std::unordered\_map}\strut
+\end{minipage} & \begin{minipage}[t]{0.54\columnwidth}\raggedright
+Associative array: Holds data in key-value format.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.40\columnwidth}\centering
+\texttt{std::set}, \texttt{std::unordered\_set}\strut
+\end{minipage} & \begin{minipage}[t]{0.54\columnwidth}\raggedright
+Set: Keeps a set of unduplicated values.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\texttt{std::vector} has faster access to elements than \texttt{std::list}. On the other hand, \texttt{std::list} is faster at adding elements.
+
+\texttt{std::map} holds elements in the order sorted by their keys. On the other hand, \texttt{std::unordered\_map} does not guarantee the order of its elements, but is faster to insert and access elements.
+
+Similarly, \texttt{std::set} holds elements in the order sorted by element values. On the other hand, the order is not guaranteed with \texttt{std::unordered\_set}, but it is faster to insert and access elements.
+
+\hypertarget{conversion-between-standard-c-data-structures-and-rcpp-data-structures}{%
+\section{Conversion between standard C++ data structures and Rcpp data structures}\label{conversion-between-standard-c-data-structures-and-rcpp-data-structures}}
+
+The \texttt{as\textless{}T\textgreater{}()} and \texttt{wrap()} functions are used to convert the data structures between Rcpp and standard C++.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{as\textless{}CPP\textgreater{}(RCPP)} : Converts the Rcpp data structure (\texttt{RCPP}) to the standard C++ data structure (\texttt{CPP})
+\item
+  \texttt{wrap(CPP)} : Converts the standard C++ data structure (\texttt{CPP}) to the Rcpp data structure (\texttt{RCPP})
+\end{itemize}
+
+The following table shows the correspondence between Rcpp and C++ the data structures that can be converted each other.
+
+(\texttt{+} indicates compatible, \texttt{-} indicates not compatible)
+
+\begin{longtable}[]{@{}cccc@{}}
+\toprule
+Rcpp & C++ & as & wrap\tabularnewline
+\midrule
+\endhead
+\texttt{Vector} & \texttt{vector}, \texttt{list}, \texttt{deque} & + & +\tabularnewline
+\texttt{List}, \texttt{DataFrame} & \texttt{vector\textless{}vector\textgreater{}}, \texttt{list\textless{}vector\textgreater{}} etc. & + & +\tabularnewline
+Named \texttt{Vector} & \texttt{map}, \texttt{unordered\_map} & - & +\tabularnewline
+\texttt{Vector} & \texttt{set}, \texttt{unordered\_set} & - & +\tabularnewline
+\bottomrule
+\end{longtable}
+
+The following example shows how to convert \texttt{Rcpp::Vector} to a standard C++ sequence container (a container which can be treated as a series of values such as \texttt{std::vector}, \texttt{std::list}, \texttt{std::deque}, etc.).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NumericVector   rcpp_vector = \{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\};}
+
+\CommentTok{// Conversion from Rcpp::Vector to std::vector  }
+\BuiltInTok{std::}\NormalTok{vector<}\DataTypeTok{double}\NormalTok{>  cpp_vector = as< }\BuiltInTok{std::}\NormalTok{vector<}\DataTypeTok{double}\NormalTok{> >(rcpp_vector);}
+
+\CommentTok{// Conversion from std::vector to Rcpp::Vector  }
+\NormalTok{NumericVector v1 = wrap(cpp_vector);}
+\end{Highlighting}
+\end{Shaded}
+
+The following code example shows how to convert a 2-dimensional container, which is nested C++ sequence containers, into a \texttt{DataFrame} or \texttt{List}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{using} \KeywordTok{namespace}\NormalTok{ std;}
+
+\CommentTok{// A two-dimensional vector with all element vectors of equal length}
+\CommentTok{// can be converted to a DataFrame}
+
+\NormalTok{vector<vector<}\DataTypeTok{double}\NormalTok{>> cpp_vector_2d_01 = \{\{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{\},\{}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{\}\};}
+\NormalTok{DataFrame df = wrap(cpp_vector_2d_01);}
+
+\CommentTok{// A two-dimensional vector with different length of element vectors}
+\CommentTok{// can be converted to a list}
+
+\NormalTok{vector<vector<}\DataTypeTok{double}\NormalTok{>> cpp_vector_2d_02 = \{\{}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{\},\{}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{\}\};}
+\NormalTok{List li = wrap(cpp_vector_2d_02);}
+\end{Highlighting}
+\end{Shaded}
+
+The following code example shows that standard C++ \texttt{std::map\textless{}key,\ value\textgreater{}} and \texttt{std::unordered\_map\textless{}key,\ value\textgreater{}} are converted to named \texttt{Rcpp::Vector} with \texttt{key} as the name of the element and \texttt{value} as the type of the element.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#include}\ImportTok{<map>}
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{NumericVector std_map()\{}
+    \BuiltInTok{std::}\NormalTok{map<}\BuiltInTok{std::}\NormalTok{string, }\DataTypeTok{double}\NormalTok{> cpp_num_map;}
+\NormalTok{    cpp_num_map[}\StringTok{"C"}\NormalTok{] = }\DecValTok{3}\NormalTok{;    }
+\NormalTok{    cpp_num_map[}\StringTok{"B"}\NormalTok{] = }\DecValTok{2}\NormalTok{;}
+\NormalTok{    cpp_num_map[}\StringTok{"A"}\NormalTok{] = }\DecValTok{1}\NormalTok{;}
+
+    \BuiltInTok{std::}\NormalTok{un<}\BuiltInTok{std::}\NormalTok{string, }\DataTypeTok{double}\NormalTok{> cpp_num_map;}
+\NormalTok{    cpp_num_map[}\StringTok{"C"}\NormalTok{] = }\DecValTok{3}\NormalTok{;    }
+\NormalTok{    cpp_num_map[}\StringTok{"B"}\NormalTok{] = }\DecValTok{2}\NormalTok{;}
+\NormalTok{    cpp_num_map[}\StringTok{"A"}\NormalTok{] = }\DecValTok{1}\NormalTok{;}
+
+\NormalTok{    Listli li = List::create(cpp_num_map, cpp_num_map);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+execution result
+
+You can see that \texttt{std::map} is sorted by key value, whereas \texttt{std::unordered\_map} is not guaranteed to be ordered.
+
+\begin{verbatim}
+> std_map()
+[[1]]
+A B C
+2 1 3
+
+[[2]]
+A C B
+2 3 1
+\end{verbatim}
+
+\hypertarget{use-standard-c-data-structures-as-arguments-and-return-values-of-rcpp-functions}{%
+\section{Use standard C++ data structures as arguments and return values of Rcpp functions}\label{use-standard-c-data-structures-as-arguments-and-return-values-of-rcpp-functions}}
+
+Standard C++ data structures that can be converted by the \texttt{as()} and \texttt{wrap()} functions can also be used as arguments or return values of Rcpp functions. The \texttt{as()} and \texttt{wrap()} is callded implicitly when you use C++ data structures as Rcpp function's arguments or return values. Thus, you need not to write \texttt{as()} and \texttt{wrap()} explicitly in your Rcpp functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// [[Rcpp::plugins("cpp11")]]}
+\CommentTok{// [[Rcpp::export]]}
+\NormalTok{vector<}\DataTypeTok{double}\NormalTok{> times_two_std_vector(vector<}\DataTypeTok{double}\NormalTok{> v)\{ }\CommentTok{// as() is called implicitly}
+    \ControlFlowTok{for}\NormalTok{(}\DataTypeTok{double}\NormalTok{ &x : v)\{}
+\NormalTok{        x *= }\DecValTok{2}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{ v; }\CommentTok{// wrap() is called implicitly}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{standard-c-algorithms}{%
+\section{Standard C++ Algorithms}\label{standard-c-algorithms}}
+
+The standard C++ \texttt{\textless{}algorithm\textgreater{}} and \texttt{\textless{}numeric\textgreater{}} header files provide various generic algorithms. As mentioned in \href{310_iterator.html}{the chapter on iterators}, many of C++ algorithm use iterators to specify the location and extent to which the algorithm is applied.
+
+The following example shows how to use the \texttt{std::count()} function of the \texttt{\textless{}algorithm\textgreater{}} to count the number of elements equal to the specified value.
+
+\begin{verbatim}
+#include <algorithm>
+// [[Rcpp::export]]
+int rcpp_count(){
+    // create a string vector
+    CharacterVector v =
+        CharacterVector::create("A", "B", "A", "C", NA_STRING);
+
+    // count the number of elements whose value is "A" from the string vector v
+    return std::count(v.begin(), v.end(), "A"); // 2
+}
+\end{verbatim}
+
+For many other algorithms included in standard C++, please refer to other C++ resources.
 
 \hypertarget{r-math-library}{%
 \chapter{R Math Library}\label{r-math-library}}

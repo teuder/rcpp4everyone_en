@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Date | Rcpp for everyone</title>
+  <title>Chapter 29 Iterator | Rcpp for everyone</title>
   <meta name="description" content="Introducing how to use Rcpp" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Date | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 29 Iterator | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Date | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 29 Iterator | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="170_string.html"/>
-<link rel="next" href="190_datetime.html"/>
+<link rel="prev" href="280_environment.html"/>
+<link rel="next" href="300_STL.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -485,85 +485,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="date" class="section level1">
-<h1><span class="header-section-number">Chapter 16</span> Date</h1>
-<p><code>Date</code> is a scalar type corresponding to an element of <code>DateVector</code>.</p>
-<div id="creating-date-object" class="section level2">
-<h2><span class="header-section-number">16.1</span> Creating Date object</h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb59-1" data-line-number="1">Date d;       <span class="co">//&quot;1970-01-01&quot;</span></a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">Date d(<span class="dv">1</span>);    <span class="co">//&quot;1970-01-01&quot; + 1day</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">Date d(<span class="fl">1.1</span>);  <span class="co">//&quot;1970-01-01&quot; + ceil(1.1)day</span></a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="sc">%Y-%</span><span class="st">m-</span><span class="sc">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span></a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">Date( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2000</span>); <span class="co">// 2000-01-02 Date(mon, day, year)</span></a>
-<a class="sourceLine" id="cb59-6" data-line-number="6">Date( <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">2</span>); <span class="co">// 2000-01-02 Date(year, mon, day)</span></a></code></pre></div>
-</div>
-<div id="operators-1" class="section level2">
-<h2><span class="header-section-number">16.2</span> Operators</h2>
-<p><code>Date</code> has operators <code>+, -, &lt;, &gt;, &gt;=, &lt;=, ==, !=</code>. By using these operators, you can perform addition of days (<code>+</code>), difference calculation of date (<code>-</code>), comparison of dates (<code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code>) .</p>
-<pre><code>// [[Rcpp::export]]
-DateVector rcpp_date1(){
-    // Creating Date objects
-    Date d1(&quot;2000-01-01&quot;);
-    Date d2(&quot;2000-02-01&quot;);
+<div id="iterator" class="section level1">
+<h1><span class="header-section-number">Chapter 29</span> Iterator</h1>
+<p>Iterator is an class used to access elements of <code>Vector</code> <code>DataFrame</code> <code>List</code>. If you want to use algorithms provided by standard C++, you need to understand iterator. Because many of the algorithms provided by standard C++ use iterators to specify location or range of data to apply the algorithms.</p>
+<p>Specific iterator type is defined for each data structure of Rcpp.</p>
+<pre><code>NumericVector::iterator
+IntegerVector::iterator
+LogicalVector::iterator
+CharacterVector::iterator
+DataFrame::iterator
+List::iterator</code></pre>
+<p>The figure below shows schematically how to access vector elements using an iterator.</p>
+<p><img src="iterator.png" /></p>
+<ul>
+<li><code>i = v.begin()</code> : The iterator <code>i</code> points to the first element of<code>v</code>.</li>
+<li><code>++i</code> : Updates <code>i</code> to the state pointing to the next element.</li>
+<li><code>--i</code> : Updates <code>i</code> to the state pointing to the previous element.</li>
+<li><code>i + 1</code> : Represents an iterator pointing to the element 1 elements behind of <code>i</code>.</li>
+<li><code>i - 1</code> : Represents an iterator pointing to the element 1 elements ahead of <code>i</code>.</li>
+<li><code>*i</code> : Represents the value of the element pointed by <code>i</code>.</li>
+<li><code>v.end()</code> : Represents an iterator pointing to the end (one after the last element) of <code>v</code>.</li>
+<li><code>*(v.begin()+k)</code> : Represents the value of the <code>k</code>-th element of <code>v</code> (<code>v[k]</code>).</li>
+</ul>
+<p>The following code example shows an example of traversing all the elements of a <code>NumericVector</code> using iterator to calculate sum of the elements.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb127-2" data-line-number="2"><span class="dt">double</span> rcpp_sum(NumericVector x) {</a>
+<a class="sourceLine" id="cb127-3" data-line-number="3">  <span class="dt">double</span> total = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb127-4" data-line-number="4">  <span class="cf">for</span>(NumericVector::iterator i = x.begin(); i != x.end(); ++i) {</a>
+<a class="sourceLine" id="cb127-5" data-line-number="5">    total += *i;</a>
+<a class="sourceLine" id="cb127-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb127-7" data-line-number="7">  <span class="cf">return</span> total;</a>
+<a class="sourceLine" id="cb127-8" data-line-number="8">}</a></code></pre></div>
 
-    int  i  = d2 - d1; // difference of dates
-    bool b  = d2 &gt; d1; // comparison of dates
-
-    Rcout &lt;&lt; i &lt;&lt; &quot;\n&quot;; // 31
-    Rcout &lt;&lt; b &lt;&lt; &quot;\n&quot;; // 1
-
-
-    DateVector date(1);
-    date[0] = d1 + 1;  // adding 1 day to d1
-
-    return date; // 2000-01-02
-}</code></pre>
-</div>
-<div id="member-functions-5" class="section level2">
-<h2><span class="header-section-number">16.3</span> Member functions</h2>
-<div id="getday" class="section level3">
-<h3><span class="header-section-number">16.3.1</span> getDay()</h3>
-<p>Returns the day of the date.</p>
-</div>
-<div id="getmonth" class="section level3">
-<h3><span class="header-section-number">16.3.2</span> getMonth()</h3>
-<p>Returns the month of the date.</p>
-</div>
-<div id="getyear" class="section level3">
-<h3><span class="header-section-number">16.3.3</span> getYear()</h3>
-<p>Returns the year of the date.</p>
-</div>
-<div id="getweekday" class="section level3">
-<h3><span class="header-section-number">16.3.4</span> getWeekday()</h3>
-<p>Returns the day of the week as an int. (1:Sun 2:Mon 3:Tue 4:Wed 5:Thu 6:Sat)</p>
-</div>
-<div id="getyearday" class="section level3">
-<h3><span class="header-section-number">16.3.5</span> getYearday()</h3>
-<p>Returns the number of the date through the year with January 1st as 1 and December 31st as 365.</p>
-</div>
-<div id="is_na" class="section level3">
-<h3><span class="header-section-number">16.3.6</span> is_na()</h3>
-<p>Returns <code>true</code> if this object is NA.</p>
-</div>
-</div>
-<div id="execution-result" class="section level2">
-<h2><span class="header-section-number">16.4</span> Execution result</h2>
-<pre><code>Date d(&quot;2016-1-1&quot;);
-Rcout &lt;&lt; d.getDay() &lt;&lt; endl;     //1
-Rcout &lt;&lt; d.getMonth() &lt;&lt; endl;   //1
-Rcout &lt;&lt; d.getYear() &lt;&lt; endl;    //2016
-Rcout &lt;&lt; d.getWeekday() &lt;&lt; endl; //6
-Rcout &lt;&lt; d.getYearday() &lt;&lt; endl; //1</code></pre>
-
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="170_string.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="190_datetime.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="280_environment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="300_STL.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

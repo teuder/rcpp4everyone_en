@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Date | Rcpp for everyone</title>
+  <title>Chapter 28 Environment | Rcpp for everyone</title>
   <meta name="description" content="Introducing how to use Rcpp" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Date | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 28 Environment | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Date | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 28 Environment | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="170_string.html"/>
-<link rel="next" href="190_datetime.html"/>
+<link rel="prev" href="270_cancellation.html"/>
+<link rel="next" href="290_iterator.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -485,76 +485,129 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="date" class="section level1">
-<h1><span class="header-section-number">Chapter 16</span> Date</h1>
-<p><code>Date</code> is a scalar type corresponding to an element of <code>DateVector</code>.</p>
-<div id="creating-date-object" class="section level2">
-<h2><span class="header-section-number">16.1</span> Creating Date object</h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb59-1" data-line-number="1">Date d;       <span class="co">//&quot;1970-01-01&quot;</span></a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">Date d(<span class="dv">1</span>);    <span class="co">//&quot;1970-01-01&quot; + 1day</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">Date d(<span class="fl">1.1</span>);  <span class="co">//&quot;1970-01-01&quot; + ceil(1.1)day</span></a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="sc">%Y-%</span><span class="st">m-</span><span class="sc">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span></a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">Date( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2000</span>); <span class="co">// 2000-01-02 Date(mon, day, year)</span></a>
-<a class="sourceLine" id="cb59-6" data-line-number="6">Date( <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">2</span>); <span class="co">// 2000-01-02 Date(year, mon, day)</span></a></code></pre></div>
+<div id="environment-1" class="section level1">
+<h1><span class="header-section-number">Chapter 28</span> Environment</h1>
+<p>By using <code>Environment</code> class, you can keep the environment you want to access as a variable and retrieve variables and functions from the environment.</p>
+<div id="creating-environment-object" class="section level2">
+<h2><span class="header-section-number">28.1</span> Creating Environment object</h2>
+<p>This section shows you how to create an object of the <code>Environment</code> class.</p>
+<pre><code>Environment env();                           // Global environment
+Environment env = Environment::global_env(); // Global environment
+Environment env(&quot;package:stats&quot;);            // Environment of package &quot;stats&quot;
+Environment env(1); // The i-th environment in onbject search path (i = 1 is global environment)</code></pre>
+<p>To check the object search path, use <code>search()</code> function in R.</p>
+<pre><code>&gt; search()
+ [1] &quot;.GlobalEnv&quot;        &quot;tools:RGUI&quot;        &quot;package:stats&quot;    
+ [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+ [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
+[10] &quot;package:base&quot;   </code></pre>
 </div>
-<div id="operators-1" class="section level2">
-<h2><span class="header-section-number">16.2</span> Operators</h2>
-<p><code>Date</code> has operators <code>+, -, &lt;, &gt;, &gt;=, &lt;=, ==, !=</code>. By using these operators, you can perform addition of days (<code>+</code>), difference calculation of date (<code>-</code>), comparison of dates (<code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code>) .</p>
-<pre><code>// [[Rcpp::export]]
-DateVector rcpp_date1(){
-    // Creating Date objects
-    Date d1(&quot;2000-01-01&quot;);
-    Date d2(&quot;2000-02-01&quot;);
+<div id="accessing-object-in-a-environment" class="section level2">
+<h2><span class="header-section-number">28.2</span> Accessing object in a environment</h2>
+<p>You can use the <code>[]</code> operator or <code>get()</code> member function to access variables and functions in an environment through <code>Environment</code> class object. If you access variables or functions that do not exist in that environment, <code>R_NilValue</code> (<code>NULL</code>) will be returned.</p>
+<pre><code>// Retrieving the global environment
+Environment env = Environment::global_env();
 
-    int  i  = d2 - d1; // difference of dates
-    bool b  = d2 &gt; d1; // comparison of dates
+// Retrieving object &quot;x&quot; from the global environment
+NumericVector x = env[&quot;x&quot;];
 
-    Rcout &lt;&lt; i &lt;&lt; &quot;\n&quot;; // 31
-    Rcout &lt;&lt; b &lt;&lt; &quot;\n&quot;; // 1
+// Changing the value of the variable x in the global environment
+x[0] = 100;</code></pre>
+</div>
+<div id="creating-new-environment" class="section level2">
+<h2><span class="header-section-number">28.3</span> Creating new environment</h2>
+<p>A new empty environment can be created by using the function <code>new_env()</code> function.</p>
+<div id="new_envsize-29" class="section level3">
+<h3><span class="header-section-number">28.3.1</span> new_env(size = 29)</h3>
+<p>Returns a new environment. The argument <code>size</code> specifies the initial size of the hash table of the environment to be created.</p>
+</div>
+<div id="new_envparent-size-29" class="section level3">
+<h3><span class="header-section-number">28.3.2</span> new_env(parent, size = 29)</h3>
+<p>Returns a new environment whose parent environmnet is the <code>parent</code>. The argument <code>size</code> specifies the initial size of the hash table of the environment to be created.</p>
+</div>
+</div>
+<div id="member-functions-8" class="section level2">
+<h2><span class="header-section-number">28.4</span> Member functions</h2>
+<div id="getname" class="section level3">
+<h3><span class="header-section-number">28.4.1</span> get(name)</h3>
+<p>Retrieves the object with its name specified by the argument <code>name</code>. If it can not be found, it returns <code>R_NilValue</code>.</p>
+</div>
+<div id="lsall" class="section level3">
+<h3><span class="header-section-number">28.4.2</span> ls(all)</h3>
+<p>Returns a list of objects in this environment as a <code>CharacterVector</code>. If the argument <code>all</code> is true, all objects are displayed, <code>false</code> excludes objects whose name begins with <code>.</code>.</p>
+</div>
+<div id="findname" class="section level3">
+<h3><span class="header-section-number">28.4.3</span> find(name)</h3>
+<p>Retrieves the object with the name specified by the argument <code>name</code> from this environment or its parent environment. If the object is not found, the <code>binding_not_found</code> exception is thrown.</p>
+</div>
+<div id="existsname" class="section level3">
+<h3><span class="header-section-number">28.4.4</span> exists(name)</h3>
+<p>Returns <code>true</code> if there is an object with the name specified by the argument <code>name</code> in this environment.</p>
+</div>
+<div id="assign-name-x" class="section level3">
+<h3><span class="header-section-number">28.4.5</span> assign( name, x )</h3>
+<p>Assign the value <code>x</code> to the object with the name specified by the character string <code>name</code> in this environment. Returns <code>true</code> if it succeeds.</p>
+</div>
+<div id="islocked" class="section level3">
+<h3><span class="header-section-number">28.4.6</span> isLocked()</h3>
+<p>Returns <code>true</code> if this environment is locked.</p>
+</div>
+<div id="removename" class="section level3">
+<h3><span class="header-section-number">28.4.7</span> remove(name)</h3>
+<p>Removes the object with the name specified by the string <code>name</code> from this environment. Returns <code>true</code> if it succeeds.</p>
+</div>
+<div id="lockbindings-false" class="section level3">
+<h3><span class="header-section-number">28.4.8</span> lock(bindings = false)</h3>
+<p>Locks this environment. If binding = <code>true</code>, it also locks bindings of this environment. (The “binding” is linking between name of the object and data of the object in R.)</p>
+</div>
+<div id="lockbindingname" class="section level3">
+<h3><span class="header-section-number">28.4.9</span> lockBinding(name)</h3>
+<p>Lock the binding (i.e. variable) specified by the string <code>name</code> in this environment.</p>
+</div>
+<div id="unlockbindingname" class="section level3">
+<h3><span class="header-section-number">28.4.10</span> unlockBinding(name){</h3>
+<p>Unlock the binding (i.e. variable) specified by the string <code>name</code> in this environment.</p>
+</div>
+<div id="bindingislockedname" class="section level3">
+<h3><span class="header-section-number">28.4.11</span> bindingIsLocked(name)</h3>
+<p>Returns <code>true</code> if the binding (i.e. variable) specified by the string <code>name</code> in this environment is locked.</p>
+</div>
+<div id="bindingisactivename" class="section level3">
+<h3><span class="header-section-number">28.4.12</span> bindingIsActive(name)</h3>
+<p>Returns <code>true</code> if the binding (i.e. variable) specified by the string <code>name</code> in this environment is active.</p>
+</div>
+<div id="is_user_database" class="section level3">
+<h3><span class="header-section-number">28.4.13</span> is_user_database()</h3>
+<p>Returns true if this environment inherits “UserDefinedDatabase”.</p>
+</div>
+<div id="parent" class="section level3">
+<h3><span class="header-section-number">28.4.14</span> parent()</h3>
+<p>Returns the parent environment of this environment.</p>
+</div>
+<div id="new_childhashed" class="section level3">
+<h3><span class="header-section-number">28.4.15</span> new_child(hashed)</h3>
+<p>Creates a new environment whose parent is this environment. If hashed == <code>true</code>, the created environment uses hash table.</p>
+</div>
+</div>
+<div id="static-member-functions-2" class="section level2">
+<h2><span class="header-section-number">28.5</span> Static member functions</h2>
+<p>###Environment::global_env()</p>
+<p>Returns the global environment.</p>
+<p>###Environment::empty_env()</p>
+<p>Returns the empty environment.</p>
+<p>###Environment::base_env()</p>
+<p>Returns the environment of base package.</p>
+<p>###Environment::base_namespace()</p>
+<p>Returns the namespace of base package.</p>
+<div id="environmentrcpp_namespace" class="section level3">
+<h3><span class="header-section-number">28.5.1</span> Environment::Rcpp_namespace()</h3>
+<p>Returns the namespace of Rcpp package.</p>
+</div>
+<div id="environmentnamespace_envpackage" class="section level3">
+<h3><span class="header-section-number">28.5.2</span> Environment::namespace_env(package)</h3>
+<p>Returns the namespace of the package whose name is specified by argument <code>package</code>. If you use <code>Environment::namespace_env()</code>, you can call package functions without preloading the package with the <code>library()</code> function in R. This is equivalent to calling package function with the form <code>PACKAGE::FUNCTION()</code>. In addition, you can also access functions that are not exported in the package. This is equivalent to calling with the form <code>PACKAGE:::FUNCTION()</code> in R.</p>
 
-
-    DateVector date(1);
-    date[0] = d1 + 1;  // adding 1 day to d1
-
-    return date; // 2000-01-02
-}</code></pre>
 </div>
-<div id="member-functions-5" class="section level2">
-<h2><span class="header-section-number">16.3</span> Member functions</h2>
-<div id="getday" class="section level3">
-<h3><span class="header-section-number">16.3.1</span> getDay()</h3>
-<p>Returns the day of the date.</p>
-</div>
-<div id="getmonth" class="section level3">
-<h3><span class="header-section-number">16.3.2</span> getMonth()</h3>
-<p>Returns the month of the date.</p>
-</div>
-<div id="getyear" class="section level3">
-<h3><span class="header-section-number">16.3.3</span> getYear()</h3>
-<p>Returns the year of the date.</p>
-</div>
-<div id="getweekday" class="section level3">
-<h3><span class="header-section-number">16.3.4</span> getWeekday()</h3>
-<p>Returns the day of the week as an int. (1:Sun 2:Mon 3:Tue 4:Wed 5:Thu 6:Sat)</p>
-</div>
-<div id="getyearday" class="section level3">
-<h3><span class="header-section-number">16.3.5</span> getYearday()</h3>
-<p>Returns the number of the date through the year with January 1st as 1 and December 31st as 365.</p>
-</div>
-<div id="is_na" class="section level3">
-<h3><span class="header-section-number">16.3.6</span> is_na()</h3>
-<p>Returns <code>true</code> if this object is NA.</p>
-</div>
-</div>
-<div id="execution-result" class="section level2">
-<h2><span class="header-section-number">16.4</span> Execution result</h2>
-<pre><code>Date d(&quot;2016-1-1&quot;);
-Rcout &lt;&lt; d.getDay() &lt;&lt; endl;     //1
-Rcout &lt;&lt; d.getMonth() &lt;&lt; endl;   //1
-Rcout &lt;&lt; d.getYear() &lt;&lt; endl;    //2016
-Rcout &lt;&lt; d.getWeekday() &lt;&lt; endl; //6
-Rcout &lt;&lt; d.getYearday() &lt;&lt; endl; //1</code></pre>
-
 </div>
 </div>
             </section>
@@ -562,8 +615,8 @@ Rcout &lt;&lt; d.getYearday() &lt;&lt; endl; //1</code></pre>
           </div>
         </div>
       </div>
-<a href="170_string.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="190_datetime.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="270_cancellation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="290_iterator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

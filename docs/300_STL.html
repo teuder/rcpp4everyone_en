@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Date | Rcpp for everyone</title>
+  <title>Chapter 30 Standard C++ data structures and algorithms | Rcpp for everyone</title>
   <meta name="description" content="Introducing how to use Rcpp" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Date | Rcpp for everyone" />
+  <meta property="og:title" content="Chapter 30 Standard C++ data structures and algorithms | Rcpp for everyone" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Date | Rcpp for everyone" />
+  <meta name="twitter:title" content="Chapter 30 Standard C++ data structures and algorithms | Rcpp for everyone" />
   
   <meta name="twitter:description" content="Introducing how to use Rcpp" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="170_string.html"/>
-<link rel="next" href="190_datetime.html"/>
+<link rel="prev" href="290_iterator.html"/>
+<link rel="next" href="310_Rmath.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -485,75 +485,203 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="date" class="section level1">
-<h1><span class="header-section-number">Chapter 16</span> Date</h1>
-<p><code>Date</code> is a scalar type corresponding to an element of <code>DateVector</code>.</p>
-<div id="creating-date-object" class="section level2">
-<h2><span class="header-section-number">16.1</span> Creating Date object</h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb59-1" data-line-number="1">Date d;       <span class="co">//&quot;1970-01-01&quot;</span></a>
-<a class="sourceLine" id="cb59-2" data-line-number="2">Date d(<span class="dv">1</span>);    <span class="co">//&quot;1970-01-01&quot; + 1day</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3">Date d(<span class="fl">1.1</span>);  <span class="co">//&quot;1970-01-01&quot; + ceil(1.1)day</span></a>
-<a class="sourceLine" id="cb59-4" data-line-number="4">Date( <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;</span><span class="sc">%Y-%</span><span class="st">m-</span><span class="sc">%d</span><span class="st">&quot;</span>); <span class="co">//default format is &quot;%Y-%m-%d&quot;</span></a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">Date( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2000</span>); <span class="co">// 2000-01-02 Date(mon, day, year)</span></a>
-<a class="sourceLine" id="cb59-6" data-line-number="6">Date( <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">2</span>); <span class="co">// 2000-01-02 Date(year, mon, day)</span></a></code></pre></div>
+<div id="standard-c-data-structures-and-algorithms" class="section level1">
+<h1><span class="header-section-number">Chapter 30</span> Standard C++ data structures and algorithms</h1>
+<div id="standard-c-data-structure" class="section level2">
+<h2><span class="header-section-number">30.1</span> Standard C++ data structure</h2>
+<p>Standard C++ provides various data structures (containers), such as <code>std::vector</code> <code>std::list</code> <code>std::map</code> <code>std::set</code>. They differ in their efficiency in accessing, adding, and deleting elements. Thus, you are able to implement the process more efficiently by choosing appropriate data structures.</p>
+<p>For example, consider the situation that you want to add an element to a vector, both Rcpp’s <code>Rcpp::Vector</code> and standard C++’s <code>std::vector</code> provides a member function <code>push_back()</code> which adds an element to the end of a vector. However, there is a big difference in efficiency between these. This is because each time <code>Rcpp::Vector</code> executes a member function <code>push_back()</code> the whole value of the vector is copied to another place in memory, whereas <code>std::vector</code> allows you to add an element to the end without copying the whole value in many cases.</p>
+<p>Standard C++ classes and functions are defined in the <code>std::</code> namespace, so they are specified with <code>std::</code> for example, <code>std::vector</code>. You can also omit writing <code>std::</code> by adding <code>using namespace std;</code> in your code.</p>
+<p>Below is an example of using <code>std::vector</code> to get the row and column numbers of non-zero matrix elements.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">DataFrame matix_rows_cols(NumericMatrix m){</a>
+<a class="sourceLine" id="cb128-3" data-line-number="3">    <span class="co">// Returns the column and row numbers of non-zero elements from the matrix.</span></a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">    <span class="co">// For simplicity, we assume that the matrix does not contain NA.</span></a>
+<a class="sourceLine" id="cb128-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb128-6" data-line-number="6">    <span class="co">// Tolal number of rows and cols</span></a>
+<a class="sourceLine" id="cb128-7" data-line-number="7">    <span class="dt">int</span> I = m.rows();</a>
+<a class="sourceLine" id="cb128-8" data-line-number="8">    <span class="dt">int</span> J = m.cols();</a>
+<a class="sourceLine" id="cb128-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb128-10" data-line-number="10">    <span class="co">// variables to store row and column numbers</span></a>
+<a class="sourceLine" id="cb128-11" data-line-number="11">    <span class="co">// store the result in a std::vector</span></a>
+<a class="sourceLine" id="cb128-12" data-line-number="12">    <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; rows, cols;</a>
+<a class="sourceLine" id="cb128-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb128-14" data-line-number="14">    <span class="co">// The number of elements can be up to the number of elements in matrix m,</span></a>
+<a class="sourceLine" id="cb128-15" data-line-number="15">    <span class="co">// so we allocate memory for that in advance.</span></a>
+<a class="sourceLine" id="cb128-16" data-line-number="16">    rows.reserve(m.length());</a>
+<a class="sourceLine" id="cb128-17" data-line-number="17">    cols.reserve(m.length());</a>
+<a class="sourceLine" id="cb128-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb128-19" data-line-number="19">    <span class="co">// Accesses all elements of matrix M</span></a>
+<a class="sourceLine" id="cb128-20" data-line-number="20">    <span class="co">// and stores the row and column numbers of elements whose values are not zero.</span></a>
+<a class="sourceLine" id="cb128-21" data-line-number="21">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;I; ++i){</a>
+<a class="sourceLine" id="cb128-22" data-line-number="22">        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;J; ++j){</a>
+<a class="sourceLine" id="cb128-23" data-line-number="23">            <span class="cf">if</span>(m(i,j)!=<span class="fl">0.0</span>){</a>
+<a class="sourceLine" id="cb128-24" data-line-number="24">                rows.push_back(i<span class="dv">+1</span>);</a>
+<a class="sourceLine" id="cb128-25" data-line-number="25">                cols.push_back(j<span class="dv">+1</span>);</a>
+<a class="sourceLine" id="cb128-26" data-line-number="26">            }</a>
+<a class="sourceLine" id="cb128-27" data-line-number="27">        }</a>
+<a class="sourceLine" id="cb128-28" data-line-number="28">    }</a>
+<a class="sourceLine" id="cb128-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb128-30" data-line-number="30">    <span class="co">// Returns the result as a data.frame.</span></a>
+<a class="sourceLine" id="cb128-31" data-line-number="31">    <span class="cf">return</span> DataFrame::create(Named(<span class="st">&quot;rows&quot;</span>, rows),</a>
+<a class="sourceLine" id="cb128-32" data-line-number="32">                             Named(<span class="st">&quot;cols&quot;</span>, cols));</a>
+<a class="sourceLine" id="cb128-33" data-line-number="33">}</a></code></pre></div>
+<p>Below is an overview of some of the major standard C++ data structures.</p>
+<table>
+<colgroup>
+<col width="42%" />
+<col width="57%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Standard C++ Data Structure</th>
+<th align="left">Outline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>std::vector</code></td>
+<td align="left">Variable length array: each element is arranged continuously in memory.</td>
+</tr>
+<tr class="even">
+<td align="center"><code>std::list</code></td>
+<td align="left">Variable length array: each element is distributed in memory.</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>std::map</code>, <code>std::unordered_map</code></td>
+<td align="left">Associative array: Holds data in key-value format.</td>
+</tr>
+<tr class="even">
+<td align="center"><code>std::set</code>, <code>std::unordered_set</code></td>
+<td align="left">Set: Keeps a set of unduplicated values.</td>
+</tr>
+</tbody>
+</table>
+<p><code>std::vector</code> has faster access to elements than <code>std::list</code>. On the other hand, <code>std::list</code> is faster at adding elements.</p>
+<p><code>std::map</code> holds elements in the order sorted by their keys. On the other hand, <code>std::unordered_map</code> does not guarantee the order of its elements, but is faster to insert and access elements.</p>
+<p>Similarly, <code>std::set</code> holds elements in the order sorted by element values. On the other hand, the order is not guaranteed with <code>std::unordered_set</code>, but it is faster to insert and access elements.</p>
 </div>
-<div id="operators-1" class="section level2">
-<h2><span class="header-section-number">16.2</span> Operators</h2>
-<p><code>Date</code> has operators <code>+, -, &lt;, &gt;, &gt;=, &lt;=, ==, !=</code>. By using these operators, you can perform addition of days (<code>+</code>), difference calculation of date (<code>-</code>), comparison of dates (<code>&lt;, &lt;=, &gt;, &gt;=, ==, !=</code>) .</p>
-<pre><code>// [[Rcpp::export]]
-DateVector rcpp_date1(){
-    // Creating Date objects
-    Date d1(&quot;2000-01-01&quot;);
-    Date d2(&quot;2000-02-01&quot;);
+<div id="conversion-between-standard-c-data-structures-and-rcpp-data-structures" class="section level2">
+<h2><span class="header-section-number">30.2</span> Conversion between standard C++ data structures and Rcpp data structures</h2>
+<p>The <code>as&lt;T&gt;()</code> and <code>wrap()</code> functions are used to convert the data structures between Rcpp and standard C++.</p>
+<ul>
+<li><code>as&lt;CPP&gt;(RCPP)</code> : Converts the Rcpp data structure (<code>RCPP</code>) to the standard C++ data structure (<code>CPP</code>)</li>
+<li><code>wrap(CPP)</code> : Converts the standard C++ data structure (<code>CPP</code>) to the Rcpp data structure (<code>RCPP</code>)</li>
+</ul>
+<p>The following table shows the correspondence between Rcpp and C++ the data structures that can be converted each other.</p>
+<p>(<code>+</code> indicates compatible, <code>-</code> indicates not compatible)</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Rcpp</th>
+<th align="center">C++</th>
+<th align="center">as</th>
+<th align="center">wrap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>Vector</code></td>
+<td align="center"><code>vector</code>, <code>list</code>, <code>deque</code></td>
+<td align="center">+</td>
+<td align="center">+</td>
+</tr>
+<tr class="even">
+<td align="center"><code>List</code>, <code>DataFrame</code></td>
+<td align="center"><code>vector&lt;vector&gt;</code>, <code>list&lt;vector&gt;</code> etc.</td>
+<td align="center">+</td>
+<td align="center">+</td>
+</tr>
+<tr class="odd">
+<td align="center">Named <code>Vector</code></td>
+<td align="center"><code>map</code>, <code>unordered_map</code></td>
+<td align="center">-</td>
+<td align="center">+</td>
+</tr>
+<tr class="even">
+<td align="center"><code>Vector</code></td>
+<td align="center"><code>set</code>, <code>unordered_set</code></td>
+<td align="center">-</td>
+<td align="center">+</td>
+</tr>
+</tbody>
+</table>
+<p>The following example shows how to convert <code>Rcpp::Vector</code> to a standard C++ sequence container (a container which can be treated as a series of values such as <code>std::vector</code>, <code>std::list</code>, <code>std::deque</code>, etc.).</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb129-1" data-line-number="1">NumericVector   rcpp_vector = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
+<a class="sourceLine" id="cb129-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="co">// Conversion from Rcpp::Vector to std::vector  </span></a>
+<a class="sourceLine" id="cb129-4" data-line-number="4"><span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt;  cpp_vector = as&lt; <span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt; &gt;(rcpp_vector);</a>
+<a class="sourceLine" id="cb129-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb129-6" data-line-number="6"><span class="co">// Conversion from std::vector to Rcpp::Vector  </span></a>
+<a class="sourceLine" id="cb129-7" data-line-number="7">NumericVector v1 = wrap(cpp_vector);</a></code></pre></div>
+<p>The following code example shows how to convert a 2-dimensional container, which is nested C++ sequence containers, into a <code>DataFrame</code> or <code>List</code>.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="kw">using</span> <span class="kw">namespace</span> std;</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="co">// A two-dimensional vector with all element vectors of equal length</span></a>
+<a class="sourceLine" id="cb130-4" data-line-number="4"><span class="co">// can be converted to a DataFrame</span></a>
+<a class="sourceLine" id="cb130-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb130-6" data-line-number="6">vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_01 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>}};</a>
+<a class="sourceLine" id="cb130-7" data-line-number="7">DataFrame df = wrap(cpp_vector_2d_01);</a>
+<a class="sourceLine" id="cb130-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb130-9" data-line-number="9"><span class="co">// A two-dimensional vector with different length of element vectors</span></a>
+<a class="sourceLine" id="cb130-10" data-line-number="10"><span class="co">// can be converted to a list</span></a>
+<a class="sourceLine" id="cb130-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb130-12" data-line-number="12">vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_02 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>}};</a>
+<a class="sourceLine" id="cb130-13" data-line-number="13">List li = wrap(cpp_vector_2d_02);</a></code></pre></div>
+<p>The following code example shows that standard C++ <code>std::map&lt;key, value&gt;</code> and <code>std::unordered_map&lt;key, value&gt;</code> are converted to named <code>Rcpp::Vector</code> with <code>key</code> as the name of the element and <code>value</code> as the type of the element.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="pp">#include</span><span class="im">&lt;map&gt;</span></a>
+<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb131-3" data-line-number="3">NumericVector std_map(){</a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">    <span class="bu">std::</span>map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; cpp_num_map;</a>
+<a class="sourceLine" id="cb131-5" data-line-number="5">    cpp_num_map[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
+<a class="sourceLine" id="cb131-6" data-line-number="6">    cpp_num_map[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb131-7" data-line-number="7">    cpp_num_map[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb131-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb131-9" data-line-number="9">    <span class="bu">std::</span>un&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; cpp_num_map;</a>
+<a class="sourceLine" id="cb131-10" data-line-number="10">    cpp_num_map[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
+<a class="sourceLine" id="cb131-11" data-line-number="11">    cpp_num_map[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb131-12" data-line-number="12">    cpp_num_map[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb131-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb131-14" data-line-number="14">    Listli li = List::create(cpp_num_map, cpp_num_map);</a>
+<a class="sourceLine" id="cb131-15" data-line-number="15">}</a></code></pre></div>
+<p>execution result</p>
+<p>You can see that <code>std::map</code> is sorted by key value, whereas <code>std::unordered_map</code> is not guaranteed to be ordered.</p>
+<pre><code>&gt; std_map()
+[[1]]
+A B C
+2 1 3
 
-    int  i  = d2 - d1; // difference of dates
-    bool b  = d2 &gt; d1; // comparison of dates
+[[2]]
+A C B
+2 3 1</code></pre>
+</div>
+<div id="use-standard-c-data-structures-as-arguments-and-return-values-of-rcpp-functions" class="section level2">
+<h2><span class="header-section-number">30.3</span> Use standard C++ data structures as arguments and return values of Rcpp functions</h2>
+<p>Standard C++ data structures that can be converted by the <code>as()</code> and <code>wrap()</code> functions can also be used as arguments or return values of Rcpp functions. The <code>as()</code> and <code>wrap()</code> is callded implicitly when you use C++ data structures as Rcpp function’s arguments or return values. Thus, you need not to write <code>as()</code> and <code>wrap()</code> explicitly in your Rcpp functions.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a>
+<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb133-3" data-line-number="3">vector&lt;<span class="dt">double</span>&gt; times_two_std_vector(vector&lt;<span class="dt">double</span>&gt; v){ <span class="co">// as() is called implicitly</span></a>
+<a class="sourceLine" id="cb133-4" data-line-number="4">    <span class="cf">for</span>(<span class="dt">double</span> &amp;x : v){</a>
+<a class="sourceLine" id="cb133-5" data-line-number="5">        x *= <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb133-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb133-7" data-line-number="7">    <span class="cf">return</span> v; <span class="co">// wrap() is called implicitly</span></a>
+<a class="sourceLine" id="cb133-8" data-line-number="8">}</a></code></pre></div>
+</div>
+<div id="standard-c-algorithms" class="section level2">
+<h2><span class="header-section-number">30.4</span> Standard C++ Algorithms</h2>
+<p>The standard C++ <code>&lt;algorithm&gt;</code> and <code>&lt;numeric&gt;</code> header files provide various generic algorithms. As mentioned in <a href="310_iterator.html">the chapter on iterators</a>, many of C++ algorithm use iterators to specify the location and extent to which the algorithm is applied.</p>
+<p>The following example shows how to use the <code>std::count()</code> function of the <code>&lt;algorithm&gt;</code> to count the number of elements equal to the specified value.</p>
+<pre><code>#include &lt;algorithm&gt;
+// [[Rcpp::export]]
+int rcpp_count(){
+    // create a string vector
+    CharacterVector v =
+        CharacterVector::create(&quot;A&quot;, &quot;B&quot;, &quot;A&quot;, &quot;C&quot;, NA_STRING);
 
-    Rcout &lt;&lt; i &lt;&lt; &quot;\n&quot;; // 31
-    Rcout &lt;&lt; b &lt;&lt; &quot;\n&quot;; // 1
-
-
-    DateVector date(1);
-    date[0] = d1 + 1;  // adding 1 day to d1
-
-    return date; // 2000-01-02
+    // count the number of elements whose value is &quot;A&quot; from the string vector v
+    return std::count(v.begin(), v.end(), &quot;A&quot;); // 2
 }</code></pre>
-</div>
-<div id="member-functions-5" class="section level2">
-<h2><span class="header-section-number">16.3</span> Member functions</h2>
-<div id="getday" class="section level3">
-<h3><span class="header-section-number">16.3.1</span> getDay()</h3>
-<p>Returns the day of the date.</p>
-</div>
-<div id="getmonth" class="section level3">
-<h3><span class="header-section-number">16.3.2</span> getMonth()</h3>
-<p>Returns the month of the date.</p>
-</div>
-<div id="getyear" class="section level3">
-<h3><span class="header-section-number">16.3.3</span> getYear()</h3>
-<p>Returns the year of the date.</p>
-</div>
-<div id="getweekday" class="section level3">
-<h3><span class="header-section-number">16.3.4</span> getWeekday()</h3>
-<p>Returns the day of the week as an int. (1:Sun 2:Mon 3:Tue 4:Wed 5:Thu 6:Sat)</p>
-</div>
-<div id="getyearday" class="section level3">
-<h3><span class="header-section-number">16.3.5</span> getYearday()</h3>
-<p>Returns the number of the date through the year with January 1st as 1 and December 31st as 365.</p>
-</div>
-<div id="is_na" class="section level3">
-<h3><span class="header-section-number">16.3.6</span> is_na()</h3>
-<p>Returns <code>true</code> if this object is NA.</p>
-</div>
-</div>
-<div id="execution-result" class="section level2">
-<h2><span class="header-section-number">16.4</span> Execution result</h2>
-<pre><code>Date d(&quot;2016-1-1&quot;);
-Rcout &lt;&lt; d.getDay() &lt;&lt; endl;     //1
-Rcout &lt;&lt; d.getMonth() &lt;&lt; endl;   //1
-Rcout &lt;&lt; d.getYear() &lt;&lt; endl;    //2016
-Rcout &lt;&lt; d.getWeekday() &lt;&lt; endl; //6
-Rcout &lt;&lt; d.getYearday() &lt;&lt; endl; //1</code></pre>
+<p>For many other algorithms included in standard C++, please refer to other C++ resources.</p>
 
 </div>
 </div>
@@ -562,8 +690,8 @@ Rcout &lt;&lt; d.getYearday() &lt;&lt; endl; //1</code></pre>
           </div>
         </div>
       </div>
-<a href="170_string.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="190_datetime.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="290_iterator.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="310_Rmath.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
