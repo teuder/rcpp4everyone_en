@@ -630,30 +630,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb130-13" data-line-number="13">List li = wrap(cpp_vector_2d_02);</a></code></pre></div>
 <p>The following code example shows that standard C++ <code>std::map&lt;key, value&gt;</code> and <code>std::unordered_map&lt;key, value&gt;</code> are converted to named <code>Rcpp::Vector</code> with <code>key</code> as the name of the element and <code>value</code> as the type of the element.</p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="pp">#include</span><span class="im">&lt;map&gt;</span></a>
-<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb131-3" data-line-number="3">NumericVector std_map(){</a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">    <span class="bu">std::</span>map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; cpp_num_map;</a>
-<a class="sourceLine" id="cb131-5" data-line-number="5">    cpp_num_map[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
-<a class="sourceLine" id="cb131-6" data-line-number="6">    cpp_num_map[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb131-7" data-line-number="7">    cpp_num_map[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb131-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb131-9" data-line-number="9">    <span class="bu">std::</span>un&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; cpp_num_map;</a>
-<a class="sourceLine" id="cb131-10" data-line-number="10">    cpp_num_map[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
-<a class="sourceLine" id="cb131-11" data-line-number="11">    cpp_num_map[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb131-12" data-line-number="12">    cpp_num_map[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb131-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb131-14" data-line-number="14">    Listli li = List::create(cpp_num_map, cpp_num_map);</a>
-<a class="sourceLine" id="cb131-15" data-line-number="15">}</a></code></pre></div>
+<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="pp">#include</span><span class="im">&lt;unordered_map&gt;</span></a>
+<a class="sourceLine" id="cb131-3" data-line-number="3"><span class="co">// [[Rcpp::export]]</span></a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">List std_map(){</a>
+<a class="sourceLine" id="cb131-5" data-line-number="5">  <span class="bu">std::</span>map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; map_str_dbl;</a>
+<a class="sourceLine" id="cb131-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb131-7" data-line-number="7">  map_str_dbl[<span class="st">&quot;E&quot;</span>] = <span class="dv">5</span>;    </a>
+<a class="sourceLine" id="cb131-8" data-line-number="8">  map_str_dbl[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb131-9" data-line-number="9">  map_str_dbl[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
+<a class="sourceLine" id="cb131-10" data-line-number="10">  map_str_dbl[<span class="st">&quot;D&quot;</span>] = <span class="dv">4</span>;</a>
+<a class="sourceLine" id="cb131-11" data-line-number="11">  map_str_dbl[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb131-12" data-line-number="12">  </a>
+<a class="sourceLine" id="cb131-13" data-line-number="13">  <span class="bu">std::</span>unordered_map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; umap_str_dbl;</a>
+<a class="sourceLine" id="cb131-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb131-15" data-line-number="15">  umap_str_dbl[<span class="st">&quot;E&quot;</span>] = <span class="dv">5</span>;    </a>
+<a class="sourceLine" id="cb131-16" data-line-number="16">  umap_str_dbl[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb131-17" data-line-number="17">  umap_str_dbl[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
+<a class="sourceLine" id="cb131-18" data-line-number="18">  umap_str_dbl[<span class="st">&quot;D&quot;</span>] = <span class="dv">4</span>;</a>
+<a class="sourceLine" id="cb131-19" data-line-number="19">  umap_str_dbl[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb131-20" data-line-number="20">  </a>
+<a class="sourceLine" id="cb131-21" data-line-number="21">  List li = List::create(Named(<span class="st">&quot;std::map&quot;</span>, map_str_dbl),</a>
+<a class="sourceLine" id="cb131-22" data-line-number="22">                         Named(<span class="st">&quot;std::unordered_map&quot;</span>, umap_str_dbl)</a>
+<a class="sourceLine" id="cb131-23" data-line-number="23">                        );</a>
+<a class="sourceLine" id="cb131-24" data-line-number="24">  </a>
+<a class="sourceLine" id="cb131-25" data-line-number="25">  <span class="cf">return</span>(li);</a>
+<a class="sourceLine" id="cb131-26" data-line-number="26">}</a></code></pre></div>
 <p>execution result</p>
 <p>You can see that <code>std::map</code> is sorted by key value, whereas <code>std::unordered_map</code> is not guaranteed to be ordered.</p>
 <pre><code>&gt; std_map()
-[[1]]
-A B C
-2 1 3
+$`std::map`
+A B C D E 
+1 2 3 4 5 
 
-[[2]]
-A C B
-2 3 1</code></pre>
+$`std::unordered_map`
+D B C A E 
+4 2 3 1 5 </code></pre>
 </div>
 <div id="use-standard-c-data-structures-as-arguments-and-return-values-of-rcpp-functions" class="section level2">
 <h2><span class="header-section-number">30.3</span> Use standard C++ data structures as arguments and return values of Rcpp functions</h2>
