@@ -2,7 +2,7 @@
 
 ## Assigning between vectors
 
-When you assign a object `v1` to another object `v2` using `=` operator (`v2 = v1;`), the value of elements  of `v1` is not copied to `v2` but `v2` will be an alias to `v1`. Thus, if you change the value of some elements in `v1`, the change also applied to `v2`. You should use `clone()`, if you want to avoid coupling between objects (see sample code below).
+When you assign an object `v1` to another object `v2` using `=` operator (`v2 = v1;`), the value of elements  of `v1` is not copied to `v2` but `v2` will be an alias to `v1`. Thus, if you change the value of some elements in `v1`, the change also applied to `v2`. You should use `clone()`, if you want to avoid coupling between objects (see sample code below).
 
 The sample code presented below shows that the difference of the shallow copy and deep copy when you change value of one of vector after assigning.
 

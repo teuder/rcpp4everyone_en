@@ -73,11 +73,11 @@ Returns the minute of the date and time in Coordinated Universal Time.
 
 Returns the hour of the date and time in Coordinated Universal Time.
 
-###getDay()
+### getDay()
 
 Returns the day of the date and time in Coordinated Universal Time.
 
-###getMonth()
+### getMonth()
 
 Returns the month of the date and time in Coordinated Universal Time.
 
@@ -85,7 +85,7 @@ Returns the month of the date and time in Coordinated Universal Time.
 
 Returns the year of the date and time in Coordinated Universal Time.
 
-###getWeekday()
+### getWeekday()
 
 Returns the day of the week of the date and time in Coordinated Universal Time in `int`.
 

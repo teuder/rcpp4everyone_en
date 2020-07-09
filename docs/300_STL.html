@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 30 Standard C++ data structures and algorithms | Rcpp for everyone</title>
   <meta name="description" content="Introducing how to use Rcpp" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 30 Standard C++ data structures and algorithms | Rcpp for everyone" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Masaki E. Tsuda" />
 
 
-<meta name="date" content="2020-05-15" />
+<meta name="date" content="2020-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101879207-2"></script>
 <script>
@@ -62,9 +63,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -73,14 +74,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -89,9 +92,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -221,15 +224,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2" data-path="100_matrix.html"><a href="100_matrix.html#accessing-to-matrix-elements"><i class="fa fa-check"></i><b>9.2</b> Accessing to Matrix elements</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="100_matrix.html"><a href="100_matrix.html#accessing-as-reference-to-row-column-and-sub-matrix"><i class="fa fa-check"></i><b>9.2.1</b> Accessing as reference to row, column and sub matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="100_matrix.html"><a href="100_matrix.html#member-functions-1"><i class="fa fa-check"></i><b>9.3</b> Member functions</a><ul>
+<li class="chapter" data-level="9.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>9.3</b> Member functions</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="100_matrix.html"><a href="100_matrix.html#nrow-rows"><i class="fa fa-check"></i><b>9.3.1</b> nrow() rows()</a></li>
-<li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#ncolcols"><i class="fa fa-check"></i><b>9.3.2</b> ncol()　cols()</a></li>
+<li class="chapter" data-level="9.3.2" data-path="100_matrix.html"><a href="100_matrix.html#ncol-cols"><i class="fa fa-check"></i><b>9.3.2</b> ncol()　cols()</a></li>
 <li class="chapter" data-level="9.3.3" data-path="100_matrix.html"><a href="100_matrix.html#row-i"><i class="fa fa-check"></i><b>9.3.3</b> row( i )</a></li>
 <li class="chapter" data-level="9.3.4" data-path="100_matrix.html"><a href="100_matrix.html#column-i"><i class="fa fa-check"></i><b>9.3.4</b> column( i )</a></li>
 <li class="chapter" data-level="9.3.5" data-path="100_matrix.html"><a href="100_matrix.html#fill_diag-x"><i class="fa fa-check"></i><b>9.3.5</b> fill_diag( x )</a></li>
 <li class="chapter" data-level="9.3.6" data-path="100_matrix.html"><a href="100_matrix.html#offset-i-j"><i class="fa fa-check"></i><b>9.3.6</b> offset( i, j )</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="100_matrix.html"><a href="100_matrix.html#static-member-functions-1"><i class="fa fa-check"></i><b>9.4</b> Static member functions</a><ul>
+<li class="chapter" data-level="9.4" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>9.4</b> Static member functions</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="100_matrix.html"><a href="100_matrix.html#matrixdiag-size-x"><i class="fa fa-check"></i><b>9.4.1</b> Matrix::diag( size, x )</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="100_matrix.html"><a href="100_matrix.html#other-functions-related-to-matrix"><i class="fa fa-check"></i><b>9.5</b> Other functions related to Matrix</a><ul>
@@ -256,32 +259,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="140_dataframe.html"><a href="140_dataframe.html"><i class="fa fa-check"></i><b>12</b> DataFrame</a><ul>
 <li class="chapter" data-level="12.1" data-path="140_dataframe.html"><a href="140_dataframe.html#creating-a-dataframe-object"><i class="fa fa-check"></i><b>12.1</b> Creating a DataFrame object</a></li>
 <li class="chapter" data-level="12.2" data-path="140_dataframe.html"><a href="140_dataframe.html#accessing-dataframe-elements"><i class="fa fa-check"></i><b>12.2</b> Accessing DataFrame elements</a></li>
-<li class="chapter" data-level="12.3" data-path="140_dataframe.html"><a href="140_dataframe.html#member-functions-2"><i class="fa fa-check"></i><b>12.3</b> Member functions</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="140_dataframe.html"><a href="140_dataframe.html#length-size-1"><i class="fa fa-check"></i><b>12.3.1</b> length() size()</a></li>
+<li class="chapter" data-level="12.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>12.3</b> Member functions</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="080_vector.html"><a href="080_vector.html#length-size"><i class="fa fa-check"></i><b>12.3.1</b> length() size()</a></li>
 <li class="chapter" data-level="12.3.2" data-path="140_dataframe.html"><a href="140_dataframe.html#nrows"><i class="fa fa-check"></i><b>12.3.2</b> nrows()</a></li>
-<li class="chapter" data-level="12.3.3" data-path="140_dataframe.html"><a href="140_dataframe.html#names-1"><i class="fa fa-check"></i><b>12.3.3</b> names()</a></li>
+<li class="chapter" data-level="12.3.3" data-path="080_vector.html"><a href="080_vector.html#names"><i class="fa fa-check"></i><b>12.3.3</b> names()</a></li>
 <li class="chapter" data-level="12.3.4" data-path="140_dataframe.html"><a href="140_dataframe.html#offsetname-findnamename"><i class="fa fa-check"></i><b>12.3.4</b> offset(name) findName(name)</a></li>
 <li class="chapter" data-level="12.3.5" data-path="140_dataframe.html"><a href="140_dataframe.html#fillv"><i class="fa fa-check"></i><b>12.3.5</b> fill(v)</a></li>
-<li class="chapter" data-level="12.3.6" data-path="140_dataframe.html"><a href="140_dataframe.html#assign-first_it-last_it-1"><i class="fa fa-check"></i><b>12.3.6</b> assign( first_it, last_it)</a></li>
+<li class="chapter" data-level="12.3.6" data-path="080_vector.html"><a href="080_vector.html#assign-first_it-last_it"><i class="fa fa-check"></i><b>12.3.6</b> assign( first_it, last_it)</a></li>
 <li class="chapter" data-level="12.3.7" data-path="140_dataframe.html"><a href="140_dataframe.html#push_backv"><i class="fa fa-check"></i><b>12.3.7</b> push_back(v)</a></li>
 <li class="chapter" data-level="12.3.8" data-path="140_dataframe.html"><a href="140_dataframe.html#push_back-v-name"><i class="fa fa-check"></i><b>12.3.8</b> push_back( v, name )</a></li>
 <li class="chapter" data-level="12.3.9" data-path="140_dataframe.html"><a href="140_dataframe.html#push_frontx"><i class="fa fa-check"></i><b>12.3.9</b> push_front(x)</a></li>
-<li class="chapter" data-level="12.3.10" data-path="140_dataframe.html"><a href="140_dataframe.html#push_front-x-name-1"><i class="fa fa-check"></i><b>12.3.10</b> push_front( x, name )</a></li>
-<li class="chapter" data-level="12.3.11" data-path="140_dataframe.html"><a href="140_dataframe.html#begin-1"><i class="fa fa-check"></i><b>12.3.11</b> begin()</a></li>
-<li class="chapter" data-level="12.3.12" data-path="140_dataframe.html"><a href="140_dataframe.html#end-1"><i class="fa fa-check"></i><b>12.3.12</b> end()</a></li>
+<li class="chapter" data-level="12.3.10" data-path="080_vector.html"><a href="080_vector.html#push_front-x-name"><i class="fa fa-check"></i><b>12.3.10</b> push_front( x, name )</a></li>
+<li class="chapter" data-level="12.3.11" data-path="080_vector.html"><a href="080_vector.html#begin"><i class="fa fa-check"></i><b>12.3.11</b> begin()</a></li>
+<li class="chapter" data-level="12.3.12" data-path="080_vector.html"><a href="080_vector.html#end"><i class="fa fa-check"></i><b>12.3.12</b> end()</a></li>
 <li class="chapter" data-level="12.3.13" data-path="140_dataframe.html"><a href="140_dataframe.html#insert-it-v"><i class="fa fa-check"></i><b>12.3.13</b> insert( it, v )</a></li>
-<li class="chapter" data-level="12.3.14" data-path="140_dataframe.html"><a href="140_dataframe.html#erasei-1"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
-<li class="chapter" data-level="12.3.15" data-path="140_dataframe.html"><a href="140_dataframe.html#eraseit-1"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
+<li class="chapter" data-level="12.3.14" data-path="080_vector.html"><a href="080_vector.html#erasei"><i class="fa fa-check"></i><b>12.3.14</b> erase(i)</a></li>
+<li class="chapter" data-level="12.3.15" data-path="080_vector.html"><a href="080_vector.html#eraseit"><i class="fa fa-check"></i><b>12.3.15</b> erase(it)</a></li>
 <li class="chapter" data-level="12.3.16" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_i-last_i"><i class="fa fa-check"></i><b>12.3.16</b> erase(first_i, last_i)</a></li>
 <li class="chapter" data-level="12.3.17" data-path="140_dataframe.html"><a href="140_dataframe.html#erasefirst_it-last_it"><i class="fa fa-check"></i><b>12.3.17</b> erase(first_it, last_it)</a></li>
-<li class="chapter" data-level="12.3.18" data-path="140_dataframe.html"><a href="140_dataframe.html#containselementnamedname-1"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
+<li class="chapter" data-level="12.3.18" data-path="080_vector.html"><a href="080_vector.html#containselementnamedname"><i class="fa fa-check"></i><b>12.3.18</b> containsElementNamed(name)</a></li>
 <li class="chapter" data-level="12.3.19" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>12.3.19</b> inherits(str)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="150_list.html"><a href="150_list.html"><i class="fa fa-check"></i><b>13</b> List</a><ul>
 <li class="chapter" data-level="13.1" data-path="150_list.html"><a href="150_list.html#creating-list-object"><i class="fa fa-check"></i><b>13.1</b> Creating List object</a></li>
 <li class="chapter" data-level="13.2" data-path="150_list.html"><a href="150_list.html#accessing-list-elements"><i class="fa fa-check"></i><b>13.2</b> Accessing List elements</a></li>
-<li class="chapter" data-level="13.3" data-path="150_list.html"><a href="150_list.html#member-functions-3"><i class="fa fa-check"></i><b>13.3</b> Member functions</a></li>
+<li class="chapter" data-level="13.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>13.3</b> Member functions</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="160_s3_s4.html"><a href="160_s3_s4.html"><i class="fa fa-check"></i><b>14</b> S3・S4 class</a><ul>
 <li class="chapter" data-level="14.1" data-path="160_s3_s4.html"><a href="160_s3_s4.html#s3-class"><i class="fa fa-check"></i><b>14.1</b> S3 class</a></li>
@@ -293,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15" data-path="170_string.html"><a href="170_string.html"><i class="fa fa-check"></i><b>15</b> String</a><ul>
 <li class="chapter" data-level="15.1" data-path="170_string.html"><a href="170_string.html#creating-string-object"><i class="fa fa-check"></i><b>15.1</b> Creating String object</a></li>
 <li class="chapter" data-level="15.2" data-path="170_string.html"><a href="170_string.html#operators"><i class="fa fa-check"></i><b>15.2</b> Operators</a></li>
-<li class="chapter" data-level="15.3" data-path="170_string.html"><a href="170_string.html#member-functions-4"><i class="fa fa-check"></i><b>15.3</b> Member functions</a><ul>
+<li class="chapter" data-level="15.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>15.3</b> Member functions</a><ul>
 <li class="chapter" data-level="15.3.1" data-path="170_string.html"><a href="170_string.html#replace_first-str-new_str"><i class="fa fa-check"></i><b>15.3.1</b> replace_first( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.2" data-path="170_string.html"><a href="170_string.html#replace_last-str-new_str"><i class="fa fa-check"></i><b>15.3.2</b> replace_last( str, new_str )</a></li>
 <li class="chapter" data-level="15.3.3" data-path="170_string.html"><a href="170_string.html#replace_all-str-new_str"><i class="fa fa-check"></i><b>15.3.3</b> replace_all( str, new_str )</a></li>
@@ -308,8 +311,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="16" data-path="180_date.html"><a href="180_date.html"><i class="fa fa-check"></i><b>16</b> Date</a><ul>
 <li class="chapter" data-level="16.1" data-path="180_date.html"><a href="180_date.html#creating-date-object"><i class="fa fa-check"></i><b>16.1</b> Creating Date object</a></li>
-<li class="chapter" data-level="16.2" data-path="180_date.html"><a href="180_date.html#operators-1"><i class="fa fa-check"></i><b>16.2</b> Operators</a></li>
-<li class="chapter" data-level="16.3" data-path="180_date.html"><a href="180_date.html#member-functions-5"><i class="fa fa-check"></i><b>16.3</b> Member functions</a><ul>
+<li class="chapter" data-level="16.2" data-path="170_string.html"><a href="170_string.html#operators"><i class="fa fa-check"></i><b>16.2</b> Operators</a></li>
+<li class="chapter" data-level="16.3" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>16.3</b> Member functions</a><ul>
 <li class="chapter" data-level="16.3.1" data-path="180_date.html"><a href="180_date.html#getday"><i class="fa fa-check"></i><b>16.3.1</b> getDay()</a></li>
 <li class="chapter" data-level="16.3.2" data-path="180_date.html"><a href="180_date.html#getmonth"><i class="fa fa-check"></i><b>16.3.2</b> getMonth()</a></li>
 <li class="chapter" data-level="16.3.3" data-path="180_date.html"><a href="180_date.html#getyear"><i class="fa fa-check"></i><b>16.3.3</b> getYear()</a></li>
@@ -322,22 +325,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path="190_datetime.html"><a href="190_datetime.html"><i class="fa fa-check"></i><b>17</b> Datetime</a><ul>
 <li class="chapter" data-level="17.1" data-path="190_datetime.html"><a href="190_datetime.html#creating-datetime-object"><i class="fa fa-check"></i><b>17.1</b> Creating Datetime object</a></li>
 <li class="chapter" data-level="17.2" data-path="190_datetime.html"><a href="190_datetime.html#time-zone"><i class="fa fa-check"></i><b>17.2</b> Time zone</a></li>
-<li class="chapter" data-level="17.3" data-path="190_datetime.html"><a href="190_datetime.html#operators-2"><i class="fa fa-check"></i><b>17.3</b> Operators</a></li>
-<li class="chapter" data-level="17.4" data-path="190_datetime.html"><a href="190_datetime.html#member-functions-6"><i class="fa fa-check"></i><b>17.4</b> Member functions</a><ul>
+<li class="chapter" data-level="17.3" data-path="170_string.html"><a href="170_string.html#operators"><i class="fa fa-check"></i><b>17.3</b> Operators</a></li>
+<li class="chapter" data-level="17.4" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>17.4</b> Member functions</a><ul>
 <li class="chapter" data-level="17.4.1" data-path="190_datetime.html"><a href="190_datetime.html#getfractionaltimestamp"><i class="fa fa-check"></i><b>17.4.1</b> getFractionalTimestamp()</a></li>
 <li class="chapter" data-level="17.4.2" data-path="190_datetime.html"><a href="190_datetime.html#getmicroseconds"><i class="fa fa-check"></i><b>17.4.2</b> getMicroSeconds()</a></li>
 <li class="chapter" data-level="17.4.3" data-path="190_datetime.html"><a href="190_datetime.html#getseconds"><i class="fa fa-check"></i><b>17.4.3</b> getSeconds()</a></li>
 <li class="chapter" data-level="17.4.4" data-path="190_datetime.html"><a href="190_datetime.html#getminutes"><i class="fa fa-check"></i><b>17.4.4</b> getMinutes()</a></li>
 <li class="chapter" data-level="17.4.5" data-path="190_datetime.html"><a href="190_datetime.html#gethours"><i class="fa fa-check"></i><b>17.4.5</b> getHours()</a></li>
-<li class="chapter" data-level="17.4.6" data-path="190_datetime.html"><a href="190_datetime.html#getyear-1"><i class="fa fa-check"></i><b>17.4.6</b> getYear()</a></li>
-<li class="chapter" data-level="17.4.7" data-path="190_datetime.html"><a href="190_datetime.html#getyearday-1"><i class="fa fa-check"></i><b>17.4.7</b> getYearday()</a></li>
-<li class="chapter" data-level="17.4.8" data-path="190_datetime.html"><a href="190_datetime.html#is_na-1"><i class="fa fa-check"></i><b>17.4.8</b> is_na()</a></li>
+<li class="chapter" data-level="17.4.6" data-path="180_date.html"><a href="180_date.html#getday"><i class="fa fa-check"></i><b>17.4.6</b> getDay()</a></li>
+<li class="chapter" data-level="17.4.7" data-path="180_date.html"><a href="180_date.html#getmonth"><i class="fa fa-check"></i><b>17.4.7</b> getMonth()</a></li>
+<li class="chapter" data-level="17.4.8" data-path="180_date.html"><a href="180_date.html#getyear"><i class="fa fa-check"></i><b>17.4.8</b> getYear()</a></li>
+<li class="chapter" data-level="17.4.9" data-path="180_date.html"><a href="180_date.html#getweekday"><i class="fa fa-check"></i><b>17.4.9</b> getWeekday()</a></li>
+<li class="chapter" data-level="17.4.10" data-path="180_date.html"><a href="180_date.html#getyearday"><i class="fa fa-check"></i><b>17.4.10</b> getYearday()</a></li>
+<li class="chapter" data-level="17.4.11" data-path="180_date.html"><a href="180_date.html#is_na"><i class="fa fa-check"></i><b>17.4.11</b> is_na()</a></li>
 </ul></li>
-<li class="chapter" data-level="17.5" data-path="190_datetime.html"><a href="190_datetime.html#code-example-1"><i class="fa fa-check"></i><b>17.5</b> Code example</a></li>
+<li class="chapter" data-level="17.5" data-path="170_string.html"><a href="170_string.html#code-example"><i class="fa fa-check"></i><b>17.5</b> Code example</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="200_robject.html"><a href="200_robject.html"><i class="fa fa-check"></i><b>18</b> RObject</a><ul>
-<li class="chapter" data-level="18.1" data-path="200_robject.html"><a href="200_robject.html#member-functions-7"><i class="fa fa-check"></i><b>18.1</b> Member functions</a><ul>
-<li class="chapter" data-level="18.1.1" data-path="200_robject.html"><a href="200_robject.html#inheritsstr-1"><i class="fa fa-check"></i><b>18.1.1</b> inherits(str)</a></li>
+<li class="chapter" data-level="18.1" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>18.1</b> Member functions</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="140_dataframe.html"><a href="140_dataframe.html#inheritsstr"><i class="fa fa-check"></i><b>18.1.1</b> inherits(str)</a></li>
 <li class="chapter" data-level="18.1.2" data-path="200_robject.html"><a href="200_robject.html#slotname"><i class="fa fa-check"></i><b>18.1.2</b> slot(name)</a></li>
 <li class="chapter" data-level="18.1.3" data-path="200_robject.html"><a href="200_robject.html#hasslotname"><i class="fa fa-check"></i><b>18.1.3</b> hasSlot(name)</a></li>
 <li class="chapter" data-level="18.1.4" data-path="200_robject.html"><a href="200_robject.html#attrname"><i class="fa fa-check"></i><b>18.1.4</b> attr(name)</a></li>
@@ -428,14 +434,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="25" data-path="250_factor.html"><a href="250_factor.html"><i class="fa fa-check"></i><b>25</b> factor</a></li>
 <li class="chapter" data-level="26" data-path="260_error.html"><a href="260_error.html"><i class="fa fa-check"></i><b>26</b> Error handling</a></li>
 <li class="chapter" data-level="27" data-path="270_cancellation.html"><a href="270_cancellation.html"><i class="fa fa-check"></i><b>27</b> Cancel handling</a></li>
-<li class="chapter" data-level="28" data-path="280_environment.html"><a href="280_environment.html"><i class="fa fa-check"></i><b>28</b> Environment</a><ul>
-<li class="chapter" data-level="28.1" data-path="280_environment.html"><a href="280_environment.html#creating-environment-object"><i class="fa fa-check"></i><b>28.1</b> Creating Environment object</a></li>
+<li class="chapter" data-level="28" data-path="230_R_function.html"><a href="230_R_function.html#environment"><i class="fa fa-check"></i><b>28</b> Environment</a><ul>
+<li class="chapter" data-level="28.1" data-path="280_environment.html"><a href="280_environment.html"><i class="fa fa-check"></i><b>28.1</b> Creating Environment object</a></li>
 <li class="chapter" data-level="28.2" data-path="280_environment.html"><a href="280_environment.html#accessing-object-in-a-environment"><i class="fa fa-check"></i><b>28.2</b> Accessing object in a environment</a></li>
 <li class="chapter" data-level="28.3" data-path="280_environment.html"><a href="280_environment.html#creating-new-environment"><i class="fa fa-check"></i><b>28.3</b> Creating new environment</a><ul>
 <li class="chapter" data-level="28.3.1" data-path="280_environment.html"><a href="280_environment.html#new_envsize-29"><i class="fa fa-check"></i><b>28.3.1</b> new_env(size = 29)</a></li>
 <li class="chapter" data-level="28.3.2" data-path="280_environment.html"><a href="280_environment.html#new_envparent-size-29"><i class="fa fa-check"></i><b>28.3.2</b> new_env(parent, size = 29)</a></li>
 </ul></li>
-<li class="chapter" data-level="28.4" data-path="280_environment.html"><a href="280_environment.html#member-functions-8"><i class="fa fa-check"></i><b>28.4</b> Member functions</a><ul>
+<li class="chapter" data-level="28.4" data-path="080_vector.html"><a href="080_vector.html#member-functions"><i class="fa fa-check"></i><b>28.4</b> Member functions</a><ul>
 <li class="chapter" data-level="28.4.1" data-path="280_environment.html"><a href="280_environment.html#getname"><i class="fa fa-check"></i><b>28.4.1</b> get(name)</a></li>
 <li class="chapter" data-level="28.4.2" data-path="280_environment.html"><a href="280_environment.html#lsall"><i class="fa fa-check"></i><b>28.4.2</b> ls(all)</a></li>
 <li class="chapter" data-level="28.4.3" data-path="280_environment.html"><a href="280_environment.html#findname"><i class="fa fa-check"></i><b>28.4.3</b> find(name)</a></li>
@@ -452,7 +458,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="28.4.14" data-path="280_environment.html"><a href="280_environment.html#parent"><i class="fa fa-check"></i><b>28.4.14</b> parent()</a></li>
 <li class="chapter" data-level="28.4.15" data-path="280_environment.html"><a href="280_environment.html#new_childhashed"><i class="fa fa-check"></i><b>28.4.15</b> new_child(hashed)</a></li>
 </ul></li>
-<li class="chapter" data-level="28.5" data-path="280_environment.html"><a href="280_environment.html#static-member-functions-2"><i class="fa fa-check"></i><b>28.5</b> Static member functions</a><ul>
+<li class="chapter" data-level="28.5" data-path="080_vector.html"><a href="080_vector.html#static-member-functions"><i class="fa fa-check"></i><b>28.5</b> Static member functions</a><ul>
 <li class="chapter" data-level="28.5.1" data-path="280_environment.html"><a href="280_environment.html#environmentrcpp_namespace"><i class="fa fa-check"></i><b>28.5.1</b> Environment::Rcpp_namespace()</a></li>
 <li class="chapter" data-level="28.5.2" data-path="280_environment.html"><a href="280_environment.html#environmentnamespace_envpackage"><i class="fa fa-check"></i><b>28.5.2</b> Environment::namespace_env(package)</a></li>
 </ul></li>
@@ -493,39 +499,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For example, consider the situation that you want to add an element to a vector, both Rcpp’s <code>Rcpp::Vector</code> and standard C++’s <code>std::vector</code> provides a member function <code>push_back()</code> which adds an element to the end of a vector. However, there is a big difference in efficiency between these. This is because each time <code>Rcpp::Vector</code> executes a member function <code>push_back()</code> the whole value of the vector is copied to another place in memory, whereas <code>std::vector</code> allows you to add an element to the end without copying the whole value in many cases.</p>
 <p>Standard C++ classes and functions are defined in the <code>std::</code> namespace, so they are specified with <code>std::</code> for example, <code>std::vector</code>. You can also omit writing <code>std::</code> by adding <code>using namespace std;</code> in your code.</p>
 <p>Below is an example of using <code>std::vector</code> to get the row and column numbers of non-zero matrix elements.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb128-2" data-line-number="2">DataFrame matix_rows_cols(NumericMatrix m){</a>
-<a class="sourceLine" id="cb128-3" data-line-number="3">    <span class="co">// Returns the column and row numbers of non-zero elements from the matrix.</span></a>
-<a class="sourceLine" id="cb128-4" data-line-number="4">    <span class="co">// For simplicity, we assume that the matrix does not contain NA.</span></a>
-<a class="sourceLine" id="cb128-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb128-6" data-line-number="6">    <span class="co">// Tolal number of rows and cols</span></a>
-<a class="sourceLine" id="cb128-7" data-line-number="7">    <span class="dt">int</span> I = m.rows();</a>
-<a class="sourceLine" id="cb128-8" data-line-number="8">    <span class="dt">int</span> J = m.cols();</a>
-<a class="sourceLine" id="cb128-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb128-10" data-line-number="10">    <span class="co">// variables to store row and column numbers</span></a>
-<a class="sourceLine" id="cb128-11" data-line-number="11">    <span class="co">// store the result in a std::vector</span></a>
-<a class="sourceLine" id="cb128-12" data-line-number="12">    <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; rows, cols;</a>
-<a class="sourceLine" id="cb128-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb128-14" data-line-number="14">    <span class="co">// The number of elements can be up to the number of elements in matrix m,</span></a>
-<a class="sourceLine" id="cb128-15" data-line-number="15">    <span class="co">// so we allocate memory for that in advance.</span></a>
-<a class="sourceLine" id="cb128-16" data-line-number="16">    rows.reserve(m.length());</a>
-<a class="sourceLine" id="cb128-17" data-line-number="17">    cols.reserve(m.length());</a>
-<a class="sourceLine" id="cb128-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb128-19" data-line-number="19">    <span class="co">// Accesses all elements of matrix M</span></a>
-<a class="sourceLine" id="cb128-20" data-line-number="20">    <span class="co">// and stores the row and column numbers of elements whose values are not zero.</span></a>
-<a class="sourceLine" id="cb128-21" data-line-number="21">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;I; ++i){</a>
-<a class="sourceLine" id="cb128-22" data-line-number="22">        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;J; ++j){</a>
-<a class="sourceLine" id="cb128-23" data-line-number="23">            <span class="cf">if</span>(m(i,j)!=<span class="fl">0.0</span>){</a>
-<a class="sourceLine" id="cb128-24" data-line-number="24">                rows.push_back(i<span class="dv">+1</span>);</a>
-<a class="sourceLine" id="cb128-25" data-line-number="25">                cols.push_back(j<span class="dv">+1</span>);</a>
-<a class="sourceLine" id="cb128-26" data-line-number="26">            }</a>
-<a class="sourceLine" id="cb128-27" data-line-number="27">        }</a>
-<a class="sourceLine" id="cb128-28" data-line-number="28">    }</a>
-<a class="sourceLine" id="cb128-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb128-30" data-line-number="30">    <span class="co">// Returns the result as a data.frame.</span></a>
-<a class="sourceLine" id="cb128-31" data-line-number="31">    <span class="cf">return</span> DataFrame::create(Named(<span class="st">&quot;rows&quot;</span>, rows),</a>
-<a class="sourceLine" id="cb128-32" data-line-number="32">                             Named(<span class="st">&quot;cols&quot;</span>, cols));</a>
-<a class="sourceLine" id="cb128-33" data-line-number="33">}</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb128-1"><a href="300_STL.html#cb128-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb128-2"><a href="300_STL.html#cb128-2"></a>DataFrame matix_rows_cols(NumericMatrix m){</span>
+<span id="cb128-3"><a href="300_STL.html#cb128-3"></a>    <span class="co">// Returns the column and row numbers of non-zero elements from the matrix.</span></span>
+<span id="cb128-4"><a href="300_STL.html#cb128-4"></a>    <span class="co">// For simplicity, we assume that the matrix does not contain NA.</span></span>
+<span id="cb128-5"><a href="300_STL.html#cb128-5"></a></span>
+<span id="cb128-6"><a href="300_STL.html#cb128-6"></a>    <span class="co">// Tolal number of rows and cols</span></span>
+<span id="cb128-7"><a href="300_STL.html#cb128-7"></a>    <span class="dt">int</span> I = m.rows();</span>
+<span id="cb128-8"><a href="300_STL.html#cb128-8"></a>    <span class="dt">int</span> J = m.cols();</span>
+<span id="cb128-9"><a href="300_STL.html#cb128-9"></a></span>
+<span id="cb128-10"><a href="300_STL.html#cb128-10"></a>    <span class="co">// variables to store row and column numbers</span></span>
+<span id="cb128-11"><a href="300_STL.html#cb128-11"></a>    <span class="co">// store the result in a std::vector</span></span>
+<span id="cb128-12"><a href="300_STL.html#cb128-12"></a>    <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; rows, cols;</span>
+<span id="cb128-13"><a href="300_STL.html#cb128-13"></a></span>
+<span id="cb128-14"><a href="300_STL.html#cb128-14"></a>    <span class="co">// The number of elements can be up to the number of elements in matrix m,</span></span>
+<span id="cb128-15"><a href="300_STL.html#cb128-15"></a>    <span class="co">// so we allocate memory for that in advance.</span></span>
+<span id="cb128-16"><a href="300_STL.html#cb128-16"></a>    rows.reserve(m.length());</span>
+<span id="cb128-17"><a href="300_STL.html#cb128-17"></a>    cols.reserve(m.length());</span>
+<span id="cb128-18"><a href="300_STL.html#cb128-18"></a></span>
+<span id="cb128-19"><a href="300_STL.html#cb128-19"></a>    <span class="co">// Accesses all elements of matrix M</span></span>
+<span id="cb128-20"><a href="300_STL.html#cb128-20"></a>    <span class="co">// and stores the row and column numbers of elements whose values are not zero.</span></span>
+<span id="cb128-21"><a href="300_STL.html#cb128-21"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>; i&lt;I; ++i){</span>
+<span id="cb128-22"><a href="300_STL.html#cb128-22"></a>        <span class="cf">for</span>(<span class="dt">int</span> j=<span class="dv">0</span>; j&lt;J; ++j){</span>
+<span id="cb128-23"><a href="300_STL.html#cb128-23"></a>            <span class="cf">if</span>(m(i,j)!=<span class="fl">0.0</span>){</span>
+<span id="cb128-24"><a href="300_STL.html#cb128-24"></a>                rows.push_back(i+<span class="dv">1</span>);</span>
+<span id="cb128-25"><a href="300_STL.html#cb128-25"></a>                cols.push_back(j+<span class="dv">1</span>);</span>
+<span id="cb128-26"><a href="300_STL.html#cb128-26"></a>            }</span>
+<span id="cb128-27"><a href="300_STL.html#cb128-27"></a>        }</span>
+<span id="cb128-28"><a href="300_STL.html#cb128-28"></a>    }</span>
+<span id="cb128-29"><a href="300_STL.html#cb128-29"></a></span>
+<span id="cb128-30"><a href="300_STL.html#cb128-30"></a>    <span class="co">// Returns the result as a data.frame.</span></span>
+<span id="cb128-31"><a href="300_STL.html#cb128-31"></a>    <span class="cf">return</span> DataFrame::create(Named(<span class="st">&quot;rows&quot;</span>, rows),</span>
+<span id="cb128-32"><a href="300_STL.html#cb128-32"></a>                             Named(<span class="st">&quot;cols&quot;</span>, cols));</span>
+<span id="cb128-33"><a href="300_STL.html#cb128-33"></a>}</span></code></pre></div>
 <p>Below is an overview of some of the major standard C++ data structures.</p>
 <table>
 <colgroup>
@@ -607,54 +613,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>The following example shows how to convert <code>Rcpp::Vector</code> to a standard C++ sequence container (a container which can be treated as a series of values such as <code>std::vector</code>, <code>std::list</code>, <code>std::deque</code>, etc.).</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb129-1" data-line-number="1">NumericVector   rcpp_vector = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</a>
-<a class="sourceLine" id="cb129-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="co">// Conversion from Rcpp::Vector to std::vector  </span></a>
-<a class="sourceLine" id="cb129-4" data-line-number="4"><span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt;  cpp_vector = as&lt; <span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt; &gt;(rcpp_vector);</a>
-<a class="sourceLine" id="cb129-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb129-6" data-line-number="6"><span class="co">// Conversion from std::vector to Rcpp::Vector  </span></a>
-<a class="sourceLine" id="cb129-7" data-line-number="7">NumericVector v1 = wrap(cpp_vector);</a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb129-1"><a href="300_STL.html#cb129-1"></a>NumericVector   rcpp_vector = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</span>
+<span id="cb129-2"><a href="300_STL.html#cb129-2"></a></span>
+<span id="cb129-3"><a href="300_STL.html#cb129-3"></a><span class="co">// Conversion from Rcpp::Vector to std::vector  </span></span>
+<span id="cb129-4"><a href="300_STL.html#cb129-4"></a><span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt;  cpp_vector = as&lt; <span class="bu">std::</span>vector&lt;<span class="dt">double</span>&gt; &gt;(rcpp_vector);</span>
+<span id="cb129-5"><a href="300_STL.html#cb129-5"></a></span>
+<span id="cb129-6"><a href="300_STL.html#cb129-6"></a><span class="co">// Conversion from std::vector to Rcpp::Vector  </span></span>
+<span id="cb129-7"><a href="300_STL.html#cb129-7"></a>NumericVector v1 = wrap(cpp_vector);</span></code></pre></div>
 <p>The following code example shows how to convert a 2-dimensional container, which is nested C++ sequence containers, into a <code>DataFrame</code> or <code>List</code>.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb130-1" data-line-number="1"><span class="kw">using</span> <span class="kw">namespace</span> std;</a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="co">// A two-dimensional vector with all element vectors of equal length</span></a>
-<a class="sourceLine" id="cb130-4" data-line-number="4"><span class="co">// can be converted to a DataFrame</span></a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6">vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_01 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>}};</a>
-<a class="sourceLine" id="cb130-7" data-line-number="7">DataFrame df = wrap(cpp_vector_2d_01);</a>
-<a class="sourceLine" id="cb130-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb130-9" data-line-number="9"><span class="co">// A two-dimensional vector with different length of element vectors</span></a>
-<a class="sourceLine" id="cb130-10" data-line-number="10"><span class="co">// can be converted to a list</span></a>
-<a class="sourceLine" id="cb130-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb130-12" data-line-number="12">vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_02 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>}};</a>
-<a class="sourceLine" id="cb130-13" data-line-number="13">List li = wrap(cpp_vector_2d_02);</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb130-1"><a href="300_STL.html#cb130-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
+<span id="cb130-2"><a href="300_STL.html#cb130-2"></a></span>
+<span id="cb130-3"><a href="300_STL.html#cb130-3"></a><span class="co">// A two-dimensional vector with all element vectors of equal length</span></span>
+<span id="cb130-4"><a href="300_STL.html#cb130-4"></a><span class="co">// can be converted to a DataFrame</span></span>
+<span id="cb130-5"><a href="300_STL.html#cb130-5"></a></span>
+<span id="cb130-6"><a href="300_STL.html#cb130-6"></a>vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_01 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>}};</span>
+<span id="cb130-7"><a href="300_STL.html#cb130-7"></a>DataFrame df = wrap(cpp_vector_2d_01);</span>
+<span id="cb130-8"><a href="300_STL.html#cb130-8"></a></span>
+<span id="cb130-9"><a href="300_STL.html#cb130-9"></a><span class="co">// A two-dimensional vector with different length of element vectors</span></span>
+<span id="cb130-10"><a href="300_STL.html#cb130-10"></a><span class="co">// can be converted to a list</span></span>
+<span id="cb130-11"><a href="300_STL.html#cb130-11"></a></span>
+<span id="cb130-12"><a href="300_STL.html#cb130-12"></a>vector&lt;vector&lt;<span class="dt">double</span>&gt;&gt; cpp_vector_2d_02 = {{<span class="dv">1</span>,<span class="dv">2</span>},{<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>}};</span>
+<span id="cb130-13"><a href="300_STL.html#cb130-13"></a>List li = wrap(cpp_vector_2d_02);</span></code></pre></div>
 <p>The following code example shows that standard C++ <code>std::map&lt;key, value&gt;</code> and <code>std::unordered_map&lt;key, value&gt;</code> are converted to named <code>Rcpp::Vector</code> with <code>key</code> as the name of the element and <code>value</code> as the type of the element.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="pp">#include</span><span class="im">&lt;map&gt;</span></a>
-<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="pp">#include</span><span class="im">&lt;unordered_map&gt;</span></a>
-<a class="sourceLine" id="cb131-3" data-line-number="3"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">List std_map(){</a>
-<a class="sourceLine" id="cb131-5" data-line-number="5">  <span class="bu">std::</span>map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; map_str_dbl;</a>
-<a class="sourceLine" id="cb131-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb131-7" data-line-number="7">  map_str_dbl[<span class="st">&quot;E&quot;</span>] = <span class="dv">5</span>;    </a>
-<a class="sourceLine" id="cb131-8" data-line-number="8">  map_str_dbl[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb131-9" data-line-number="9">  map_str_dbl[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
-<a class="sourceLine" id="cb131-10" data-line-number="10">  map_str_dbl[<span class="st">&quot;D&quot;</span>] = <span class="dv">4</span>;</a>
-<a class="sourceLine" id="cb131-11" data-line-number="11">  map_str_dbl[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb131-12" data-line-number="12">  </a>
-<a class="sourceLine" id="cb131-13" data-line-number="13">  <span class="bu">std::</span>unordered_map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; umap_str_dbl;</a>
-<a class="sourceLine" id="cb131-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb131-15" data-line-number="15">  umap_str_dbl[<span class="st">&quot;E&quot;</span>] = <span class="dv">5</span>;    </a>
-<a class="sourceLine" id="cb131-16" data-line-number="16">  umap_str_dbl[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb131-17" data-line-number="17">  umap_str_dbl[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </a>
-<a class="sourceLine" id="cb131-18" data-line-number="18">  umap_str_dbl[<span class="st">&quot;D&quot;</span>] = <span class="dv">4</span>;</a>
-<a class="sourceLine" id="cb131-19" data-line-number="19">  umap_str_dbl[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb131-20" data-line-number="20">  </a>
-<a class="sourceLine" id="cb131-21" data-line-number="21">  List li = List::create(Named(<span class="st">&quot;std::map&quot;</span>, map_str_dbl),</a>
-<a class="sourceLine" id="cb131-22" data-line-number="22">                         Named(<span class="st">&quot;std::unordered_map&quot;</span>, umap_str_dbl)</a>
-<a class="sourceLine" id="cb131-23" data-line-number="23">                        );</a>
-<a class="sourceLine" id="cb131-24" data-line-number="24">  </a>
-<a class="sourceLine" id="cb131-25" data-line-number="25">  <span class="cf">return</span>(li);</a>
-<a class="sourceLine" id="cb131-26" data-line-number="26">}</a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb131-1"><a href="300_STL.html#cb131-1"></a><span class="pp">#include</span><span class="im">&lt;map&gt;</span></span>
+<span id="cb131-2"><a href="300_STL.html#cb131-2"></a><span class="pp">#include</span><span class="im">&lt;unordered_map&gt;</span></span>
+<span id="cb131-3"><a href="300_STL.html#cb131-3"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb131-4"><a href="300_STL.html#cb131-4"></a>List std_map(){</span>
+<span id="cb131-5"><a href="300_STL.html#cb131-5"></a>  <span class="bu">std::</span>map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; map_str_dbl;</span>
+<span id="cb131-6"><a href="300_STL.html#cb131-6"></a>  </span>
+<span id="cb131-7"><a href="300_STL.html#cb131-7"></a>  map_str_dbl[<span class="st">&quot;E&quot;</span>] = <span class="dv">5</span>;    </span>
+<span id="cb131-8"><a href="300_STL.html#cb131-8"></a>  map_str_dbl[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</span>
+<span id="cb131-9"><a href="300_STL.html#cb131-9"></a>  map_str_dbl[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </span>
+<span id="cb131-10"><a href="300_STL.html#cb131-10"></a>  map_str_dbl[<span class="st">&quot;D&quot;</span>] = <span class="dv">4</span>;</span>
+<span id="cb131-11"><a href="300_STL.html#cb131-11"></a>  map_str_dbl[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</span>
+<span id="cb131-12"><a href="300_STL.html#cb131-12"></a>  </span>
+<span id="cb131-13"><a href="300_STL.html#cb131-13"></a>  <span class="bu">std::</span>unordered_map&lt;<span class="bu">std::</span>string, <span class="dt">double</span>&gt; umap_str_dbl;</span>
+<span id="cb131-14"><a href="300_STL.html#cb131-14"></a></span>
+<span id="cb131-15"><a href="300_STL.html#cb131-15"></a>  umap_str_dbl[<span class="st">&quot;E&quot;</span>] = <span class="dv">5</span>;    </span>
+<span id="cb131-16"><a href="300_STL.html#cb131-16"></a>  umap_str_dbl[<span class="st">&quot;A&quot;</span>] = <span class="dv">1</span>;</span>
+<span id="cb131-17"><a href="300_STL.html#cb131-17"></a>  umap_str_dbl[<span class="st">&quot;C&quot;</span>] = <span class="dv">3</span>;    </span>
+<span id="cb131-18"><a href="300_STL.html#cb131-18"></a>  umap_str_dbl[<span class="st">&quot;D&quot;</span>] = <span class="dv">4</span>;</span>
+<span id="cb131-19"><a href="300_STL.html#cb131-19"></a>  umap_str_dbl[<span class="st">&quot;B&quot;</span>] = <span class="dv">2</span>;</span>
+<span id="cb131-20"><a href="300_STL.html#cb131-20"></a>  </span>
+<span id="cb131-21"><a href="300_STL.html#cb131-21"></a>  List li = List::create(Named(<span class="st">&quot;std::map&quot;</span>, map_str_dbl),</span>
+<span id="cb131-22"><a href="300_STL.html#cb131-22"></a>                         Named(<span class="st">&quot;std::unordered_map&quot;</span>, umap_str_dbl)</span>
+<span id="cb131-23"><a href="300_STL.html#cb131-23"></a>                        );</span>
+<span id="cb131-24"><a href="300_STL.html#cb131-24"></a>  </span>
+<span id="cb131-25"><a href="300_STL.html#cb131-25"></a>  <span class="cf">return</span>(li);</span>
+<span id="cb131-26"><a href="300_STL.html#cb131-26"></a>}</span></code></pre></div>
 <p>execution result</p>
 <p>You can see that <code>std::map</code> is sorted by key value, whereas <code>std::unordered_map</code> is not guaranteed to be ordered.</p>
 <pre><code>&gt; std_map()
@@ -669,14 +675,14 @@ D B C A E
 <div id="use-standard-c-data-structures-as-arguments-and-return-values-of-rcpp-functions" class="section level2">
 <h2><span class="header-section-number">30.3</span> Use standard C++ data structures as arguments and return values of Rcpp functions</h2>
 <p>Standard C++ data structures that can be converted by the <code>as()</code> and <code>wrap()</code> functions can also be used as arguments or return values of Rcpp functions. The <code>as()</code> and <code>wrap()</code> is callded implicitly when you use C++ data structures as Rcpp function’s arguments or return values. Thus, you need not to write <code>as()</code> and <code>wrap()</code> explicitly in your Rcpp functions.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="co">// [[Rcpp::export]]</span></a>
-<a class="sourceLine" id="cb133-3" data-line-number="3">vector&lt;<span class="dt">double</span>&gt; times_two_std_vector(vector&lt;<span class="dt">double</span>&gt; v){ <span class="co">// as() is called implicitly</span></a>
-<a class="sourceLine" id="cb133-4" data-line-number="4">    <span class="cf">for</span>(<span class="dt">double</span> &amp;x : v){</a>
-<a class="sourceLine" id="cb133-5" data-line-number="5">        x *= <span class="dv">2</span>;</a>
-<a class="sourceLine" id="cb133-6" data-line-number="6">    }</a>
-<a class="sourceLine" id="cb133-7" data-line-number="7">    <span class="cf">return</span> v; <span class="co">// wrap() is called implicitly</span></a>
-<a class="sourceLine" id="cb133-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb133-1"><a href="300_STL.html#cb133-1"></a><span class="co">// [[Rcpp::plugins(&quot;cpp11&quot;)]]</span></span>
+<span id="cb133-2"><a href="300_STL.html#cb133-2"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb133-3"><a href="300_STL.html#cb133-3"></a>vector&lt;<span class="dt">double</span>&gt; times_two_std_vector(vector&lt;<span class="dt">double</span>&gt; v){ <span class="co">// as() is called implicitly</span></span>
+<span id="cb133-4"><a href="300_STL.html#cb133-4"></a>    <span class="cf">for</span>(<span class="dt">double</span> &amp;x : v){</span>
+<span id="cb133-5"><a href="300_STL.html#cb133-5"></a>        x *= <span class="dv">2</span>;</span>
+<span id="cb133-6"><a href="300_STL.html#cb133-6"></a>    }</span>
+<span id="cb133-7"><a href="300_STL.html#cb133-7"></a>    <span class="cf">return</span> v; <span class="co">// wrap() is called implicitly</span></span>
+<span id="cb133-8"><a href="300_STL.html#cb133-8"></a>}</span></code></pre></div>
 </div>
 <div id="standard-c-algorithms" class="section level2">
 <h2><span class="header-section-number">30.4</span> Standard C++ Algorithms</h2>
