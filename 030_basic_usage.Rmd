@@ -50,7 +50,7 @@ RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){
 
 * `using namespace Rcpp;` : This sentence is optional. But if you did not write this sentence, you have to add the prefix `Rcpp::` to specify classes and functions defined by Rcpp. (For example, `Rcpp::NumericVector`)
 
-* `RETURN_TYPE FUNCTION_NAME(ARGMENT_TYPE ARGMENT){}`：You need to specify data types of functions and arguments.
+* `RETURN_TYPE FUNCTION_NAME(ARGUMENT_TYPE ARGUMENT){}`：You need to specify data types of functions and arguments.
 
 * `return RETURN_VALUE;`：`return` statement is mandatory if your function would return a value. However, if your function do not return a value (i.e. `RETURN_TYPE` is `void`), the return statement can be omitted.
 
