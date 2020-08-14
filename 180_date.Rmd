@@ -13,7 +13,7 @@ Date( 1, 2, 2000); // 2000-01-02 Date(mon, day, year)
 Date( 2000, 1, 2); // 2000-01-02 Date(year, mon, day)
 ```
 
-## Operators
+## Operators {#operators-date}
 
 `Date` has operators `+`, `-`, `<`, `>`, `>=`, `<=`, `==`, `!=`. By using these operators, you can perform addition of days (`+`), difference calculation of date (`-`), and comparison of dates (`<`, `<=`, `>`, `>=`, `==`, `!=`) .
 
@@ -56,7 +56,7 @@ Date subtract_day() {
 ```
 
 
-## Member functions
+## Member functions {#member-functions-date}
 
 
 ### format()
@@ -87,7 +87,7 @@ Returns the number of the date through the year with January 1st as 1 and Decemb
 
 Returns `true` if this object is NA.
 
-## Execution result
+## Execution result {#execution-result-date}
 
 ```cpp
 Date d("2016-1-1");

@@ -17,7 +17,7 @@ String s(str);
 String s(char_vec[0])
 ```
 
-## Operators
+## Operators {#operators-string}
 
 The `+=` operator is defined in `String` type. This allows you to combine another string object at the end of the string. (Note that the `+` operator is not defined)
 
@@ -32,7 +32,7 @@ Rcout << s << "\n"; // "AB"
 ```
 
 
-## Member functions
+## Member functions {#member-functions-string}
 
 Note: The member functions `replace_first()`, `replace_last()`, `replace_all()` do not just return the replaced character string, but instead rewrite the value of this object.
 
@@ -74,7 +74,7 @@ Set the character encoding specified by [`cetype_t`](https://github.com/wch/r-so
 
 
 
-### Code example
+### Code example {#code-example-string}
 
 ```
 // [[Rcpp::export]]

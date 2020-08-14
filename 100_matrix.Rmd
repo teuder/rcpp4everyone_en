@@ -106,7 +106,7 @@ m( _ , 1) = 2 * m( _ , 1 );
 
 
 
-## Member functions
+## Member functions {#member-functions-matrix}
 
 Since `Matrix` is actually `Vector`, `Matrix` basically has the same member functions as `Vector`. Thus, member functions unique to `Matrix` are only presented below.
 
@@ -136,7 +136,7 @@ Returns the numerical index in the original vector of the matrix corresponding t
 
 
 
-## Static member functions
+## Static member functions {#static-member-functions-matrix}
 
 `Matrix` basically has the same static member function as `Vector`. The static member functions unique to `Matrix` are shown below.
 
