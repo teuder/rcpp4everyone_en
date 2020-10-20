@@ -64,7 +64,7 @@ v2 = v2*2;                       // Changing v2 does not change the value of df 
 
 
 
-## Member functions
+## Member functions {#member-functions-data-frame}
 
 In Rcpp, `DataFrame` is implemented as certain kinds of vectors. In other words, `Vector` is a vector whose elements are scalar values, and `DataFrame` is a vector whose elements are `Vector`s. Therefore, `DataFrame` has many member functions common to `Vector`.
 

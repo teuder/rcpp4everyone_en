@@ -65,7 +65,7 @@ void rcpp_vector_access(){
 }
 ```
 
-## Member functions
+## Member functions {#member-functions-vector}
 
 Member functions (also called Methods) are functions that are attached to an individual object. You can call member functions `f()` of object `v` in the form of `v.f()`.
 
@@ -141,8 +141,6 @@ Returns a const iterator pointing to the first element of the vector. See [the C
 Returns a const iterator pointing to the end of the vector (**one past the last element of this vector**). See [the Chapter 28 Iterator](280_iterator.html).
 
 
-
-
 ### `insert( i, x )`
 
 Insert scalar value `x` to the position pointed by numerical index `i`. And returns the iterator pointing to the inserted element.
@@ -173,7 +171,7 @@ Erase elements from the position pointed by the iterator `first_it` to `last_it 
 Returns `true` if this vector contains an element with the name specified by character string `name`.
 
 
-## Static member functions
+## Static member functions {#static-member-functions-vector}
 
 Static member function is a function that is attached to the class rather than a from which an object is being molded. 
 

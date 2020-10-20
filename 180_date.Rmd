@@ -1,21 +1,23 @@
-# Date
+# Date and DateVector
 
-`Date` is a scalar type corresponding to an element of `DateVector`.
+`Date` is a scalar type corresponding to an element of `DateVector` (but see the [`DateVector` subsetting](#datevector-subsetting) section below for a potential pitfall).
 
-## Creating Date object
+## Creating Date objects
 
 ```cpp
 Date d;       //"1970-01-01"
-Date d(1);    //"1970-01-01" + 1day
-Date d(1.1);  //"1970-01-01" + ceil(1.1)day
+Date d(1);    //"1970-01-01" + 1 day
+Date d(1.1);  //"1970-01-01" + ceil(1.1) day
 Date( "2000-01-01", "%Y-%m-%d"); //default format is "%Y-%m-%d"
 Date( 1, 2, 2000); // 2000-01-02 Date(mon, day, year)
 Date( 2000, 1, 2); // 2000-01-02 Date(year, mon, day)
 ```
-## Operators
 
-`Date` has operators `+, -, <, >, >=, <=, ==, !=`. By using these operators, you can perform addition of days (`+`), difference calculation of date (`-`), comparison of dates (`<, <=, >, >=, ==, !=`) .
-```
+## Operators {#operators-date}
+
+`Date` has operators `+`, `-`, `<`, `>`, `>=`, `<=`, `==`, `!=`. By using these operators, you can perform addition of days (`+`), difference calculation of date (`-`), and comparison of dates (`<`, `<=`, `>`, `>=`, `==`, `!=`) .
+
+```cpp
 // [[Rcpp::export]]
 DateVector rcpp_date1(){
     // Creating Date objects
@@ -36,10 +38,30 @@ DateVector rcpp_date1(){
 }
 ```
 
+**Note:** As mentioned above, the `-` operator is used for calculating the difference between dates, not subtraction. If you want to subtract a number of days from a `Date` you can add a negative number.
+
+```cpp
+// [[Rcpp::export]]
+Date subtract_day() {
+    Date d1("2000-01-01");
+    
+    // This causes a compiler error
+    // Date d2 = d1 - 1;
+    
+    // This subtracts a day
+    Date d2 = d1 + -1;
+    
+    return d2;  // 1999-12-31
+}
+```
 
 
-## Member functions
+## Member functions {#member-functions-date}
 
+
+### format()
+
+Returns the date as a `std::string` using the same specification as base R (see the documentation for [strptime](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/strptime) or run `help(format.Date)`). The default format is "YYYY-MM-DD".
 
 ### getDay()
 
@@ -65,13 +87,49 @@ Returns the number of the date through the year with January 1st as 1 and Decemb
 
 Returns `true` if this object is NA.
 
-## Execution result
+## Execution result {#execution-result-date}
+
+```cpp
+Date d("2016-1-1");
+Rcout << d.format("%d/%m/%Y") << endl;  // "1/1/2016"
+Rcout << d.getDay() << endl;            // 1
+Rcout << d.getMonth() << endl;          // 1
+Rcout << d.getYear() << endl;           // 2016
+Rcout << d.getWeekday() << endl;        // 6
+Rcout << d.getYearday() << endl;        // 1
+```
+
+## DateVector subsetting
+
+Internally, both `DateVector` and `DateTimeVector` are stored as numeric types. This can cause confusion when subsetting a `DateVector` with `[]`, as the item extracted is a `double`, not a `Date` as you might assume. For example, the code below looks logical but fails to compile because `dates[i]` (a `double`) has no `getYear()` method.
+
+```cpp
+// [[Rcpp::export]]
+void print_years(DateVector dates) {
+    for (auto i = 0; i < dates.length(); i++) {
+        Rcout << dates[i].getYear() << std::endl;
+    }
+}
+```
+
+Here's the compiler error (edited for brevity):
 
 ```
-Date d("2016-1-1");
-Rcout << d.getDay() << endl;     //1
-Rcout << d.getMonth() << endl;   //1
-Rcout << d.getYear() << endl;    //2016
-Rcout << d.getWeekday() << endl; //6
-Rcout << d.getYearday() << endl; //1
+E> error: request for member 'getYear' in '[...]' which is of non-class type 'const type {aka const double}'
+E>      Rcout << dates[i].getYear() << std::endl;
+E>                        ^
 ```
+
+To make this work you can explicitly create a `Date` object from `dates[i]`:
+
+```cpp
+// [[Rcpp::export]]
+void print_years(DateVector dates) {
+    for (auto i = 0; i < dates.length(); i++) {
+        Date d = dates[i];    // Create a `Date`
+        Rcout << d.getYear() << std::endl;
+    }
+}
+```
+
+As mentioned in [this StackOverflow question](https://stackoverflow.com/questions/55981439/rcpp-error-comparing-a-datevector-element-with-a-date), if you actually want a `std::vector<Date>` you can use the `DateVector.getDates()` method.

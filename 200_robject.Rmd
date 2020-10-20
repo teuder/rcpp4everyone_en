@@ -59,7 +59,7 @@ However, matrices and factor vectors can not be determined by only using the fun
 
 The code example below shows how to determine the type using `RObject`.
 
-```
+```cpp
 // [[Rcpp::export]]
 void rcpp_type(RObject x){
     if(is<NumericVector>(x)){
@@ -90,8 +90,98 @@ void rcpp_type(RObject x){
 Use `as<T>()` to convert `RObject` to another Rcpp type after determining the type.
 
 
-```
+```cpp
 // Converting `RObject` to `NumericVector`
 RObject x;
 NumericVector v = as<NumericVector>(x);
+```
+
+## Using `RObject` to write functions that receive various datatypes (function templates)
+
+C++ allows us to avoid code duplication by writing [templated functions](https://www.programiz.com/cpp-programming/templates) that are not limited to specific datatypes. 
+
+**Note:** This section does not cover C++ templates in any detail - it only shows how to implement them in Rcpp. It also assumes your compiler can use C++11 syntax. If not, please refer to [this Rcpp Gallery example](https://gallery.rcpp.org/articles/rcpp-return-macros/) by Nathan Russell which covers the process in much more detail (and which provided the source material for this section). 
+
+Say we have a very simple C++ templated function that prints "Hello" and then returns its input.
+
+```cpp
+template<typename T>
+T say_hello(T x) {
+    std::cout << "Hello!" << std::endl;
+    return x;
+}
+```
+
+The `T` in this function is a placeholder for any other type. You can use any identifier you like, but `T` is conventional. At compile time the compiler analyses our code and creates new functions with `T` replaced with the relevant datatypes, so we don't have to write versions of `add_one()` for `int`, `float`, `double` etc.
+
+In Rcpp the process is almost identical, but we have to jump through a couple of extra hoops.
+
+A first attempt at an Rcpp version of the function might look very similar:
+
+```cpp
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+template<typename T>
+T say_hello(T x) {
+    Rcout << "Hello!" << std::endl;
+    return x;
+}
+```
+
+However, this will not compile. To quote [Nathan Russell's article](https://gallery.rcpp.org/articles/rcpp-return-macros/):
+
+> Sadly this does not work: magical as Rcpp attributes may be, there are limits to what they can do, and at least for the time being, translating C++ template functions into something compatible with R’s C API is out of the question.
+
+Fortunately Rcpp provides two macros, `RCPP_RETURN_VECTOR` and `RCPP_RETURN_MATRIX` that make it very simple to implement a templated function.
+
+```cpp
+template<int RTYPE>
+Vector<RTYPE> printer(Vector<RTYPE> x) {
+    Rcout << "Hello!" << std::endl;
+    return x;
+}
+
+// [[Rcpp::export]]
+RObject say_hello(RObject x) {
+    RCPP_RETURN_VECTOR(printer, x);
+}
+```
+
+The exported `say_hello()` function now works as expected in R.
+
+```R
+say_hello("a")
+## Hello!
+##  [1] "a"
+
+say_hello(1:10)
+## Hello!
+##  [1]  1  2  3  4  5  6  7  8  9 10
+
+say_hello(FALSE)
+## Hello!
+##  [1] FALSE
+```
+
+Note that the template specification looks slightly different: `template<int RTYPE>` rather than `template<typename T>` in the earlier example. This is called a [non-type parameter](https://www.learncpp.com/cpp-tutorial/134-template-non-type-parameters/), and is used because [the type of an RObject is stored as an integer](https://cran.r-project.org/doc/manuals/r-release/R-ints.html#SEXPTYPEs). Again, Nathan's article provides more details on this. As with the use of `T` in the first example, the use of `RTYPE` as an alias for the type is entirely arbitrary.
+
+Also note that `printer()` and `say_hello()` have different names because otherwise the call to `RCPP_RETURN_VECTOR` is ambiguous and the code will not compile. If you would prefer both functions to have the same name, you can use [namespaces](https://en.cppreference.com/w/cpp/language/namespace) as shown below.  
+
+```cpp
+namespace internal {
+
+    template<int RTYPE>
+    Vector<RTYPE> say_hello(Vector<RTYPE> x) {
+        Rcout << "Hello!" << std::endl;
+        return x;
+    }
+    
+}  // end of "internal" namespace
+
+// [[Rcpp::export]]
+RObject say_hello(RObject x) {
+    RCPP_RETURN_VECTOR(internal::say_hello, x);
+}
 ```

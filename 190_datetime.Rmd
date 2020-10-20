@@ -27,7 +27,7 @@ Datetime dt("2000年1月1日 0時0分0秒", "%Y年%m月%d日 %H時%M分%OS秒");
 When creating a Datetime object in the form of `Datetime dt(str, format)`, `str` is interpreted as the time in the local timezone. For example, if you run `Datetime dt(2000-01-01 00:00:00);` in Japan Standard Time (JST), the value of `1999-12-31 15:00:00 UTC` is set internally.
 
 
-## Operators
+## Operators {#operators-datetime}
 
 The `+, -, <, >, >=, <=, ==, !=` operators are defined in `Datetime`.
 
@@ -48,7 +48,7 @@ bool b = dt2 > dt1; // true
 ```
 
 
-## Member functions
+## Member functions {#member-functions-datetime}
 
 Note: The value output using these member functions is the time interpreted at the time of Coordinated Universal Time. Therefore, it looks different from the date and time of the user's time zone. (For example, refer to the execution result of the code at the end of this chapter)
 
@@ -100,7 +100,7 @@ Returns the number of the date through the year with January 1st as 1 and Decemb
 Returns `true` if this object is `NA`.
 
 
-## Code example
+## Code example {#code-example-datetime}
 
 The code example below shows the result of executing in Japan Standard Time (JST) environment.
 

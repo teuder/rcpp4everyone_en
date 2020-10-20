@@ -27,6 +27,6 @@ NumericVector v1 = L[0];
 NumericVector v2 = L["V1"];
 ```
 
-## Member functions
+## Member functions {#member-functions-list}
 
 `List` has the same member functions as `Vector`.
