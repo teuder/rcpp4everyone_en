@@ -118,19 +118,19 @@ Creates a new environment whose parent is this environment. If hashed == `true`,
 
 ## Static member functions
 
-###Environment::global_env()
+### Environment::global_env()
 
 Returns the global environment.
 
-###Environment::empty_env()
+### Environment::empty_env()
 
 Returns the empty environment.
 
-###Environment::base_env()
+### Environment::base_env()
 
 Returns the environment of base package.
 
-###Environment::base_namespace()
+### Environment::base_namespace()
 
 Returns the namespace of base package.
 
