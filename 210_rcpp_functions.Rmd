@@ -444,7 +444,7 @@ As with the `sample` function in R, this function takes a sample from a vector `
 sample(const Vector<RTYPE>& x, int size, bool replace = false, sugar::probs_t probs = R_NilValue)`
 
 
-**sample(n, size, replace = TRUE, probs = NULL, one_based = TRUE)**
+**sample(n, size, replace = false, probs = NULL, one_based = TRUE)**
 
 As with the `sample.int` function in R.
 
